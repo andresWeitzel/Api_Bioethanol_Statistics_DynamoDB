@@ -1,0 +1,18 @@
+Resources:
+  usersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: usersTable
+      AttributeDefinitions:
+        - AttributeName: year
+          AttributeType: N
+        - AttributeName: title
+          AttributeType: S
+      KeySchema:
+        - AttributeName: year
+          KeyType: HASH
+        - AttributeName: title
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10

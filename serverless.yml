@@ -1,0 +1,55 @@
+
+service: api-bioetanol-estadisticas-dynamodb-aws
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region : us-west-1
+  memorySize: 512
+  timeout : 10
+  environment: ${file(./serverless_ssm.yml)}
+  apiGateway:
+    apiKeys:
+      - name : xApiKey
+        value : ${file(./serverless_ssm.yml):X_API_KEY}
+  logs:
+    # Enable REST API logs
+    restApi:
+      accessLogging: true
+      format: "requestId: $context.requestId"
+      executionLogging: true
+      level: INFO
+      fullExecutionData: true
+      role: arn:aws:iam::xxxx:role
+      roleManagedExternally: false         
+
+plugins:
+    - serverless-dynamodb-local
+    - serverless-offline-ssm
+    - serverless-offline  
+
+functions:
+  hello:
+    handler: handler.hello
+
+
+
+resources:
+  - ${file(src/resources/dynamo-table.yml)}    
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    lambdaPort: 4002    
+  serverless-offline-ssm:
+    stages:
+      - dev
+    ssm: 
+      ${file(./serverless_ssm.yml)}
+  dynamodb:
+    stages:
+      - dev
+
