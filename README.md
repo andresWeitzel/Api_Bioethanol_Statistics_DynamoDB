@@ -325,6 +325,8 @@ sls offline start
  
  <br>
 
+#### Dynamodb
+* [Plugin serverless](https://www.serverless.com/plugins/serverless-dynamodb-local)
 
 #### Herramientas 
  * [Herramienta de Diseño AWS app.diagrams.net](https://app.diagrams.net/?splash=0&libs=aws4)
