@@ -5,5 +5,8 @@ jspm_packages
 # Serverless directories
 .serverless
 
-# ssm
-.serverless_ssm.yml
+# SSM files
+serverless_ssm.yml
+
+#test
+.vscode
