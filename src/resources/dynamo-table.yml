@@ -1,11 +1,11 @@
 Resources:
-  usersTable:
+  bioetanolTotal:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: usersTable
+      TableName: bioetanolTotal
       AttributeDefinitions:
-        - AttributeName: year
-          AttributeType: N
+        - AttributeName: periodo
+          AttributeType: S
         - AttributeName: title
           AttributeType: S
       KeySchema:
