@@ -331,8 +331,13 @@ sls offline start
  
  <br>
 
-#### Dynamodb
+#### Dynamodb examples
 * [Plugin serverless](https://www.serverless.com/plugins/serverless-dynamodb-local)
+* [Ejemplo dynamodb serverless](https://github.com/serverless/examples/tree/v3/aws-node-rest-api-with-dynamodb-and-offline)
+* [Dynamodb SDK examples](https://github.com/aws-samples/aws-dynamodb-examples/tree/master/DynamoDB-SDK-Examples/node.js)
+
+#### DynamoDB teoría
+* [Modelado de datos](https://blog.theodo.com/2021/04/introduction-to-dynamo-db-modeling/)
 
 #### Herramientas 
  * [Herramienta de Diseño AWS app.diagrams.net](https://app.diagrams.net/?splash=0&libs=aws4)

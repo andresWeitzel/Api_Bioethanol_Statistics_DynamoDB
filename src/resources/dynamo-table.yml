@@ -2,17 +2,17 @@ Resources:
   bioetanolTotal:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: bioetanolTotal
+      TableName: bioetanol_total
       AttributeDefinitions:
-        - AttributeName: periodo
-          AttributeType: S
-        - AttributeName: title
-          AttributeType: S
+        - AttributeName: id
+          AttributeType: N
+        - AttributeName: produccion
+          AttributeType: N
+        - AttributeName: ventas_totales
+          AttributeType: N  
       KeySchema:
-        - AttributeName: year
+        - AttributeName: id
           KeyType: HASH
-        - AttributeName: title
-          KeyType: RANGE
       ProvisionedThroughput:
-        ReadCapacityUnits: 10
-        WriteCapacityUnits: 10
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
