@@ -5,7 +5,7 @@ Resources:
       TableName: bioetanol_total
       AttributeDefinitions:
         - AttributeName: id
-          AttributeType: N
+          AttributeType: S
         - AttributeName: produccion
           AttributeType: N
         - AttributeName: ventas_totales
@@ -13,6 +13,10 @@ Resources:
       KeySchema:
         - AttributeName: id
           KeyType: HASH
+        - AttributeName: produccion
+          KeyType: RANGE
+        - AttributeName: ventas_totales
+          KeyType: RANGE   
       ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
