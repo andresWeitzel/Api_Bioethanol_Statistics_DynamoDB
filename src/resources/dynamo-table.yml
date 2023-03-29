@@ -1,22 +1,108 @@
 Resources:
-  bioetanolTotal:
+  bioetanolPrecios:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: bioetanol_total
+      TableName: bioetanolPrecios
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
-        - AttributeName: produccion
+        - AttributeName: periodo
+          AttributeType: S  
+        - AttributeName: bioetCanAzucar
           AttributeType: N
-        - AttributeName: ventas_totales
+        - AttributeName: bioetMaiz
           AttributeType: N  
       KeySchema:
         - AttributeName: id
           KeyType: HASH
-        - AttributeName: produccion
+        - AttributeName: periodo
           KeyType: RANGE
-        - AttributeName: ventas_totales
-          KeyType: RANGE   
       ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1      
+      GlobalSecondaryIndexes:
+        - IndexName: bioetCanAzucar
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: bioetCanAzucar
+              KeyType: RANGE  
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: bioetMaiz
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: bioetMaiz
+              KeyType: RANGE  
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1                
+        
+
+  # bioetanolTotal:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: bioetanolTotal
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #       - AttributeName: produccion
+  #         AttributeType: N
+  #       - AttributeName: ventasTotales
+  #         AttributeType: N  
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #       - AttributeName: produccion
+  #         KeyType: RANGE  
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 1
+  #       WriteCapacityUnits: 1
+
+  # bioetanolMaiz:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: bioetanolMaiz
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #       - AttributeName: produccion
+  #         AttributeType: N
+  #       - AttributeName: ventasTotales
+  #         AttributeType: N  
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #       - AttributeName: produccion
+  #         KeyType: RANGE  
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 1
+  #       WriteCapacityUnits: 1 
+
+  # bioetanolCanAzucar:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: bioetanolCanAzucar
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #       - AttributeName: produccion
+  #         AttributeType: N
+  #       - AttributeName: ventasTotales
+  #         AttributeType: N  
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #       - AttributeName: produccion
+  #         KeyType: RANGE
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 1
+  #       WriteCapacityUnits: 1     
+
+        

@@ -38,7 +38,8 @@ functions:
 
 
 resources:
-  - ${file(src/resources/dynamo-table.yml)}    
+  - ${file(src/resources/dynamo-table.yml)}
+  - ${file(src/resources/api-gateway.yml)}     
 
 custom:
   serverless-offline:
@@ -49,7 +50,6 @@ custom:
       - dev
     ssm: 
       ${file(./serverless_ssm.yml)}
-      ${file(./api-gateway.yml)}
   dynamodb:
     stages:
       - dev
