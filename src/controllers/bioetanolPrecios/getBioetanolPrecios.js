@@ -1,17 +1,17 @@
 //Enums
 const {
     statusCode
-} = require("../enums/http/statusCode");
+} = require("../../enums/http/statusCode");
 //Helpers
 const {
     bodyResponse
-} = require("../helpers/http/bodyResponse");
+} = require("../../helpers/http/bodyResponse");
 const {
     validateHeadersParams,
-} = require("../helpers/validator/http/requestHeadersParams");
+} = require("../../helpers/validator/http/requestHeadersParams");
 const {
     validateAuthHeaders
-} = require("../helpers/auth/headers");
+} = require("../../helpers/auth/headers");
 //Const/Vars
 let eventBody;
 let eventHeaders;
