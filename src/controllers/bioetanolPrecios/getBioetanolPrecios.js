@@ -1,4 +1,7 @@
-
+//Enums
+const {
+    statusCode
+} = require("../enums/http/statusCode");
 //Helpers
 const {
     bodyResponse
@@ -9,22 +12,22 @@ const {
 const {
     validateAuthHeaders
 } = require("../helpers/auth/headers");
-
+//Const/Vars
+let eventBody;
+let eventHeaders;
+let validateReqParams;
+let validateAuth;
+let obj;
 
 /**
- * @description get an object from the s3 bucket 
+ * @description Function to obtain all the objects of the bioethanol prices table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
-
 module.exports.handler = async (event) => {
     try {
         //Init
-        jsonInit = [];
-        bodyObj = null;
-        bucketContent = null;
         obj = null;
-
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
