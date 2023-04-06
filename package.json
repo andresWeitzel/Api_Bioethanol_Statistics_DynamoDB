@@ -22,6 +22,7 @@
     "serverless-offline-ssm": "^6.2.0"
   },
   "dependencies": {
+    "node-input-validator": "^4.5.1",
     "serverless-dynamodb-local": "^1.0.2"
   }
 }

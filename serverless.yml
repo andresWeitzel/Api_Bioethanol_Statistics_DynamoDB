@@ -32,8 +32,14 @@ plugins:
     - serverless-offline  
 
 functions:
-  hello:
-    handler: handler.hello
+  getBioetanolPrecios:
+    handler: src/controllers/bioetanolPrecios/getBioetanolPrecios.handler
+    description: Function to obtain all the objects of the bioethanol prices table
+    events:
+      - http:
+          method: get
+          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/get-all
+          private: true
 
 
 
