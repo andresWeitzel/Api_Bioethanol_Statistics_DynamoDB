@@ -98,12 +98,27 @@ sls dynamodb install
   * Creamos el archivo con el name `serverless_ssm.yml`. Este deberá estar a la misma altura que el serverless.yml
   * Añadimos las ssm necesarias dentro del archivo.
   ```git
-    # Keys
+    
+    # AUTHENTICATION
     X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
 
     BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 
-  ```  
+    # API VALUES
+    API_VERSION : v1
+
+    # Dynamodb values
+    DEFAULT_REGION : us-west-1
+
+  ```
+* Instalamos el sdk client de dynamodb para las operaciones de db necesarias
+``` git
+npm install @aws-sdk/client-dynamodb
+```     
+* Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
+``` git
+npm i @aws-sdk/lib-dynamodb
+```     
 * Ejecutamos el proyecto
 ```git
 sls offline start
@@ -205,7 +220,14 @@ custom:
     stages:
       - dev
 ```
- 
+* Instalamos el sdk client de dynamodb para las operaciones de db necesarias
+``` git
+npm install @aws-sdk/client-dynamodb
+```     
+* Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
+``` git
+npm i @aws-sdk/lib-dynamodb
+```   
 * Descargamos la Java Runtime Engine (JRE) versión 6.x o posterior. [Descargar desde aquí](https://www.oracle.com/java/technologies/downloads/)
 * Descargamos el .jar que contendrá toda la configuración para la instalación . [Descargar desde aquí](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html#DynamoDBLocal.DownloadingAndRunning.title)
 * Una vez descargado el .jar en formato .tar descomprimimos y copiamos todo su contenido dentro de la carpeta que se cread de dynamo en el proyecto (.dynamodb). Si esta carpeta no está, la creamos dentro de proyecto.
@@ -338,6 +360,10 @@ sls offline start
 * [Definicion de atributos](https://tipsfolder.com/range-key-dynamodb-ac5558671b26d5d7f2a34cd9b138c01e/#:~:text=The%20range%20attribute%20is%20the%20type%20key%20of,%28which%20means%20it%20can%20only%20hold%20one%20value%29.)
 * [Clave de Partición vs Ordenación](https://stackoverflow.com/questions/27329461/what-is-hash-and-range-primary-key)
 * [Guía DynamoDB](https://www.dynamodbguide.com/local-secondary-indexes/)
+
+#### Dynamodb operations sdk v-3
+* [Operations](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/javascript_dynamodb_code_examples.html)
+* [Operations API-REST](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
 
 
 #### Dynamodb examples

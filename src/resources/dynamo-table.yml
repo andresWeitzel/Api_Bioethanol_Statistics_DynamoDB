@@ -9,9 +9,9 @@ Resources:
         - AttributeName: periodo
           AttributeType: S  
         - AttributeName: bioetCanAzucar
-          AttributeType: N
+          AttributeType: S
         - AttributeName: bioetMaiz
-          AttributeType: N  
+          AttributeType: S  
       KeySchema:
         - AttributeName: id
           KeyType: HASH
