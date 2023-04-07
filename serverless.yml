@@ -65,11 +65,13 @@ custom:
     ssm: 
       ${file(./serverless_ssm.yml)}
   dynamodb:
+    #host: 'http://localhost:8000'
     stages:
       - dev
     start:
-      port: 8000
+      port: 8042
       inMemory: true
       migrate: true
+      seed: true
 
 

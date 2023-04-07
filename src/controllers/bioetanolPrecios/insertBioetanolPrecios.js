@@ -1,13 +1,10 @@
-//Environment vars
-// const DEFAULT_REGION = require(process.env.DEFAULT_REGION);
-
 //External
 const {
     DynamoDBDocumentClient,
     PutCommand
 } = require("@aws-sdk/lib-dynamodb");
 const {
-    DynamoDBClient
+    DynamoDBClient,
 } = require("@aws-sdk/client-dynamodb");
 //Enums
 const {
@@ -26,6 +23,11 @@ const {
 // const {
 //     dynamoDBClient
 // } = require("../../helpers/dynamodb/client");
+
+//Environment vars
+const DEFAULT_REGION = process.env.REGION;
+
+
 //Const/Vars
 let eventBody;
 let eventHeaders;
@@ -69,19 +71,63 @@ module.exports.handler = async (event) => {
         const params = {
             TableName: "bioetanolPrecios",
             Item: {
-                id: "hasgdhashdg",
-                periodo: "2023/12/01",
-                bioetCanAzucar: "329,309",
-                bioetMaiz: "351,00"
+                id: {
+                    S: "JAHSDJAH33DASDBA"
+                },
+                periodo: {
+                    S: "2023/12/01"
+                },
+                // bioetCanAzucar: {
+                //     S: "329,309"
+                // },
+                // bioetMaiz: {
+                //     S: "351,00"
+                // }
             },
         };
         try {
-            const client = new DynamoDBClient({});
+            const client = new DynamoDBClient({
+                //region: DEFAULT_REGION,
+                region: 'eu-west-2',
+                //endpoint: "http://localhost:8042",
+                // accessKeyId: 'xxxx',
+                // secretAccessKey: 'xxxx',
+                // sessionToken: 'xxxx'
+            });
+
+            console.log(client);
+
+            // const command = new UpdateItemCommand(params);
+
+            // const result = await client.send(command);
+
+            // console.log("Success - item added or updated", result);
 
             const dynamo = await DynamoDBDocumentClient.from(client);
 
-            const data = await dynamo.send(new PutCommand(params));
-            console.log("Success - item added or updated", data);
+            console.log(dynamo);
+
+             const data = await dynamo.send(new PutCommand(
+                {
+                    TableName: "bioetanolPrecios",
+                    Item:{}
+                    // Item: {
+                    //     id: {
+                    //         S: "JAHSDJAH33DASDBA"
+                    //     },
+                    //     periodo: {
+                    //         S: "2023/12/01"
+                    //     },
+                    //     // bioetCanAzucar: {
+                    //     //     S: "329,309"
+                    //     // },
+                    //     // bioetMaiz: {
+                    //     //     S: "351,00"
+                    //     // }
+                    // },
+                }
+             ));
+             console.log("Success - item added or updated", data);
         } catch (err) {
             console.log("Error", err.stack);
         }
