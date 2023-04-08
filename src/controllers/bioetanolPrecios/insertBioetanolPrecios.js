@@ -88,10 +88,10 @@ module.exports.handler = async (event) => {
         try {
             const client = new DynamoDBClient({
                 //region: DEFAULT_REGION,
-                region: 'eu-west-2',
+                region: 'us-east-1',
                 //endpoint: "http://localhost:8042",
-                // accessKeyId: 'xxxx',
-                // secretAccessKey: 'xxxx',
+                 accessKeyId: 'xxxx',
+                 secretAccessKey: 'xxxx',
                 // sessionToken: 'xxxx'
             });
 
@@ -109,22 +109,22 @@ module.exports.handler = async (event) => {
 
              const data = await dynamo.send(new PutCommand(
                 {
-                    TableName: "bioetanolPrecios",
-                    Item:{}
-                    // Item: {
-                    //     id: {
-                    //         S: "JAHSDJAH33DASDBA"
-                    //     },
-                    //     periodo: {
-                    //         S: "2023/12/01"
-                    //     },
+                    TableName: "bioetanol-precios",
+                    //Item:{}
+                    Item: {
+                        id: {
+                            S: "JAHSDJAH33DASDBA"
+                        },
+                        periodo: {
+                            S: "2023/12/01"
+                        },
                     //     // bioetCanAzucar: {
                     //     //     S: "329,309"
                     //     // },
                     //     // bioetMaiz: {
                     //     //     S: "351,00"
                     //     // }
-                    // },
+                    },
                 }
              ));
              console.log("Success - item added or updated", data);

@@ -2,7 +2,7 @@ Resources:
   bioetanolPrecios:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: bioetanolPrecios
+      TableName: bioetanol-precios
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S

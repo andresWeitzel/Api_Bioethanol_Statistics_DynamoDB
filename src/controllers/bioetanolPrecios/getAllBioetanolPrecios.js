@@ -1,3 +1,14 @@
+//External
+const {
+    DynamoDBClient
+} = require("@aws-sdk/client-dynamodb");
+const {
+    DynamoDBDocumentClient,
+    ScanCommand,
+    PutCommand,
+    GetCommand,
+    DeleteCommand,
+} = require("@aws-sdk/lib-dynamodb");
 //Enums
 const {
     statusCode
@@ -28,6 +39,7 @@ module.exports.handler = async (event) => {
     try {
         //Init
         obj = null;
+        let body = null;
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
@@ -51,10 +63,34 @@ module.exports.handler = async (event) => {
         }
         //-- end with validation Headers  ---
 
+        //-- start with dynamodb operations  ---
+        const client = new DynamoDBClient({
+            region: 'eu-west-2',
+            accessKeyId: '123',
+            secretAccessKey: '123',
+        });
+
+        const dynamo = DynamoDBDocumentClient.from(client);
+
+        const tableName = "bioetanol-precios";
+
+        try {
+            body = await dynamo.send(
+                new ScanCommand({
+                    TableName: tableName
+                })
+            );
+            body = body.Items;
+
+        } catch (error) {
+            console.log(error);
+        }
+        //-- end with dynamodb operations  ---
+
 
         return await bodyResponse(
             statusCode.OK,
-            obj
+            body
         );
 
     } catch (error) {

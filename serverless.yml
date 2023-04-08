@@ -5,9 +5,9 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   stage: dev
-  region : us-west-1
+  region : us-east-1
   memorySize: 512
   timeout : 10
   environment: ${file(./serverless_ssm.yml)}
@@ -41,7 +41,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/insert
           private: true
   getBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getBioetanolPrecios.handler
+    handler: src/controllers/bioetanolPrecios/getAllBioetanolPrecios.handler
     description: Function to obtain all the objects of the bioethanol prices table
     events:
       - http:
@@ -69,7 +69,7 @@ custom:
     stages:
       - dev
     start:
-      port: 8042
+      port: 8000
       inMemory: true
       migrate: true
       seed: true
