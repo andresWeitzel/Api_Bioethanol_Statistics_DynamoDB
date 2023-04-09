@@ -10,7 +10,8 @@ provider:
   region : us-east-1
   memorySize: 512
   timeout : 10
-  environment: ${file(./serverless_ssm.yml)}
+  environment: 
+    ${file(./serverless_ssm.yml)}
   apiGateway:
     apiKeys:
       - name : xApiKey
@@ -55,23 +56,20 @@ resources:
   - ${file(src/resources/dynamo-table.yml)}
   - ${file(src/resources/api-gateway.yml)}     
 
-custom:
-  serverless-offline:
-    httpPort: 4000
-    lambdaPort: 4002    
+custom:  
   serverless-offline-ssm:
     stages:
       - dev
     ssm: 
       ${file(./serverless_ssm.yml)}
   dynamodb:
-    #host: 'http://localhost:8000'
     stages:
       - dev
     start:
-      port: 8000
       inMemory: true
       migrate: true
       seed: true
-
+  serverless-offline:
+    httpPort: 4000
+    lambdaPort: 4002  
 

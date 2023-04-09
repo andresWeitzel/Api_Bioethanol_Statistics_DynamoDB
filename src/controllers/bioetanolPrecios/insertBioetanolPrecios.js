@@ -1,10 +1,6 @@
 //External
 const {
-    DynamoDBDocumentClient,
-    PutCommand
-} = require("@aws-sdk/lib-dynamodb");
-const {
-    DynamoDBClient,
+    PutItemCommand
 } = require("@aws-sdk/client-dynamodb");
 //Enums
 const {
@@ -20,12 +16,9 @@ const {
 const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
-// const {
-//     dynamoDBClient
-// } = require("../../helpers/dynamodb/client");
-
-//Environment vars
-const DEFAULT_REGION = process.env.REGION;
+const {
+    dynamoDBClient
+} = require("../../helpers/dynamodb/client");
 
 
 //Const/Vars
@@ -86,48 +79,28 @@ module.exports.handler = async (event) => {
             },
         };
         try {
-            const client = new DynamoDBClient({
-                //region: DEFAULT_REGION,
-                region: 'us-east-1',
-                //endpoint: "http://localhost:8042",
-                 accessKeyId: 'xxxx',
-                 secretAccessKey: 'xxxx',
-                // sessionToken: 'xxxx'
-            });
+          
+            const dynamo = await dynamoDBClient();
 
-            console.log(client);
-
-            // const command = new UpdateItemCommand(params);
-
-            // const result = await client.send(command);
-
-            // console.log("Success - item added or updated", result);
-
-            const dynamo = await DynamoDBDocumentClient.from(client);
-
-            console.log(dynamo);
-
-             const data = await dynamo.send(new PutCommand(
-                {
-                    TableName: "bioetanol-precios",
-                    //Item:{}
-                    Item: {
-                        id: {
-                            S: "JAHSDJAH33DASDBA"
-                        },
-                        periodo: {
-                            S: "2023/12/01"
-                        },
+            const data = await dynamo.send(new PutItemCommand({
+                TableName: 'bioetanol-precios',
+                //Item:{}
+                Item: {
+                    'id': {
+                        'S': 'JAHSDJAH33DASDBA'
+                    },
+                    'periodo': {
+                        'S': '2023/12/01'
+                    },
                     //     // bioetCanAzucar: {
                     //     //     S: "329,309"
                     //     // },
                     //     // bioetMaiz: {
                     //     //     S: "351,00"
                     //     // }
-                    },
-                }
-             ));
-             console.log("Success - item added or updated", data);
+                },
+            }));
+            console.log("Success - item added or updated", data);
         } catch (err) {
             console.log("Error", err.stack);
         }

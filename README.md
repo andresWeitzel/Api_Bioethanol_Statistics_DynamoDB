@@ -99,17 +99,20 @@ sls dynamodb install
   * Creamos el archivo con el name `serverless_ssm.yml`. Este deberá estar a la misma altura que el serverless.yml
   * Añadimos las ssm necesarias dentro del archivo.
   ```git
-    
-    # AUTHENTICATION
-    X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
+      
+      # AUTHENTICATION
+      X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
 
-    BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+      BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 
-    # API VALUES
-    API_VERSION : v1
+      # API VALUES
+      API_VERSION : 'v1'
 
-    # Dynamodb values
-    DEFAULT_REGION : us-west-1
+      # DYNAMODB VALUES
+      REGION : 'us-east-1'
+      ACCESS_KEY_RANDOM_VALUE: 'access_key_random_value'
+      SECRET_KEY_RANDOM_VALUE: 'secret_key_random_value'
+      ENDPOINT: "http://localhost:8000"
 
   ```
 * Instalamos el sdk client de dynamodb para las operaciones de db necesarias
@@ -119,6 +122,16 @@ npm install @aws-sdk/client-dynamodb
 * Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
 ``` git
 npm i @aws-sdk/lib-dynamodb
+```
+* Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
+```git
+aws configure
+```
+```git
+AWS Access Key ID .... : access_key_random_value
+AWS Secret Key ID .... : secret_key_random_value
+Default.... [us-east-1] : us-east-1
+Default outpu..... : json
 ```     
 * Ejecutamos el proyecto
 ```git
@@ -236,6 +249,16 @@ npm i @aws-sdk/lib-dynamodb
 * Procedemos a instalar el servicio de dynamodb
 ```git
 sls dynamodb install
+```
+* Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
+```git
+aws configure
+```
+```git
+AWS Access Key ID .... : access_key_random_value
+AWS Secret Key ID .... : secret_key_random_value
+Default.... [us-east-1] : us-east-1
+Default outpu..... : json
 ```
 * Ejecutamos el proyecto
 ```git
@@ -368,6 +391,9 @@ sls offline start
 * [Operations](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/javascript_dynamodb_code_examples.html)
 * [Operations API-REST](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
 
+#### Videotutoriales 
+* [Dynamodb local config](https://www.youtube.com/watch?v=-KRykmVIoV0&t=663s)
+* [Crud Dynamodb](https://www.youtube.com/watch?v=hOcbHz4T0Eg)
 
 #### Dynamodb examples
 * [Plugin serverless](https://www.serverless.com/plugins/serverless-dynamodb-local)
