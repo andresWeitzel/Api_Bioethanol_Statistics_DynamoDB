@@ -1,7 +1,4 @@
-//External
-const {
-    PutItemCommand
-} = require("@aws-sdk/client-dynamodb");
+
 //Enums
 const {
     statusCode
@@ -17,8 +14,8 @@ const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
 const {
-    dynamoDBClient
-} = require("../../helpers/dynamodb/dynamoDBClient");
+    insertOneItem
+} = require("../../helpers/dynamodb/insertOneItem");
 
 
 //Const/Vars
@@ -27,6 +24,7 @@ let eventHeaders;
 let validateReqParams;
 let validateAuth;
 let obj;
+let params;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table
@@ -61,54 +59,32 @@ module.exports.handler = async (event) => {
         //-- end with validation Headers  ---
 
         //-- start with dynamoDB operations  ---
-        const params = {
-            TableName: "bioetanolPrecios",
+         params = {
+            TableName: 'bioetanol-precios',
+            //Item:{}
             Item: {
-                id: {
-                    S: "JAHSDJAH33DASDBA"
+                'id': {
+                    'S': 'JAHSDJAH33DASDBA'
                 },
-                periodo: {
-                    S: "2023/12/01"
+                'periodo': {
+                    'S': '2023/12/01'
                 },
-                // bioetCanAzucar: {
-                //     S: "329,309"
-                // },
-                // bioetMaiz: {
-                //     S: "351,00"
-                // }
+                //     // bioetCanAzucar: {
+                //     //     S: "329,309"
+                //     // },
+                //     // bioetMaiz: {
+                //     //     S: "351,00"
+                //     // }
             },
         };
-        try {
-          
-            const dynamo = await dynamoDBClient();
 
-            const data = await dynamo.send(new PutItemCommand({
-                TableName: 'bioetanol-precios',
-                //Item:{}
-                Item: {
-                    'id': {
-                        'S': 'JAHSDJAH33DASDBA'
-                    },
-                    'periodo': {
-                        'S': '2023/12/01'
-                    },
-                    //     // bioetCanAzucar: {
-                    //     //     S: "329,309"
-                    //     // },
-                    //     // bioetMaiz: {
-                    //     //     S: "351,00"
-                    //     // }
-                },
-            }));
-            console.log("Success - item added or updated", data);
-        } catch (err) {
-            console.log("Error", err.stack);
-        }
+        let requestId = await insertOneItem(params);
+
 
         //-- end with dynamoDB operations  ---
         return await bodyResponse(
             statusCode.OK,
-            obj
+            requestId
         );
 
     } catch (error) {
