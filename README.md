@@ -99,7 +99,7 @@ sls dynamodb install
   * Creamos el archivo con el name `serverless_ssm.yml`. Este deberá estar a la misma altura que el serverless.yml
   * Añadimos las ssm necesarias dentro del archivo.
   ```git
-      
+
       # AUTHENTICATION
       X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
 
@@ -109,6 +109,7 @@ sls dynamodb install
       API_VERSION : 'v1'
 
       # DYNAMODB VALUES
+      BIOET_PRECIOS_TABLE_NAME : 'bioetanol-precios'
       REGION : 'us-east-1'
       ACCESS_KEY_RANDOM_VALUE: 'access_key_random_value'
       SECRET_KEY_RANDOM_VALUE: 'secret_key_random_value'
@@ -401,6 +402,9 @@ sls offline start
 * [Ejemplo dynamodb serverless](https://github.com/serverless/examples/tree/v3/aws-node-rest-api-with-dynamodb-and-offline)
 * [Dynamodb SDK examples](https://github.com/aws-samples/aws-dynamodb-examples/tree/master/DynamoDB-SDK-Examples/node.js)
 * [CRUD Dynamodb](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
+
+#### Dynamodb code
+* [Api Rest Base](https://github.com/jacksonyuan-yt/dynamodb-crud-api-gateway)
 
 
 #### Herramientas 

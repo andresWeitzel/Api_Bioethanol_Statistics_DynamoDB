@@ -1,10 +1,3 @@
-//External
-const {
-    DynamoDBClient
-} = require("@aws-sdk/client-dynamodb");
-const {
-    ScanCommand
-} = require("@aws-sdk/lib-dynamodb");
 //Enums
 const {
     statusCode
@@ -20,8 +13,8 @@ const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
 const {
-    dynamoDBClient
-} = require("../../helpers/dynamodb/client");
+    getAllItems
+} = require("../../helpers/dynamodb/getAll");
 
 //Const/Vars
 let eventBody;
@@ -29,6 +22,7 @@ let eventHeaders;
 let validateReqParams;
 let validateAuth;
 let obj;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table
@@ -65,28 +59,14 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamodb operations  ---
         
-        const dynamo = await dynamoDBClient();
-
-        const tableName = "bioetanol-precios";
-
-        try {
-            body = await dynamo.send(
-                new ScanCommand({
-                    TableName: tableName
-                })
-            );
-            body = body.Items;
-            console.log(body);
-
-        } catch (error) {
-            console.log(error);
-        }
+        let items = await getAllItems(BIOET_PRECIOS_TABLE_NAME);
+        
         //-- end with dynamodb operations  ---
 
 
         return await bodyResponse(
             statusCode.OK,
-            body
+            items
         );
 
     } catch (error) {

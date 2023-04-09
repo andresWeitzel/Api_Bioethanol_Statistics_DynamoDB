@@ -18,7 +18,7 @@ const {
 } = require("../../helpers/auth/headers");
 const {
     dynamoDBClient
-} = require("../../helpers/dynamodb/client");
+} = require("../../helpers/dynamodb/dynamoDBClient");
 
 
 //Const/Vars

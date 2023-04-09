@@ -6,6 +6,7 @@ const {
     DynamoDBClient
 } = require("@aws-sdk/client-dynamodb");
 
+
 //Const-vars 
 let client;
 let dynamo;
