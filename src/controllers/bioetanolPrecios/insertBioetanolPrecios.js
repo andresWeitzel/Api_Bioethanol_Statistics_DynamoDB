@@ -1,4 +1,3 @@
-
 //Enums
 const {
     statusCode
@@ -16,15 +15,30 @@ const {
 const {
     insertOneItem
 } = require("../../helpers/dynamodb/insertOneItem");
+const {
+    generateUUID
+} = require("../../helpers/math/generateUuid");
+const {
+    formatToJson
+} = require("../../helpers/format/formatToJson");
+const {
+    formatToString
+} = require("../../helpers/format/formatToString");
+const {
+    validateBodyAddItemParams
+} = require("../../helpers/validator/http/requestBodyAddItemParams");
+
 
 
 //Const/Vars
-let eventBody;
 let eventHeaders;
+let eventBody;
 let validateReqParams;
 let validateAuth;
+let validateBodyAddItem;
 let obj;
 let params;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table
@@ -58,30 +72,51 @@ module.exports.handler = async (event) => {
         }
         //-- end with validation Headers  ---
 
+        //-- start with body validations  ---
+
+        eventBody = await formatToJson(event.body);
+
+        validateBodyAddItem = await validateBodyAddItemParams(eventBody);
+
+        if (!validateBodyAddItem) {
+            return await bodyResponse(
+                statusCode.BAD_REQUEST,
+                "Bad request, check request body attributes. Missing or incorrect"
+            );
+        }
+        //-- end with body validations  ---
+
+
         //-- start with dynamoDB operations  ---
-         params = {
+
+        let uuid=await(generateUUID());
+        uuid=await formatToString(uuid);
+        let periodo=await eventBody.periodo;
+        let bioetCanAzucar=await eventBody.bioetanol_azucar;
+        let bioetMaiz=await eventBody.bioetanol_maiz;
+
+        params = {
             TableName: 'bioetanol-precios',
-            //Item:{}
             Item: {
                 'id': {
-                    'S': 'JAHSDJAH33DASDBA'
+                    'S': uuid
                 },
                 'periodo': {
-                    'S': '2023/12/01'
+                    'S': periodo
                 },
-                //     // bioetCanAzucar: {
-                //     //     S: "329,309"
-                //     // },
-                //     // bioetMaiz: {
-                //     //     S: "351,00"
-                //     // }
+                'bioetCanAzucar': {
+                    'S': bioetCanAzucar
+                },
+                'bioetMaiz': {
+                    'S': bioetMaiz
+                }
             },
         };
 
         let requestId = await insertOneItem(params);
 
-
         //-- end with dynamoDB operations  ---
+
         return await bodyResponse(
             statusCode.OK,
             requestId

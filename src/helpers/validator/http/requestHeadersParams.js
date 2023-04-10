@@ -42,7 +42,7 @@ const validateHeadersParams = async (eventHeaders) => {
     }
 
   } catch (error) {
-    console.log(error);
+    console.log(`Error in validateHeadersParams(), caused by ${{error}}`);
   }
 
   return validateCheck;

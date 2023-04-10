@@ -6,6 +6,9 @@ const {
 const {
     dynamoDBClient
 } = require("./dynamoDBClient");
+const {
+    formatToString
+} = require("../../helpers/format/formatToString");
 //Const-vars 
 let dynamo;
 let metadata;
@@ -19,14 +22,16 @@ let requestId;
  */
 const insertOneItem = async (params) => {
     try {
+
         dynamo = await dynamoDBClient();
 
         metadata = await dynamo.send(new PutItemCommand({
             TableName: params.TableName,
             Item : params.Item
         }));
+        console.log(metadata)
 
-         requestId = await metadata.$metadata.requestId;
+         requestId = metadata.$metadata.requestId;
 
         return requestId;
 

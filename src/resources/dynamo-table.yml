@@ -8,10 +8,10 @@ Resources:
           AttributeType: S
         - AttributeName: periodo
           AttributeType: S  
-        # - AttributeName: bioetCanAzucar
-        #   AttributeType: S
-        # - AttributeName: bioetMaiz
-        #   AttributeType: S  
+        - AttributeName: bioetCanAzucar
+          AttributeType: S
+        - AttributeName: bioetMaiz
+          AttributeType: S  
       KeySchema:
         - AttributeName: id
           KeyType: HASH
@@ -20,29 +20,29 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1      
-      # GlobalSecondaryIndexes:
-      #   - IndexName: bioetCanAzucar
-      #     KeySchema:
-      #       - AttributeName: id
-      #         KeyType: HASH
-      #       - AttributeName: bioetCanAzucar
-      #         KeyType: RANGE  
-      #     Projection:
-      #       ProjectionType: ALL
-      #     ProvisionedThroughput:
-      #       ReadCapacityUnits: 1
-      #       WriteCapacityUnits: 1 
-      #   - IndexName: bioetMaiz
-      #     KeySchema:
-      #       - AttributeName: id
-      #         KeyType: HASH
-      #       - AttributeName: bioetMaiz
-      #         KeyType: RANGE  
-      #     Projection:
-      #       ProjectionType: ALL
-      #     ProvisionedThroughput:
-      #       ReadCapacityUnits: 1
-      #       WriteCapacityUnits: 1                
+      GlobalSecondaryIndexes:
+        - IndexName: bioetCanAzucar
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: bioetCanAzucar
+              KeyType: RANGE  
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: bioetMaiz
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: bioetMaiz
+              KeyType: RANGE  
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1                
         
 
   # bioetanolTotal:
