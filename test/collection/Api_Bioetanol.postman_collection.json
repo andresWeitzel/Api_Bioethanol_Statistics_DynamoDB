@@ -19,12 +19,12 @@
 								"header": [
 									{
 										"key": "x-api-key",
-										"value": "f98d8cd98h73s204e3456998ecl9427j",
+										"value": "{{x-api-key}}",
 										"type": "text"
 									},
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+										"value": "{{bearer-token}}",
 										"type": "text"
 									},
 									{
@@ -41,6 +41,49 @@
 									"path": [
 										"bioetanol-precios",
 										"get-all"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "insert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"periodo\":\"2023-10-02\",\r\n    \"bioetanol_azucar\":\"345,33\",\r\n    \"bioetanol_maiz\":\"412,23\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/insert",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"insert"
 									]
 								}
 							},
@@ -75,6 +118,14 @@
 		{
 			"key": "base_url",
 			"value": "http://localhost:4000/dev/v1"
+		},
+		{
+			"key": "x-api-key",
+			"value": "f98d8cd98h73s204e3456998ecl9427j"
+		},
+		{
+			"key": "bearer-token",
+			"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
 		}
 	]
 }

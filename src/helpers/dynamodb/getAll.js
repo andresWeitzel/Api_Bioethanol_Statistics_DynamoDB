@@ -33,6 +33,7 @@ const getAllItems = async (tableName) => {
 
     } catch (error) {
         console.log(`Error in getAllItems(), caused by ${{error}}`);
+        console.error(error.stack);
     }
 }
 

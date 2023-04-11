@@ -11,6 +11,7 @@ const formatToJson = async (obj) => {
           }
     } catch (error) {
         console.log(`Error in formatToJson(), caused by ${{error}}`);
+        console.error(error.stack);
     }
     return obj;
 }

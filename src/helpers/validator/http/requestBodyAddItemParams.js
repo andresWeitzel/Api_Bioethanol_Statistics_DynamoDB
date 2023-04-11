@@ -41,6 +41,7 @@ const validateBodyAddItemParams = async (eventBody) => {
 
   } catch (error) {
     console.log(`Error in validateBodyAddItemParams(), caused by ${{error}}`);
+    console.error(error.stack);
   }
 
   return validateCheck;

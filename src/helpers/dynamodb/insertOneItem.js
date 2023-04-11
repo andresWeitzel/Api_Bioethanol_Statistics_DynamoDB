@@ -25,10 +25,29 @@ const insertOneItem = async (params) => {
 
         dynamo = await dynamoDBClient();
 
+        // metadata = await dynamo.send(new PutItemCommand({
+        //     TableName: params.TableName,
+        //     Item : params.Item
+        // }));
+
         metadata = await dynamo.send(new PutItemCommand({
-            TableName: params.TableName,
-            Item : params.Item
+            TableName: 'bioetanol-precios',
+            Item: {
+                'id': {
+                    'S': 'uuid'
+                },
+                'periodo': {
+                    'S': 'periodo'
+                },
+                'bioetCanAzucar': {
+                    'S': 'bioetCanAzucar'
+                },
+                'bioetMaiz': {
+                    'S': 'bioetMaiz'
+                }
+            },
         }));
+     
         console.log(metadata)
 
          requestId = metadata.$metadata.requestId;
@@ -37,6 +56,7 @@ const insertOneItem = async (params) => {
 
     } catch (error) {
         console.log(`Error in insertOneItem(), caused by ${{error}}`);
+        console.error(error.stack);
     }
 }
 

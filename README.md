@@ -1,7 +1,7 @@
 ![Index app](./doc/datos/excel.png)
 
 # Bioetanol_Estadisticas_DynamoDB_AWS
-Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda, entre otros.
+Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda, Docker entre otros.
 
 * [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 * [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
@@ -124,6 +124,13 @@ npm install @aws-sdk/client-dynamodb
 ``` git
 npm i @aws-sdk/lib-dynamodb
 ```
+* Seguidamente descargamos e instalamos [Docker Desktop](https://www.docker.com/products/docker-desktop/). La descarga para windows es más tediosa ya que se necesita emular un kernel(WSL-2) de linux en dicho sistema. Para tal caso los pasos para dicha instalación son los siguientes: [Pasos instalación docker desktop en windows](https://docs.docker.com/desktop/install/windows-install/)
+* Abrimos Docker Desktop para iniciar el proceso en el sistema.
+* Abrimos una cmd y creamos el contenedor para dynamodb
+```git
+docker run --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
+```
+* Ahora podemos levantar el contenedor desde la GUI de docker
 * Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
 ```git
 aws configure
@@ -133,7 +140,11 @@ AWS Access Key ID .... : access_key_random_value
 AWS Secret Key ID .... : secret_key_random_value
 Default.... [us-east-1] : us-east-1
 Default outpu..... : json
-```     
+```
+* Visualizamos que se hayan seteado las credenciales
+```git
+aws configure list
+```
 * Ejecutamos el proyecto
 ```git
 sls offline start
@@ -251,6 +262,13 @@ npm i @aws-sdk/lib-dynamodb
 ```git
 sls dynamodb install
 ```
+* Seguidamente descargamos e instalamos [Docker Desktop](https://www.docker.com/products/docker-desktop/). La descarga para windows es más tediosa ya que se necesita emular un kernel(WSL-2) de linux en dicho sistema. Para tal caso los pasos para dicha instalación son los siguientes: [Pasos instalación docker desktop en windows](https://docs.docker.com/desktop/install/windows-install/)
+* Abrimos Docker Desktop para iniciar el proceso en el sistema.
+* Abrimos una cmd y creamos el contenedor para dynamodb
+```git
+docker run --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
+```
+* Ahora podemos levantar el contenedor desde la GUI de docker
 * Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
 ```git
 aws configure
@@ -260,6 +278,10 @@ AWS Access Key ID .... : access_key_random_value
 AWS Secret Key ID .... : secret_key_random_value
 Default.... [us-east-1] : us-east-1
 Default outpu..... : json
+```
+* Visualizamos que se hayan seteado las credenciales
+```git
+aws configure list
 ```
 * Ejecutamos el proyecto
 ```git
@@ -288,6 +310,8 @@ sls offline start
 | [Systems Manager Parameter Store (SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) | 3.0 | Manejo de Variables de Entorno |
 | [Amazon Api Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) | 2.0 | Gestor, Autenticación, Control y Procesamiento de la Api | 
 | [NodeJS](https://nodejs.org/en/) | 14.18.1  | Librería JS |
+| [Docker](https://docs.docker.com/) | 20.10  | Contenedor de archivos |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | 14.13  | GUI de contenedores |
 | [VSC](https://code.visualstudio.com/docs) | 1.72.2  | IDE |
 | [Postman](https://www.postman.com/downloads/) | 10.11  | Cliente Http |
 | [CMD](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) | 10 | Símbolo del Sistema para linea de comandos | 

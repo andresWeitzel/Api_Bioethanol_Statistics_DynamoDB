@@ -38,7 +38,7 @@ let validateAuth;
 let validateBodyAddItem;
 let obj;
 let params;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const {BIOET_PRECIOS_TABLE} = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table

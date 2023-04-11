@@ -5,8 +5,6 @@ const {
 const {
     DynamoDBClient
 } = require("@aws-sdk/client-dynamodb");
-
-
 //Const-vars 
 let client;
 let dynamo;
@@ -21,10 +19,8 @@ const dynamoDBClient = async () => {
          client = new DynamoDBClient({
             region: process.env.REGION,
             accessKeyId: process.env.ACCESS_KEY_RANDOM_VALUE,
-            secretAccessKey: 
-            process.env.SECRET_KEY_RANDOM_VALUE,
-            endpoint: 
-            process.env.ENDPOINT
+            secretAccessKey: process.env.SECRET_KEY_RANDOM_VALUE,
+            endpoint: process.env.ENDPOINT
         });
 
         dynamo = DynamoDBDocumentClient.from(client);
@@ -33,6 +29,7 @@ const dynamoDBClient = async () => {
 
     } catch (error) {
         console.log(`Error in dynamoDBClient(), caused by ${{error}}`);
+        console.error(error.stack);
     }
 }
 
