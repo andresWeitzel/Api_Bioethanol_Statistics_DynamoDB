@@ -25,27 +25,9 @@ const insertOneItem = async (params) => {
 
         dynamo = await dynamoDBClient();
 
-        // metadata = await dynamo.send(new PutItemCommand({
-        //     TableName: params.TableName,
-        //     Item : params.Item
-        // }));
-
         metadata = await dynamo.send(new PutItemCommand({
-            TableName: 'bioetanol-precios',
-            Item: {
-                'id': {
-                    'S': 'uuid'
-                },
-                'periodo': {
-                    'S': 'periodo'
-                },
-                'bioetCanAzucar': {
-                    'S': 'bioetCanAzucar'
-                },
-                'bioetMaiz': {
-                    'S': 'bioetMaiz'
-                }
-            },
+            TableName: params.TableName,
+            Item : params.Item
         }));
      
         console.log(metadata)

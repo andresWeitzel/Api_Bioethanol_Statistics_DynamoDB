@@ -1,7 +1,7 @@
 ![Index app](./doc/datos/excel.png)
 
 # Bioetanol_Estadisticas_DynamoDB_AWS
-Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda, Docker entre otros.
+Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros.
 
 * [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 * [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
@@ -138,16 +138,19 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB, realizar la migración de las tablas y levantar serverless-offline
+* Los siguientes scripts configurados en el package.json del proyecto son los encargados de
+   * Ejecutar el servicio de dynamoDB en memoria (script dynamodb-service)
+   * Realizar la migración de las tablas (script dynamodb-migrate)
+   * Levantar serverless-offline (serverless-offline)
  ```git
   "scripts": {
-    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
-    "dynamodb-migrate": "serverless dynamodb start --migrate",
+    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb -inMemory",
+    "dynamodb-migrate": "sls dynamodb start --migrate",
     "serverless-offline": "sls offline start",
     "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
   },
 ```
-* Ejecutamos el script configurado 
+* Ejecutamos los scripts configurados
 ```git
 npm start
 ```
@@ -215,7 +218,7 @@ npm install serverless-dynamodb-local --save
 plugins:
   - serverless-dynamodb-local
 ```
- * Reemplazamos la plantila serverless.yml inicial por la siguiente como modelo (cambiar nombre, etc)...
+ * Reemplazamos la plantila serverless.yml inicial por la siguiente como modelo base (cambiar nombre, etc)...
 ```yml
 
 service: nombre
@@ -279,20 +282,19 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB, realizar la migración de las tablas y levantar serverless-offline
+* Los siguientes scripts configurados en el package.json del proyecto son los encargados de
+   * Ejecutar el servicio de dynamoDB en memoria (script dynamodb-service)
+   * Realizar la migración de las tablas (script dynamodb-migrate)
+   * Levantar serverless-offline (serverless-offline)
  ```git
   "scripts": {
-    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
-    "dynamodb-migrate": "serverless dynamodb start --migrate",
+    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb -inMemory",
+    "dynamodb-migrate": "sls dynamodb start --migrate",
     "serverless-offline": "sls offline start",
     "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
   },
 ```
-* Instalamos el paquete encargado de la ejecución en paralelo de los script configurado
-```git
-npm i concurrently --save-dev
-```
-* Ejecutamos el script configurado 
+* Ejecutamos los scripts configurados
 ```git
 npm start
 ```
@@ -320,8 +322,6 @@ npm start
 | [Systems Manager Parameter Store (SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) | 3.0 | Manejo de Variables de Entorno |
 | [Amazon Api Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) | 2.0 | Gestor, Autenticación, Control y Procesamiento de la Api | 
 | [NodeJS](https://nodejs.org/en/) | 14.18.1  | Librería JS |
-| [Docker](https://docs.docker.com/) | 20.10  | Contenedor de archivos |
-| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | 14.13  | GUI de contenedores |
 | [VSC](https://code.visualstudio.com/docs) | 1.72.2  | IDE |
 | [Postman](https://www.postman.com/downloads/) | 10.11  | Cliente Http |
 | [CMD](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) | 10 | Símbolo del Sistema para linea de comandos | 
