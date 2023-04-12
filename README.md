@@ -138,12 +138,13 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB y levantar serverless-offline
+* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB, realizar la migración de las tablas y levantar serverless-offline
  ```git
   "scripts": {
-    "serverless-offline": "sls offline start",
     "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
-    "start": "concurrently --kill-others \"npm run serverless-offline\" \"npm run dynamodb-service\""
+    "dynamodb-migrate": "serverless dynamodb start --migrate",
+    "serverless-offline": "sls offline start",
+    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
   },
 ```
 * Ejecutamos el script configurado 
@@ -205,9 +206,9 @@ npm i serverless-offline-ssm --save-dev
 plugins:
   - serverless-offlline-ssm
 ```  
-* Instalamos serverless-dynamoDB-local (No dynamoDB)
+* Instalamos serverless-dynamoDB-local (No dynamoDB). Importante que sea --save y NO --save-dev
 ```git
-npm install serverless-dynamodb-local --save-dev
+npm install serverless-dynamodb-local --save
 ```
  * Agregamos el plugin dentro del serverless.yml
 ```yml
@@ -278,12 +279,13 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB y levantar serverless-offline
+* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB, realizar la migración de las tablas y levantar serverless-offline
  ```git
   "scripts": {
-    "serverless-offline": "sls offline start",
     "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
-    "start": "concurrently --kill-others \"npm run serverless-offline\" \"npm run dynamodb-service\""
+    "dynamodb-migrate": "serverless dynamodb start --migrate",
+    "serverless-offline": "sls offline start",
+    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
   },
 ```
 * Instalamos el paquete encargado de la ejecución en paralelo de los script configurado
