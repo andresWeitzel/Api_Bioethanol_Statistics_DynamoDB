@@ -4,7 +4,10 @@
   "description": "Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda, entre otros.",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
+    "dynamodb-migrate": "serverless dynamodb start --migrate",
+    "serverless-offline": "sls offline start",
+    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS#readme",
   "devDependencies": {
+    "concurrently": "^8.0.1",
     "serverless-dynamodb-local": "^1.0.2",
     "serverless-offline": "^12.0.4",
     "serverless-offline-ssm": "^6.2.0"

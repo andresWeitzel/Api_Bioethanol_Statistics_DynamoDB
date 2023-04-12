@@ -124,13 +124,6 @@ npm install @aws-sdk/client-dynamodb
 ``` git
 npm i @aws-sdk/lib-dynamodb
 ```
-* Seguidamente descargamos e instalamos [Docker Desktop](https://www.docker.com/products/docker-desktop/). La descarga para windows es más tediosa ya que se necesita emular un kernel(WSL-2) de linux en dicho sistema. Para tal caso los pasos para dicha instalación son los siguientes: [Pasos instalación docker desktop en windows](https://docs.docker.com/desktop/install/windows-install/)
-* Abrimos Docker Desktop para iniciar el proceso en el sistema.
-* Abrimos una cmd y creamos el contenedor para dynamodb
-```git
-docker run --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
-```
-* Ahora podemos levantar el contenedor desde la GUI de docker
 * Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
 ```git
 aws configure
@@ -145,11 +138,20 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* Ejecutamos el proyecto
-```git
-sls offline start
+* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB y levantar serverless-offline
+ ```git
+  "scripts": {
+    "serverless-offline": "sls offline start",
+    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
+    "start": "concurrently --kill-others \"npm run serverless-offline\" \"npm run dynamodb-service\""
+  },
 ```
- 
+* Ejecutamos el script configurado 
+```git
+npm start
+```
+
+
  
 <br>
 
@@ -262,13 +264,6 @@ npm i @aws-sdk/lib-dynamodb
 ```git
 sls dynamodb install
 ```
-* Seguidamente descargamos e instalamos [Docker Desktop](https://www.docker.com/products/docker-desktop/). La descarga para windows es más tediosa ya que se necesita emular un kernel(WSL-2) de linux en dicho sistema. Para tal caso los pasos para dicha instalación son los siguientes: [Pasos instalación docker desktop en windows](https://docs.docker.com/desktop/install/windows-install/)
-* Abrimos Docker Desktop para iniciar el proceso en el sistema.
-* Abrimos una cmd y creamos el contenedor para dynamodb
-```git
-docker run --name dynamodb-local -p 8000:8000 amazon/dynamodb-local
-```
-* Ahora podemos levantar el contenedor desde la GUI de docker
 * Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
 ```git
 aws configure
@@ -283,10 +278,23 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
-* Ejecutamos el proyecto
-```git
-sls offline start
+* El siguiente script configurado en el package.json del proyecto es el encargado de ejecutar el servicio de dynamoDB y levantar serverless-offline
+ ```git
+  "scripts": {
+    "serverless-offline": "sls offline start",
+    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb",
+    "start": "concurrently --kill-others \"npm run serverless-offline\" \"npm run dynamodb-service\""
+  },
 ```
+* Instalamos el paquete encargado de la ejecución en paralelo de los script configurado
+```git
+npm i concurrently --save-dev
+```
+* Ejecutamos el script configurado 
+```git
+npm start
+```
+
 
 <br>
 
@@ -440,6 +448,9 @@ sls offline start
 
  #### Librerías
  * [Validación de campos](https://www.npmjs.com/package/node-input-validator)
+
+ #### Package.json
+ * [Configuración de scripts en paralelo](https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel)
 
 <br>
 
