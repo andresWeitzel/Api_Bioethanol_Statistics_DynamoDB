@@ -42,15 +42,24 @@ functions:
           method: post
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/insert
           private: true
-  getBioetanolPrecios:
+  getAllBioetanolPrecios:
     handler: src/controllers/bioetanolPrecios/getAllBioetanolPrecios.handler
     description: Function to obtain all the objects of the bioethanol prices table
     timeout: 10
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/get-all
+          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/list
           private: true
+  getByIdBioetanolPrecios:
+    handler: src/controllers/bioetanolPrecios/getByIdBioetanolPrecios.handler
+    description: Function to obtain all the objects of the bioethanol prices table according to id
+    timeout: 10
+    events:
+      - http:
+          method: get
+          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/id/{id}
+          private: true        
 
 
 
