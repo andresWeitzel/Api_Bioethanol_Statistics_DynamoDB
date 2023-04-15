@@ -1,3 +1,7 @@
+//Models
+const {
+    BioetanolPrecio
+} = require("../../models/BioetanolPrecio");
 //Enums
 const {
     statusCode
@@ -27,6 +31,9 @@ const {
 const {
     validateBodyAddItemParams
 } = require("../../helpers/validator/http/requestBodyAddItemParams");
+const {
+    currentDateTime
+} = require("../../helpers/dateTime/dates");
 
 
 
@@ -94,21 +101,27 @@ module.exports.handler = async (event) => {
         let periodo=await eventBody.periodo;
         let bioetCanAzucar=await eventBody.bioetanol_azucar;
         let bioetMaiz=await eventBody.bioetanol_maiz;
+        let createdAt = await currentDateTime();
+
+        let bioetPrecio = new BioetanolPrecio(uuid, periodo,bioetCanAzucar, bioetMaiz, createdAt);
 
         params = {
             TableName: 'bioetanol-precios',
             Item: {
                 'id': {
-                    'S': uuid
+                    'S': bioetPrecio.getUuid()
                 },
                 'periodo': {
-                    'S': periodo
+                    'S': bioetPrecio.getPeriodo()
                 },
                 'bioetCanAzucar': {
-                    'S': bioetCanAzucar
+                    'S': bioetPrecio.getBioetCanAzucar()
                 },
                 'bioetMaiz': {
-                    'S': bioetMaiz
+                    'S': bioetPrecio.getBioetMaiz()
+                },
+                'createdAt': {
+                    'S': bioetPrecio.getCreatedAt()
                 }
             },
         };
@@ -119,7 +132,7 @@ module.exports.handler = async (event) => {
 
         return await bodyResponse(
             statusCode.OK,
-            requestId
+            bioetPrecio.toString()
         );
 
     } catch (error) {

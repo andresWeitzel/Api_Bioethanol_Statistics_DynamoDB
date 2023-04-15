@@ -36,6 +36,7 @@ functions:
   insertBioetanolPrecios:
     handler: src/controllers/bioetanolPrecios/insertBioetanolPrecios.handler
     description: Function to insert an object in the bioethanol prices table
+    timeout: 10
     events:
       - http:
           method: post
@@ -44,6 +45,7 @@ functions:
   getBioetanolPrecios:
     handler: src/controllers/bioetanolPrecios/getAllBioetanolPrecios.handler
     description: Function to obtain all the objects of the bioethanol prices table
+    timeout: 10
     events:
       - http:
           method: get
