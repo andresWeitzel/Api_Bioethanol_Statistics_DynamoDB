@@ -46,9 +46,9 @@ class BioetanolPrecio {
     }
 
     toString(){
-        return `Bioetanol Precio [ Uuid : ${this.getUuid()} , Periodo : ${this.getPeriodo()}, Bioetanol Caña de Azucar[$/L] : ${this.getBioetCanAzucar()}, Bioetanol Maíz [$/L] : ${this.getBioetMaiz()}, Created at : ${this.getCreatedAt()}  ] `;
+        return `[ Uuid : ${this.getUuid()} , Periodo : ${this.getPeriodo()}, Bioetanol Caña de Azucar[$/L] : $${this.getBioetCanAzucar()}, Bioetanol Maíz [$/L] : $${this.getBioetMaiz()}, Created at : ${this.getCreatedAt()} ] `;
     }
-
+ 
 
 
 
