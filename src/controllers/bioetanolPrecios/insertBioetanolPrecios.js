@@ -44,8 +44,14 @@ let validateReqParams;
 let validateAuth;
 let validateBodyAddItem;
 let obj;
-let params;
-const {BIOET_PRECIOS_TABLE} = process.env.BIOET_PRECIOS_TABLE_NAME;
+let items;
+let newBioetPrecio;
+let uuid;
+let periodo;
+let bioetCanAzucar;
+let bioetMaiz;
+let createdAt;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table
@@ -96,37 +102,43 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamoDB operations  ---
 
-        let uuid=await(generateUUID());
+        uuid=await generateUUID();
         uuid=await formatToString(uuid);
-        let periodo=await eventBody.periodo;
-        let bioetCanAzucar=await eventBody.bioetanol_azucar;
-        let bioetMaiz=await eventBody.bioetanol_maiz;
-        let createdAt = await currentDateTime();
+        periodo=await eventBody.periodo;
+        bioetCanAzucar=await eventBody.bioetanol_azucar;
+        bioetMaiz=await eventBody.bioetanol_maiz;
+        createdAt = await currentDateTime();
 
         let bioetPrecio = new BioetanolPrecio(uuid, periodo,bioetCanAzucar, bioetMaiz, createdAt);
 
-        params = {
-            TableName: 'bioetanol-precios',
+        items = {
             Item: {
                 'id': {
-                    'S': bioetPrecio.getUuid()
+                    'S': await bioetPrecio.getUuid()
                 },
                 'periodo': {
-                    'S': bioetPrecio.getPeriodo()
+                    'S': await bioetPrecio.getPeriodo()
                 },
                 'bioetCanAzucar': {
-                    'S': bioetPrecio.getBioetCanAzucar()
+                    'S': await bioetPrecio.getBioetCanAzucar()
                 },
                 'bioetMaiz': {
-                    'S': bioetPrecio.getBioetMaiz()
+                    'S': await bioetPrecio.getBioetMaiz()
                 },
                 'createdAt': {
-                    'S': bioetPrecio.getCreatedAt()
+                    'S': await bioetPrecio.getCreatedAt()
                 }
             },
         };
 
-        let requestId = await insertOneItem(params);
+        newBioetPrecio = await insertOneItem(BIOET_PRECIOS_TABLE_NAME, items);
+
+        if (newBioetPrecio==null) {
+            return await bodyResponse(
+                statusCode.INTERNAL_SERVER_ERROR,
+                "An error has occurred, the object has not been inserted into the database"
+            );
+        }
 
         //-- end with dynamoDB operations  ---
 
@@ -136,7 +148,8 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(error);
+        console.log(`Error in insertBioetanolPrecios lambda, caused by ${{error}}`);
+        console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,
             "An unexpected error has occurred. Try again"

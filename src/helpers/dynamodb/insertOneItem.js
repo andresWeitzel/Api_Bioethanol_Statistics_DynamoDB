@@ -6,9 +6,6 @@ const {
 const {
     dynamoDBClient
 } = require("./dynamoDBClient");
-const {
-    formatToString
-} = require("../../helpers/format/formatToString");
 //Const-vars 
 let dynamo;
 let metadata;
@@ -17,22 +14,24 @@ let requestId;
 
 /**
  * @description insert one item in the database
- * @param {Object} params object json type
+* @param {String} tableName string type
+ * @param {Object} items object json type
  * @returns a metadata with the information of the operation
  */
-const insertOneItem = async (params) => {
+const insertOneItem = async (tableName,items) => {
     try {
 
+        requestId=null;
         dynamo = await dynamoDBClient();
 
         metadata = await dynamo.send(new PutItemCommand({
-            TableName: params.TableName,
-            Item : params.Item
+            TableName: tableName,
+            Item : items.Item
         }));
      
-        console.log(metadata)
-
-         requestId = metadata.$metadata.requestId;
+        if(metadata!=null){
+            requestId = metadata.$metadata.requestId;
+        }
 
         return requestId;
 

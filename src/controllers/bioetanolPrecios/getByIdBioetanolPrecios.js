@@ -13,6 +13,9 @@ const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
 const {
+    validatePathParameters,
+} = require("../../helpers/http/queryStringParams");
+const {
     getOneItem
 } = require("../../helpers/dynamodb/getOne");
 
@@ -21,8 +24,10 @@ let eventBody;
 let eventHeaders;
 let validateReqParams;
 let validateAuth;
-let obj;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+let validatePathParam;
+let id;
+let item;
+const {BIOET_PRECIOS_TABLE} = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table according to id
@@ -33,7 +38,8 @@ module.exports.handler = async (event) => {
     try {
         //Init
         obj = null;
-        let body = null;
+        id = '';
+        item = null;
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
@@ -57,20 +63,43 @@ module.exports.handler = async (event) => {
         }
         //-- end with validation Headers  ---
 
+        //-- start with path parameters  ---
+        id = await event.pathParameters.id;
+
+        validatePathParam = await validatePathParameters(id);
+        
+        if(!validatePathParam){
+            return await bodyResponse(
+                statusCode.BAD_REQUEST,
+                "Bad request, check malformed id"
+            );
+        }
+        //-- end with path parameters  ---
+
         //-- start with dynamodb operations  ---
-        
-        //let items = await getOneItem(BIOET_PRECIOS_TABLE_NAME);
-        
+
+        // params = {
+        //     TableName: BIOET_PRECIOS_TABLE,
+        //     Key: {
+        //         'id': {
+        //             'S': id
+        //         }
+        //     },
+        // };
+
+        // item = await getOneItem(params);
+
         //-- end with dynamodb operations  ---
 
 
         return await bodyResponse(
             statusCode.OK,
-            items
+            item
         );
 
     } catch (error) {
-        console.log(error);
+        console.log(`Error in getByIdBioetanolPrecios lambda, caused by ${{error}}`);
+        console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,
             "An unexpected error has occurred. Try again"
