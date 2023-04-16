@@ -26,7 +26,7 @@ const insertOneItem = async (tableName,items) => {
 
         metadata = await dynamo.send(new PutItemCommand({
             TableName: tableName,
-            Item : items.Item
+            Item : items
         }));
      
         if(metadata!=null){

@@ -102,38 +102,36 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamoDB operations  ---
 
-        uuid=await generateUUID();
-        uuid=await formatToString(uuid);
-        periodo=await eventBody.periodo;
-        bioetCanAzucar=await eventBody.bioetanol_azucar;
-        bioetMaiz=await eventBody.bioetanol_maiz;
+        uuid = await generateUUID();
+        uuid = await formatToString(uuid);
+        periodo = await eventBody.periodo;
+        bioetCanAzucar = await eventBody.bioetanol_azucar;
+        bioetMaiz = await eventBody.bioetanol_maiz;
         createdAt = await currentDateTime();
 
-        let bioetPrecio = new BioetanolPrecio(uuid, periodo,bioetCanAzucar, bioetMaiz, createdAt);
+        let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt);
 
         items = {
-            Item: {
-                'id': {
-                    'S': await bioetPrecio.getUuid()
-                },
-                'periodo': {
-                    'S': await bioetPrecio.getPeriodo()
-                },
-                'bioetCanAzucar': {
-                    'S': await bioetPrecio.getBioetCanAzucar()
-                },
-                'bioetMaiz': {
-                    'S': await bioetPrecio.getBioetMaiz()
-                },
-                'createdAt': {
-                    'S': await bioetPrecio.getCreatedAt()
-                }
+            'id': {
+                'S': await bioetPrecio.getUuid()
             },
+            'periodo': {
+                'S': await bioetPrecio.getPeriodo()
+            },
+            'bioetCanAzucar': {
+                'S': await bioetPrecio.getBioetCanAzucar()
+            },
+            'bioetMaiz': {
+                'S': await bioetPrecio.getBioetMaiz()
+            },
+            'createdAt': {
+                'S': await bioetPrecio.getCreatedAt()
+            }
         };
 
         newBioetPrecio = await insertOneItem(BIOET_PRECIOS_TABLE_NAME, items);
 
-        if (newBioetPrecio==null) {
+        if (newBioetPrecio == null) {
             return await bodyResponse(
                 statusCode.INTERNAL_SERVER_ERROR,
                 "An error has occurred, the object has not been inserted into the database"

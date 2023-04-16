@@ -25,9 +25,10 @@ let eventHeaders;
 let validateReqParams;
 let validateAuth;
 let validatePathParam;
+let key;
 let id;
 let item;
-const {BIOET_PRECIOS_TABLE} = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table according to id
@@ -40,6 +41,7 @@ module.exports.handler = async (event) => {
         obj = null;
         id = '';
         item = null;
+        key = null;
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
@@ -67,8 +69,8 @@ module.exports.handler = async (event) => {
         id = await event.pathParameters.id;
 
         validatePathParam = await validatePathParameters(id);
-        
-        if(!validatePathParam){
+
+        if (!validatePathParam) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
                 "Bad request, check malformed id"
@@ -78,17 +80,20 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamodb operations  ---
 
-        // params = {
-        //     TableName: BIOET_PRECIOS_TABLE,
-        //     Key: {
-        //         'id': {
-        //             'S': id
-        //         }
-        //     },
-        // };
+        key = {
+            'id': {
+                'S': await id
+            }
+        };
 
-        // item = await getOneItem(params);
-
+        item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
+        
+        if (item==null) {
+            return await bodyResponse(
+                statusCode.BAD_REQUEST,
+                "The object with the requested id is not found in the database"
+            );
+        }
         //-- end with dynamodb operations  ---
 
 
