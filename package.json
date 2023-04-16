@@ -30,6 +30,6 @@
     "@aws-sdk/lib-dynamodb": "^3.306.0",
     "node-input-validator": "^4.5.1",
     "prettier": "^2.8.7",
-    "serverless-dynamodb-local": "^0.2.40"
+    "serverless-dynamodb-local": "^1.0.2"
   }
 }
