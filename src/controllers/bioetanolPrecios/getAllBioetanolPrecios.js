@@ -77,7 +77,7 @@ module.exports.handler = async (event) => {
 
         items = await getAllItems(BIOET_PRECIOS_TABLE_NAME, pageSizeNro, orderAt);
 
-        if (items==null) {
+        if (items==null || !(items.length)) {
             return await bodyResponse(
                 statusCode.INTERNAL_SERVER_ERROR,
                 "An error has occurred, failed to list database objects"

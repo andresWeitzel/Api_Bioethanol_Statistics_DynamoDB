@@ -131,7 +131,7 @@ module.exports.handler = async (event) => {
 
         newBioetPrecio = await insertOneItem(BIOET_PRECIOS_TABLE_NAME, items);
 
-        if (newBioetPrecio == null) {
+        if (newBioetPrecio == null || !(newBioetPrecio.length)) {
             return await bodyResponse(
                 statusCode.INTERNAL_SERVER_ERROR,
                 "An error has occurred, the object has not been inserted into the database"

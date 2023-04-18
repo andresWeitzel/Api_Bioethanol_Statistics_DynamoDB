@@ -28,7 +28,7 @@ const insertOneItem = async (tableName,items) => {
             TableName: tableName,
             Item : items
         }));
-     
+        
         if(metadata!=null){
             requestId = metadata.$metadata.requestId;
         }
