@@ -93,7 +93,7 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamodb operations  ---
 
-        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'periodo', createdAt, pageSizeNro, orderAt);
+        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'createdAt', createdAt, pageSizeNro, orderAt);
 
         if (items == null || !(items.length)) {
             return await bodyResponse(

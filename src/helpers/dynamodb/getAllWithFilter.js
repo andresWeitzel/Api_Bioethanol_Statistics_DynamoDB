@@ -36,7 +36,7 @@ const getAllItemsWithFilter = async (tableName, filter, filterValue,pageSizeNro,
         metadata = await dynamo.send(
             new ScanCommand({
                 TableName: tableName,
-                FilterExpression: '#filter = :filterValue',
+                FilterExpression: 'contains(#filter, :filterValue)',
                 ExpressionAttributeNames:{
                     "#filter":filter
                 },

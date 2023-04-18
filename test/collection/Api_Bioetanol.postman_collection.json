@@ -1,4 +1,4 @@
-{
+t{
 	"info": {
 		"_postman_id": "2800e3f1-1732-4b6c-b3ed-29eaa89e6101",
 		"name": "Api_Bioetanol",
@@ -13,7 +13,7 @@
 					"name": "GET",
 					"item": [
 						{
-							"name": "get-all",
+							"name": "getAll",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -34,13 +34,93 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/get-all",
+									"raw": "{{base_url}}/bioetanol-precios/list?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
-										"get-all"
+										"list"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "das"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getById",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/id/108935952",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"id",
+										"108935952"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLikeCreatedAt",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-04-17 22:24:33",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"created-at",
+										"2023-04-17 22:24:33"
 									]
 								}
 							},
@@ -74,7 +154,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-10-02\",\r\n    \"bioetanol_azucar\":\"345,33\",\r\n    \"bioetanol_maiz\":\"412,23\"\r\n}"
+									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"bioetanol_azucar\":\"345,33\",\r\n    \"bioetanol_maiz\":\"412,23\"\r\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/bioetanol-precios/insert",

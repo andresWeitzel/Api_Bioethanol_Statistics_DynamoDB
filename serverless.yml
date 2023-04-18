@@ -60,9 +60,9 @@ functions:
           method: get
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/id/{id}
           private: true   
-  getByCreatedAtBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getByCreatedAtBioetanolPrecios.handler
-    description: Function to obtain all the objects of the bioethanol prices table according to created at
+  getLikeCreatedAtBioetanolPrecios:
+    handler: src/controllers/bioetanolPrecios/getLikeCreatedAtBioetanolPrecios.handler
+    description: Function to obtain all the objects of the bioethanol prices table according to the creation date
     timeout: 10
     events:
       - http:
