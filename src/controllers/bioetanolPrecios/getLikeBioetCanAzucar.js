@@ -30,11 +30,11 @@ let id;
 let pageNro;
 let orderAt;
 let items;
-let createdAt;
+let bioetCanAzucar;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
- * @description Function to obtain all the objects of the bioethanol prices table according to id
+ * @description Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar prices
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -79,14 +79,14 @@ module.exports.handler = async (event) => {
         //-- end with pagination  ---
 
         //-- start with path parameters  ---
-        createdAt = await event.pathParameters.createdAt;
+        bioetCanAzucar = await event.pathParameters.bioetCanAzucar;
 
-        validatePathParam = await validatePathParameters(createdAt);
+        validatePathParam = await validatePathParameters(bioetCanAzucar);
 
         if (!validatePathParam) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
-                "Bad request, check malformed createdAt value"
+                "Bad request, check malformed bioetCanAzucar value"
             );
         }
         //-- end with path parameters  ---
@@ -94,12 +94,12 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamodb operations  ---
 
-        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'createdAt', createdAt, pageSizeNro, orderAt);
+        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'bioetCanAzucar', bioetCanAzucar, pageSizeNro, orderAt);
 
         if (items == null || !(items.length)) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
-                "The objects with the createdAt value is not found in the database"
+                "The objects with the bioetCanAzucar value is not found in the database"
             );
         }
         //-- end with dynamodb operations  ---
@@ -111,7 +111,7 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(`Error in getLikeCreatedAt lambda, caused by ${{error}}`);
+        console.log(`Error in getLikeBioetCanAzucar lambda, caused by ${{error}}`);
         console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,

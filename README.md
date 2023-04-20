@@ -1,7 +1,7 @@
 ![Index app](./doc/datos/bioetanolTablas.png)
 
 # Bioetanol_Estadisticas_DynamoDB_AWS
-Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros.
+Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
 
 * [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 * [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
@@ -70,7 +70,7 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
  
 * Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
 ```git
-git clone https://github.com/andresWeitzel/Microservice_Mercadolibre_Users_AWS
+git clone https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS
 ```
 * Nos posicionamos sobre el proyecto
 ```git
@@ -154,6 +154,7 @@ aws configure list
 ```git
 npm start
 ```
+* Si se ha realizado la migración de tablas previamente (ejecutado el comando anterior), al momento de una nueva ejecución con el mismo, surgiran errores en consola. Esto esta contemplado ya que la migración levanta el servicio de dynamodb, pero `se podrá ejecutar el servicio sin problemas`. Una alternativa es usar directamente el comando `sls offline start` ya que se corrió inicialmente y al menos una vez dicha migración. 
 
 
  
@@ -298,6 +299,7 @@ aws configure list
 ```git
 npm start
 ```
+* Si se ha realizado la migración de tablas previamente (ejecutado el comando anterior), al momento de una nueva ejecución con el mismo, surgiran errores en consola. Esto esta contemplado ya que la migración levanta el servicio de dynamodb, pero `se podrá ejecutar el servicio sin problemas`. Una alternativa es usar directamente el comando `sls offline start` ya que se corrió inicialmente y al menos una vez dicha migración. 
 
 
 <br>

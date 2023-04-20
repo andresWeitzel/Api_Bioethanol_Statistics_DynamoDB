@@ -79,14 +79,14 @@ module.exports.handler = async (event) => {
         //-- end with pagination  ---
 
         //-- start with path parameters  ---
-        periodo = await event.pathParameters.createdAt;
+        periodo = await event.pathParameters.periodo;
 
         validatePathParam = await validatePathParameters(periodo);
 
         if (!validatePathParam) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
-                "Bad request, check malformed id"
+                "Bad request, check malformed periodo value"
             );
         }
         //-- end with path parameters  ---

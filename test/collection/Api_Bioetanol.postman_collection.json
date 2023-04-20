@@ -1,4 +1,4 @@
-t{
+{
 	"info": {
 		"_postman_id": "2800e3f1-1732-4b6c-b3ed-29eaa89e6101",
 		"name": "Api_Bioetanol",
@@ -78,14 +78,14 @@ t{
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/id/108935952",
+									"raw": "{{base_url}}/bioetanol-precios/id/107068662",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"id",
-										"108935952"
+										"107068662"
 									]
 								}
 							},
@@ -113,14 +113,149 @@ t{
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-04-17 22:24:33",
+									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-04-19?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"created-at",
-										"2023-04-17 22:24:33"
+										"2023-04-19"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "das"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLikePeriodo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/periodo/2023",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"periodo",
+										"2023"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLikeBioetMaiz",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/bioetanol-maiz/412?limit=3&orderAt=das",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"bioetanol-maiz",
+										"412"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "das"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLikeBioetCanAzucar",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/345?limit=3&orderAt=das",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"bioetanol-cana-azucar",
+										"345"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "das"
+										}
 									]
 								}
 							},
