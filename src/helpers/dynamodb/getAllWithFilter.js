@@ -47,9 +47,7 @@ const getAllItemsWithFilter = async (tableName, filter, filterValue,pageSizeNro,
                 ScanIndexForward: orderAt
             })
         );
-
-        console.log(metadata)
-
+        
         if (metadata != null) {
             items = metadata.Items;
         }

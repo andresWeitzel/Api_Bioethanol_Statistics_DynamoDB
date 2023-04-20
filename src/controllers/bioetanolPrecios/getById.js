@@ -13,24 +13,25 @@ const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
 const {
-    getAllItems
-} = require("../../helpers/dynamodb/getAll");
+    validatePathParameters,
+} = require("../../helpers/http/queryStringParams");
+const {
+    getOneItem
+} = require("../../helpers/dynamodb/getOne");
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 let eventBody;
 let eventHeaders;
 let validateReqParams;
 let validateAuth;
-let obj;
-let queryStrParams;
-let pageSizeNro;
-let pageNro;
-let orderAt;
-let items;
+let validatePathParam;
+let key;
+let id;
+let item;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
- * @description Function to obtain all the objects of the bioethanol prices table
+ * @description Function to obtain all the objects of the bioethanol prices table according to id
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -38,9 +39,9 @@ module.exports.handler = async (event) => {
     try {
         //Init
         obj = null;
-        items=null;
-        pageSizeNro = 5;
-        orderAt = "asc";
+        id = '';
+        item = null;
+        key = null;
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
@@ -64,34 +65,45 @@ module.exports.handler = async (event) => {
         }
         //-- end with validation Headers  ---
 
-        //-- start with pagination  ---
-        queryStrParams = event.queryStringParameters;
+        //-- start with path parameters  ---
+        id = await event.pathParameters.id;
 
-        if (queryStrParams != null) {
-            pageSizeNro = parseInt(await event.queryStringParameters.limit);
-            orderAt = await event.queryStringParameters.orderAt;
+        validatePathParam = await validatePathParameters(id);
+
+        if (!validatePathParam) {
+            return await bodyResponse(
+                statusCode.BAD_REQUEST,
+                "Bad request, check malformed id"
+            );
         }
-        //-- end with pagination  ---
+        //-- end with path parameters  ---
 
         //-- start with dynamodb operations  ---
 
-        items = await getAllItems(BIOET_PRECIOS_TABLE_NAME, pageSizeNro, orderAt);
+        key = {
+            'id': {
+                'S': await id
+            }
+        };
 
-        if (items==null || !(items.length)) {
+        item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
+        
+        if (item==null || !(item.length)) {
             return await bodyResponse(
-                statusCode.INTERNAL_SERVER_ERROR,
-                "An error has occurred, failed to list database objects"
+                statusCode.BAD_REQUEST,
+                "The object with the requested id is not found in the database"
             );
         }
         //-- end with dynamodb operations  ---
 
+
         return await bodyResponse(
             statusCode.OK,
-            items
+            item
         );
 
     } catch (error) {
-        console.log(`Error in getAllBioetanolPrecios lambda, caused by ${{error}}`);
+        console.log(`Error in getById lambda, caused by ${{error}}`);
         console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,

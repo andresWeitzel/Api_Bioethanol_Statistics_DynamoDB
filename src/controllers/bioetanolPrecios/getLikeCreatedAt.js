@@ -16,8 +16,8 @@ const {
     validatePathParameters,
 } = require("../../helpers/http/queryStringParams");
 const {
-    getOneItem
-} = require("../../helpers/dynamodb/getOne");
+    getAllItemsWithFilter
+} = require("../../helpers/dynamodb/getAllWithFilter");
 
 //Const/Vars
 let eventBody;
@@ -27,7 +27,9 @@ let validateAuth;
 let validatePathParam;
 let key;
 let id;
-let item;
+let pageNro;
+let orderAt;
+let items;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
@@ -40,8 +42,9 @@ module.exports.handler = async (event) => {
         //Init
         obj = null;
         id = '';
-        item = null;
-        key = null;
+        items = null;
+        pageSizeNro = 5;
+        orderAt = "asc";
 
         //-- start with validation Headers  ---
         eventHeaders = await event.headers;
@@ -65,10 +68,19 @@ module.exports.handler = async (event) => {
         }
         //-- end with validation Headers  ---
 
-        //-- start with path parameters  ---
-        id = await event.pathParameters.id;
+        //-- start with pagination  ---
+        queryStrParams = event.queryStringParameters;
 
-        validatePathParam = await validatePathParameters(id);
+        if (queryStrParams != null) {
+            pageSizeNro = parseInt(await event.queryStringParameters.limit);
+            orderAt = await event.queryStringParameters.orderAt;
+        }
+        //-- end with pagination  ---
+
+        //-- start with path parameters  ---
+        createdAt = await event.pathParameters.createdAt;
+
+        validatePathParam = await validatePathParameters(createdAt);
 
         if (!validatePathParam) {
             return await bodyResponse(
@@ -78,20 +90,15 @@ module.exports.handler = async (event) => {
         }
         //-- end with path parameters  ---
 
+
         //-- start with dynamodb operations  ---
 
-        key = {
-            'id': {
-                'S': await id
-            }
-        };
+        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'createdAt', createdAt, pageSizeNro, orderAt);
 
-        item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
-        
-        if (item==null || !(item.length)) {
+        if (items == null || !(items.length)) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
-                "The object with the requested id is not found in the database"
+                "The objects with the createdAt value is not found in the database"
             );
         }
         //-- end with dynamodb operations  ---
@@ -99,11 +106,11 @@ module.exports.handler = async (event) => {
 
         return await bodyResponse(
             statusCode.OK,
-            item
+            items
         );
 
     } catch (error) {
-        console.log(`Error in getByIdBioetanolPrecios lambda, caused by ${{error}}`);
+        console.log(`Error in getByCreatedAt lambda, caused by ${{error}}`);
         console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,

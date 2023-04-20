@@ -28,12 +28,13 @@ let validatePathParam;
 let key;
 let id;
 let pageNro;
+let periodo;
 let orderAt;
 let items;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
- * @description Function to obtain all the objects of the bioethanol prices table according to id
+ * @description Function to obtain all the objects of the bioethanol prices table according to the periodo
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -78,9 +79,9 @@ module.exports.handler = async (event) => {
         //-- end with pagination  ---
 
         //-- start with path parameters  ---
-        createdAt = await event.pathParameters.createdAt;
+        periodo = await event.pathParameters.createdAt;
 
-        validatePathParam = await validatePathParameters(createdAt);
+        validatePathParam = await validatePathParameters(periodo);
 
         if (!validatePathParam) {
             return await bodyResponse(
@@ -93,12 +94,12 @@ module.exports.handler = async (event) => {
 
         //-- start with dynamodb operations  ---
 
-        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'createdAt', createdAt, pageSizeNro, orderAt);
+        items = await getAllItemsWithFilter(BIOET_PRECIOS_TABLE_NAME, 'periodo', periodo, pageSizeNro, orderAt);
 
         if (items == null || !(items.length)) {
             return await bodyResponse(
                 statusCode.BAD_REQUEST,
-                "The objects with the created_at value is not found in the database"
+                "The objects with the periodo value is not found in the database"
             );
         }
         //-- end with dynamodb operations  ---
@@ -110,7 +111,7 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(`Error in getByCreatedAtBioetanolPrecios lambda, caused by ${{error}}`);
+        console.log(`Error in getLikePeriodo lambda, caused by ${{error}}`);
         console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,

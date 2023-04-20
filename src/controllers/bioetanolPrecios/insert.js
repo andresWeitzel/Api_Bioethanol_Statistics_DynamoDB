@@ -146,7 +146,7 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(`Error in insertBioetanolPrecios lambda, caused by ${{error}}`);
+        console.log(`Error in insert lambda, caused by ${{error}}`);
         console.error(error.stack);
         return await bodyResponse(
             statusCode.INTERNAL_SERVER_ERROR,

@@ -40,8 +40,6 @@ const getAllItems = async (tableName, pageSizeNro, orderAt) => {
             })
         );
 
-        console.log(metadata)
-
         if(metadata != null){
             items = metadata.Items;
         }
