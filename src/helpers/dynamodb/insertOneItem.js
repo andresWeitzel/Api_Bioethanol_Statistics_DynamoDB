@@ -1,6 +1,6 @@
 //External
 const {
-    PutItemCommand
+    PutItemCommand,
 } = require("@aws-sdk/client-dynamodb");
 //Helpers
 const {
@@ -13,12 +13,12 @@ let requestId;
 
 
 /**
- * @description insert one item in the database
+ * @description insert one item into the database
 * @param {String} tableName string type
- * @param {Object} items object json type
+ * @param {Object} item object json type
  * @returns a metadata with the information of the operation
  */
-const insertOneItem = async (tableName,items) => {
+const insertOneItem = async (tableName,item) => {
     try {
 
         requestId=null;
@@ -26,7 +26,7 @@ const insertOneItem = async (tableName,items) => {
 
         metadata = await dynamo.send(new PutItemCommand({
             TableName: tableName,
-            Item : items
+            Item : item
         }));
         
         if(metadata!=null){

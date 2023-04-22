@@ -15,18 +15,12 @@ Resources:
       KeySchema:
         - AttributeName: id
           KeyType: HASH
-        # - AttributeName: periodo
-        #   KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1      
       GlobalSecondaryIndexes:
         - IndexName: periodo
           KeySchema:
-            # - AttributeName: id
-            #   KeyType: HASH
-            # - AttributeName: bioetCanAzucar
-            #   KeyType: RANGE  
             - AttributeName: periodo
               KeyType: HASH    
           Projection:
@@ -36,10 +30,6 @@ Resources:
             WriteCapacityUnits: 1 
         - IndexName: bioetCanAzucar
           KeySchema:
-            # - AttributeName: id
-            #   KeyType: HASH
-            # - AttributeName: bioetCanAzucar
-            #   KeyType: RANGE  
             - AttributeName: bioetCanAzucar
               KeyType: HASH    
           Projection:
@@ -49,10 +39,6 @@ Resources:
             WriteCapacityUnits: 1 
         - IndexName: bioetMaiz
           KeySchema:
-            # - AttributeName: id
-            #   KeyType: HASH
-            # - AttributeName: bioetMaiz
-            #   KeyType: RANGE 
             - AttributeName: bioetMaiz
               KeyType: HASH    
           Projection:

@@ -42,6 +42,15 @@ functions:
           method: post
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/insert
           private: true
+  updateBioetanolPrecios:
+    handler: src/controllers/bioetanolPrecios/update.handler
+    description: Function to update an object in the bioethanol prices table
+    timeout: 10
+    events:
+      - http:
+          method: put
+          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/update/{id}
+          private: true          
   getAllBioetanolPrecios:
     handler: src/controllers/bioetanolPrecios/getAll.handler
     description: Function to obtain all the objects of the bioethanol prices table
