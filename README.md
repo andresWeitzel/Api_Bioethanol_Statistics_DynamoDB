@@ -427,7 +427,8 @@ npm start
  
  <br>
 
-
+#### Dynamodb installation
+ * [DynamoDB en local ejecutable](https://cloudkatha.com/how-to-install-dynamodb-locally-on-windows-10/#:~:text=How%20to%20Install%20DynamoDB%20Locally%20on%20Windows%2010,Use%20DynamoDB%20Locally%20to%20Create%20a%20Table%20)
 
 #### DynamoDB teoría
 * [Guía DynamoDB](https://www.dynamodbguide.com/local-secondary-indexes/)
