@@ -254,6 +254,14 @@ custom:
     stages:
       - dev
 ```
+* Instalamos prettier para indentaciones
+``` git
+npm i prettier --save
+```
+* Instalamos node-input-validator para para validaciones de atributos en request, objetos de clases, etc.
+``` git
+npm i node-input-validator --save
+```
 * Instalamos el sdk client de dynamodb para las operaciones de db necesarias
 ``` git
 npm install @aws-sdk/client-dynamodb
@@ -283,6 +291,10 @@ Default outpu..... : json
 ```git
 aws configure list
 ```
+* Instalamos la dependencia para la ejecución de scripts en paralelo
+``` git
+npm i --save-dev concurrently
+``` 
 * Los siguientes scripts configurados en el package.json del proyecto son los encargados de
    * Ejecutar el servicio de dynamoDB en memoria (script dynamodb-service)
    * Realizar la migración de las tablas (script dynamodb-migrate)
