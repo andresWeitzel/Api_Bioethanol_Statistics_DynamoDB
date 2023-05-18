@@ -5,9 +5,9 @@
   "main": "handler.js",
   "scripts": {
     "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -inMemory",
-    "dynamodb-migrate": "sls dynamodb start --migrate",
     "serverless-offline": "sls offline start",
-    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
+    "createBioetanolPreciosTable":"node src/helpers/dynamodb/definition/BioetanolPreciosTable.js",
+    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run createBioetanolPreciosTable\" \"npm run serverless-offline\""
   },
   "repository": {
     "type": "git",
