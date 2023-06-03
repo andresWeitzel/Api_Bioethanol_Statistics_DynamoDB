@@ -6,7 +6,7 @@ const {
 //Helpers
 const {
     dynamoDBClient
-} = require("./dynamoDBClient");
+} = require("../config/dynamoDBClient");
 //Const-vars 
 let dynamo;
 let metadata;

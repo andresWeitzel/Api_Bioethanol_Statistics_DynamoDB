@@ -18,7 +18,7 @@ const {
 } = require("../../helpers/auth/headers");
 const {
     insertOneItem
-} = require("../../helpers/dynamodb/insertOneItem");
+} = require("../../helpers/dynamodb/operations/insertOneItem");
 const {
     generateUUID
 } = require("../../helpers/math/generateUuid");

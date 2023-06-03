@@ -17,7 +17,7 @@ const {
 } = require("../../helpers/http/queryStringParams");
 const {
     getAllItemsWithFilter
-} = require("../../helpers/dynamodb/getAllWithFilter");
+} = require("../../helpers/dynamodb/operations/getAllWithFilter");
 
 //Const/Vars
 let eventBody;

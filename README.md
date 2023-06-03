@@ -100,20 +100,20 @@ sls dynamodb install
   * Añadimos las ssm necesarias dentro del archivo.
   ```git
 
-      # AUTHENTICATION
-      X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
+  # AUTHENTICATION
+  X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
 
-      BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+  BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
 
-      # API VALUES
-      API_VERSION : 'v1'
+  # API VALUES
+  API_VERSION : 'v1'
 
-      # DYNAMODB VALUES
-      BIOET_PRECIOS_TABLE_NAME : 'bioetanol-precios'
-      REGION : 'us-east-1'
-      ACCESS_KEY_RANDOM_VALUE: 'access_key_random_value'
-      SECRET_KEY_RANDOM_VALUE: 'secret_key_random_value'
-      ENDPOINT: "http://localhost:8000"
+  # DYNAMODB VALUES
+  BIOET_PRECIOS_TABLE_NAME : 'bioetanol-precios'
+  REGION : 'us-east-1'
+  ACCESS_KEY_RANDOM_VALUE: 'xxxx'
+  SECRET_KEY_RANDOM_VALUE: 'xxxx'
+  ENDPOINT: "http://127.0.0.1:8000"
 
   ```
 * Instalamos el sdk client de dynamodb para las operaciones de db necesarias

@@ -106,13 +106,6 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/bioetanol-cana-azucar/{bioetCanAzucar}
           private: true           
 
-
-
-
-resources:
-  - ${file(src/resources/dynamo-table.yml)}
-  - ${file(src/resources/api-gateway.yml)}     
-
 custom:  
   serverless-offline-ssm:
     stages:
@@ -130,3 +123,7 @@ custom:
     httpPort: 4000
     lambdaPort: 4002  
 
+resources:
+  - ${file(src/resources/api-gateway.yml)} 
+  - ${file(src/resources/dynamo-table.yml)}         
+      

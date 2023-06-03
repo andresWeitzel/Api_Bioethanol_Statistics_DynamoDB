@@ -33,10 +33,10 @@ const {
 } = require("../../helpers/http/queryStringParams");
 const {
     getOneItem
-} = require("../../helpers/dynamodb/getOne");
+} = require("../../helpers/dynamodb/operations/getOne");
 const {
     updateOneItem
-} = require("../../helpers/dynamodb/updateOneItem");
+} = require("../../helpers/dynamodb/operations/updateOneItem");
 
 
 

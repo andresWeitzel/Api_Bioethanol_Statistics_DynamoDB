@@ -14,7 +14,7 @@ const {
 } = require("../../helpers/auth/headers");
 const {
     getAllItems
-} = require("../../helpers/dynamodb/getAll");
+} = require("../../helpers/dynamodb/operations/getAll");
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;

@@ -17,7 +17,7 @@ const {
 } = require("../../helpers/http/queryStringParams");
 const {
     getOneItem
-} = require("../../helpers/dynamodb/getOne");
+} = require("../../helpers/dynamodb/operations/getOne");
 
 //Const/Vars
 let eventBody;
