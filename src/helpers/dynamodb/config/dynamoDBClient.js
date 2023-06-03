@@ -9,7 +9,6 @@ const {
 let client;
 let dynamo;
 
-
 /**
  * @description creating a dynamodb client
  * @returns the client created
@@ -28,8 +27,7 @@ const dynamoDBClient = async () => {
         return dynamo;
 
     } catch (error) {
-        console.log(`Error in dynamoDBClient(), caused by ${{error}}`);
-        console.error(error.stack);
+        console.error(`ERROR in dynamoDBClient() function. Caused by ${error} . Specific stack is ${error.stack} `);
     }
 }
 

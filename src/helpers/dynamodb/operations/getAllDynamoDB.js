@@ -13,15 +13,59 @@ let items;
 
 
 /**
+ * @description get all items from the database
+ * @param {String} tableName string type
+ * @param {BigInt} pageSizeNro BigInt type
+ * @param {String} orderAt String type
+ * @returns a list with all items from the db in json format
+ */
+const getAllItems = async (tableName, pageSizeNro, orderAt) => {
+    try {
+        metadata=null;
+        items=null;
+        orderAt = orderAt.toLowerCase();
+
+        if(orderAt=='asc' || orderAt == null){
+            orderAt=true;
+        }else{
+            orderAt=false;
+        }
+
+        dynamo = await dynamoDBClient();
+
+        metadata = await dynamo.send(
+            new ScanCommand({
+                TableName: tableName,
+                Limit: pageSizeNro,
+                ScanIndexForward : orderAt
+            })
+        );
+
+        if(metadata != null){
+            items = metadata.Items;
+        }
+        
+        return items;
+
+    } catch (error) {
+        console.log(`Error in getAllItems(), caused by ${{error}}`);
+        console.error(error.stack);
+    }
+}
+
+
+
+/**
  * @description get all items from the database according to the filter applied
  * @param {String} tableName string type
- * @param {String} filter String type
- * @param {BigInt} limit BigInt type
+ * @param {String} tableName string type
+ * @param {BigInt} pageSizeNro BigInt type
  * @param {String} orderAt String type
  * @returns a list with all items from the db in json format
  */
 const getAllItemsWithFilter = async (tableName, filter, filterValue,pageSizeNro, orderAt) => {
     try {
+        metadata=null;
         items = null;
         orderAt = orderAt.toLowerCase();
 
@@ -55,12 +99,13 @@ const getAllItemsWithFilter = async (tableName, filter, filterValue,pageSizeNro,
         return items;
 
     } catch (error) {
-        console.log(`Error in getAllItemsWithFilter(), caused by ${{error}}`);
-        console.error(error.stack);
+        console.error(`ERROR in getAllItemsWithFilter() function. Caused by ${error} . Specific stack is ${error.stack} `);
     }
 }
 
 
+
 module.exports = {
+    getAllItems,
     getAllItemsWithFilter
 }

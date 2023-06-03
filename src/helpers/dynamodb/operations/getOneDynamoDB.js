@@ -9,6 +9,7 @@ const {
 //Const-vars 
 let dynamo;
 let item;
+let metadata;
 
 
 /**
@@ -21,6 +22,8 @@ const getOneItem = async (tableName, key) => {
 
     try {
         item = null;
+        metadata=null;
+
 
         dynamo = await dynamoDBClient();
 
@@ -36,8 +39,7 @@ const getOneItem = async (tableName, key) => {
         return item;
 
     } catch (error) {
-        console.log(`Error in getOneItem(), caused by ${{error}}`);
-        console.error(error.stack);
+        console.error(`ERROR in getOneItem() function. Caused by ${error} . Specific stack is ${error.stack} `);
     }
 }
 

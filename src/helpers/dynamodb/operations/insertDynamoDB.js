@@ -1,7 +1,5 @@
 //External
-const {
-    PutItemCommand,
-} = require("@aws-sdk/client-dynamodb");
+const { PutCommand } = require("@aws-sdk/lib-dynamodb");
 //Helpers
 const {
     dynamoDBClient
@@ -13,18 +11,18 @@ let requestId;
 
 
 /**
- * @description insert one item into the database
+ * @description insert item/s into the database
 * @param {String} tableName string type
  * @param {Object} item object json type
  * @returns a metadata with the information of the operation
  */
-const insertOneItem = async (tableName,item) => {
+const insertItem = async (tableName,item) => {
     try {
 
         requestId=null;
         dynamo = await dynamoDBClient();
 
-        metadata = await dynamo.send(new PutItemCommand({
+        metadata = await dynamo.send(new PutCommand({
             TableName: tableName,
             Item : item
         }));
@@ -36,12 +34,12 @@ const insertOneItem = async (tableName,item) => {
         return requestId;
 
     } catch (error) {
-        console.log(`Error in insertOneItem(), caused by ${{error}}`);
+        console.log(`Error in insertItem(), caused by ${{error}}`);
         console.error(error.stack);
     }
 }
 
 
 module.exports = {
-    insertOneItem
+    insertItem
 }

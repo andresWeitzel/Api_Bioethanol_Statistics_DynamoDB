@@ -17,8 +17,8 @@ const {
     validateAuthHeaders
 } = require("../../helpers/auth/headers");
 const {
-    insertOneItem
-} = require("../../helpers/dynamodb/operations/insertOneItem");
+    insertItem
+} = require("../../helpers/dynamodb/operations/insertDynamoDB");
 const {
     generateUUID
 } = require("../../helpers/math/generateUuid");
@@ -112,24 +112,14 @@ module.exports.handler = async (event) => {
         let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt);
 
         item = {
-            'id': {
-                'S': await bioetPrecio.getUuid()
-            },
-            'periodo': {
-                'S': await bioetPrecio.getPeriodo()
-            },
-            'bioetCanAzucar': {
-                'S': await bioetPrecio.getBioetCanAzucar()
-            },
-            'bioetMaiz': {
-                'S': await bioetPrecio.getBioetMaiz()
-            },
-            'createdAt': {
-                'S': await bioetPrecio.getCreatedAt()
+            id : await bioetPrecio.getUuid(),
+            periodo : await bioetPrecio.getPeriodo(),
+            bioetCanAzucar : await bioetPrecio.getBioetCanAzucar(),
+            bioetMaiz : await bioetPrecio.getBioetMaiz(),
+            createdAt : await bioetPrecio.getCreatedAt()
             }
-        };
 
-        newBioetPrecio = await insertOneItem(BIOET_PRECIOS_TABLE_NAME, item);
+        newBioetPrecio = await insertItem(BIOET_PRECIOS_TABLE_NAME, item);
 
         if (newBioetPrecio == null || !(newBioetPrecio.length)) {
             return await bodyResponse(
