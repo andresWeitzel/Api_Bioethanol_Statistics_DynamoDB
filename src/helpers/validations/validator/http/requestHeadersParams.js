@@ -7,7 +7,7 @@ let eventHeadersObj;
 
 /**
  * @description We validate the request headers parameters
- * @param {Object} eventHeaders event.headers type
+ * @param {Object} headers event.headers type
  * @returns a boolean
  * @example Content-Type, Authorization, etc
  */
@@ -24,10 +24,8 @@ const validateHeadersParams = async (eventHeaders) => {
           contentType: await eventHeaders["Content-Type"],
           authorization: await eventHeaders["Authorization"],
           xApiKey: await eventHeaders["x-api-key"],
-     
         }
       }
-
       validatorObj = new Validator(
         {
           eventHeadersObj,
@@ -38,17 +36,16 @@ const validateHeadersParams = async (eventHeaders) => {
           "eventHeadersObj.headers.xApiKey": "required|string|minLength:30|maxLength:100",
         }
       );
-      validateCheck = await validatorObj.check()
+      validateCheck = await validatorObj.check();
     }
 
   } catch (error) {
-    console.log(`Error in validateHeadersParams(), caused by ${{error}}`);
-    console.error(error.stack);
+    console.log(error);
   }
 
   return validateCheck;
 }
 
 module.exports = {
-  validateHeadersParams
+    validateHeadersParams
 }

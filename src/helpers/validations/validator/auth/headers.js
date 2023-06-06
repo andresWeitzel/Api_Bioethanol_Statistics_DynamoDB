@@ -26,5 +26,6 @@ const validateAuthHeaders = async (eventHeaders) => {
   return validate;
 }
 
-module.exports = { validateAuthHeaders }
-
+module.exports = {
+    validateAuthHeaders
+}

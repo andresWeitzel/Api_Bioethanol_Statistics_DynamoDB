@@ -2,19 +2,15 @@
 const {
     statusCode
 } = require("../../enums/http/statusCode");
+const { value } = require("../../enums/general/values");
 //Helpers
 const {
     bodyResponse
 } = require("../../helpers/http/bodyResponse");
 const {
-    validateHeadersParams,
-} = require("../../helpers/validator/http/requestHeadersParams");
-const {
-    validateAuthHeaders
-} = require("../../helpers/auth/headers");
-const {
     getAllItems
-} = require("../../helpers/dynamodb/operations/getAll");
+} = require("../../helpers/dynamodb/operations/getAllDynamoDB");
+const { validateHeadersAndKeys } = require("../../helpers/validations/headers/validateHeadersAndKeys");
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
@@ -37,37 +33,25 @@ let items;
 module.exports.handler = async (event) => {
     try {
         //Init
-        obj = null;
-        items=null;
+        obj = value.IS_NULL;
+        items=value.IS_NULL;
         pageSizeNro = 5;
         orderAt = "asc";
 
-        //-- start with validation Headers  ---
-        eventHeaders = await event.headers;
+       //-- start with validation headers and keys  ---
+       eventHeaders = await event.headers;
 
-        validateReqParams = await validateHeadersParams(eventHeaders);
+       checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-        if (!validateReqParams) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check missing or malformed headers"
-            );
-        }
-
-        validateAuth = await validateAuthHeaders(eventHeaders);
-
-        if (!validateAuth) {
-            return await bodyResponse(
-                statusCode.UNAUTHORIZED,
-                "Not authenticated, check x_api_key and Authorization"
-            );
-        }
-        //-- end with validation Headers  ---
+       if (checkEventHeadersAndKeys != value.IS_NULL) {
+           return checkEventHeadersAndKeys;
+       }
+       //-- end with validation headers and keys  ---
 
         //-- start with pagination  ---
         queryStrParams = event.queryStringParameters;
 
-        if (queryStrParams != null) {
+        if (queryStrParams != value.IS_NULL) {
             pageSizeNro = parseInt(await event.queryStringParameters.limit);
             orderAt = await event.queryStringParameters.orderAt;
         }
@@ -77,7 +61,7 @@ module.exports.handler = async (event) => {
 
         items = await getAllItems(BIOET_PRECIOS_TABLE_NAME, pageSizeNro, orderAt);
 
-        if (items==null || !(items.length)) {
+        if (items==value.IS_NULL || !(items.length)) {
             return await bodyResponse(
                 statusCode.INTERNAL_SERVER_ERROR,
                 "An error has occurred, failed to list database objects"

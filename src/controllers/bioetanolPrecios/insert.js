@@ -6,16 +6,16 @@ const {
 const {
     statusCode
 } = require("../../enums/http/statusCode");
+const {
+    value
+} = require("../../enums/general/values");
 //Helpers
 const {
     bodyResponse
 } = require("../../helpers/http/bodyResponse");
 const {
-    validateHeadersParams,
-} = require("../../helpers/validator/http/requestHeadersParams");
-const {
-    validateAuthHeaders
-} = require("../../helpers/auth/headers");
+    validateHeadersAndKeys,
+} = require("../../helpers/validations/headers/validateHeadersAndKeys");
 const {
     insertItem
 } = require("../../helpers/dynamodb/operations/insertDynamoDB");
@@ -30,7 +30,7 @@ const {
 } = require("../../helpers/format/formatToString");
 const {
     validateBodyAddItemParams
-} = require("../../helpers/validator/http/requestBodyAddItemParams");
+} = require("../../helpers/validations/validator/http/requestBodyAddItemParams");
 const {
     currentDateTime
 } = require("../../helpers/dateTime/dates");
@@ -43,6 +43,7 @@ let eventBody;
 let validateReqParams;
 let validateAuth;
 let validateBodyAddItem;
+let checkEventHeadersAndKeys;
 let obj;
 let item;
 let newBioetPrecio;
@@ -63,27 +64,15 @@ module.exports.handler = async (event) => {
         //Init
         obj = null;
 
-        //-- start with validation Headers  ---
+        //-- start with validation headers and keys  ---
         eventHeaders = await event.headers;
 
-        validateReqParams = await validateHeadersParams(eventHeaders);
+        checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-        if (!validateReqParams) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check missing or malformed headers"
-            );
+        if (checkEventHeadersAndKeys != value.IS_NULL) {
+            return checkEventHeadersAndKeys;
         }
-
-        validateAuth = await validateAuthHeaders(eventHeaders);
-
-        if (!validateAuth) {
-            return await bodyResponse(
-                statusCode.UNAUTHORIZED,
-                "Not authenticated, check x_api_key and Authorization"
-            );
-        }
-        //-- end with validation Headers  ---
+        //-- end with validation headers and keys  ---
 
         //-- start with body validations  ---
 
