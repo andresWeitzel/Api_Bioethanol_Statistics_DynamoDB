@@ -35,8 +35,6 @@ const {
     currentDateTime
 } = require("../../helpers/dateTime/dates");
 
-
-
 //Const/Vars
 let eventHeaders;
 let eventBody;
@@ -52,7 +50,10 @@ let periodo;
 let bioetCanAzucar;
 let bioetMaiz;
 let createdAt;
+let msg;
+let code;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+
 
 /**
  * @description Function to insert one object into th bioethanol prices table
@@ -125,12 +126,11 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(`Error in insert lambda, caused by ${{error}}`);
-        console.error(error.stack);
-        return await bodyResponse(
-            statusCode.INTERNAL_SERVER_ERROR,
-            "An unexpected error has occurred. Try again"
-        );
+        code = statusCode.INTERNAL_SERVER_ERROR;
+        msg = `Error in INSERT lambda. Caused by ${error}`;
+        console.error(`${msg}. Stack error type : ${error.stack}`);
+
+        return await bodyResponse(code, msg);
     }
 
 }

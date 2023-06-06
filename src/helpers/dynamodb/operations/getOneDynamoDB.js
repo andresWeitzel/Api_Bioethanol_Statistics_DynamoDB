@@ -1,7 +1,7 @@
 //External
 const {
-    GetItemCommand
-} = require("@aws-sdk/client-dynamodb");
+    GetCommand
+} = require("@aws-sdk/lib-dynamodb");
 //Helpers
 const {
     dynamoDBClient
@@ -24,10 +24,9 @@ const getOneItem = async (tableName, key) => {
         item = null;
         metadata=null;
 
-
         dynamo = await dynamoDBClient();
 
-        metadata = await dynamo.send(new GetItemCommand({
+        metadata = await dynamo.send(new GetCommand({
             TableName: tableName,
             Key: key
         }));
@@ -37,7 +36,7 @@ const getOneItem = async (tableName, key) => {
         }
 
         return item;
-
+        
     } catch (error) {
         console.error(`ERROR in getOneItem() function. Caused by ${error} . Specific stack is ${error.stack} `);
     }

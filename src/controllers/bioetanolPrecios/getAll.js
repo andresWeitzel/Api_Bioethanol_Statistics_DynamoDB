@@ -14,16 +14,14 @@ const { validateHeadersAndKeys } = require("../../helpers/validations/headers/va
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
-let eventBody;
 let eventHeaders;
-let validateReqParams;
-let validateAuth;
-let obj;
+let checkEventHeadersAndKeys;
 let queryStrParams;
 let pageSizeNro;
-let pageNro;
 let orderAt;
 let items;
+let msg;
+let code;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table
@@ -75,12 +73,11 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        console.log(`Error in getAll lambda, caused by ${{error}}`);
-        console.error(error.stack);
-        return await bodyResponse(
-            statusCode.INTERNAL_SERVER_ERROR,
-            "An unexpected error has occurred. Try again"
-        );
+        code = statusCode.INTERNAL_SERVER_ERROR;
+        msg = `Error in GET ALL lambda. Caused by ${error}`;
+        console.error(`${msg}. Stack error type : ${error.stack}`);
+
+        return await bodyResponse(code, msg);
     }
 
 }

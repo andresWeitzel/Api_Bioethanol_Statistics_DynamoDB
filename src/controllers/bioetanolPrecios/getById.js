@@ -1,114 +1,84 @@
 //Enums
-const {
-    statusCode
-} = require("../../enums/http/statusCode");
+const { statusCode } = require("../../enums/http/statusCode");
+const { value } = require("../../enums/general/values");
 //Helpers
+const { bodyResponse } = require("../../helpers/http/bodyResponse");
 const {
-    bodyResponse
-} = require("../../helpers/http/bodyResponse");
-const {
-    validateHeadersParams,
-} = require("../../helpers/validator/http/requestHeadersParams");
-const {
-    validateAuthHeaders
-} = require("../../helpers/auth/headers");
-const {
-    validatePathParameters,
+  validatePathParameters,
 } = require("../../helpers/http/queryStringParams");
 const {
-    getOneItem
-} = require("../../helpers/dynamodb/operations/getOne");
+  getOneItem,
+} = require("../../helpers/dynamodb/operations/getOneDynamoDB");
+const {
+  validateHeadersAndKeys,
+} = require("../../helpers/validations/headers/validateHeadersAndKeys");
 
 //Const/Vars
-let eventBody;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 let eventHeaders;
-let validateReqParams;
-let validateAuth;
+let checkEventHeadersAndKeys;
 let validatePathParam;
 let key;
-let id;
+let idParam;
 let item;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+let msg;
+let code;
 
 /**
- * @description Function to obtain all the objects of the bioethanol prices table according to id
+ * @description Function to get a product of the bioethanol prices table according to id
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
-    try {
-        //Init
-        obj = null;
-        id = '';
-        item = null;
-        key = null;
+  try {
+    //Init
+    item = value.IS_NULL;
+    key = value.IS_NULL;
 
-        //-- start with validation Headers  ---
-        eventHeaders = await event.headers;
+    //-- start with validation headers and keys  ---
+    eventHeaders = await event.headers;
 
-        validateReqParams = await validateHeadersParams(eventHeaders);
+    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-        if (!validateReqParams) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check missing or malformed headers"
-            );
-        }
+    if (checkEventHeadersAndKeys != value.IS_NULL) {
+      return checkEventHeadersAndKeys;
+    }
+    //-- end with validation headers and keys  ---
 
-        validateAuth = await validateAuthHeaders(eventHeaders);
+    //-- start with path parameters  ---
+    idParam = await event.pathParameters.id;
 
-        if (!validateAuth) {
-            return await bodyResponse(
-                statusCode.UNAUTHORIZED,
-                "Not authenticated, check x_api_key and Authorization"
-            );
-        }
-        //-- end with validation Headers  ---
+    validatePathParam = await validatePathParameters(idParam);
 
-        //-- start with path parameters  ---
-        id = await event.pathParameters.id;
+    if (!validatePathParam) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "Bad request, check malformed id to get bioethanol prices based on your id"
+      );
+    }
+    //-- end with path parameters  ---
 
-        validatePathParam = await validatePathParameters(id);
+    //-- start with dynamodb operations  ---
 
-        if (!validatePathParam) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check malformed id"
-            );
-        }
-        //-- end with path parameters  ---
+    key = { id: idParam };
 
-        //-- start with dynamodb operations  ---
+    item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
 
-        key = {
-            'id': {
-                'S': await id
-            }
-        };
-
-        item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
-        
-        if (item==null || !(item.length)) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "The object with the requested id is not found in the database"
-            );
-        }
-        //-- end with dynamodb operations  ---
-
-
-        return await bodyResponse(
-            statusCode.OK,
-            item
-        );
-
-    } catch (error) {
-        console.log(`Error in getById lambda, caused by ${{error}}`);
-        console.error(error.stack);
-        return await bodyResponse(
-            statusCode.INTERNAL_SERVER_ERROR,
-            "An unexpected error has occurred. Try again"
-        );
+    if (item == value.IS_NULL || item.IS_UNDEFINED) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "The Bioetanol prices object with the requested id is not found in the database"
+      );
     }
 
-}
+    return await bodyResponse(statusCode.OK, item);
+
+    //-- end with dynamodb operations  ---
+  } catch (error) {
+    code = statusCode.INTERNAL_SERVER_ERROR;
+    msg = `Error in GET BY ID lambda. Caused by ${error}`;
+    console.error(`${msg}. Stack error type : ${error.stack}`);
+
+    return await bodyResponse(code, msg);
+  }
+};
