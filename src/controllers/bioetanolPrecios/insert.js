@@ -132,7 +132,7 @@ module.exports.handler = async (event) => {
 
         return await bodyResponse(
             statusCode.OK,
-            bioetPrecio.toString()
+            item
         );
 
     } catch (error) {

@@ -55,6 +55,9 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
  
  <br>
 
+ `Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
+
+
 <br>
 
 </details>
@@ -67,8 +70,11 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
 <details>
   <summary>Ver</summary>
  
- 
-* Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
+* Creamos un entorno de trabajo a través de algún ide, podemos o no crear una carpeta raíz para el proyecto, nos posicionamos sobre la misma
+```git
+cd 'projectRootName'
+``` 
+* Una vez creado un entorno de trabajo, clonamos el proyecto
 ```git
 git clone https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS
 ```
@@ -89,10 +95,7 @@ sls -v
 ```git
 npm i
 ```
-* Instalamos dynamodb con la configuración de librerias que se encuentran dentro de .dynamodb. Procedemos a instalar dicho servicio 
-```git
-sls dynamodb install
-```
+* `Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
 * Creamos un archivo para almacenar las variables ssm utilizadas en el proyecto (Más allá que sea un proyecto con fines no comerciales es una buena práctica utilizar variables de entorno).
   * Click der sobre la raíz del proyecto
   * New file
@@ -116,45 +119,18 @@ sls dynamodb install
   ENDPOINT: "http://127.0.0.1:8000"
 
   ```
-* Instalamos el sdk client de dynamodb para las operaciones de db necesarias
-``` git
-npm install @aws-sdk/client-dynamodb
-```     
-* Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
-``` git
-npm i @aws-sdk/lib-dynamodb
-```
-* Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
-```git
-aws configure
-```
-```git
-AWS Access Key ID .... : access_key_random_value
-AWS Secret Key ID .... : secret_key_random_value
-Default.... [us-east-1] : us-east-1
-Default outpu..... : json
-```
-* Visualizamos que se hayan seteado las credenciales
-```git
-aws configure list
-```
-* Los siguientes scripts configurados en el package.json del proyecto son los encargados de
-   * Ejecutar el servicio de dynamoDB en memoria (script dynamodb-service)
-   * Realizar la migración de las tablas (script dynamodb-migrate)
+* El siguiente script configurado en el package.json del proyecto es el encargado de
    * Levantar serverless-offline (serverless-offline)
  ```git
   "scripts": {
-    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb -inMemory",
-    "dynamodb-migrate": "sls dynamodb start --migrate",
     "serverless-offline": "sls offline start",
-    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
+    "start": "npm run serverless-offline"
   },
 ```
-* Ejecutamos los scripts configurados
+* Ejecutamos la app desde terminal.
 ```git
 npm start
 ```
-* Si se ha realizado la migración de tablas previamente (ejecutado el comando anterior), al momento de una nueva ejecución con el mismo, surgiran errores en consola. Esto esta contemplado ya que la migración levanta el servicio de dynamodb, pero `se podrá ejecutar el servicio sin problemas`. Una alternativa es usar directamente el comando `sls offline start` ya que se corrió inicialmente y al menos una vez dicha migración. 
 
 
  
@@ -171,7 +147,16 @@ npm start
  <br>
  
 
-* Creamos un entorno de trabajo a través de algún ide, luego de crear una carpeta nos posicionamos sobre la misma
+
+* Creamos un entorno de trabajo a través de algún ide, podemos o no crear una carpeta raíz para el proyecto, nos posicionamos sobre la misma
+```git
+cd 'projectRootName'
+``` 
+* Una vez creado un entorno de trabajo, clonamos el proyecto
+```git
+git clone https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS
+```
+* Nos posicionamos sobre el proyecto
 ```git
 cd 'projectName'
 ```
@@ -210,15 +195,25 @@ npm i serverless-offline-ssm --save-dev
 plugins:
   - serverless-offlline-ssm
 ```  
-* Instalamos serverless-dynamoDB-local (No dynamoDB). Importante que sea --save y NO --save-dev
+* Instalamos el plugin para el uso de dynamodb en local (No el servicio de dynamoDB, este viene configurado en los archivos dentro de .dynamodb).
+* `Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
 ```git
-npm install serverless-dynamodb-local --save
+npm install serverless-dynamodb-local --save-dev
 ```
  * Agregamos el plugin dentro del serverless.yml
 ```yml
 plugins:
   - serverless-dynamodb-local
 ```
+* Instalamos el sdk client de dynamodb para las operaciones de db necesarias
+``` git
+npm install @aws-sdk/client-dynamodb
+```     
+* Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
+``` git
+npm i @aws-sdk/lib-dynamodb
+```
+* Modificaremos la plantilla inicial  para las configs estandarizadas.
  * Reemplazamos la plantila serverless.yml inicial por la siguiente como modelo base (cambiar nombre, etc)...
 ```yml
 
@@ -262,58 +257,40 @@ npm i prettier --save
 ``` git
 npm i node-input-validator --save
 ```
-* Instalamos el sdk client de dynamodb para las operaciones de db necesarias
-``` git
-npm install @aws-sdk/client-dynamodb
-```     
-* Instalamos el sdk lib de dynamodb para las operaciones de db necesarias
-``` git
-npm i @aws-sdk/lib-dynamodb
-```   
-* Descargamos la Java Runtime Engine (JRE) versión 6.x o posterior. [Descargar desde aquí](https://www.oracle.com/java/technologies/downloads/)
-* Descargamos el .jar que contendrá toda la configuración para la instalación . [Descargar desde aquí](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html#DynamoDBLocal.DownloadingAndRunning.title)
- * Según el .jar que descarguemos tenemos que setear la región correspondiente para su [zona de disponibilidad](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html) en las credenciales de conexión de dynamo (si descargamos US West (Oregon) Region será 'us-west-2').
-* Una vez descargado el .jar en formato .tar descomprimimos y copiamos todo su contenido dentro de la carpeta que se ha creado de dynamo en el proyecto (.dynamodb). Si esta carpeta no está, la creamos dentro de proyecto.
-* Una vez descargado el .jar en formato .tar descomprimimos y copiamos todo su contenido dentro de la carpeta que se cread de dynamo en el proyecto (.dynamodb). Si esta carpeta no está, la creamos dentro de proyecto.
-* Procedemos a instalar el servicio de dynamodb
-```git
-sls dynamodb install
-```
-* Configuramos las credenciales de aws seteadas en el proyecto (Verificar ssm).
-```git
-aws configure
-```
-```git
-AWS Access Key ID .... : access_key_random_value
-AWS Secret Key ID .... : secret_key_random_value
-Default.... [us-east-1] : us-east-1
-Default outpu..... : json
-```
-* Visualizamos que se hayan seteado las credenciales
-```git
-aws configure list
-```
+* Debemos descargar el .jar junto con su config para ejecutar el servicio de dynamodb. [Descargar aquí](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html#DynamoDBLocal.DownloadingAndRunning.title)
+* Una vez descargado el .jar en formato .tar descomprimimos y copiamos todo su contenido dentro de la carpeta `.dynamodb`.
 * Instalamos la dependencia para la ejecución de scripts en paralelo
 ``` git
 npm i --save-dev concurrently
 ``` 
-* Los siguientes scripts configurados en el package.json del proyecto son los encargados de
-   * Ejecutar el servicio de dynamoDB en memoria (script dynamodb-service)
-   * Realizar la migración de las tablas (script dynamodb-migrate)
-   * Levantar serverless-offline (serverless-offline)
- ```git
-  "scripts": {
-    "dynamodb-service": "java -Djava.library.path=.dynamodb/DynamoDBLocal_lib -jar .dynamodb/DynamoDBLocal.jar -sharedDb -inMemory",
-    "dynamodb-migrate": "sls dynamodb start --migrate",
-    "serverless-offline": "sls offline start",
-    "start": "concurrently --kill-others \"npm run dynamodb-service\" \"npm run dynamodb-migrate\" \"npm run serverless-offline\""
-  },
+* El siguiente script configurado en el package.json del proyecto es el encargado de
+Levantar serverless-offline (serverless-offline)
+```git
+ "scripts": {
+   "serverless-offline": "sls offline start",
+   "start": "npm run serverless-offline"
+ },
 ```
-* Ejecutamos los scripts configurados
+* Ejecutamos la app desde terminal.
 ```git
 npm start
 ```
-* Si se ha realizado la migración de tablas previamente (ejecutado el comando anterior), al momento de una nueva ejecución con el mismo, surgiran errores en consola. Esto esta contemplado ya que la migración levanta el servicio de dynamodb, pero `se podrá ejecutar el servicio sin problemas`. Una alternativa es usar directamente el comando `sls offline start` ya que se corrió inicialmente y al menos una vez dicha migración. 
+* Deberíamos esperar un output por consola con los siguiente servicios levantados cuando se ejecuta el comando anterior
+```git
+> crud-amazon-dynamodb-aws@1.0.0 start
+> npm run serverless-offline
+
+> crud-amazon-dynamodb-aws@1.0.0 serverless-offline
+> sls offline start
+
+serverless-offline-ssm checking serverless version 3.31.0.
+Dynamodb Local Started, Visit: http://localhost:8000/shell
+DynamoDB - created table xxxx
+
+etc.....
+```
+* Ya tenemos una app funcional con una estructura inicial definida por Serverless-Framework. La aplicación queda deployada en http://localhost:4002 y podemos testear el endpoint declarado en el serverless desde postman
+* `Aclaración` : El resto de las modificaciones aplicadas sobre la plantilla inicial no se describen por temas de simplificación de doc. Para más info consultar el tutorial de [Serverless-framework](https://www.serverless.com/) para el uso de servicios, plugins, etc.
 
 
 <br>
