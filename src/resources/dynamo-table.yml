@@ -48,25 +48,25 @@ Resources:
             WriteCapacityUnits: 1                
         
 
-  bioetanolTotal:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: bioetanolTotal
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-        - AttributeName: produccion
-          AttributeType: N
-        - AttributeName: ventasTotales
-          AttributeType: N  
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-        - AttributeName: produccion
-          KeyType: RANGE  
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+  # bioetanolTotal:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: bioetanolTotal
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #       - AttributeName: produccion
+  #         AttributeType: N
+  #       - AttributeName: ventasTotales
+  #         AttributeType: N  
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #       - AttributeName: produccion
+  #         KeyType: RANGE  
+  #     ProvisionedThroughput:
+  #       ReadCapacityUnits: 1
+  #       WriteCapacityUnits: 1
 
   # bioetanolMaiz:
   #   Type: AWS::DynamoDB::Table

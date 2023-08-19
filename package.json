@@ -29,6 +29,7 @@
     "@aws-sdk/client-dynamodb": "^3.351.0",
     "@aws-sdk/lib-dynamodb": "^3.306.0",
     "node-input-validator": "^4.5.1",
-    "uninstall": "^0.0.0"
+    "uninstall": "^0.0.0",
+    "uuidv4": "^6.2.13"
   }
 }
