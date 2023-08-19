@@ -55,7 +55,8 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
  
  <br>
 
- `Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
+Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz. La misma se divide a través del manejo de precios de cada tipo de bioetanol según periodo de venta, total de ventas de cada uno, tipos de bioetanol (caña de azucar y maiz), etc.
+`Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
 
 
 <br>
@@ -96,29 +97,7 @@ sls -v
 npm i
 ```
 * `Importante`: Hay alertas de seguridad de dependabot que apuntan contra el plugin "serverless-dynamodb-local". No aplicar parches de seguridad a dicho plugin, ya que la versión `^1.0.2` tiene problemas al momento de la creación de tablas y ejecución del servicio de dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
-* Creamos un archivo para almacenar las variables ssm utilizadas en el proyecto (Más allá que sea un proyecto con fines no comerciales es una buena práctica utilizar variables de entorno).
-  * Click der sobre la raíz del proyecto
-  * New file
-  * Creamos el archivo con el name `serverless_ssm.yml`. Este deberá estar a la misma altura que el serverless.yml
-  * Añadimos las ssm necesarias dentro del archivo.
-  ```git
-
-  # AUTHENTICATION
-  X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
-
-  BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
-
-  # API VALUES
-  API_VERSION : 'v1'
-
-  # DYNAMODB VALUES
-  BIOET_PRECIOS_TABLE_NAME : 'bioetanol-precios'
-  REGION : 'us-east-1'
-  ACCESS_KEY_RANDOM_VALUE: 'xxxx'
-  SECRET_KEY_RANDOM_VALUE: 'xxxx'
-  ENDPOINT: "http://127.0.0.1:8000"
-
-  ```
+* Las variables ssm utilizadas en el proyecto se mantienen para simplificar el proceso de configuración del mismo. Es recomendado agregar el archivo correspondiente (serverless_ssm.yml) al .gitignore.
 * El siguiente script configurado en el package.json del proyecto es el encargado de
    * Levantar serverless-offline (serverless-offline)
  ```git
@@ -129,6 +108,12 @@ npm i
 ```
 * Ejecutamos la app desde terminal.
 ```git
+npm start
+```
+* Si se presenta algún mensaje indicando qué el puerto 4000 u 8000 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+```git
+npx kill-port 4000 (serverless)
+npx kill-port 8000 (dynamo)
 npm start
 ```
 
@@ -259,20 +244,38 @@ npm i node-input-validator --save
 ```
 * Debemos descargar el .jar junto con su config para ejecutar el servicio de dynamodb. [Descargar aquí](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.DownloadingAndRunning.html#DynamoDBLocal.DownloadingAndRunning.title)
 * Una vez descargado el .jar en formato .tar descomprimimos y copiamos todo su contenido dentro de la carpeta `.dynamodb`.
-* Instalamos la dependencia para la ejecución de scripts en paralelo
-``` git
-npm i --save-dev concurrently
-``` 
-* El siguiente script configurado en el package.json del proyecto es el encargado de
-Levantar serverless-offline (serverless-offline)
+* Usaremos [git](https://www.hostinger.com.ar/tutoriales/instalar-git-en-distintos-sistemas-operativos) como control de versiones. Nos posicionamos en la app e inicializamos git
 ```git
- "scripts": {
-   "serverless-offline": "sls offline start",
-   "start": "npm run serverless-offline"
- },
+git init
+```
+* Creamos el repositorio en github (sin readme) y agregamos la url del repositorio creado (ej: la siguiente)
+```git
+git remote add origin https://github.com/andresWeitzel/CRUD_Amazon_DynamoDB_AWS
+```
+* Traemos los cambios del remoto, agregamos los nuevos cambios en local, commitiamos y los subimos al repo.
+```git
+git pull origin master
+git add *
+git commit -m "Add app config"
+git push origin master
+```
+* Las variables ssm utilizadas en el proyecto se mantienen para simplificar el proceso de configuración del mismo. Es recomendado agregar el archivo correspondiente (serverless_ssm.yml) al .gitignore.
+* El siguiente script configurado en el package.json del proyecto es el encargado de
+   * Levantar serverless-offline (serverless-offline)
+ ```git
+  "scripts": {
+    "serverless-offline": "sls offline start",
+    "start": "npm run serverless-offline"
+  },
 ```
 * Ejecutamos la app desde terminal.
 ```git
+npm start
+```
+* Si se presenta algún mensaje indicando qué el puerto 4000 u 8000 ya está en uso, podemos terminar todos los procesos dependientes y volver a ejecutar la app
+```git
+npx kill-port 4000 (serverless)
+npx kill-port 8000 (dynamo)
 npm start
 ```
 * Deberíamos esperar un output por consola con los siguiente servicios levantados cuando se ejecuta el comando anterior
@@ -285,7 +288,7 @@ npm start
 
 serverless-offline-ssm checking serverless version 3.31.0.
 Dynamodb Local Started, Visit: http://localhost:8000/shell
-DynamoDB - created table xxxx
+DynamoDB - created table payments-table
 
 etc.....
 ```
@@ -330,19 +333,8 @@ etc.....
 | [Serverless Plugin](https://www.serverless.com/plugins/) | Librerías para la Definición Modular |
 | [serverless-offline](https://www.npmjs.com/package/serverless-offline) | Este complemento sin servidor emula AWS λ y API Gateway en entorno local |
 | [serverless-offline-ssm](https://www.npmjs.com/package/serverless-offline-ssm) |  busca variables de entorno que cumplen los parámetros de SSM en el momento de la compilación y las sustituye desde un archivo  |
-
-
-
-
-
-</br>
-
-### Extensiones VSC Implementados.
-
-| **Extensión** |              
-| -------------  | 
-| Prettier - Code formatter |
-| YAML - Autoformatter .yml (alt+shift+f) |
+| [serverless-dynamodb-local](https://www.serverless.com/plugins/serverless-dynamodb-local) | Complemento para tipo de db NoSQL DynamoDB |
+| Otros | Otros |
 
 
 <br>
