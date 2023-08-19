@@ -1,17 +1,17 @@
-//Const/vars
-let newUUID;
+//External
+const { uuid } = require('uuidv4');
+
 
 /**
- * @description Generate uuid 
- * @returns a integer
- * @example 109401114
+ * @description Generate a uuid through external library
+ * @returns a string
+ * @example '75442486-0878-440c-9db1-a7006c25a39f'
  */
 const generateUUID = async () => {
-    newUUID = null;
     try {
-        newUUID = parseInt(Math.random() * 10000000 + 100000000);
+        return uuid();
     } catch (error) {
-        console.log(`Error in  generateUUID(), caused by ${{error}}`);
+        console.log(`Error in  generateUUID(), caused by ${error}`);
         console.error(error.stack);
     }
     return newUUID;
