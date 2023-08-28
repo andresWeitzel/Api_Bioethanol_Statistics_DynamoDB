@@ -1,9 +1,9 @@
 //Enums
-const { statusCode } = require("../../../enums/http/statusCode");
+const { statusCode } = require("../../../enums/http/status-code");
 //Helpers
-const { bodyResponse } = require("../../http/bodyResponse");
+const { bodyResponse } = require("../../http/body-response");
 const { validateAuthHeaders } = require("../validator/auth/headers");
-const { validateHeadersParams } = require("../validator/http/requestHeadersParams");
+const { validateHeadersParams } = require("../validator/http/request-headers-params");
 //Const-vars
 let checkEventHeaders;
 let validateReqParams;

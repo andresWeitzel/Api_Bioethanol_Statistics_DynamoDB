@@ -1,17 +1,17 @@
 //Enums
-const { statusCode } = require("../../enums/http/statusCode");
+const { statusCode } = require("../../enums/http/status-code");
 const { value } = require("../../enums/general/values");
 //Helpers
-const { bodyResponse } = require("../../helpers/http/bodyResponse");
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validatePathParameters,
-} = require("../../helpers/http/queryStringParams");
+} = require("../../helpers/http/query-string-params");
 const {
   getOneItem,
-} = require("../../helpers/dynamodb/operations/getOneDynamoDB");
+} = require("../../helpers/dynamodb/operations/get-one");
 const {
   validateHeadersAndKeys,
-} = require("../../helpers/validations/headers/validateHeadersAndKeys");
+} = require("../../helpers/validations/headers/validate-headers-keys");
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;

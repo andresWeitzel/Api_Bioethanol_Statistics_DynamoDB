@@ -1,38 +1,40 @@
 //Enums
-const { statusCode } = require("../../enums/http/statusCode");
+const { statusCode } = require("../../enums/http/status-code");
 const { value } = require("../../enums/general/values");
 //Helpers
-const { bodyResponse } = require("../../helpers/http/bodyResponse");
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-    validateHeadersAndKeys,
-  } = require("../../helpers/validations/headers/validateHeadersAndKeys");
+  validateHeadersAndKeys,
+} = require("../../helpers/validations/headers/validate-headers-keys");
 const {
   validatePathParameters,
-} = require("../../helpers/http/queryStringParams");
+} = require("../../helpers/http/query-string-params");
 const {
   getAllItemsWithFilter,
-} = require("../../helpers/dynamodb/operations/getAllDynamoDB");
+} = require("../../helpers/dynamodb/operations/get-all");
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
-const BIOET_PRECIOS_KEY_DYNAMO = "bioetMaiz";
 let eventHeaders;
 let validatePathParam;
+let key;
+let id;
+let pageNro;
+let periodo;
 let orderAt;
 let items;
-let bioetMaiz;
-let msg;
-let code;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
- * @description Function to obtain all the objects of the bioethanol prices table according to the bioethanol maiz prices
+ * @description Function to obtain all the objects of the bioethanol prices table according to the periodo
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
   try {
     //Init
-    items = value.IS_NULL;
+    obj = null;
+    id = "";
+    items = null;
     pageSizeNro = 5;
     orderAt = "asc";
 
@@ -49,21 +51,21 @@ module.exports.handler = async (event) => {
     //-- start with pagination  ---
     queryStrParams = event.queryStringParameters;
 
-    if (queryStrParams != value.IS_NULL) {
+    if (queryStrParams != null) {
       pageSizeNro = parseInt(await event.queryStringParameters.limit);
       orderAt = await event.queryStringParameters.orderAt;
     }
     //-- end with pagination  ---
 
     //-- start with path parameters  ---
-    bioetMaiz = await event.pathParameters.bioetMaiz;
+    periodo = await event.pathParameters.periodo;
 
-    validatePathParam = await validatePathParameters(bioetMaiz);
+    validatePathParam = await validatePathParameters(periodo);
 
     if (!validatePathParam) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "Bad request, check malformed bioetMaiz value"
+        "Bad request, check malformed periodo value"
       );
     }
     //-- end with path parameters  ---
@@ -72,26 +74,27 @@ module.exports.handler = async (event) => {
 
     items = await getAllItemsWithFilter(
       BIOET_PRECIOS_TABLE_NAME,
-      BIOET_PRECIOS_KEY_DYNAMO,
-      bioetMaiz,
+      "periodo",
+      periodo,
       pageSizeNro,
       orderAt
     );
 
-    if (items == value.IS_NULL || items == value.IS_UNDEFINED) {
+    if (items == null || !items.length) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "The objects with the bioetMaiz value is not found in the database"
+        "The objects with the periodo value is not found in the database"
       );
     }
     //-- end with dynamodb operations  ---
 
     return await bodyResponse(statusCode.OK, items);
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in GET LIKE BIOET MAIZ lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
-
-    return await bodyResponse(code, msg);
+    console.log(`Error in getLikePeriodo lambda, caused by ${{ error }}`);
+    console.error(error.stack);
+    return await bodyResponse(
+      statusCode.INTERNAL_SERVER_ERROR,
+      "An unexpected error has occurred. Try again"
+    );
   }
 };
