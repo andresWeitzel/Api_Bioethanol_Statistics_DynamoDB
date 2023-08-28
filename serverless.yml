@@ -33,6 +33,7 @@ plugins:
     - serverless-offline  
 
 functions:
+# -- BIOETANOL PRECIOS --
   insertBioetanolPrecios:
     handler: src/controllers/bioetanolPrecios/insert.handler
     description: Function to insert an object in the bioethanol prices table
@@ -104,7 +105,9 @@ functions:
       - http:
           method: get
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/bioetanol-cana-azucar/{bioetCanAzucar}
-          private: true           
+          private: true
+           
+# -- BIOETANOL TOTAL --                    
 
 custom:  
   serverless-offline-ssm:
