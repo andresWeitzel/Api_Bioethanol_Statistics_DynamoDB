@@ -34,7 +34,7 @@ plugins:
 
 functions:
   insertBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/insert.handler
+    handler: src/controllers/bioetanol-precios/insert.handler
     description: Function to insert an object in the bioethanol prices table
     timeout: 10
     events:
@@ -43,7 +43,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/insert
           private: true
   updateBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/update.handler
+    handler: src/controllers/bioetanol-precios/update.handler
     description: Function to update an object in the bioethanol prices table
     timeout: 10
     events:
@@ -52,7 +52,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/update/{id}
           private: true          
   getAllBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getAll.handler
+    handler: src/controllers/bioetanol-precios/get-all.handler
     description: Function to obtain all the objects of the bioethanol prices table
     timeout: 10
     events:
@@ -61,7 +61,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/list
           private: true
   getByIdBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getById.handler
+    handler: src/controllers/bioetanol-precios/get-by-id.handler
     description: Function to obtain all the objects of the bioethanol prices table according to id
     timeout: 10
     events:
@@ -70,7 +70,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/id/{id}
           private: true   
   getLikeCreatedAtBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getLikeCreatedAt.handler
+    handler: src/controllers/bioetanol-precios/get-like-created-at.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the creation date
     timeout: 10
     events:
@@ -79,7 +79,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/created-at/{createdAt}
           private: true  
   getLikePeriodoBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getLikePeriodo.handler
+    handler: src/controllers/bioetanol-precios/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the periodo
     timeout: 10
     events:
@@ -88,7 +88,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/periodo/{periodo}
           private: true
   getLikeBioetMaizBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getLikeBioetMaiz.handler
+    handler: src/controllers/bioetanol-precios/get-like-bioet-maiz.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol maiz price
     timeout: 10
     events:
@@ -97,7 +97,7 @@ functions:
           path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/bioetanol-maiz/{bioetMaiz}
           private: true 
   getLikeBioetCanAzucarBioetanolPrecios:
-    handler: src/controllers/bioetanolPrecios/getLikeBioetCanAzucar.handler
+    handler: src/controllers/bioetanol-precios/get-like-bioet-can-azucar.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar price
     timeout: 10
     events:

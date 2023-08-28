@@ -5,35 +5,35 @@ const {
 //Enums
 const {
     statusCode
-} = require("../../enums/http/statusCode");
+} = require("../../enums/http/status-code");
 const {
     value
 } = require("../../enums/general/values");
 //Helpers
 const {
     bodyResponse
-} = require("../../helpers/http/bodyResponse");
+} = require("../../helpers/http/body-response");
 const {
     validateHeadersAndKeys,
-} = require("../../helpers/validations/headers/validateHeadersAndKeys");
+} = require("../../helpers/validations/headers/validate-headers-keys");
 const {
     insertItem
-} = require("../../helpers/dynamodb/operations/insertDynamoDB");
+} = require("../../helpers/dynamodb/operations/insert");
 const {
     generateUUID
-} = require("../../helpers/math/generateUuid");
+} = require("../../helpers/math/generate-uuid");
 const {
     formatToJson
-} = require("../../helpers/format/formatToJson");
+} = require("../../helpers/format/format-to-json");
 const {
     formatToString
-} = require("../../helpers/format/formatToString");
+} = require("../../helpers/format/format-to-string");
 const {
     validateBodyAddItemParams
-} = require("../../helpers/validations/validator/http/requestBodyAddItemParams");
+} = require("../../helpers/validations/validator/http/request-body-add-item-params");
 const {
     currentDateTime
-} = require("../../helpers/dateTime/dates");
+} = require("../../helpers/date-time/dates");
 
 //Const/Vars
 let eventHeaders;
