@@ -1,50 +1,30 @@
 //Models
-const {
-    BioetanolPrecio
-} = require("../../models/BioetanolPrecio");
+const { BioetanolPrecio } = require("../../models/BioetanolPrecio");
 //Enums
-const {
-    statusCode
-} = require("../../enums/http/statusCode");
+const { statusCode } = require("../../enums/http/status-code");
+const { value } = require("../../enums/general/values");
 //Helpers
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-    bodyResponse
-} = require("../../helpers/http/bodyResponse");
+  validateHeadersAndKeys,
+} = require("../../helpers/validations/headers/validate-headers-keys");
+const { formatToJson } = require("../../helpers/format/format-to-json");
+const { formatToString } = require("../../helpers/format/format-to-string");
 const {
-    validateHeadersParams,
-} = require("../../helpers/validator/http/requestHeadersParams");
+  validateBodyAddItemParams,
+} = require("../../helpers/validator/http/request-body-add-item-params");
+const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
-    validateAuthHeaders
-} = require("../../helpers/auth/headers");
+  validatePathParameters,
+} = require("../../helpers/http/query-string-params");
+const { getOneItem } = require("../../helpers/dynamodb/operations/getOne");
 const {
-    formatToJson
-} = require("../../helpers/format/formatToJson");
-const {
-    formatToString
-} = require("../../helpers/format/formatToString");
-const {
-    validateBodyAddItemParams
-} = require("../../helpers/validator/http/requestBodyAddItemParams");
-const {
-    currentDateTime
-} = require("../../helpers/dateTime/dates");
-const {
-    validatePathParameters
-} = require("../../helpers/http/queryStringParams");
-const {
-    getOneItem
-} = require("../../helpers/dynamodb/operations/getOne");
-const {
-    updateOneItem
-} = require("../../helpers/dynamodb/operations/updateOneItem");
-
-
+  updateOneItem,
+} = require("../../helpers/dynamodb/operations/update");
 
 //Const/Vars
 let eventHeaders;
 let eventBody;
-let validateReqParams;
-let validateAuth;
 let validateBodyAddItem;
 let validatePathParam;
 let item;
@@ -53,7 +33,7 @@ let uuid;
 let periodo;
 let bioetCanAzucar;
 let bioetMaiz;
-let bioetPrecio
+let bioetPrecio;
 let createdAt;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
@@ -63,133 +43,120 @@ const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
-    try {
-        //Init
-        item = null;
-        bioetPrecio = null;
+  try {
+    //Init
+    item = null;
+    bioetPrecio = null;
 
-        //-- start with validation Headers  ---
-        eventHeaders = await event.headers;
+    //-- start with validation headers and keys  ---
+    eventHeaders = await event.headers;
 
-        validateReqParams = await validateHeadersParams(eventHeaders);
+    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-        if (!validateReqParams) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check missing or malformed headers"
-            );
-        }
+    if (checkEventHeadersAndKeys != value.IS_NULL) {
+      return checkEventHeadersAndKeys;
+    }
+    //-- end with validation headers and keys  ---
 
-        validateAuth = await validateAuthHeaders(eventHeaders);
+    //-- start with path parameters  ---
+    uuid = await event.pathParameters.id;
 
-        if (!validateAuth) {
-            return await bodyResponse(
-                statusCode.UNAUTHORIZED,
-                "Not authenticated, check x_api_key and Authorization"
-            );
-        }
-        //-- end with validation Headers  ---
+    validatePathParam = await validatePathParameters(uuid);
 
-        //-- start with path parameters  ---
-        uuid = await event.pathParameters.id;
+    if (!validatePathParam) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "Bad request, check malformed uuid"
+      );
+    }
+    //-- end with path parameters  ---
 
-        validatePathParam = await validatePathParameters(uuid);
+    //-- start with body validations  ---
 
-        if (!validatePathParam) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check malformed uuid"
-            );
-        }
-        //-- end with path parameters  ---
+    eventBody = await formatToJson(event.body);
 
-        //-- start with body validations  ---
+    validateBodyAddItem = await validateBodyAddItemParams(eventBody);
 
-        eventBody = await formatToJson(event.body);
+    if (!validateBodyAddItem) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "Bad request, check request body attributes. Missing or incorrect"
+      );
+    }
+    //-- end with body validations  ---
 
-        validateBodyAddItem = await validateBodyAddItemParams(eventBody);
+    //-- start with dynamoDB operations  ---
 
-        if (!validateBodyAddItem) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check request body attributes. Missing or incorrect"
-            );
-        }
-        //-- end with body validations  ---
+    // key = {
+    //     'id': {
+    //         'S': await uuid
+    //     }
+    // };
 
+    // item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
 
-        //-- start with dynamoDB operations  ---
+    // if (item == null || !(item.length)) {
+    //     return await bodyResponse(
+    //         statusCode.BAD_REQUEST,
+    //         `The object has not been updated with the id ${uuid} beacuse is not found in the database`
+    //     );
+    // }
 
+    periodo = await eventBody.periodo;
+    bioetCanAzucar = await eventBody.bioetanol_azucar;
+    bioetMaiz = await eventBody.bioetanol_maiz;
+    createdAt = await currentDateTime();
 
-        // key = {
-        //     'id': {
-        //         'S': await uuid
-        //     }
-        // };
+    bioetPrecio = new BioetanolPrecio(
+      uuid,
+      periodo,
+      bioetCanAzucar,
+      bioetMaiz,
+      createdAt
+    );
 
-        // item = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
+    key = {
+      id: {
+        S: await uuid,
+      },
+    };
 
-        // if (item == null || !(item.length)) {
-        //     return await bodyResponse(
-        //         statusCode.BAD_REQUEST,
-        //         `The object has not been updated with the id ${uuid} beacuse is not found in the database`
-        //     );
-        // }
+    item = {
+      // 'id': {
+      //     'S': await bioetPrecio.getUuid()
+      // },
+      periodo: {
+        S: await bioetPrecio.getPeriodo(),
+      },
+      bioetCanAzucar: {
+        S: await bioetPrecio.getBioetCanAzucar(),
+      },
+      bioetMaiz: {
+        S: await bioetPrecio.getBioetMaiz(),
+      },
+      createdAt: {
+        S: await bioetPrecio.getCreatedAt(),
+      },
+    };
 
-        periodo = await eventBody.periodo;
-        bioetCanAzucar = await eventBody.bioetanol_azucar;
-        bioetMaiz = await eventBody.bioetanol_maiz;
-        createdAt = await currentDateTime();
+    newBioetPrecio = await updateOneItem(BIOET_PRECIOS_TABLE_NAME, key, item);
 
-        bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt);
-
-        key = {
-            'id': {
-                'S': await uuid
-            }
-        };
-
-        item = {
-            // 'id': {
-            //     'S': await bioetPrecio.getUuid()
-            // },
-            'periodo': {
-                'S': await bioetPrecio.getPeriodo()
-            },
-            'bioetCanAzucar': {
-                'S': await bioetPrecio.getBioetCanAzucar()
-            },
-            'bioetMaiz': {
-                'S': await bioetPrecio.getBioetMaiz()
-            },
-            'createdAt': {
-                'S': await bioetPrecio.getCreatedAt()
-            }
-        };
-
-        newBioetPrecio = await updateOneItem(BIOET_PRECIOS_TABLE_NAME, key, item);
-
-        if (newBioetPrecio == null || !(newBioetPrecio.length)) {
-            return await bodyResponse(
-                statusCode.INTERNAL_SERVER_ERROR,
-                "An error has occurred, the object has not been updated into the database"
-            );
-        }
-
-        //-- end with dynamoDB operations  ---
-
-        return await bodyResponse(
-            statusCode.OK,
-            bioetPrecio.toString()
-        );
-
-    } catch (error) {
-        console.log(`Error in updated lambda, caused by ${{error}}`);
-        console.error(error.stack);
-        return await bodyResponse(
-            statusCode.INTERNAL_SERVER_ERROR,
-            "An unexpected error has occurred. Try again"
-        );
+    if (newBioetPrecio == null || !newBioetPrecio.length) {
+      return await bodyResponse(
+        statusCode.INTERNAL_SERVER_ERROR,
+        "An error has occurred, the object has not been updated into the database"
+      );
     }
 
-}
+    //-- end with dynamoDB operations  ---
+
+    return await bodyResponse(statusCode.OK, bioetPrecio.toString());
+  } catch (error) {
+    console.log(`Error in updated lambda, caused by ${{ error }}`);
+    console.error(error.stack);
+    return await bodyResponse(
+      statusCode.INTERNAL_SERVER_ERROR,
+      "An unexpected error has occurred. Try again"
+    );
+  }
+};

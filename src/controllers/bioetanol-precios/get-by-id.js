@@ -8,7 +8,7 @@ const {
 } = require("../../helpers/http/query-string-params");
 const {
   getOneItem,
-} = require("../../helpers/dynamodb/operations/getOne");
+} = require("../../helpers/dynamodb/operations/get-one");
 const {
   validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
