@@ -17,7 +17,7 @@ const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
   validatePathParameters,
 } = require("../../helpers/http/query-string-params");
-const { getOneItem } = require("../../helpers/dynamodb/operations/getOne");
+const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
 const {
   updateOneItem,
 } = require("../../helpers/dynamodb/operations/update");

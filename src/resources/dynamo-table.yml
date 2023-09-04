@@ -55,6 +55,8 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
+        - AttributeName: periodo
+          AttributeType: S   
         - AttributeName: produccion
           AttributeType: S
         - AttributeName: ventasTotales
@@ -66,6 +68,15 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1 
       GlobalSecondaryIndexes:
+        - IndexName: periodo
+          KeySchema:
+            - AttributeName: periodo
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
         - IndexName: produccion
           KeySchema:
             - AttributeName: produccion

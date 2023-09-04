@@ -1,18 +1,18 @@
 'use strict';
 
-class BioetanolPrecio {
+class BioetanolTotal {
     constructor(
         uuid,
         periodo,
-        bioetCanAzucar,
-        bioetMaiz,
+        produccion,
+        ventasTotales,
         createdAt,
         updatedAt
     ) {
         this.uuid = uuid,
             this.periodo = periodo,
-            this.bioetCanAzucar = bioetCanAzucar,
-            this.bioetMaiz = bioetMaiz,
+            this.produccion = produccion,
+            this.ventasTotales = ventasTotales,
             this.createdAt = createdAt,
             this.updatedAt = updatedAt
     }
@@ -28,17 +28,17 @@ class BioetanolPrecio {
     setPeriodo(periodo){
         return this.periodo;
     }
-    getBioetCanAzucar(){
-        return this.bioetCanAzucar;
+    getProduccion(){
+        return this.produccion;
     }
-    setBioetCanAzucar(bioetCanAzucar){
-        return this.bioetCanAzucar;
+    setProduccion(produccion){
+        return this.produccion;
     }
-    getBioetMaiz(){
-        return this.bioetMaiz;
+    getVentasTotales(){
+        return this.ventasTotales;
     }
-    setBioetMaiz(bioetMaiz){
-        return this.bioetMaiz;
+    setVentasTotales(ventasTotales){
+        return this.ventasTotales;
     }
     getCreatedAt(){
         return this.createdAt;
@@ -54,7 +54,7 @@ class BioetanolPrecio {
     }
 
     toString(){
-        return `[ Uuid : ${this.getUuid()} , Periodo : ${this.getPeriodo()}, Bioetanol Caña de Azucar[$/L] : $${this.getBioetCanAzucar()}, Bioetanol Maíz [$/L] : $${this.getBioetMaiz()}, Created at : ${this.getCreatedAt()}, Updated at : ${this.geUpdatedAt()} ] `;
+        return `[ Uuid : ${this.getUuid()} , Periodo : ${this.getPeriodo()}, Producción de Bioetanol Total [m3] : $${this.getproduccion()}, Ventas Totales [m3] : $${this.getventasTotales()}, Created at : ${this.getCreatedAt()}, Updated at : ${this.geUpdatedAt()} ] `;
     }
  
 
@@ -63,5 +63,5 @@ class BioetanolPrecio {
 }
 
 module.exports = {
-    BioetanolPrecio
+    BioetanolTotal
 }

@@ -50,6 +50,7 @@ let periodo;
 let bioetCanAzucar;
 let bioetMaiz;
 let createdAt;
+let updatedAt;
 let msg;
 let code;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
@@ -98,15 +99,17 @@ module.exports.handler = async (event) => {
         bioetCanAzucar = await eventBody.bioetanol_azucar;
         bioetMaiz = await eventBody.bioetanol_maiz;
         createdAt = await currentDateTime();
+        updatedAt = await currentDateTime();
 
-        let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt);
+        let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt, updatedAt);
 
         item = {
             id : await bioetPrecio.getUuid(),
             periodo : await bioetPrecio.getPeriodo(),
             bioetCanAzucar : await bioetPrecio.getBioetCanAzucar(),
             bioetMaiz : await bioetPrecio.getBioetMaiz(),
-            createdAt : await bioetPrecio.getCreatedAt()
+            createdAt : await bioetPrecio.getCreatedAt(),
+            updatedAt : await bioetPrecio.getUpdatedAt()
             }
 
         newBioetPrecio = await insertItem(BIOET_PRECIOS_TABLE_NAME, item);
