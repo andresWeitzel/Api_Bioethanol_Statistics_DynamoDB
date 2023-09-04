@@ -3,7 +3,7 @@ const { PutCommand } = require("@aws-sdk/lib-dynamodb");
 //Helpers
 const {
     dynamoDBClient
-} = require("../config/dynamoDBClient");
+} = require("../config/client");
 //Const-vars 
 let dynamo;
 let metadata;
