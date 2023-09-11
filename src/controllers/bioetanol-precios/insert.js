@@ -29,7 +29,7 @@ const {
     formatToString
 } = require("../../helpers/format/format-to-string");
 const {
-    validateBodyAddItemParams
+    validateBodyAddItemParamsBioetPrecios
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
 const {
     currentDateTime
@@ -80,7 +80,7 @@ module.exports.handler = async (event) => {
 
         eventBody = await formatToJson(event.body);
 
-        validateBodyAddItem = await validateBodyAddItemParams(eventBody);
+        validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(eventBody);
 
         if (!validateBodyAddItem) {
             return await bodyResponse(
