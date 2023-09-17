@@ -116,7 +116,25 @@ functions:
       - http:
           method: post
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/'
-          private: true            
+          private: true
+  getAllBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-all.handler
+    description: Function to obtain all the objects of the bioethanol total table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/list'
+          private: true          
+  getByIdBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-by-id.handler
+    description: Function to obtain all the objects of the bioethanol total table according to id
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/id/{id}'
+          private: true  
 
 custom:  
   serverless-offline-ssm:
