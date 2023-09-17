@@ -1,0 +1,9 @@
+*.js linguist-detectable=true
+*.ts linguist-detectable=true
+*.py linguist-detectable=true
+*.sql linguist-detectable=true
+
+*.js linguist-language=javascript
+*.ts linguist-language=typescript
+*.py linguist-language=python
+*.sql linguist-language=sql
