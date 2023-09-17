@@ -31,6 +31,7 @@ plugins:
     - serverless-dynamodb-local
     - serverless-offline-ssm
     - serverless-offline  
+    # Add https://www.serverless.com/plugins/serverless-offline-watcher
 
 functions:
 # -- BIOETANOL PRECIOS --
