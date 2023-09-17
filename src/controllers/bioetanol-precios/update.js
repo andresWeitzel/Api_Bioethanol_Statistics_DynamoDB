@@ -11,13 +11,13 @@ const {
 const { formatToJson } = require("../../helpers/format/format-to-json");
 const { formatToString } = require("../../helpers/format/format-to-string");
 const {
-  validateBodyAddItemParams,
+  validateBodyAddItemParamsBioetPrecios,
 } = require("../../helpers/validator/http/request-body-add-item-params");
 const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
   validatePathParameters,
 } = require("../../helpers/http/query-string-params");
-const { getOneItem } = require("../../helpers/dynamodb/operations/getOne");
+const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
 const {
   updateOneItem,
 } = require("../../helpers/dynamodb/operations/update");
@@ -75,7 +75,7 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParams(eventBody);
+    validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(eventBody);
 
     if (!validateBodyAddItem) {
       return await bodyResponse(

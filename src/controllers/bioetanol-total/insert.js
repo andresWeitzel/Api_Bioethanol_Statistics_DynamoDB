@@ -1,7 +1,7 @@
 //Models
 const {
-    BioetanolPrecio
-} = require("../../models/BioetanolPrecio");
+    BioetanolTotal
+} = require("../../models/BioetanolTotal");
 //Enums
 const {
     statusCode
@@ -29,7 +29,7 @@ const {
     formatToString
 } = require("../../helpers/format/format-to-string");
 const {
-    validateBodyAddItemParamsBioetPrecios
+    validateBodyAddItemParamsBioetTotal
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
 const {
     currentDateTime
@@ -38,26 +38,23 @@ const {
 //Const/Vars
 let eventHeaders;
 let eventBody;
-let validateReqParams;
-let validateAuth;
 let validateBodyAddItem;
 let checkEventHeadersAndKeys;
 let obj;
 let item;
-let newBioetPrecio;
+let newBioetTotal;
 let uuid;
 let periodo;
-let bioetCanAzucar;
-let bioetMaiz;
+let produccion;
+let ventasTotales;
 let createdAt;
-let updatedAt;
 let msg;
 let code;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 
 
 /**
- * @description Function to insert one object into th bioethanol prices table
+ * @description Function to insert one object into th bioethanol total table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -80,7 +77,7 @@ module.exports.handler = async (event) => {
 
         eventBody = await formatToJson(event.body);
 
-        validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(eventBody);
+        validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
 
         if (!validateBodyAddItem) {
             return await bodyResponse(
@@ -96,25 +93,23 @@ module.exports.handler = async (event) => {
         uuid = await generateUUID();
         uuid = await formatToString(uuid);
         periodo = await eventBody.periodo;
-        bioetCanAzucar = await eventBody.bioetanol_azucar;
-        bioetMaiz = await eventBody.bioetanol_maiz;
+        produccion = await eventBody.produccion;
+        ventasTotales = await eventBody.ventas_totales;
         createdAt = await currentDateTime();
-        updatedAt = await currentDateTime();
 
-        let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt, updatedAt);
+        let bioetPrecio = new BioetanolTotal(uuid, periodo, produccion, ventasTotales, createdAt);
 
         item = {
             id : await bioetPrecio.getUuid(),
             periodo : await bioetPrecio.getPeriodo(),
-            bioetCanAzucar : await bioetPrecio.getBioetCanAzucar(),
-            bioetMaiz : await bioetPrecio.getBioetMaiz(),
-            createdAt : await bioetPrecio.getCreatedAt(),
-            updatedAt : await bioetPrecio.getUpdatedAt()
+            produccion : await bioetPrecio.getProduccion(),
+            ventasTotales : await bioetPrecio.getVentasTotales(),
+            createdAt : await bioetPrecio.getCreatedAt()
             }
 
-        newBioetPrecio = await insertItem(BIOET_PRECIOS_TABLE_NAME, item);
+        newBioetTotal = await insertItem(BIOET_TOTAL_TABLE_NAME, item);
 
-        if (newBioetPrecio == null || !(newBioetPrecio.length)) {
+        if (newBioetTotal == null || !(newBioetTotal.length)) {
             return await bodyResponse(
                 statusCode.INTERNAL_SERVER_ERROR,
                 "An error has occurred, the object has not been inserted into the database"

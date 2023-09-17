@@ -9,7 +9,7 @@ provider:
   stage: dev
   region : us-east-1
   memorySize: 512
-  timeout : 10
+  timeout : ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
   environment: 
     ${file(./serverless_ssm.yml)}
   apiGateway:
@@ -33,78 +33,108 @@ plugins:
     - serverless-offline  
 
 functions:
+# -- BIOETANOL PRECIOS --
   insertBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/insert.handler
     description: Function to insert an object in the bioethanol prices table
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: post
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/insert
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/'
           private: true
   updateBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/update.handler
     description: Function to update an object in the bioethanol prices table
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: put
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/update/{id}
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/{id}'
           private: true          
   getAllBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-all.handler
     description: Function to obtain all the objects of the bioethanol prices table
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/list
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/list'
           private: true
   getByIdBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-by-id.handler
     description: Function to obtain all the objects of the bioethanol prices table according to id
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/id/{id}
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/id/{id}'
           private: true   
   getLikeCreatedAtBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-created-at.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the creation date
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/created-at/{createdAt}
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/created-at/{createdAt}'
           private: true  
   getLikePeriodoBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the periodo
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/periodo/{periodo}
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/periodo/{periodo}'
           private: true
   getLikeBioetMaizBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-bioet-maiz.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol maiz price
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/bioetanol-maiz/{bioetMaiz}
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/bioetanol-maiz/{bioetMaiz}'
           private: true 
   getLikeBioetCanAzucarBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-bioet-can-azucar.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar price
-    timeout: 10
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
-          path: /${file(./serverless_ssm.yml):API_VERSION}/bioetanol-precios/bioetanol-cana-azucar/{bioetCanAzucar}
-          private: true           
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/bioetanol-cana-azucar/{bioetCanAzucar}'
+          private: true
+           
+# -- BIOETANOL TOTAL --        
+  insertBioetanolTotal:
+    handler: src/controllers/bioetanol-total/insert.handler
+    description: Function to insert an object in the bioethanol total table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: post
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/'
+          private: true
+  getAllBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-all.handler
+    description: Function to obtain all the objects of the bioethanol total table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/list'
+          private: true          
+  getByIdBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-by-id.handler
+    description: Function to obtain all the objects of the bioethanol total table according to id
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/id/{id}'
+          private: true  
 
 custom:  
   serverless-offline-ssm:
