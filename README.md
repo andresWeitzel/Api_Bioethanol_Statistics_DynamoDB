@@ -448,6 +448,7 @@ etc.....
  * [Generador de uuidv4](https://www.npmjs.com/package/uuid)
  * [Watch changes with serverless-offline-watcher](https://www.serverless.com/plugins/serverless-offline-watcher)
 
+
  #### Package.json
  * [Configuración de scripts en paralelo](https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel)
 
