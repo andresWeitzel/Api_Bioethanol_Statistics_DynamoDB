@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "serverless-offline": "sls offline start",
-    "start": "npm run serverless-offline"
+    "start": "npm run serverless-offline",
+    "start:watch": "nodemon -e js,ts,yml,json --exec \"sls offline\""
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS#readme",
   "devDependencies": {
+    "nodemon": "^3.0.1",
     "prettier": "^2.8.8",
     "serverless": "^3.35.2",
     "serverless-dynamodb-local": "^0.2.40",

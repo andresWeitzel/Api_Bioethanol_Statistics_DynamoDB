@@ -446,7 +446,7 @@ etc.....
  #### Librerías
  * [Validación de campos](https://www.npmjs.com/package/node-input-validator)
  * [Generador de uuidv4](https://www.npmjs.com/package/uuid)
- * [Watch changes with serverless-offline-watcher](https://www.serverless.com/plugins/serverless-offline-watcher)
+ * [Us de nodemon](https://www.npmjs.com/package/nodemon)
 
 
  #### Package.json

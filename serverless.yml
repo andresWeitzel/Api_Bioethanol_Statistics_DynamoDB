@@ -30,9 +30,7 @@ provider:
 plugins:
     - serverless-dynamodb-local
     - serverless-offline-ssm
-    - serverless-offline  
-    # Add https://www.serverless.com/plugins/serverless-offline-watcher
-
+    - serverless-offline
 
 functions:
 # -- BIOETANOL PRECIOS --
@@ -153,7 +151,7 @@ custom:
       seed: true
   serverless-offline:
     httpPort: 4000
-    lambdaPort: 4002  
+    lambdaPort: 4002
 
 resources:
   - ${file(src/resources/api-gateway.yml)} 
