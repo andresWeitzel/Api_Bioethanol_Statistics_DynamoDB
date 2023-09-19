@@ -30,7 +30,7 @@ provider:
 plugins:
     - serverless-dynamodb-local
     - serverless-offline-ssm
-    - serverless-offline  
+    - serverless-offline
 
 functions:
 # -- BIOETANOL PRECIOS --
@@ -151,7 +151,7 @@ custom:
       seed: true
   serverless-offline:
     httpPort: 4000
-    lambdaPort: 4002  
+    lambdaPort: 4002
 
 resources:
   - ${file(src/resources/api-gateway.yml)} 

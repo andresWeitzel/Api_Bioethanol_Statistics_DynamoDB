@@ -446,6 +446,8 @@ etc.....
  #### Librerías
  * [Validación de campos](https://www.npmjs.com/package/node-input-validator)
  * [Generador de uuidv4](https://www.npmjs.com/package/uuid)
+ * [Us de nodemon](https://www.npmjs.com/package/nodemon)
+
 
  #### Package.json
  * [Configuración de scripts en paralelo](https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel)
