@@ -6,7 +6,7 @@
   "scripts": {
     "serverless-offline": "sls offline start",
     "start": "npm run serverless-offline",
-    "start:watch": "nodemon -e js,ts,yml,json --exec \"sls offline\""
+    "start:watch": "nodemon -e js,ts,yml,json --exec \"sls offline start\""
   },
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.351.0",
-    "@aws-sdk/lib-dynamodb": "^3.306.0",
+    "@aws-sdk/lib-dynamodb": "^3.415.0",
     "node-input-validator": "^4.5.1",
     "uninstall": "^0.0.0",
     "uuid": "^9.0.1"

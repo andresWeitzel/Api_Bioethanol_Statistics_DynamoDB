@@ -17,9 +17,7 @@ const {
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
-let key;
-let id;
-let pageNro;
+let pageSizeNro;
 let orderAt;
 let items;
 let createdAt;
@@ -34,7 +32,6 @@ module.exports.handler = async (event) => {
   try {
     //Init
     obj = null;
-    id = "";
     items = null;
     pageSizeNro = 5;
     orderAt = "asc";

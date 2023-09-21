@@ -38,11 +38,8 @@ const {
 //Const/Vars
 let eventHeaders;
 let eventBody;
-let validateReqParams;
-let validateAuth;
 let validateBodyAddItem;
 let checkEventHeadersAndKeys;
-let obj;
 let item;
 let newBioetPrecio;
 let uuid;
@@ -104,7 +101,7 @@ module.exports.handler = async (event) => {
         let bioetPrecio = new BioetanolPrecio(uuid, periodo, bioetCanAzucar, bioetMaiz, createdAt, updatedAt);
 
         item = {
-            id : await bioetPrecio.getUuid(),
+            uuid : await bioetPrecio.getUuid(),
             periodo : await bioetPrecio.getPeriodo(),
             bioetCanAzucar : await bioetPrecio.getBioetCanAzucar(),
             bioetMaiz : await bioetPrecio.getBioetMaiz(),

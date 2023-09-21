@@ -4,7 +4,7 @@ Resources:
     Properties:
       TableName: bioetanol-precios
       AttributeDefinitions:
-        - AttributeName: id
+        - AttributeName: uuid
           AttributeType: S
         - AttributeName: periodo
           AttributeType: S  
@@ -13,7 +13,7 @@ Resources:
         - AttributeName: bioetMaiz
           AttributeType: S  
       KeySchema:
-        - AttributeName: id
+        - AttributeName: uuid
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
@@ -53,7 +53,7 @@ Resources:
     Properties:
       TableName: bioetanol-total
       AttributeDefinitions:
-        - AttributeName: id
+        - AttributeName: uuid
           AttributeType: S
         - AttributeName: periodo
           AttributeType: S   
@@ -62,7 +62,7 @@ Resources:
         - AttributeName: ventasTotales
           AttributeType: S  
       KeySchema:
-        - AttributeName: id
+        - AttributeName: uuid
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
