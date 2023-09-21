@@ -1,5 +1,3 @@
-//Models
-const { BioetanolPrecio } = require("../../models/BioetanolPrecio");
 //Enums
 const { statusCode } = require("../../enums/http/status-code");
 const { value } = require("../../enums/general/values");
@@ -9,38 +7,34 @@ const {
   validateHeadersAndKeys
 } = require("../../helpers/validations/headers/validate-headers-keys");
 const { formatToJson } = require("../../helpers/format/format-to-json");
-const { formatToString } = require("../../helpers/format/format-to-string");
 const {
   validateBodyAddItemParamsBioetPrecios
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
-const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
   validatePathParameters
 } = require("../../helpers/http/query-string-params");
-const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
-const { updateOneItem } = require("../../helpers/dynamodb/operations/update");
+const {
+  deleteItemByUuid
+} = require("../../helpers/dynamodb/operations/delete");
 
 //Const/Vars
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
 let validatePathParam;
-let oldItem;
-let updatedBioetPrecio;
+let itemDeleted;
 let uuid;
-let newItem;
-let newBioetanolPrecioObj;
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 
 /**
- * @description Function to update one object into the bioethanol prices table
+ * @description Function to delete one object from the bioethanol prices table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
   try {
     //Init
-    item = null;
+    itemDeleted = null;
     bioetPrecio = null;
 
     //-- start with validation headers and keys  ---
@@ -54,7 +48,7 @@ module.exports.handler = async (event) => {
     //-- end with validation headers and keys  ---
 
     //-- start with path parameters  ---
-    uuid = await formatToString(event.pathParameters.uuid);
+    uuid = event.pathParameters.uuid;
 
     validatePathParam = await validatePathParameters(uuid);
 
@@ -82,54 +76,27 @@ module.exports.handler = async (event) => {
     }
     //-- end with body validations  ---
 
-    //-- start with old item dynamoDB operations  ---
+    //-- start with delete item dynamoDB operations  ---
 
-    key = { uuid: uuid };
+    itemDeleted = await deleteItemByUuid(BIOET_PRECIOS_TABLE_NAME, uuid);
 
-    oldItem = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
-
-    if (oldItem == value.IS_NULL || oldItem == value.IS_UNDEFINED) {
+    if (itemDeleted != true) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
-        `Internal Server Error. Unable to update object in db as failed to get a item by uuid ${uuid} . Check if the item exists in the database and try again.`
+        `Unable to delete item based on uuid ${uuid}`
       );
     }
-    //-- end with old item dynamoDB operations  ---
 
+    //-- end with delete item dynamoDB operations  ---
 
-    //-- start with new item dynamoDB operations  ---
-
-    newBioetanolPrecioObj = new BioetanolPrecio(
-      uuid,
-      eventBody.periodo,
-      eventBody.bioetanol_azucar,
-      eventBody.bioetanol_maiz,
-      await currentDateTime(),
-      await currentDateTime()
+    return await bodyResponse(
+      statusCode.OK,
+      `Successfully removed item based on uuid ${uuid}`
     );
-
-    newItem = {
-      periodo: newBioetanolPrecioObj.getPeriodo(),
-      bioetCanAzucar : newBioetanolPrecioObj.getBioetCanAzucar(),
-      bioetMaiz : newBioetanolPrecioObj.getBioetMaiz(),
-      updatedAt : newBioetanolPrecioObj.getUpdatedAt()
-    }
-
-    updatedBioetPrecio = await updateOneItem(BIOET_PRECIOS_TABLE_NAME, key, newItem);
-
-    if (updatedBioetPrecio == value.IS_NULL || updatedBioetPrecio == value.IS_UNDEFINED) {
-      return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
-        "An error has occurred, the object has not been updated into the database"
-      );
-    }
-
-    //-- end with new item dynamoDB operations  ---
-
-    return await bodyResponse(statusCode.OK, updatedBioetPrecio);
-
   } catch (error) {
-    console.log(`Error in updated bioethanol-precios lambda, caused by ${{ error }}`);
+    console.log(
+      `Error in updated bioethanol-precios lambda, caused by ${{ error }}`
+    );
     console.error(error.stack);
     return await bodyResponse(
       statusCode.INTERNAL_SERVER_ERROR,

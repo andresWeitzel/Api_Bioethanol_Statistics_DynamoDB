@@ -1,7 +1,7 @@
 //External
 const {
-    UpdateItemCommand,
-} = require("@aws-sdk/client-dynamodb");
+    UpdateCommand
+} = require("@aws-sdk/lib-dynamodb");
 // const { marshall, unmarshall } = require('@aws-sdk/util-dynamodb');
 //Helpers
 const {
@@ -10,7 +10,7 @@ const {
 //Const-vars 
 let dynamo;
 let metadata;
-let requestId;
+let itemUpdated;
 
 
 /**
@@ -22,12 +22,12 @@ let requestId;
  */
 const updateOneItem = async (tableName, key, item) => {
     try {
-        requestId = null;
+        itemUpdated = null;
         const itemKeys = Object.keys(item);
 
         dynamo = await dynamoDBClient();
 
-        metadata = await dynamo.send(new UpdateItemCommand({
+        metadata = await dynamo.send(new UpdateCommand({
             TableName: tableName,
             Key: key,
             ReturnValues: 'ALL_NEW',
@@ -42,19 +42,14 @@ const updateOneItem = async (tableName, key, item) => {
             }), {}),
         }));
 
-        // if (metadata != null) {
-        //     requestId = metadata.$metadata.requestId;
-        // }
+        if (metadata != null) {
+            itemUpdated = metadata.Attributes;
+        }
 
-        // return requestId;
-
-        console.log({UPDATE : metadata});
-
-        return metadata;
+        return itemUpdated;
 
     } catch (error) {
-        console.log(`Error in updateOneItem(), caused by ${{error}}`);
-        console.error(error.stack);
+        console.error(`ERROR in updateOneItem() function. Caused by ${error} . Specific stack is ${error.stack} `);
     }
 }
 

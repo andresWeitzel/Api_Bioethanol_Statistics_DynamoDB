@@ -1,7 +1,7 @@
 ![Index app](./doc/datos/bioetanolTablas.png)
 
 # Bioetanol_Estadisticas_DynamoDB_AWS
-Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
+Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
 
 * [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 * [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)

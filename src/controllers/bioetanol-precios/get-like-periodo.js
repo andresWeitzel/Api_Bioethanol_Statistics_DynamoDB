@@ -16,9 +16,7 @@ const {
 //Const/Vars
 let eventHeaders;
 let validatePathParam;
-let key;
-let id;
-let pageNro;
+let pageSizeNro;
 let periodo;
 let orderAt;
 let items;
@@ -33,7 +31,6 @@ module.exports.handler = async (event) => {
   try {
     //Init
     obj = null;
-    id = "";
     items = null;
     pageSizeNro = 5;
     orderAt = "asc";
