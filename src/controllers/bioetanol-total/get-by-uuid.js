@@ -19,7 +19,7 @@ let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
 let key;
-let idParam;
+let uuidParam;
 let item;
 let msg;
 let code;
@@ -46,9 +46,9 @@ module.exports.handler = async (event) => {
     //-- end with validation headers and keys  ---
 
     //-- start with path parameters  ---
-    idParam = await event.pathParameters.id;
+    uuidParam = await event.pathParameters.uuid;
 
-    validatePathParam = await validatePathParameters(idParam);
+    validatePathParam = await validatePathParameters(uuidParam);
 
     if (!validatePathParam) {
       return await bodyResponse(
@@ -60,7 +60,7 @@ module.exports.handler = async (event) => {
 
     //-- start with dynamodb operations  ---
 
-    key = { id: idParam };
+    key = { uuid: uuidParam };
 
     item = await getOneItem(BIOET_TOTAL_TABLE_NAME, key);
 
@@ -76,7 +76,7 @@ module.exports.handler = async (event) => {
     //-- end with dynamodb operations  ---
   } catch (error) {
     code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in get-by-id lambda for bioethanol total. Caused by ${error}`;
+    msg = `Error in get-by-uuid lambda for bioethanol total. Caused by ${error}`;
     console.error(`${msg}. Stack error type : ${error.stack}`);
 
     return await bodyResponse(code, msg);

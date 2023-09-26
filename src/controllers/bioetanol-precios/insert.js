@@ -61,7 +61,6 @@ const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
 module.exports.handler = async (event) => {
     try {
         //Init
-        obj = null;
 
         //-- start with validation headers and keys  ---
         eventHeaders = await event.headers;
@@ -127,7 +126,7 @@ module.exports.handler = async (event) => {
 
     } catch (error) {
         code = statusCode.INTERNAL_SERVER_ERROR;
-        msg = `Error in INSERT lambda. Caused by ${error}`;
+        msg = `Error in insert bioetanol-precios lambda. Caused by ${error}`;
         console.error(`${msg}. Stack error type : ${error.stack}`);
 
         return await bodyResponse(code, msg);

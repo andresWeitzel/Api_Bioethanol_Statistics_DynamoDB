@@ -1,5 +1,5 @@
 //Models
-const { BioetanolPrecio } = require("../../models/BioetanolPrecio");
+const { BioetanolTotal } = require("../../models/BioetanolTotal");
 //Enums
 const { statusCode } = require("../../enums/http/status-code");
 const { value } = require("../../enums/general/values");
@@ -11,7 +11,7 @@ const {
 const { formatToJson } = require("../../helpers/format/format-to-json");
 const { formatToString } = require("../../helpers/format/format-to-string");
 const {
-  validateBodyAddItemParamsBioetPrecios
+  validateBodyAddItemParamsBioetTotal
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
 const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
@@ -26,19 +26,21 @@ let eventBody;
 let validateBodyAddItem;
 let validatePathParam;
 let oldItem;
-let updatedBioetPrecio;
+let updatedBioetTotal;
 let uuid;
 let newItem;
-let newBioetanolPrecioObj;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+let newBioetanolTotalObj;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 
 /**
- * @description Function to update one object into the bioethanol prices table
+ * @description Function to update one object into the bioethanol total table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
   try {
+    //Init
+
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
 
@@ -66,7 +68,7 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(
       eventBody
     );
 
@@ -82,7 +84,7 @@ module.exports.handler = async (event) => {
 
     key = { uuid: uuid };
 
-    oldItem = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
+    oldItem = await getOneItem(BIOET_TOTAL_TABLE_NAME, key);
 
     if (oldItem == value.IS_NULL || oldItem == value.IS_UNDEFINED) {
       return await bodyResponse(
@@ -95,25 +97,25 @@ module.exports.handler = async (event) => {
 
     //-- start with new item dynamoDB operations  ---
 
-    newBioetanolPrecioObj = new BioetanolPrecio(
+    newBioetanolTotalObj = new BioetanolTotal(
       uuid,
       eventBody.periodo,
-      eventBody.bioetanol_azucar,
-      eventBody.bioetanol_maiz,
+      eventBody.produccion,
+      eventBody.ventas_totales,
       await currentDateTime(),
       await currentDateTime()
     );
 
     newItem = {
-      periodo: newBioetanolPrecioObj.getPeriodo(),
-      bioetCanAzucar : newBioetanolPrecioObj.getBioetCanAzucar(),
-      bioetMaiz : newBioetanolPrecioObj.getBioetMaiz(),
-      updatedAt : newBioetanolPrecioObj.getUpdatedAt()
+      periodo: newBioetanolTotalObj.getPeriodo(),
+      produccion : newBioetanolTotalObj.getProduccion(),
+      ventasTotales : newBioetanolTotalObj.getVentasTotales(),
+      updatedAt : newBioetanolTotalObj.getUpdatedAt()
     }
 
-    updatedBioetPrecio = await updateOneItem(BIOET_PRECIOS_TABLE_NAME, key, newItem);
+    updatedBioetTotal = await updateOneItem(BIOET_TOTAL_TABLE_NAME, key, newItem);
 
-    if (updatedBioetPrecio == value.IS_NULL || updatedBioetPrecio == value.IS_UNDEFINED) {
+    if (updatedBioetTotal == value.IS_NULL || updatedBioetTotal == value.IS_UNDEFINED) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
         "An error has occurred, the object has not been updated into the database"
@@ -122,10 +124,10 @@ module.exports.handler = async (event) => {
 
     //-- end with new item dynamoDB operations  ---
 
-    return await bodyResponse(statusCode.OK, updatedBioetPrecio);
+    return await bodyResponse(statusCode.OK, updatedBioetTotal);
 
   } catch (error) {
-    console.log(`Error in updated bioethanol-precios lambda, caused by ${{ error }}`);
+    console.log(`Error in updated bioethanol-total lambda, caused by ${{ error }}`);
     console.error(error.stack);
     return await bodyResponse(
       statusCode.INTERNAL_SERVER_ERROR,

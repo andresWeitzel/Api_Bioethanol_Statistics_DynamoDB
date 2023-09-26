@@ -18,7 +18,7 @@ let eventHeaders;
 let validatePathParam;
 let itemDeleted;
 let uuid;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 
 /**
  * @description Function to delete one object from the bioethanol prices table
@@ -55,7 +55,7 @@ module.exports.handler = async (event) => {
 
     //-- start with delete item dynamoDB operations  ---
 
-    itemDeleted = await deleteItemByUuid(BIOET_PRECIOS_TABLE_NAME, uuid);
+    itemDeleted = await deleteItemByUuid(BIOET_TOTAL_TABLE_NAME, uuid);
 
     if (itemDeleted != true) {
       return await bodyResponse(

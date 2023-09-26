@@ -126,6 +126,24 @@ functions:
           method: post
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/'
           private: true
+  updateBioetanolTotal:
+    handler: src/controllers/bioetanol-total/update.handler
+    description: Function to update an object in the bioethanol total table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: put
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/{uuid}'
+          private: true
+  deleteBioetanolTotal:
+    handler: src/controllers/bioetanol-total/delete.handler
+    description: Function to delete an object in the bioethanol total table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: delete
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/{uuid}'
+          private: true            
   getAllBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-all.handler
     description: Function to obtain all the objects of the bioethanol total table
@@ -135,16 +153,24 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/list'
           private: true          
-  getByIdBioetanolTotal:
-    handler: src/controllers/bioetanol-total/get-by-id.handler
-    description: Function to obtain all the objects of the bioethanol total table according to id
+  getByUuidBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-by-uuid.handler
+    description: Function to obtain all the objects of the bioethanol total table according to the uuid
     timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/uuid/{uuid}'
           private: true  
-
+  getLikeCreatedAtUpdatedAtBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-like-created-at-updated-at.handler
+    description: Function to obtain all the objects of the bioethanol total table according to the creation date or update date
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/created-updated-at/{date}'
+          private: true  
 custom:  
   serverless-offline-ssm:
     stages:
