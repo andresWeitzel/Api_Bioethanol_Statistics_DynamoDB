@@ -74,7 +74,7 @@ module.exports.handler = async (event) => {
 
     } catch (error) {
         code = statusCode.INTERNAL_SERVER_ERROR;
-        msg = `Error in GET ALL lambda. Caused by ${error}`;
+        msg = `Error in get-all biothanol-total lambda. Caused by ${error}`;
         console.error(`${msg}. Stack error type : ${error.stack}`);
 
         return await bodyResponse(code, msg);

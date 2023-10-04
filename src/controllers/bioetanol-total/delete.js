@@ -18,7 +18,7 @@ let eventHeaders;
 let validatePathParam;
 let itemDeleted;
 let uuid;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 
 /**
  * @description Function to delete one object from the bioethanol prices table
@@ -55,7 +55,7 @@ module.exports.handler = async (event) => {
 
     //-- start with delete item dynamoDB operations  ---
 
-    itemDeleted = await deleteItemByUuid(BIOET_PRECIOS_TABLE_NAME, uuid);
+    itemDeleted = await deleteItemByUuid(BIOET_TOTAL_TABLE_NAME, uuid);
 
     if (itemDeleted != true) {
       return await bodyResponse(
@@ -71,13 +71,10 @@ module.exports.handler = async (event) => {
       `Successfully removed item based on uuid ${uuid}`
     );
   } catch (error) {
-    console.log(
-      `Error in updated bioethanol-precios lambda, caused by ${{ error }}`
-    );
-    console.error(error.stack);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      "An unexpected error has occurred. Try again"
-    );
+    code = statusCode.INTERNAL_SERVER_ERROR;
+    msg = `Error in delete bioetanol-total lambda. Caused by ${error}`;
+    console.error(`${msg}. Stack error type : ${error.stack}`);
+
+    return await bodyResponse(code, msg);
   }
 };

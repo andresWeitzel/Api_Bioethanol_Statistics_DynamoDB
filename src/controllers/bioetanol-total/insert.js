@@ -40,7 +40,6 @@ let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
 let checkEventHeadersAndKeys;
-let obj;
 let item;
 let newBioetTotal;
 let uuid;
@@ -61,7 +60,6 @@ const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 module.exports.handler = async (event) => {
     try {
         //Init
-        obj = null;
 
         //-- start with validation headers and keys  ---
         eventHeaders = await event.headers;
@@ -96,15 +94,17 @@ module.exports.handler = async (event) => {
         produccion = await eventBody.produccion;
         ventasTotales = await eventBody.ventas_totales;
         createdAt = await currentDateTime();
+        updatedAt = await currentDateTime();
 
-        let bioetPrecio = new BioetanolTotal(uuid, periodo, produccion, ventasTotales, createdAt);
+        let bioetTotalObj = new BioetanolTotal(uuid, periodo, produccion, ventasTotales, createdAt, updatedAt);
 
         item = {
-            id : await bioetPrecio.getUuid(),
-            periodo : await bioetPrecio.getPeriodo(),
-            produccion : await bioetPrecio.getProduccion(),
-            ventasTotales : await bioetPrecio.getVentasTotales(),
-            createdAt : await bioetPrecio.getCreatedAt()
+            uuid : await bioetTotalObj.getUuid(),
+            periodo : await bioetTotalObj.getPeriodo(),
+            produccion : await bioetTotalObj.getProduccion(),
+            ventasTotales : await bioetTotalObj.getVentasTotales(),
+            createdAt : await bioetTotalObj.getCreatedAt(),
+            updatedAt :  await bioetTotalObj.getUpdatedAt(),
             }
 
         newBioetTotal = await insertItem(BIOET_TOTAL_TABLE_NAME, item);
@@ -125,7 +125,7 @@ module.exports.handler = async (event) => {
 
     } catch (error) {
         code = statusCode.INTERNAL_SERVER_ERROR;
-        msg = `Error in INSERT lambda. Caused by ${error}`;
+        msg = `Error in insert bioetanol-total lambda. Caused by ${error}`;
         console.error(`${msg}. Stack error type : ${error.stack}`);
 
         return await bodyResponse(code, msg);

@@ -6,7 +6,7 @@
   "scripts": {
     "serverless-offline": "sls offline start",
     "start": "npm run serverless-offline",
-    "start:watch": "nodemon -e js,ts,yml,json --exec \"sls offline start\""
+    "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\""
   },
   "repository": {
     "type": "git",
