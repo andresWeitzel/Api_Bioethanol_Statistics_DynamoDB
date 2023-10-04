@@ -169,7 +169,7 @@ functions:
     events:
       - http:
           method: get
-          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/created-updated-at/{date}'
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/created-updated-at/{date}'
           private: true  
 custom:  
   serverless-offline-ssm:

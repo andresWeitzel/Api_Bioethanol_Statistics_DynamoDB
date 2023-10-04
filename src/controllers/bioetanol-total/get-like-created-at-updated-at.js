@@ -4,13 +4,13 @@ const { value } = require("../../enums/general/values");
 //Helpers
 const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-  validateHeadersAndKeys,
+  validateHeadersAndKeys
 } = require("../../helpers/validations/headers/validate-headers-keys");
 const {
-  validatePathParameters,
+  validatePathParameters
 } = require("../../helpers/http/query-string-params");
 const {
-  getAllItemsWithFilter,
+  getAllItemsWithFilter
 } = require("../../helpers/dynamodb/operations/get-all");
 
 //Const/Vars
@@ -19,7 +19,9 @@ let checkEventHeadersAndKeys;
 let validatePathParam;
 let pageSizeNro;
 let orderAt;
-let items;
+let itemsCreatedAt;
+let itemsUpdatedAt;
+let arrayItems;
 let date;
 const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 
@@ -32,7 +34,9 @@ module.exports.handler = async (event) => {
   try {
     //Init
     obj = null;
-    items = null;
+    itemsCreatedAt = null;
+    itemsUpdatedAt = null;
+    arrayItems = [];
     pageSizeNro = 5;
     orderAt = "asc";
 
@@ -68,31 +72,47 @@ module.exports.handler = async (event) => {
     }
     //-- end with path parameters  ---
 
-    // //-- start with dynamodb operations  ---
+    //-- start with dynamodb operations  ---
 
-    // items = await getAllItemsWithFilter(
-    //   BIOET_TOTAL_TABLE_NAME,
-    //   "date",
-    //   date,
-    //   pageSizeNro,
-    //   orderAt
-    // );
-
-    // if (items == null || !items.length) {
-    //   return await bodyResponse(
-    //     statusCode.BAD_REQUEST,
-    //     "The objects with the date value is not found in the database"
-    //   );
-    // }
-    // //-- end with dynamodb operations  ---
-
-    // return await bodyResponse(statusCode.OK, items);
-  } catch (error) {
-    console.log(`Error in getLikedate lambda, caused by ${{ error }}`);
-    console.error(error.stack);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      "An unexpected error has occurred. Try again"
+    itemsCreatedAt = await getAllItemsWithFilter(
+      BIOET_TOTAL_TABLE_NAME,
+      "createdAt",
+      date,
+      pageSizeNro,
+      orderAt
     );
+    if (itemsCreatedAt != null || itemsCreatedAt.length) {
+      arrayItems.push(itemsCreatedAt);
+    }
+
+    if (itemsCreatedAt == null || !itemsCreatedAt.length) {
+      itemsUpdatedAt = await getAllItemsWithFilter(
+        BIOET_TOTAL_TABLE_NAME,
+        "updatedAt",
+        date,
+        pageSizeNro,
+        orderAt
+      );
+      arrayItems.push(itemsUpdatedAt);
+    }
+
+    if (
+      (itemsCreatedAt == null || !itemsCreatedAt.length) &&
+      (itemsUpdatedAt == null || !itemsUpdatedAt.length)
+    ) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "The objects with the createdAt or updatedAt value is not found in the database"
+      );
+    }
+    //-- end with dynamodb operations  ---
+
+    return await bodyResponse(statusCode.OK, arrayItems);
+  } catch (error) {
+    code = statusCode.INTERNAL_SERVER_ERROR;
+    msg = `Error in get-like-created-at-updated-at bioetanol-total lambda. Caused by ${error}`;
+    console.error(`${msg}. Stack error type : ${error.stack}`);
+
+    return await bodyResponse(code, msg);
   }
 };

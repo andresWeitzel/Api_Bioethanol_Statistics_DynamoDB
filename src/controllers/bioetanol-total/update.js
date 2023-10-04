@@ -127,11 +127,10 @@ module.exports.handler = async (event) => {
     return await bodyResponse(statusCode.OK, updatedBioetTotal);
 
   } catch (error) {
-    console.log(`Error in updated bioethanol-total lambda, caused by ${{ error }}`);
-    console.error(error.stack);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      "An unexpected error has occurred. Try again"
-    );
+    code = statusCode.INTERNAL_SERVER_ERROR;
+    msg = `Error in update bioetanol-total lambda. Caused by ${error}`;
+    console.error(`${msg}. Stack error type : ${error.stack}`);
+
+    return await bodyResponse(code, msg);
   }
 };
