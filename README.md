@@ -1,4 +1,4 @@
-![Index app](./doc/data/bioethanolTables.png)
+![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
 
 
 <p align="right">
@@ -23,7 +23,7 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 
 * [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 * [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
-* [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado %2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls&wdOrigin=BROWSELINK)
+* [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls&wdOrigin=BROWSELINK)
 
 
 
