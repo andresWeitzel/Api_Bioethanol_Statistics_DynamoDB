@@ -1,4 +1,4 @@
-![Index app](./doc/datos/bioetanolTablas.png)
+![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
 
 
 <p align="right">
