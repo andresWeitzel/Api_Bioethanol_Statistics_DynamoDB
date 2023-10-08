@@ -1,3 +1,7 @@
+
+
+![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
+
 <p align="right">
      <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md" target="_blank">
        <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
@@ -7,12 +11,10 @@
    </a>
 </p>
 
-![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
 
 <div align="center">
   
 # Bioethanol_Statistics_DynamoDB_AWS
-
 
 </div>
 
