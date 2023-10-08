@@ -10,9 +10,6 @@
   </a> 
 </p>
 
-<br>
-<br>
-
 <div align="center">
   
 # Bioetanol_Estadisticas_DynamoDB_AWS
