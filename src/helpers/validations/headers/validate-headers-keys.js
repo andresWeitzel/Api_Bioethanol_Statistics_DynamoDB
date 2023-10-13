@@ -7,7 +7,9 @@ const { validateHeadersParams } = require("../validator/http/request-headers-par
 //Const-vars
 let checkEventHeaders;
 let validateReqParams;
-let validateAuth; 
+let validateAuth;
+let msgResponse;
+let msgLog;
   
   /**
    * @description Validates that all the necessary headers are correct, along with the x-api-key and the bearer token
@@ -21,9 +23,12 @@ let validateAuth;
 const validateHeadersAndKeys = async (inputEventHeaders) => {
 
     try {
-    //-- start with validation Headers  ---
     checkEventHeaders = null;
+    msgResponse = null;
+    msgLog = null;
 
+    
+    //-- start with validation Headers  ---
     validateReqParams = await validateHeadersParams(await inputEventHeaders);
 
     if (!validateReqParams) {
@@ -46,7 +51,11 @@ const validateHeadersAndKeys = async (inputEventHeaders) => {
     return checkEventHeaders;
   
     } catch (error) {
-      console.error(`ERROR in function validateHeadersAndKeys(). Caused by ${error} . Specific stack is ${error.stack} `);
+
+      msgResponse = 'ERROR in validateHeadersAndKeys() function.';
+      msgLog = msgResponse + `Caused by ${error}`;
+      console.log(msgLog);
+      return msgResponse;
     }
   
   }

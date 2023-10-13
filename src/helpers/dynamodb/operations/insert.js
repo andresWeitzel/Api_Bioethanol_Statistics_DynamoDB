@@ -8,6 +8,8 @@ const {
 let dynamo;
 let metadata;
 let requestId;
+let msgResponse;
+let msgLog;
 
 
 /**
@@ -18,7 +20,8 @@ let requestId;
  */
 const insertItem = async (tableName,item) => {
     try {
-
+        msgResponse = null;
+        msgLog = null;
         requestId=null;
         dynamo = await dynamoDBClient();
 
@@ -34,8 +37,11 @@ const insertItem = async (tableName,item) => {
         return requestId;
 
     } catch (error) {
-        console.log(`Error in insertItem(), caused by ${{error}}`);
-        console.error(error.stack);
+        
+        msgResponse = 'ERROR in insertItem() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
     }
 }
 

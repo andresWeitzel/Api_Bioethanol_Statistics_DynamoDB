@@ -1,3 +1,7 @@
+//Const-vars
+let msgResponse;
+let msgLog;
+
 /**
  * @description Convert to json format
  * @param {Object} obj Object type
@@ -5,15 +9,21 @@
  */
 const formatToJson = async (obj) => {
     try {
+        msgResponse = null;
+        msgLog = null;
         if (typeof obj != 'object') {
             //Convert to json to save
             obj = await JSON.parse(obj);
           }
-    } catch (error) {
-        console.log(`Error in formatToJson(), caused by ${{error}}`);
-        console.error(error.stack);
-    }
+          
     return obj;
+    } catch (error) {
+
+        msgResponse = 'ERROR in formatToJson() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
+    }
 }
 
 module.exports = {

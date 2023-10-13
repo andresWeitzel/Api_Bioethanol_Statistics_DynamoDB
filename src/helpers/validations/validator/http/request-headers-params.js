@@ -4,6 +4,8 @@ const { Validator } = require("node-input-validator");
 let validateCheck;
 let validatorObj;
 let eventHeadersObj;
+let msgResponse;
+let msgLog;
 
 /**
  * @description We validate the request headers parameters
@@ -15,6 +17,8 @@ const validateHeadersParams = async (eventHeaders) => {
   eventHeadersObj = null;
   validatorObj= null;
   validateCheck = false;
+  msgResponse = null;
+  msgLog = null;
 
   try{
     if(eventHeaders != null){
@@ -38,12 +42,16 @@ const validateHeadersParams = async (eventHeaders) => {
       );
       validateCheck = await validatorObj.check();
     }
+    
+  return validateCheck;
 
   } catch (error) {
-    console.log(error);
+    msgResponse = 'ERROR in validateHeadersParams() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
   }
 
-  return validateCheck;
 }
 
 module.exports = {

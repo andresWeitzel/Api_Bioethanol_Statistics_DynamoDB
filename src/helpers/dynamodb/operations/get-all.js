@@ -10,6 +10,8 @@ const {
 let dynamo;
 let metadata;
 let items;
+let msgResponse;
+let msgLog;
 
 
 /**
@@ -21,9 +23,11 @@ let items;
  */
 const getAllItems = async (tableName, pageSizeNro, orderAt) => {
     try {
+        orderAt = orderAt.toLowerCase();
         metadata=null;
         items=null;
-        orderAt = orderAt.toLowerCase();
+        msgResponse = null;
+        msgLog = null;
 
         if(orderAt=='asc' || orderAt == null){
             orderAt=true;
@@ -48,8 +52,11 @@ const getAllItems = async (tableName, pageSizeNro, orderAt) => {
         return items;
 
     } catch (error) {
-        console.log(`Error in getAllItems(), caused by ${{error}}`);
-        console.error(error.stack);
+
+        msgResponse = 'ERROR in getAllItems() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
     }
 }
 

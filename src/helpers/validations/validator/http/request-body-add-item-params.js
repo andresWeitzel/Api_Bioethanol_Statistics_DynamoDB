@@ -6,6 +6,8 @@ const {
 let validateCheck;
 let validatorObj;
 let eventBodyObj;
+let msgResponse;
+let msgLog;
 
 /**
  * @description We validate the request body parameters for add an item to the bioethanol prices table into database
@@ -16,6 +18,8 @@ const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
   eventBodyObj = null;
   validatorObj = null;
   validateCheck = false;
+  msgResponse = null;
+  msgLog = null;
 
   try {
     if (eventBody != null) {
@@ -38,13 +42,17 @@ const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
       validateCheck = await validatorObj.check();
 
     }
+    return validateCheck;
 
   } catch (error) {
-    console.log(`Error in validateBodyAddItemParamsBioetPrecios(), caused by ${{error}}`);
-    console.error(error.stack);
+
+    msgResponse = 'ERROR in validateBodyAddItemParamsBioetPrecios() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
   }
 
-  return validateCheck;
+
 }
 
 /**
@@ -56,6 +64,8 @@ const validateBodyAddItemParamsBioetTotal = async (eventBody) => {
   eventBodyObj = null;
   validatorObj = null;
   validateCheck = false;
+  msgResponse = null;
+  msgLog = null;
 
   try {
     if (eventBody != null) {
@@ -78,13 +88,16 @@ const validateBodyAddItemParamsBioetTotal = async (eventBody) => {
       validateCheck = await validatorObj.check();
 
     }
+    return validateCheck;
 
   } catch (error) {
-    console.log(`Error in validateBodyAddItemParamsBioetTotal(), caused by ${{error}}`);
-    console.error(error.stack);
+
+    msgResponse = 'ERROR in validateBodyAddItemParamsBioetTotal() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
   }
 
-  return validateCheck;
 }
 
 module.exports = {
