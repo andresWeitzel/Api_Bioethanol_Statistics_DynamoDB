@@ -4,16 +4,17 @@ const { value } = require("../../enums/general/values");
 //Helpers
 const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-  validateHeadersAndKeys
+  validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
 const {
-  validatePathParameters
+  validatePathParameters,
 } = require("../../helpers/http/query-string-params");
 const {
-  getAllItemsWithFilter
+  getAllItemsWithFilter,
 } = require("../../helpers/dynamodb/operations/get-all");
 
 //Const/Vars
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || "";
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -23,7 +24,8 @@ let itemsCreatedAt;
 let itemsUpdatedAt;
 let arrayItems;
 let date;
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to obtain all the objects of the bioethanol total table according to the updated or created date
@@ -36,6 +38,8 @@ module.exports.handler = async (event) => {
     obj = null;
     itemsCreatedAt = null;
     itemsUpdatedAt = null;
+    msgResponse = null;
+    msgLog = null;
     arrayItems = [];
     pageSizeNro = 5;
     orderAt = "asc";
@@ -109,10 +113,10 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode.OK, arrayItems);
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in get-like-created-at-updated-at bioetanol-total lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
-
-    return await bodyResponse(code, msg);
+    msgResponse =
+      "ERROR in get-like-created-at-updated-at controller function for bioethanol-total.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

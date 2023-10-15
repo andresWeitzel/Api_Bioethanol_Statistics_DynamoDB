@@ -13,12 +13,14 @@ const {
   deleteItemByUuid
 } = require("../../helpers/dynamodb/operations/delete");
 
-//Const/Vars
+//Const-Vars
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 let eventHeaders;
 let validatePathParam;
 let itemDeleted;
 let uuid;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to delete one object from the bioethanol prices table
@@ -29,6 +31,8 @@ module.exports.handler = async (event) => {
   try {
     //Init
     itemDeleted = null;
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
@@ -71,13 +75,13 @@ module.exports.handler = async (event) => {
       `Successfully removed item based on uuid ${uuid}`
     );
   } catch (error) {
-    console.log(
-      `Error in updated bioethanol-precios lambda, caused by ${{ error }}`
-    );
-    console.error(error.stack);
+
+    msgResponse = 'ERROR in delete controller function for bioethanol-prices.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
     return await bodyResponse(
       statusCode.INTERNAL_SERVER_ERROR,
-      "An unexpected error has occurred. Try again"
+      msgResponse
     );
   }
 };

@@ -13,7 +13,8 @@ const {
   getAllItemsWithFilter,
 } = require("../../helpers/dynamodb/operations/get-all");
 
-//Const/Vars
+//Const-Vars
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -21,7 +22,8 @@ let pageSizeNro;
 let orderAt;
 let items;
 let createdAt;
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table according to id
@@ -33,6 +35,8 @@ module.exports.handler = async (event) => {
     //Init
     obj = null;
     items = null;
+    msgResponse = null;
+    msgLog = null;
     pageSizeNro = 5;
     orderAt = "asc";
 
@@ -88,11 +92,9 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode.OK, items);
   } catch (error) {
-    console.log(`Error in getLikeCreatedAt lambda, caused by ${{ error }}`);
-    console.error(error.stack);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      "An unexpected error has occurred. Try again"
-    );
+    msgResponse = "ERROR in get-like-created_at controller function for bioethanol-prices.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

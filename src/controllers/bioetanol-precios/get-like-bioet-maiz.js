@@ -13,16 +13,16 @@ const {
   getAllItemsWithFilter,
 } = require("../../helpers/dynamodb/operations/get-all");
 
-//Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+//Const-Vars
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 const BIOET_PRECIOS_KEY_DYNAMO = "bioetMaiz";
 let eventHeaders;
 let validatePathParam;
 let orderAt;
 let items;
 let bioetMaiz;
-let msg;
-let code;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table according to the bioethanol maiz prices
@@ -35,6 +35,9 @@ module.exports.handler = async (event) => {
     items = value.IS_NULL;
     pageSizeNro = 5;
     orderAt = "asc";
+    msgResponse = null;
+    msgLog = null;
+
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -88,10 +91,13 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode.OK, items);
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in GET LIKE BIOET MAIZ lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
 
-    return await bodyResponse(code, msg);
+    msgResponse = 'ERROR in get-like-bioet-maiz controller function for bioethanol-prices.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(
+      statusCode.INTERNAL_SERVER_ERROR,
+      msgResponse
+    );
   }
 };
