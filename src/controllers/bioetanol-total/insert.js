@@ -1,41 +1,24 @@
 //Models
-const {
-    BioetanolTotal
-} = require("../../models/BioetanolTotal");
+const { BioetanolTotal } = require("../../models/BioetanolTotal");
 //Enums
-const {
-    statusCode
-} = require("../../enums/http/status-code");
-const {
-    value
-} = require("../../enums/general/values");
+const { statusCode } = require("../../enums/http/status-code");
+const { value } = require("../../enums/general/values");
 //Helpers
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-    bodyResponse
-} = require("../../helpers/http/body-response");
-const {
-    validateHeadersAndKeys,
+  validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
+const { insertItem } = require("../../helpers/dynamodb/operations/insert");
+const { generateUUID } = require("../../helpers/math/generate-uuid");
+const { formatToJson } = require("../../helpers/format/format-to-json");
+const { formatToString } = require("../../helpers/format/format-to-string");
 const {
-    insertItem
-} = require("../../helpers/dynamodb/operations/insert");
-const {
-    generateUUID
-} = require("../../helpers/math/generate-uuid");
-const {
-    formatToJson
-} = require("../../helpers/format/format-to-json");
-const {
-    formatToString
-} = require("../../helpers/format/format-to-string");
-const {
-    validateBodyAddItemParamsBioetTotal
+  validateBodyAddItemParamsBioetTotal,
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
-const {
-    currentDateTime
-} = require("../../helpers/date-time/dates");
+const { currentDateTime } = require("../../helpers/date-time/dates");
 
 //Const/Vars
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || "";
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
@@ -47,10 +30,8 @@ let periodo;
 let produccion;
 let ventasTotales;
 let createdAt;
-let msg;
-let code;
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
-
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to insert one object into th bioethanol total table
@@ -58,77 +39,79 @@ const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
-    try {
-        //Init
+  try {
+    //Init
+    msgResponse = null;
+    msgLog = null;
 
-        //-- start with validation headers and keys  ---
-        eventHeaders = await event.headers;
+    //-- start with validation headers and keys  ---
+    eventHeaders = await event.headers;
 
-        checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-        if (checkEventHeadersAndKeys != value.IS_NULL) {
-            return checkEventHeadersAndKeys;
-        }
-        //-- end with validation headers and keys  ---
+    if (checkEventHeadersAndKeys != value.IS_NULL) {
+      return checkEventHeadersAndKeys;
+    }
+    //-- end with validation headers and keys  ---
 
-        //-- start with body validations  ---
+    //-- start with body validations  ---
 
-        eventBody = await formatToJson(event.body);
+    eventBody = await formatToJson(event.body);
 
-        validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
 
-        if (!validateBodyAddItem) {
-            return await bodyResponse(
-                statusCode.BAD_REQUEST,
-                "Bad request, check request body attributes. Missing or incorrect"
-            );
-        }
-        //-- end with body validations  ---
+    if (!validateBodyAddItem) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "Bad request, check request body attributes. Missing or incorrect"
+      );
+    }
+    //-- end with body validations  ---
 
+    //-- start with dynamoDB operations  ---
 
-        //-- start with dynamoDB operations  ---
+    uuid = await generateUUID();
+    uuid = await formatToString(uuid);
+    periodo = await eventBody.periodo;
+    produccion = await eventBody.produccion;
+    ventasTotales = await eventBody.ventas_totales;
+    createdAt = await currentDateTime();
+    updatedAt = await currentDateTime();
 
-        uuid = await generateUUID();
-        uuid = await formatToString(uuid);
-        periodo = await eventBody.periodo;
-        produccion = await eventBody.produccion;
-        ventasTotales = await eventBody.ventas_totales;
-        createdAt = await currentDateTime();
-        updatedAt = await currentDateTime();
+    let bioetTotalObj = new BioetanolTotal(
+      uuid,
+      periodo,
+      produccion,
+      ventasTotales,
+      createdAt,
+      updatedAt
+    );
 
-        let bioetTotalObj = new BioetanolTotal(uuid, periodo, produccion, ventasTotales, createdAt, updatedAt);
+    item = {
+      uuid: await bioetTotalObj.getUuid(),
+      periodo: await bioetTotalObj.getPeriodo(),
+      produccion: await bioetTotalObj.getProduccion(),
+      ventasTotales: await bioetTotalObj.getVentasTotales(),
+      createdAt: await bioetTotalObj.getCreatedAt(),
+      updatedAt: await bioetTotalObj.getUpdatedAt(),
+    };
 
-        item = {
-            uuid : await bioetTotalObj.getUuid(),
-            periodo : await bioetTotalObj.getPeriodo(),
-            produccion : await bioetTotalObj.getProduccion(),
-            ventasTotales : await bioetTotalObj.getVentasTotales(),
-            createdAt : await bioetTotalObj.getCreatedAt(),
-            updatedAt :  await bioetTotalObj.getUpdatedAt(),
-            }
+    newBioetTotal = await insertItem(BIOET_TOTAL_TABLE_NAME, item);
 
-        newBioetTotal = await insertItem(BIOET_TOTAL_TABLE_NAME, item);
-
-        if (newBioetTotal == null || !(newBioetTotal.length)) {
-            return await bodyResponse(
-                statusCode.INTERNAL_SERVER_ERROR,
-                "An error has occurred, the object has not been inserted into the database"
-            );
-        }
-
-        //-- end with dynamoDB operations  ---
-
-        return await bodyResponse(
-            statusCode.OK,
-            item
-        );
-
-    } catch (error) {
-        code = statusCode.INTERNAL_SERVER_ERROR;
-        msg = `Error in insert bioetanol-total lambda. Caused by ${error}`;
-        console.error(`${msg}. Stack error type : ${error.stack}`);
-
-        return await bodyResponse(code, msg);
+    if (newBioetTotal == null || !newBioetTotal.length) {
+      return await bodyResponse(
+        statusCode.INTERNAL_SERVER_ERROR,
+        "An error has occurred, the object has not been inserted into the database"
+      );
     }
 
-}
+    //-- end with dynamoDB operations  ---
+
+    return await bodyResponse(statusCode.OK, item);
+  } catch (error) {
+    msgResponse = "ERROR in insert controller function for bioethanol-total.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+  }
+};

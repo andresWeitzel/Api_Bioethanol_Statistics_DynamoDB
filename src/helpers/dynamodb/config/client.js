@@ -8,6 +8,8 @@ const {
 //Const-vars 
 let client;
 let dynamo;
+let msgResponse;
+let msgLog;
 
 /**
  * @description creating a dynamodb client
@@ -27,7 +29,11 @@ const dynamoDBClient = async () => {
         return dynamo;
 
     } catch (error) {
-        console.error(`ERROR in dynamoDBClient() function. Caused by ${error} . Specific stack is ${error.stack} `);
+
+        msgResponse = 'ERROR in dynamoDBClient() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
     }
 }
 

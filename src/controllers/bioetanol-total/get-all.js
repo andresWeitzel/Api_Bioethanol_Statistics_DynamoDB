@@ -13,15 +13,15 @@ const {
 const { validateHeadersAndKeys } = require("../../helpers/validations/headers/validate-headers-keys");
 
 //Const/Vars
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let queryStrParams;
 let pageSizeNro;
 let orderAt;
 let items;
-let msg;
-let code;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to obtain all the objects of the bioethanol total table
@@ -35,6 +35,8 @@ module.exports.handler = async (event) => {
         items=value.IS_NULL;
         pageSizeNro = 5;
         orderAt = "asc";
+        msgResponse = null;
+        msgLog = null;
 
        //-- start with validation headers and keys  ---
        eventHeaders = await event.headers;
@@ -73,11 +75,11 @@ module.exports.handler = async (event) => {
         );
 
     } catch (error) {
-        code = statusCode.INTERNAL_SERVER_ERROR;
-        msg = `Error in get-all biothanol-total lambda. Caused by ${error}`;
-        console.error(`${msg}. Stack error type : ${error.stack}`);
 
-        return await bodyResponse(code, msg);
+        msgResponse = "ERROR in get-all controller function for bioethanol-total.";
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
     }
 
 }

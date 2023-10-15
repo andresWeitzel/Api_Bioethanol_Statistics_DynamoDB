@@ -4,21 +4,23 @@ const { value } = require("../../enums/general/values");
 //Helpers
 const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-  validateHeadersAndKeys
+  validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
 const {
-  validatePathParameters
+  validatePathParameters,
 } = require("../../helpers/http/query-string-params");
 const {
-  deleteItemByUuid
+  deleteItemByUuid,
 } = require("../../helpers/dynamodb/operations/delete");
 
 //Const/Vars
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
 let eventHeaders;
 let validatePathParam;
 let itemDeleted;
 let uuid;
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to delete one object from the bioethanol prices table
@@ -29,6 +31,8 @@ module.exports.handler = async (event) => {
   try {
     //Init
     itemDeleted = null;
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
@@ -71,10 +75,9 @@ module.exports.handler = async (event) => {
       `Successfully removed item based on uuid ${uuid}`
     );
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in delete bioetanol-total lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
-
-    return await bodyResponse(code, msg);
+    msgResponse = "ERROR in delete controller function for bioethanol-total.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

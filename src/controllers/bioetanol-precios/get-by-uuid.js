@@ -14,15 +14,15 @@ const {
 } = require("../../helpers/validations/headers/validate-headers-keys");
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
 let key;
 let uuidParam;
 let item;
-let msg;
-let code;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to get a product of the bioethanol prices table according to id
@@ -34,6 +34,8 @@ module.exports.handler = async (event) => {
     //Init
     item = value.IS_NULL;
     key = value.IS_NULL;
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -75,10 +77,13 @@ module.exports.handler = async (event) => {
 
     //-- end with dynamodb operations  ---
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in GET BY ID lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
 
-    return await bodyResponse(code, msg);
+    msgResponse = 'ERROR in get-by-uuid controller function for bioethanol-prices.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(
+      statusCode.INTERNAL_SERVER_ERROR,
+      msgResponse
+    );
   }
 };

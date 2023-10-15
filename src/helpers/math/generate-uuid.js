@@ -1,5 +1,8 @@
 //External
 const { v4 : uuidv4 } = require('uuid');
+//Const-vars
+let msgResponse;
+let msgLog;
 
 /**
  * @description Generate uuid 
@@ -8,11 +11,14 @@ const { v4 : uuidv4 } = require('uuid');
  */
 const generateUUID = async () => {
     try {
+        msgResponse = null;
+        msgLog = null;
         return uuidv4();
     } catch (error) {
-        console.log(`Error in  generateUUID(), caused by ${error}`);
-        console.error(error.stack);
-        return null;
+        msgResponse = 'ERROR in generateUUID() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
     }
 }
 

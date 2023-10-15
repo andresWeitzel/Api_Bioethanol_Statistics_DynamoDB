@@ -6,23 +6,21 @@ const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validatePathParameters,
 } = require("../../helpers/http/query-string-params");
-const {
-  getOneItem,
-} = require("../../helpers/dynamodb/operations/get-one");
+const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
 const {
   validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
 
 //Const/Vars
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || "";
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
 let key;
 let uuidParam;
 let item;
-let msg;
-let code;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to get a product of the bioethanol total table according to id
@@ -34,6 +32,8 @@ module.exports.handler = async (event) => {
     //Init
     item = value.IS_NULL;
     key = value.IS_NULL;
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -75,10 +75,10 @@ module.exports.handler = async (event) => {
 
     //-- end with dynamodb operations  ---
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in get-by-uuid lambda for bioethanol total. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
-
-    return await bodyResponse(code, msg);
+    msgResponse =
+      "ERROR in get-by-uuid controller function for bioethanol-total.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

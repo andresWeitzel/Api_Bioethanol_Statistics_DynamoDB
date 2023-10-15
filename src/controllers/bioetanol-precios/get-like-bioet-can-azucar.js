@@ -14,7 +14,7 @@ const {
 } = require("../../helpers/http/query-string-params");
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME;
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 const BIOET_PRECIOS_KEY_DYNAMO = "bioetCanAzucar";
 let eventHeaders;
 let checkEventHeadersAndKeys;
@@ -22,8 +22,8 @@ let validatePathParam;
 let orderAt;
 let items;
 let bioetCanAzucar;
-let msg;
-let code;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar prices
@@ -36,6 +36,8 @@ module.exports.handler = async (event) => {
     items = value.IS_NULL;
     pageSizeNro = 5;
     orderAt = "asc";
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -89,10 +91,13 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode.OK, items);
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in GET LIKE BIOET CAN AZUCAR lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
 
-    return await bodyResponse(code, msg);
+    msgResponse = 'ERROR in get-like-bioet-can-azucar controller function for bioethanol-prices.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(
+      statusCode.INTERNAL_SERVER_ERROR,
+      msgResponse
+    );
   }
 };

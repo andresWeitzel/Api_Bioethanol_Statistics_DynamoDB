@@ -11,6 +11,8 @@ const {
 let dynamo;
 let metadata;
 let itemUpdated;
+let msgResponse;
+let msgLog;
 
 
 /**
@@ -23,6 +25,8 @@ let itemUpdated;
 const updateOneItem = async (tableName, key, item) => {
     try {
         itemUpdated = null;
+        msgResponse = null;
+        msgLog = null;
         const itemKeys = Object.keys(item);
 
         dynamo = await dynamoDBClient();
@@ -49,7 +53,11 @@ const updateOneItem = async (tableName, key, item) => {
         return itemUpdated;
 
     } catch (error) {
-        console.error(`ERROR in updateOneItem() function. Caused by ${error} . Specific stack is ${error.stack} `);
+
+        msgResponse = 'ERROR in updateOneItem() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
     }
 }
 

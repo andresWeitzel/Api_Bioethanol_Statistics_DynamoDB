@@ -6,21 +6,22 @@ const { value } = require("../../enums/general/values");
 //Helpers
 const { bodyResponse } = require("../../helpers/http/body-response");
 const {
-  validateHeadersAndKeys
+  validateHeadersAndKeys,
 } = require("../../helpers/validations/headers/validate-headers-keys");
 const { formatToJson } = require("../../helpers/format/format-to-json");
 const { formatToString } = require("../../helpers/format/format-to-string");
 const {
-  validateBodyAddItemParamsBioetTotal
+  validateBodyAddItemParamsBioetTotal,
 } = require("../../helpers/validations/validator/http/request-body-add-item-params");
 const { currentDateTime } = require("../../helpers/date-time/dates");
 const {
-  validatePathParameters
+  validatePathParameters,
 } = require("../../helpers/http/query-string-params");
 const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
 const { updateOneItem } = require("../../helpers/dynamodb/operations/update");
 
 //Const/Vars
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || "";
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
@@ -30,7 +31,8 @@ let updatedBioetTotal;
 let uuid;
 let newItem;
 let newBioetanolTotalObj;
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
+let msgResponse;
+let msgLog;
 
 /**
  * @description Function to update one object into the bioethanol total table
@@ -40,6 +42,8 @@ const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME;
 module.exports.handler = async (event) => {
   try {
     //Init
+    msgResponse = null;
+    msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
@@ -68,9 +72,7 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(
-      eventBody
-    );
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
 
     if (!validateBodyAddItem) {
       return await bodyResponse(
@@ -94,7 +96,6 @@ module.exports.handler = async (event) => {
     }
     //-- end with old item dynamoDB operations  ---
 
-
     //-- start with new item dynamoDB operations  ---
 
     newBioetanolTotalObj = new BioetanolTotal(
@@ -108,14 +109,21 @@ module.exports.handler = async (event) => {
 
     newItem = {
       periodo: newBioetanolTotalObj.getPeriodo(),
-      produccion : newBioetanolTotalObj.getProduccion(),
-      ventasTotales : newBioetanolTotalObj.getVentasTotales(),
-      updatedAt : newBioetanolTotalObj.getUpdatedAt()
-    }
+      produccion: newBioetanolTotalObj.getProduccion(),
+      ventasTotales: newBioetanolTotalObj.getVentasTotales(),
+      updatedAt: newBioetanolTotalObj.getUpdatedAt(),
+    };
 
-    updatedBioetTotal = await updateOneItem(BIOET_TOTAL_TABLE_NAME, key, newItem);
+    updatedBioetTotal = await updateOneItem(
+      BIOET_TOTAL_TABLE_NAME,
+      key,
+      newItem
+    );
 
-    if (updatedBioetTotal == value.IS_NULL || updatedBioetTotal == value.IS_UNDEFINED) {
+    if (
+      updatedBioetTotal == value.IS_NULL ||
+      updatedBioetTotal == value.IS_UNDEFINED
+    ) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
         "An error has occurred, the object has not been updated into the database"
@@ -125,12 +133,10 @@ module.exports.handler = async (event) => {
     //-- end with new item dynamoDB operations  ---
 
     return await bodyResponse(statusCode.OK, updatedBioetTotal);
-
   } catch (error) {
-    code = statusCode.INTERNAL_SERVER_ERROR;
-    msg = `Error in update bioetanol-total lambda. Caused by ${error}`;
-    console.error(`${msg}. Stack error type : ${error.stack}`);
-
-    return await bodyResponse(code, msg);
+    msgResponse = "ERROR in update controller function for bioethanol-total.";
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

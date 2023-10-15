@@ -1,4 +1,6 @@
-
+//Const-vars
+let msgResponse;
+let msgLog;
 /**
  * @description Convert to string format
  * @param {Object} obj Object type
@@ -6,14 +8,20 @@
  */
 const formatToString = async (obj) => {
     try {
+        msgResponse = null;
+        msgLog = null;
         if (typeof obj != 'string') {
             obj = JSON.stringify(obj, null, 2);
         }
-    } catch (error) {
-        console.log(`Error in formatToString(), caused by ${{error}}`);
-        console.error(error.stack);
-    }
+        
     return obj;
+    } catch (error) {
+    
+        msgResponse = 'ERROR in formatToString() function.';
+        msgLog = msgResponse + `Caused by ${error}`;
+        console.log(msgLog);
+        return msgResponse;
+    }
 }
 
 module.exports = {

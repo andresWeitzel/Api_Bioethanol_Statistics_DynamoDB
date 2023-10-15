@@ -5,13 +5,16 @@ const {
   dynamoDBClient
 } = require("../config/client");
 //Const-vars
-let dynamo;
-let metadata;
-let checkItemDeleted;
 /**
  * @description undefined if the object has been deleted, defined if the object does not exist according to the key
  */
 let consumedCapacity;
+let dynamo;
+let metadata;
+let checkItemDeleted;
+let msgResponse;
+let msgLog;
+
 
 /**
  * @description Delete one item object from the database based on their specified table and limit
@@ -25,6 +28,8 @@ const deleteItemByUuid = async (tableName, uuid) => {
     metadata = null;
     checkItemDeleted = false;
     consumedCapacity = null;
+    msgResponse = null;
+    msgLog = null;
 
     dynamo = await dynamoDBClient();
 
@@ -39,15 +44,16 @@ const deleteItemByUuid = async (tableName, uuid) => {
 
     consumedCapacity = metadata.ConsumedCapacity;
 
-    if (consumedCapacity == undefined) {
-      checkItemDeleted = true;
-    }
+    checkItemDeleted = consumedCapacity == undefined ? true : false;
 
     return checkItemDeleted;
+
   } catch (error) {
-    console.error(
-      `Error with deleteItemByUuid(), caused by.. ${error} . Specific stack error is ${error.stack}`
-    );
+
+    msgResponse = 'ERROR in deleteItemByUuid() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
   }
 };
 
