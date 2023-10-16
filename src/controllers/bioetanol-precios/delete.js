@@ -22,6 +22,7 @@ let uuid;
 let msgResponse;
 let msgLog;
 
+
 /**
  * @description Function to delete one object from the bioethanol prices table
  * @param {Object} event Object type
