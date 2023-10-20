@@ -12,20 +12,21 @@ let validate;
  * @returns a boolean
  */
 const validateAuthHeaders = async (eventHeaders) => {
-
-  xApiKey = await eventHeaders["x-api-key"];
-  authorization = await eventHeaders["Authorization"];
+  xApiKey = await eventHeaders['x-api-key'];
+  authorization = await eventHeaders['Authorization'];
 
   validate = true;
 
-  if (xApiKey != X_API_KEY
-    || authorization != BEARER_TOKEN
-    || authorization == null) {
+  if (
+    xApiKey != X_API_KEY ||
+    authorization != BEARER_TOKEN ||
+    authorization == null
+  ) {
     validate = false;
   }
   return validate;
-}
+};
 
 module.exports = {
-    validateAuthHeaders
-}
+  validateAuthHeaders,
+};

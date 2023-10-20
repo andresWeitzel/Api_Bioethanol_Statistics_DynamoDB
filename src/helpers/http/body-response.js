@@ -5,18 +5,18 @@
  * @param {Object} input Object type
  * @returns a json for the lambda response
  */
-const bodyResponse = async (statusCode,message, input) => {
-    return {
-        statusCode: statusCode,
-        body: JSON.stringify(
-            {
-                message: message,
-                input: input,
-            },
-            null,
-            2
-        ),
-    };
-}
+const bodyResponse = async (statusCode, message, input) => {
+  return {
+    statusCode: statusCode,
+    body: JSON.stringify(
+      {
+        message: message,
+        input: input,
+      },
+      null,
+      2,
+    ),
+  };
+};
 
-module.exports = { bodyResponse }
+module.exports = { bodyResponse };
