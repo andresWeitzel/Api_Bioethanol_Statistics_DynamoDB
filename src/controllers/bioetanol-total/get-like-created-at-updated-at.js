@@ -1,20 +1,20 @@
 //Enums
-const { statusCode } = require("../../enums/http/status-code");
-const { value } = require("../../enums/general/values");
+const { statusCode } = require('../../enums/http/status-code');
+const { value } = require('../../enums/general/values');
 //Helpers
-const { bodyResponse } = require("../../helpers/http/body-response");
+const { bodyResponse } = require('../../helpers/http/body-response');
 const {
   validateHeadersAndKeys,
-} = require("../../helpers/validations/headers/validate-headers-keys");
+} = require('../../helpers/validations/headers/validate-headers-keys');
 const {
   validatePathParameters,
-} = require("../../helpers/http/query-string-params");
+} = require('../../helpers/http/query-string-params');
 const {
   getAllItemsWithFilter,
-} = require("../../helpers/dynamodb/operations/get-all");
+} = require('../../helpers/dynamodb/operations/get-all');
 
 //Const/Vars
-const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || "";
+const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -42,7 +42,7 @@ module.exports.handler = async (event) => {
     msgLog = null;
     arrayItems = [];
     pageSizeNro = 5;
-    orderAt = "asc";
+    orderAt = 'asc';
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -71,7 +71,7 @@ module.exports.handler = async (event) => {
     if (!validatePathParam) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "Bad request, check malformed date value"
+        'Bad request, check malformed date value',
       );
     }
     //-- end with path parameters  ---
@@ -80,10 +80,10 @@ module.exports.handler = async (event) => {
 
     itemsCreatedAt = await getAllItemsWithFilter(
       BIOET_TOTAL_TABLE_NAME,
-      "createdAt",
+      'createdAt',
       date,
       pageSizeNro,
-      orderAt
+      orderAt,
     );
     if (itemsCreatedAt != null || itemsCreatedAt.length) {
       arrayItems.push(itemsCreatedAt);
@@ -92,10 +92,10 @@ module.exports.handler = async (event) => {
     if (itemsCreatedAt == null || !itemsCreatedAt.length) {
       itemsUpdatedAt = await getAllItemsWithFilter(
         BIOET_TOTAL_TABLE_NAME,
-        "updatedAt",
+        'updatedAt',
         date,
         pageSizeNro,
-        orderAt
+        orderAt,
       );
       arrayItems.push(itemsUpdatedAt);
     }
@@ -106,7 +106,7 @@ module.exports.handler = async (event) => {
     ) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "The objects with the createdAt or updatedAt value is not found in the database"
+        'The objects with the createdAt or updatedAt value is not found in the database',
       );
     }
     //-- end with dynamodb operations  ---
@@ -114,7 +114,7 @@ module.exports.handler = async (event) => {
     return await bodyResponse(statusCode.OK, arrayItems);
   } catch (error) {
     msgResponse =
-      "ERROR in get-like-created-at-updated-at controller function for bioethanol-total.";
+      'ERROR in get-like-created-at-updated-at controller function for bioethanol-total.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
