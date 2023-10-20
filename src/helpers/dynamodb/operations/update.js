@@ -1,19 +1,14 @@
 //External
-const {
-    UpdateCommand
-} = require("@aws-sdk/lib-dynamodb");
+const { UpdateCommand } = require('@aws-sdk/lib-dynamodb');
 // const { marshall, unmarshall } = require('@aws-sdk/util-dynamodb');
 //Helpers
-const {
-    dynamoDBClient
-} = require("../config/client");
-//Const-vars 
+const { dynamoDBClient } = require('../config/client');
+//Const-vars
 let dynamo;
 let metadata;
 let itemUpdated;
 let msgResponse;
 let msgLog;
-
 
 /**
  * @description update one item into the database
@@ -23,45 +18,52 @@ let msgLog;
  * @returns a metadata with the information of the operation
  */
 const updateOneItem = async (tableName, key, item) => {
-    try {
-        itemUpdated = null;
-        msgResponse = null;
-        msgLog = null;
-        const itemKeys = Object.keys(item);
+  try {
+    itemUpdated = null;
+    msgResponse = null;
+    msgLog = null;
+    const itemKeys = Object.keys(item);
 
-        dynamo = await dynamoDBClient();
+    dynamo = await dynamoDBClient();
 
-        metadata = await dynamo.send(new UpdateCommand({
-            TableName: tableName,
-            Key: key,
-            ReturnValues: 'ALL_NEW',
-            UpdateExpression: `SET ${itemKeys.map((k, index) => `#field${index} = :value${index}`).join(', ')}`,
-            ExpressionAttributeNames: itemKeys.reduce((accumulator, k, index) => ({
-                ...accumulator,
-                [`#field${index}`]: k
-            }), {}),
-            ExpressionAttributeValues: itemKeys.reduce((accumulator, k, index) => ({
-                ...accumulator,
-                [`:value${index}`]: item[k]
-            }), {}),
-        }));
+    metadata = await dynamo.send(
+      new UpdateCommand({
+        TableName: tableName,
+        Key: key,
+        ReturnValues: 'ALL_NEW',
+        UpdateExpression: `SET ${itemKeys
+          .map((k, index) => `#field${index} = :value${index}`)
+          .join(', ')}`,
+        ExpressionAttributeNames: itemKeys.reduce(
+          (accumulator, k, index) => ({
+            ...accumulator,
+            [`#field${index}`]: k,
+          }),
+          {},
+        ),
+        ExpressionAttributeValues: itemKeys.reduce(
+          (accumulator, k, index) => ({
+            ...accumulator,
+            [`:value${index}`]: item[k],
+          }),
+          {},
+        ),
+      }),
+    );
 
-        if (metadata != null) {
-            itemUpdated = metadata.Attributes;
-        }
-
-        return itemUpdated;
-
-    } catch (error) {
-
-        msgResponse = 'ERROR in updateOneItem() function.';
-        msgLog = msgResponse + `Caused by ${error}`;
-        console.log(msgLog);
-        return msgResponse;
+    if (metadata != null) {
+      itemUpdated = metadata.Attributes;
     }
-}
 
+    return itemUpdated;
+  } catch (error) {
+    msgResponse = 'ERROR in updateOneItem() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
+  }
+};
 
 module.exports = {
-    updateOneItem
-}
+  updateOneItem,
+};

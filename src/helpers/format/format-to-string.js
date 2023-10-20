@@ -7,23 +7,22 @@ let msgLog;
  * @returns an object string with this format
  */
 const formatToString = async (obj) => {
-    try {
-        msgResponse = null;
-        msgLog = null;
-        if (typeof obj != 'string') {
-            obj = JSON.stringify(obj, null, 2);
-        }
-        
-    return obj;
-    } catch (error) {
-    
-        msgResponse = 'ERROR in formatToString() function.';
-        msgLog = msgResponse + `Caused by ${error}`;
-        console.log(msgLog);
-        return msgResponse;
+  try {
+    msgResponse = null;
+    msgLog = null;
+    if (typeof obj != 'string') {
+      obj = JSON.stringify(obj, null, 2);
     }
-}
+
+    return obj;
+  } catch (error) {
+    msgResponse = 'ERROR in formatToString() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
+  }
+};
 
 module.exports = {
-    formatToString
-}
+  formatToString,
+};

@@ -1,17 +1,17 @@
 //Enums
-const { statusCode } = require("../../enums/http/status-code");
-const { value } = require("../../enums/general/values");
+const { statusCode } = require('../../enums/http/status-code');
+const { value } = require('../../enums/general/values');
 //Helpers
-const { bodyResponse } = require("../../helpers/http/body-response");
+const { bodyResponse } = require('../../helpers/http/body-response');
 const {
-  validateHeadersAndKeys
-} = require("../../helpers/validations/headers/validate-headers-keys");
+  validateHeadersAndKeys,
+} = require('../../helpers/validations/headers/validate-headers-keys');
 const {
-  validatePathParameters
-} = require("../../helpers/http/query-string-params");
+  validatePathParameters,
+} = require('../../helpers/http/query-string-params');
 const {
-  deleteItemByUuid
-} = require("../../helpers/dynamodb/operations/delete");
+  deleteItemByUuid,
+} = require('../../helpers/dynamodb/operations/delete');
 
 //Const-Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
@@ -52,7 +52,7 @@ module.exports.handler = async (event) => {
     if (!validatePathParam) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "Bad request, check malformed uuid"
+        'Bad request, check malformed uuid',
       );
     }
     //-- end with path parameters  ---
@@ -64,7 +64,7 @@ module.exports.handler = async (event) => {
     if (itemDeleted != true) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
-        `Unable to delete item based on uuid ${uuid}`
+        `Unable to delete item based on uuid ${uuid}`,
       );
     }
 
@@ -72,16 +72,12 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(
       statusCode.OK,
-      `Successfully removed item based on uuid ${uuid}`
+      `Successfully removed item based on uuid ${uuid}`,
     );
   } catch (error) {
-
     msgResponse = 'ERROR in delete controller function for bioethanol-prices.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      msgResponse
-    );
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };

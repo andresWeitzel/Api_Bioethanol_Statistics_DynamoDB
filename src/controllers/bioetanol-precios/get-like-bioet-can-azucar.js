@@ -1,21 +1,21 @@
 //Enums
-const { statusCode } = require("../../enums/http/status-code");
-const { value } = require("../../enums/general/values");
+const { statusCode } = require('../../enums/http/status-code');
+const { value } = require('../../enums/general/values');
 //Helpers
-const { bodyResponse } = require("../../helpers/http/body-response");
+const { bodyResponse } = require('../../helpers/http/body-response');
 const {
   validateHeadersAndKeys,
-} = require("../../helpers/validations/headers/validate-headers-keys");
+} = require('../../helpers/validations/headers/validate-headers-keys');
 const {
   getAllItemsWithFilter,
-} = require("../../helpers/dynamodb/operations/get-all");
+} = require('../../helpers/dynamodb/operations/get-all');
 const {
   validatePathParameters,
-} = require("../../helpers/http/query-string-params");
+} = require('../../helpers/http/query-string-params');
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
-const BIOET_PRECIOS_KEY_DYNAMO = "bioetCanAzucar";
+const BIOET_PRECIOS_KEY_DYNAMO = 'bioetCanAzucar';
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -35,7 +35,7 @@ module.exports.handler = async (event) => {
     //Init
     items = value.IS_NULL;
     pageSizeNro = 5;
-    orderAt = "asc";
+    orderAt = 'asc';
     msgResponse = null;
     msgLog = null;
 
@@ -66,7 +66,7 @@ module.exports.handler = async (event) => {
     if (!validatePathParam) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "Bad request, check malformed bioetCanAzucar value"
+        'Bad request, check malformed bioetCanAzucar value',
       );
     }
     //-- end with path parameters  ---
@@ -78,26 +78,23 @@ module.exports.handler = async (event) => {
       BIOET_PRECIOS_KEY_DYNAMO,
       bioetCanAzucar,
       pageSizeNro,
-      orderAt
+      orderAt,
     );
 
     if (items == value.IS_NULL || items == value.IS_UNDEFINED) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        "The objects with the bioetCanAzucar value is not found in the database"
+        'The objects with the bioetCanAzucar value is not found in the database',
       );
     }
     //-- end with dynamodb operations  ---
 
     return await bodyResponse(statusCode.OK, items);
   } catch (error) {
-
-    msgResponse = 'ERROR in get-like-bioet-can-azucar controller function for bioethanol-prices.';
+    msgResponse =
+      'ERROR in get-like-bioet-can-azucar controller function for bioethanol-prices.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(
-      statusCode.INTERNAL_SERVER_ERROR,
-      msgResponse
-    );
+    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
   }
 };
