@@ -98,7 +98,7 @@ Resources:
             WriteCapacityUnits: 1 
 #-- End with bioetanolTotal --
 #-- Start with bioetanolTipos --         
- bioetanolTipos:
+  bioetanolTipos:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: bioetanol-tipos

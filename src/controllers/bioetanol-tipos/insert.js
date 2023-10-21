@@ -1,5 +1,5 @@
 //Models
-const { BioetanolPrecio } = require('../../models/BioetanolPrecio');
+const { BioetanolTipo } = require('../../models/BioetanolTipo');
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
 const { value } = require('../../enums/general/values');
@@ -13,29 +13,28 @@ const { generateUUID } = require('../../helpers/math/generate-uuid');
 const { formatToJson } = require('../../helpers/format/format-to-json');
 const { formatToString } = require('../../helpers/format/format-to-string');
 const {
-  validateBodyAddItemParamsBioetPrecios,
+  validateBodyAddItemParamsBioetTotal,
 } = require('../../helpers/validations/validator/http/request-body-add-item-params');
 const { currentDateTime } = require('../../helpers/date-time/dates');
 
-//Const-Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+//Const/Vars
+const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
 let checkEventHeadersAndKeys;
 let item;
-let newBioetPrecio;
+let newBioetTipo;
 let uuid;
 let periodo;
-let bioetCanAzucar;
-let bioetMaiz;
+let produccion;
+let ventasTotales;
 let createdAt;
-let updatedAt;
 let msgResponse;
 let msgLog;
 
 /**
- * @description Function to insert one object into the bioethanol prices table
+ * @description Function to insert one object into the bioethanol tipo table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -59,9 +58,7 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(
-      eventBody,
-    );
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
 
     if (!validateBodyAddItem) {
       return await bodyResponse(
@@ -75,33 +72,36 @@ module.exports.handler = async (event) => {
 
     uuid = await generateUUID();
     uuid = await formatToString(uuid);
+    tipo = await eventBody.tipo;
     periodo = await eventBody.periodo;
-    bioetCanAzucar = await eventBody.bioetanol_azucar;
-    bioetMaiz = await eventBody.bioetanol_maiz;
+    produccion = await eventBody.produccion;
+    ventasTotales = await eventBody.ventas_totales;
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
-    let bioetPrecio = new BioetanolPrecio(
+    let bioetTipoObj = new BioetanolTipo(
       uuid,
+      tipo,
       periodo,
-      bioetCanAzucar,
-      bioetMaiz,
+      produccion,
+      ventasTotales,
       createdAt,
       updatedAt,
     );
 
     item = {
-      uuid: await bioetPrecio.getUuid(),
-      periodo: await bioetPrecio.getPeriodo(),
-      bioetCanAzucar: await bioetPrecio.getBioetCanAzucar(),
-      bioetMaiz: await bioetPrecio.getBioetMaiz(),
-      createdAt: await bioetPrecio.getCreatedAt(),
-      updatedAt: await bioetPrecio.getUpdatedAt(),
+      uuid: await bioetTipoObj.getUuid(),
+      tipo: await bioetTipoObj.getTipo(),
+      periodo: await bioetTipoObj.getPeriodo(),
+      produccion: await bioetTipoObj.getProduccion(),
+      ventasTotales: await bioetTipoObj.getVentasTotales(),
+      createdAt: await bioetTipoObj.getCreatedAt(),
+      updatedAt: await bioetTipoObj.getUpdatedAt(),
     };
 
-    newBioetPrecio = await insertItem(BIOET_PRECIOS_TABLE_NAME, item);
+    newBioetTipo = await insertItem(BIOET_TIPO_TABLE_NAME, item);
 
-    if (newBioetPrecio == null || !newBioetPrecio.length) {
+    if (newBioetTipo == null || !newBioetTipo.length) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
         'An error has occurred, the object has not been inserted into the database',
@@ -112,7 +112,7 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(statusCode.OK, item);
   } catch (error) {
-    msgResponse = 'ERROR in insert controller function for bioethanol-prices.';
+    msgResponse = 'ERROR in insert controller function for bioethanol-tipo.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);

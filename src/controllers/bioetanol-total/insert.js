@@ -34,7 +34,7 @@ let msgResponse;
 let msgLog;
 
 /**
- * @description Function to insert one object into th bioethanol total table
+ * @description Function to insert one object into the bioethanol total table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
