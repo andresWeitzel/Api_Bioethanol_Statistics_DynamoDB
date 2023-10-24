@@ -79,6 +79,33 @@ module.exports.handler = async (event) => {
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
+    if (tipo != (null && undefined)) {
+      tipo = tipo.toLowerCase();
+      switch (tipo) {
+        case 'can_azuc':
+        case 'cana_azucar':
+        case 'azucar':
+        case 'base_azucar':
+        case 'caña':
+          tipo = 'caña_azucar';
+          break;
+        case 'maiz':
+        case 'maíz':
+        case 'base_maiz':
+          tipo = 'maiz';
+          break;
+        default:
+          tipo = null;
+          break;
+      }
+    }
+    if (tipo == (null && undefined)) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        "The type must only be 'caña_azucar' or 'maiz'",
+      );
+    }
+
     let bioetTipoObj = new BioetanolTipo(
       uuid,
       tipo,

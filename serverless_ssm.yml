@@ -9,7 +9,7 @@ API_VERSION : 'v1'
 # DYNAMODB VALUES
 BIOET_PRECIOS_TABLE_NAME : 'bioetanol-precios'
 BIOET_TOTAL_TABLE_NAME : 'bioetanol-total'
-BIOET_TIPO_TABLE_NAME : 'bioetanol-tipo'
+BIOET_TIPO_TABLE_NAME : 'bioetanol-tipos'
 REGION : 'us-east-1'
 ACCESS_KEY_RANDOM_VALUE: 'xxxx'
 SECRET_KEY_RANDOM_VALUE: 'xxxx'

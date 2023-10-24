@@ -179,6 +179,15 @@ functions:
           method: post
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/'
           private: true
+  getAllBioetanolTipo:
+    handler: src/controllers/bioetanol-tipos/get-all.handler
+    description: Function to obtain all the objects of the bioethanol tipo table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/list'
+          private: true
 custom:
   serverless-offline-ssm:
     stages:

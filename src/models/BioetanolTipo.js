@@ -1,9 +1,17 @@
 'use strict';
 
 class BioetanolTipo {
-  constructor(uuid, tipo, periodo, produccion, ventasTotales, createdAt, updatedAt) {
+  constructor(
+    uuid,
+    tipo,
+    periodo,
+    produccion,
+    ventasTotales,
+    createdAt,
+    updatedAt,
+  ) {
     (this.uuid = uuid),
-    (this.tipo = tipo),
+      (this.tipo = tipo),
       (this.periodo = periodo),
       (this.produccion = produccion),
       (this.ventasTotales = ventasTotales),
