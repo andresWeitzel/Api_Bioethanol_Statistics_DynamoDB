@@ -3,7 +3,10 @@ const { statusCode } = require('../../enums/http/status-code');
 const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
-const { getAllItems } = require('../../helpers/dynamodb/operations/get-all');
+const {
+  validatePathParameters,
+} = require('../../helpers/http/query-string-params');
+const { getOneItem } = require('../../helpers/dynamodb/operations/get-one');
 const {
   validateHeadersAndKeys,
 } = require('../../helpers/validations/headers/validate-headers-keys');
@@ -12,62 +15,68 @@ const {
 const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
 let eventHeaders;
 let checkEventHeadersAndKeys;
-let queryStrParams;
-let pageSizeNro;
-let orderAt;
-let items;
+let validatePathParam;
+let key;
+let uuidParam;
+let item;
 let msgResponse;
 let msgLog;
 
 /**
- * @description Function to obtain all the objects of the bioethanol tipos table
+ * @description Function to get a product of the bioethanol types table according to id
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
 module.exports.handler = async (event) => {
   try {
     //Init
-    obj = value.IS_NULL;
-    items = value.IS_NULL;
+    item = null;
+    key = null;
     msgResponse = null;
     msgLog = null;
-    pageSizeNro = 5;
-    orderAt = 'asc';
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != null) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
 
-    //-- start with pagination  ---
-    queryStrParams = event.queryStringParameters;
+    //-- start with path parameters  ---
+    uuidParam = await event.pathParameters.uuid;
 
-    if (queryStrParams != value.IS_NULL) {
-      pageSizeNro = parseInt(await event.queryStringParameters.limit);
-      orderAt = await event.queryStringParameters.orderAt;
+    validatePathParam = await validatePathParameters(uuidParam);
+
+    if (!validatePathParam) {
+      return await bodyResponse(
+        statusCode.BAD_REQUEST,
+        'Bad request, check malformed id to get bioetanol tipos based on your uuid',
+      );
     }
-    //-- end with pagination  ---
+    //-- end with path parameters  ---
 
     //-- start with dynamodb operations  ---
 
-    items = await getAllItems(BIOET_TIPO_TABLE_NAME, pageSizeNro, orderAt);
+    key = { uuid: uuidParam };
 
-    if (items == value.IS_NULL || !items.length) {
+    item = await getOneItem(BIOET_TIPO_TABLE_NAME, key);
+
+    if (item == (null || undefined)) {
       return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
-        'An error has occurred, failed to list database objects',
+        statusCode.BAD_REQUEST,
+        'The Bioetanol tipos object with the requested uuid is not found in the database',
       );
     }
-    //-- end with dynamodb operations  ---
 
-    return await bodyResponse(statusCode.OK, items);
+    return await bodyResponse(statusCode.OK, item);
+
+    //-- end with dynamodb operations  ---
   } catch (error) {
-    msgResponse = 'ERROR in get-all controller function for bioetanol-tipos.';
+    msgResponse =
+      'ERROR in get-by-uuid controller function for bioetanol-tipos.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);

@@ -169,8 +169,8 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/created-updated-at/{date}'
           private: true
-  # -- BIOETANOL TIPO --
-  insertBioetanolTipo:
+  # -- BIOETANOL TIPOS --
+  insertBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/insert.handler
     description: Function to insert an object in the bioethanol tipo table
     timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
@@ -179,7 +179,7 @@ functions:
           method: post
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/'
           private: true
-  getAllBioetanolTipo:
+  getAllBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-all.handler
     description: Function to obtain all the objects of the bioethanol tipo table
     timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
@@ -188,6 +188,24 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/list'
           private: true
+  getByUuidBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-by-uuid.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the uuid
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/uuid/{uuid}'
+          private: true   
+  getLikeByFieldBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-by-field.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the field and value
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/field-type'
+          private: true                 
 custom:
   serverless-offline-ssm:
     stages:
