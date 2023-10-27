@@ -86,6 +86,15 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/created-at/{createdAt}'
           private: true
+  getLikeFieldTypeBioetanolPrecios:
+    handler: src/controllers/bioetanol-precios/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol prices table according to the field type
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/field-type'
+          private: true        
   getLikePeriodoBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the periodo
@@ -169,6 +178,15 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/created-updated-at/{date}'
           private: true
+  getLikeFieldTypeBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol total table according to the field type and value
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/field-type'
+          private: true           
   # -- BIOETANOL TIPOS --
   insertBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/insert.handler
@@ -197,9 +215,9 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/uuid/{uuid}'
           private: true   
-  getLikeByFieldBioetanolTipos:
-    handler: src/controllers/bioetanol-tipos/get-like-by-field.handler
-    description: Function to obtain all the objects of the bioethanol types table according to the field and value
+  getLikeFieldTypeBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the field type and value
     timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
