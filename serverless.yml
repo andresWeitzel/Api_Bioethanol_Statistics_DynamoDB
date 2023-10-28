@@ -197,6 +197,24 @@ functions:
           method: post
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/'
           private: true
+  updateBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/update.handler
+    description: Function to update an object in the bioethanol tipo table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: put
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/{uuid}'
+          private: true
+  deleteBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/delete.handler
+    description: Function to delete an object in the bioethanol types table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: delete
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/{uuid}'
+          private: true          
   getAllBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-all.handler
     description: Function to obtain all the objects of the bioethanol tipo table
