@@ -1,4 +1,5 @@
 Resources:
+#-- Start with bioetanolPrecios -- 
   bioetanolPrecios:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -46,8 +47,8 @@ Resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1                
-        
-
+#-- End with bioetanolPrecios --         
+#-- Start with bioetanolTotal -- 
   bioetanolTotal:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -95,46 +96,64 @@ Resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1 
-       
-
-  # bioetanolMaiz:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     TableName: bioetanolMaiz
-  #     AttributeDefinitions:
-  #       - AttributeName: id
-  #         AttributeType: S
-  #       - AttributeName: produccion
-  #         AttributeType: N
-  #       - AttributeName: ventasTotales
-  #         AttributeType: N  
-  #     KeySchema:
-  #       - AttributeName: id
-  #         KeyType: HASH
-  #       - AttributeName: produccion
-  #         KeyType: RANGE  
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: 1
-  #       WriteCapacityUnits: 1 
-
-  # bioetanolCanAzucar:
-  #   Type: AWS::DynamoDB::Table
-  #   Properties:
-  #     TableName: bioetanolCanAzucar
-  #     AttributeDefinitions:
-  #       - AttributeName: id
-  #         AttributeType: S
-  #       - AttributeName: produccion
-  #         AttributeType: N
-  #       - AttributeName: ventasTotales
-  #         AttributeType: N  
-  #     KeySchema:
-  #       - AttributeName: id
-  #         KeyType: HASH
-  #       - AttributeName: produccion
-  #         KeyType: RANGE
-  #     ProvisionedThroughput:
-  #       ReadCapacityUnits: 1
-  #       WriteCapacityUnits: 1     
-
-        
+#-- End with bioetanolTotal --
+#-- Start with bioetanolTipos --         
+  bioetanolTipos:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: bioetanol-tipos
+      AttributeDefinitions:
+        - AttributeName: uuid
+          AttributeType: S
+        - AttributeName: tipo
+          AttributeType: S     
+        - AttributeName: periodo
+          AttributeType: S   
+        - AttributeName: produccion
+          AttributeType: S
+        - AttributeName: ventasTotales
+          AttributeType: S  
+      KeySchema:
+        - AttributeName: uuid
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1 
+      GlobalSecondaryIndexes:
+        - IndexName: tipo
+          KeySchema:
+            - AttributeName: tipo
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+        - IndexName: periodo
+          KeySchema:
+            - AttributeName: periodo
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1        
+        - IndexName: produccion
+          KeySchema:
+            - AttributeName: produccion
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: ventasTotales
+          KeySchema:
+            - AttributeName: ventasTotales
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+#-- End with bioetanolTipos --             

@@ -77,7 +77,7 @@ module.exports.handler = async (event) => {
     if (!validateBodyAddItem) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        'Bad request, check request body attributes. Missing or incorrect',
+        'Bad request, check request body attributes for bioetanol-total. Missing or incorrect',
       );
     }
     //-- end with body validations  ---

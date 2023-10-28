@@ -1,8 +1,7 @@
 //Models
-const { BioetanolPrecio } = require('../../models/BioetanolPrecio');
+const { BioetanolTipo } = require('../../models/BioetanolTipo');
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -11,7 +10,7 @@ const {
 const { formatToJson } = require('../../helpers/format/format-to-json');
 const { formatToString } = require('../../helpers/format/format-to-string');
 const {
-  validateBodyAddItemParamsBioetPrecios,
+  validateBodyAddItemParamsBioetTipos,
 } = require('../../helpers/validations/validator/http/request-body-add-item-params');
 const { currentDateTime } = require('../../helpers/date-time/dates');
 const {
@@ -21,21 +20,21 @@ const { getOneItem } = require('../../helpers/dynamodb/operations/get-one');
 const { updateOneItem } = require('../../helpers/dynamodb/operations/update');
 
 //Const-Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
 let validatePathParam;
 let oldItem;
-let updatedBioetPrecio;
+let updatedBioetTipo;
 let uuid;
 let newItem;
-let newBioetanolPrecioObj;
+let newBioetanolTipoObj;
 let msgResponse;
 let msgLog;
 
 /**
- * @description Function to update one object into the bioethanol prices table
+ * @description Function to update one object into the bioethanol types table
  * @param {Object} event Object type
  * @returns a body response with http code and message
  */
@@ -50,7 +49,7 @@ module.exports.handler = async (event) => {
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != null) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -72,14 +71,14 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTipos(
       eventBody,
     );
 
     if (!validateBodyAddItem) {
       return await bodyResponse(
         statusCode.BAD_REQUEST,
-        'Bad request, check request body attributes for bioetanol-precios. Missing or incorrect',
+        'Bad request, check request body attributes for bioetanol-tipos. Missing or incorrect',
       );
     }
     //-- end with body validations  ---
@@ -88,9 +87,9 @@ module.exports.handler = async (event) => {
 
     key = { uuid: uuid };
 
-    oldItem = await getOneItem(BIOET_PRECIOS_TABLE_NAME, key);
+    oldItem = await getOneItem(BIOET_TIPO_TABLE_NAME, key);
 
-    if (oldItem == value.IS_NULL || oldItem == value.IS_UNDEFINED) {
+    if (oldItem == null || oldItem == undefined) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
         `Internal Server Error. Unable to update object in db as failed to get a item by uuid ${uuid} . Check if the item exists in the database and try again.`,
@@ -100,32 +99,27 @@ module.exports.handler = async (event) => {
 
     //-- start with new item dynamoDB operations  ---
 
-    newBioetanolPrecioObj = new BioetanolPrecio(
+    newBioetanolTipoObj = new BioetanolTipo(
       uuid,
+      eventBody.tipo,
       eventBody.periodo,
-      eventBody.bioetanol_azucar,
-      eventBody.bioetanol_maiz,
+      eventBody.produccion,
+      eventBody.ventas_totales,
       await currentDateTime(),
       await currentDateTime(),
     );
 
     newItem = {
-      periodo: newBioetanolPrecioObj.getPeriodo(),
-      bioetCanAzucar: newBioetanolPrecioObj.getBioetCanAzucar(),
-      bioetMaiz: newBioetanolPrecioObj.getBioetMaiz(),
-      updatedAt: newBioetanolPrecioObj.getUpdatedAt(),
+      tipo: newBioetanolTipoObj.getTipo(),
+      periodo: newBioetanolTipoObj.getPeriodo(),
+      produccion: newBioetanolTipoObj.getProduccion(),
+      ventas_totales: newBioetanolTipoObj.getVentasTotales(),
+      updatedAt: newBioetanolTipoObj.getUpdatedAt(),
     };
 
-    updatedBioetPrecio = await updateOneItem(
-      BIOET_PRECIOS_TABLE_NAME,
-      key,
-      newItem,
-    );
+    updatedBioetTipo = await updateOneItem(BIOET_TIPO_TABLE_NAME, key, newItem);
 
-    if (
-      updatedBioetPrecio == value.IS_NULL ||
-      updatedBioetPrecio == value.IS_UNDEFINED
-    ) {
+    if (updatedBioetTipo == (null || undefined)) {
       return await bodyResponse(
         statusCode.INTERNAL_SERVER_ERROR,
         'An error has occurred, the object has not been updated into the database',
@@ -134,9 +128,9 @@ module.exports.handler = async (event) => {
 
     //-- end with new item dynamoDB operations  ---
 
-    return await bodyResponse(statusCode.OK, updatedBioetPrecio);
+    return await bodyResponse(statusCode.OK, updatedBioetTipo);
   } catch (error) {
-    msgResponse = 'ERROR in update controller function for bioethanol-prices.';
+    msgResponse = 'ERROR in update controller function for bioethanol-types.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);

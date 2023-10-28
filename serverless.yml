@@ -1,4 +1,3 @@
-
 service: api-bioetanol-estadisticas-dynamodb-aws
 
 frameworkVersion: '3'
@@ -7,33 +6,32 @@ provider:
   name: aws
   runtime: nodejs18.x
   stage: dev
-  region : us-east-1
+  region: us-east-1
   memorySize: 512
-  timeout : ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
-  environment: 
-    ${file(./serverless_ssm.yml)}
+  timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+  environment: ${file(./serverless_ssm.yml)}
   apiGateway:
     apiKeys:
-      - name : xApiKey
-        value : ${file(./serverless_ssm.yml):X_API_KEY}
+      - name: xApiKey
+        value: ${file(./serverless_ssm.yml):X_API_KEY}
   logs:
     # Enable REST API logs
     restApi:
       accessLogging: true
-      format: "requestId: $context.requestId"
+      format: 'requestId: $context.requestId'
       executionLogging: true
       level: INFO
       fullExecutionData: true
       role: arn:aws:iam::xxxx:role
-      roleManagedExternally: false         
+      roleManagedExternally: false
 
 plugins:
-    - serverless-dynamodb-local
-    - serverless-offline-ssm
-    - serverless-offline
+  - serverless-dynamodb-local
+  - serverless-offline-ssm
+  - serverless-offline
 
 functions:
-# -- BIOETANOL PRECIOS --
+  # -- BIOETANOL PRECIOS --
   insertBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/insert.handler
     description: Function to insert an object in the bioethanol prices table
@@ -51,7 +49,7 @@ functions:
       - http:
           method: put
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/{uuid}'
-          private: true 
+          private: true
   deleteBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/delete.handler
     description: Function to delete an object in the bioethanol prices table
@@ -60,7 +58,7 @@ functions:
       - http:
           method: delete
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/{uuid}'
-          private: true           
+          private: true
   getAllBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-all.handler
     description: Function to obtain all the objects of the bioethanol prices table
@@ -78,7 +76,7 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/uuid/{uuid}'
-          private: true   
+          private: true
   getLikeCreatedAtBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-created-at.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the creation date
@@ -87,7 +85,16 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/created-at/{createdAt}'
-          private: true  
+          private: true
+  getLikeFieldTypeBioetanolPrecios:
+    handler: src/controllers/bioetanol-precios/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol prices table according to the field type
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/field-type'
+          private: true        
   getLikePeriodoBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the periodo
@@ -105,7 +112,7 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/bioetanol-maiz/{bioetMaiz}'
-          private: true 
+          private: true
   getLikeBioetCanAzucarBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-bioet-can-azucar.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar price
@@ -115,8 +122,8 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/bioetanol-cana-azucar/{bioetCanAzucar}'
           private: true
-           
-# -- BIOETANOL TOTAL --        
+
+  # -- BIOETANOL TOTAL --
   insertBioetanolTotal:
     handler: src/controllers/bioetanol-total/insert.handler
     description: Function to insert an object in the bioethanol total table
@@ -143,7 +150,7 @@ functions:
       - http:
           method: delete
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/{uuid}'
-          private: true            
+          private: true
   getAllBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-all.handler
     description: Function to obtain all the objects of the bioethanol total table
@@ -152,7 +159,7 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/list'
-          private: true          
+          private: true
   getByUuidBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-by-uuid.handler
     description: Function to obtain all the objects of the bioethanol total table according to the uuid
@@ -161,7 +168,7 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/uuid/{uuid}'
-          private: true  
+          private: true
   getLikeCreatedAtUpdatedAtBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-created-at-updated-at.handler
     description: Function to obtain all the objects of the bioethanol total table according to the creation date or update date
@@ -170,13 +177,76 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/created-updated-at/{date}'
-          private: true  
-custom:  
+          private: true
+  getLikeFieldTypeBioetanolTotal:
+    handler: src/controllers/bioetanol-total/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol total table according to the field type and value
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TOTAL_TABLE_NAME}/field-type'
+          private: true           
+  # -- BIOETANOL TIPOS --
+  insertBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/insert.handler
+    description: Function to insert an object in the bioethanol tipo table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: post
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/'
+          private: true
+  updateBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/update.handler
+    description: Function to update an object in the bioethanol tipo table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: put
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/{uuid}'
+          private: true
+  deleteBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/delete.handler
+    description: Function to delete an object in the bioethanol types table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: delete
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/{uuid}'
+          private: true          
+  getAllBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-all.handler
+    description: Function to obtain all the objects of the bioethanol tipo table
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/list'
+          private: true
+  getByUuidBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-by-uuid.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the uuid
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/uuid/{uuid}'
+          private: true   
+  getLikeFieldTypeBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-field-type.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the field type and value
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/field-type'
+          private: true                 
+custom:
   serverless-offline-ssm:
     stages:
       - dev
-    ssm: 
-      ${file(./serverless_ssm.yml)}
+    ssm: ${file(./serverless_ssm.yml)}
   dynamodb:
     stages:
       - dev
@@ -189,6 +259,5 @@ custom:
     lambdaPort: 4002
 
 resources:
-  - ${file(src/resources/api-gateway.yml)} 
-  - ${file(src/resources/dynamo-table.yml)}         
-      
+  - ${file(src/resources/api-gateway.yml)}
+  - ${file(src/resources/dynamo-table.yml)}
