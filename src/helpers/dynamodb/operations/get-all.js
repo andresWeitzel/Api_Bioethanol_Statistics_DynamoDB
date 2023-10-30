@@ -71,6 +71,8 @@ const getAllItemsWithFilter = async (
   try {
     metadata = null;
     items = null;
+    msgResponse = null;
+    msgLog = null;
     orderAt = orderAt.toLowerCase();
 
     if (orderAt == 'asc' || orderAt == null) {
@@ -102,9 +104,10 @@ const getAllItemsWithFilter = async (
 
     return items;
   } catch (error) {
-    console.error(
-      `ERROR in getAllItemsWithFilter() function. Caused by ${error} . Specific stack is ${error.stack} `,
-    );
+    msgResponse = 'ERROR in getAllItemsWithFilter() function.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return msgResponse;
   }
 };
 

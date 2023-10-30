@@ -33,7 +33,7 @@ module.exports.handler = async (event) => {
     itemDeleted = null;
     msgResponse = null;
     msgLog = null;
-    validatePathParam=null;
+    validatePathParam = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
