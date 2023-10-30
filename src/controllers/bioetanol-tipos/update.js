@@ -71,9 +71,7 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetTipos(
-      eventBody,
-    );
+    validateBodyAddItem = await validateBodyAddItemParamsBioetTipos(eventBody);
 
     if (!validateBodyAddItem) {
       return await bodyResponse(

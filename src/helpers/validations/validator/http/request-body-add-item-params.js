@@ -97,7 +97,6 @@ const validateBodyAddItemParamsBioetTotal = async (eventBody) => {
   }
 };
 
-
 /**
  * @description We validate the request body parameters for add an item to the bioethanol total table into database
  * @param {object} eventBody event.body type
@@ -114,7 +113,7 @@ const validateBodyAddItemParamsBioetTipos = async (eventBody) => {
     if (eventBody != null) {
       eventBodyObj = {
         data: {
-          tipo : await eventBody.tipo,
+          tipo: await eventBody.tipo,
           periodo: await eventBody.periodo,
           produccion: await eventBody.produccion,
           ventas_totales: await eventBody.ventas_totales,
@@ -148,5 +147,5 @@ const validateBodyAddItemParamsBioetTipos = async (eventBody) => {
 module.exports = {
   validateBodyAddItemParamsBioetPrecios,
   validateBodyAddItemParamsBioetTotal,
-  validateBodyAddItemParamsBioetTipos
+  validateBodyAddItemParamsBioetTipos,
 };
