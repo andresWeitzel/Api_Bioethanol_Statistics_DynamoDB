@@ -2,7 +2,6 @@
 const { BioetanolPrecio } = require('../../models/BioetanolPrecio');
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -50,7 +49,7 @@ module.exports.handler = async (event) => {
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != null) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
