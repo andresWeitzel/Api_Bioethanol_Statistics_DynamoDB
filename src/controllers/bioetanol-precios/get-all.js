@@ -1,14 +1,14 @@
 //Enums
-const { statusCode } = require("../../enums/http/status-code");
+const { statusCode } = require('../../enums/http/status-code');
 //Helpers
-const { bodyResponse } = require("../../helpers/http/body-response");
-const { getAllItems } = require("../../helpers/dynamodb/operations/get-all");
+const { bodyResponse } = require('../../helpers/http/body-response');
+const { getAllItems } = require('../../helpers/dynamodb/operations/get-all');
 const {
   validateHeadersAndKeys,
-} = require("../../helpers/validations/headers/validate-headers-keys");
+} = require('../../helpers/validations/headers/validate-headers-keys');
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || "";
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
@@ -34,7 +34,7 @@ module.exports.handler = async (event) => {
     msgResponse = null;
     msgLog = null;
     pageSizeNro = 5;
-    orderAt = "asc";
+    orderAt = 'asc';
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -62,14 +62,14 @@ module.exports.handler = async (event) => {
     if (items == null || !items.length) {
       return await bodyResponse(
         INTERNAL_SERVER_ERROR_CODE,
-        "An error has occurred, failed to list database objects"
+        'An error has occurred, failed to list database objects',
       );
     }
     //-- end with dynamodb operations  ---
 
     return await bodyResponse(OK_CODE, items);
   } catch (error) {
-    msgResponse = "ERROR in get-all controller function for bioethanol-prices.";
+    msgResponse = 'ERROR in get-all controller function for bioethanol-prices.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);

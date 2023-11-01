@@ -2,7 +2,6 @@
 const { BioetanolTipo } = require('../../models/BioetanolTipo');
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -17,8 +16,12 @@ const {
 } = require('../../helpers/validations/validator/http/request-body-add-item-params');
 const { currentDateTime } = require('../../helpers/date-time/dates');
 
-//Const/Vars
+//Const
 const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+//Vars
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
@@ -49,7 +52,7 @@ module.exports.handler = async (event) => {
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---

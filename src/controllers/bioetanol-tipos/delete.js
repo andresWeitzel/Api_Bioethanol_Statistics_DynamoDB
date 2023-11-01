@@ -1,6 +1,5 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -12,9 +11,12 @@ const {
 const {
   deleteItemByUuid,
 } = require('../../helpers/dynamodb/operations/delete');
-
-//Const-Vars
+//const
 const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+//vars
 let eventHeaders;
 let validatePathParam;
 let itemDeleted;
@@ -40,7 +42,7 @@ module.exports.handler = async (event) => {
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -52,7 +54,7 @@ module.exports.handler = async (event) => {
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check malformed uuid',
       );
     }
@@ -64,21 +66,20 @@ module.exports.handler = async (event) => {
 
     if (itemDeleted != true) {
       return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
+        INTERNAL_SERVER_ERROR_CODE,
         `Unable to delete item based on uuid ${uuid}`,
       );
     }
-
     //-- end with delete item dynamoDB operations  ---
 
     return await bodyResponse(
-      statusCode.OK,
+      OK_CODE,
       `Successfully removed item based on uuid ${uuid}`,
     );
   } catch (error) {
     msgResponse = 'ERROR in delete controller function for bioethanol-types.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };

@@ -1,6 +1,5 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -15,6 +14,9 @@ const {
 
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
 let eventHeaders;
 let validatePathParam;
 let pageSizeNro;
@@ -44,7 +46,7 @@ module.exports.handler = async (event) => {
 
     checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -52,7 +54,7 @@ module.exports.handler = async (event) => {
     //-- start with pagination  ---
     queryStrParams = event.queryStringParameters;
 
-    if (queryStrParams != null) {
+    if (queryStrParams != (null && undefined)) {
       pageSizeNro = parseInt(await event.queryStringParameters.limit);
       orderAt = await event.queryStringParameters.orderAt;
     }
@@ -65,7 +67,7 @@ module.exports.handler = async (event) => {
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check malformed periodo value',
       );
     }
@@ -83,18 +85,18 @@ module.exports.handler = async (event) => {
 
     if (items == null || !items.length) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'The objects with the periodo value is not found in the database',
       );
     }
     //-- end with dynamodb operations  ---
 
-    return await bodyResponse(statusCode.OK, items);
+    return await bodyResponse(OK_CODE, items);
   } catch (error) {
     msgResponse =
       'ERROR in get-like-periodo controller function for bioethanol-prices.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };
