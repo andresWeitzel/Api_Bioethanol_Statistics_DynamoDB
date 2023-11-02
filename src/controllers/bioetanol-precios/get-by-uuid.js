@@ -1,17 +1,17 @@
 //Enums
-const { statusCode } = require('../../enums/http/status-code');
+const { statusCode } = require("../../enums/http/status-code");
 //Helpers
-const { bodyResponse } = require('../../helpers/http/body-response');
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validatePathParameters,
-} = require('../../helpers/http/query-string-params');
-const { getOneItem } = require('../../helpers/dynamodb/operations/get-one');
+} = require("../../helpers/http/query-string-params");
+const { getOneItem } = require("../../helpers/dynamodb/operations/get-one");
 const {
   validateHeadersAndKeys,
-} = require('../../helpers/validations/headers/validate-headers-keys');
+} = require("../../helpers/validations/headers/validate-headers-keys");
 
 //Const/Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || "";
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
@@ -36,11 +36,15 @@ module.exports.handler = async (event) => {
     key = null;
     msgResponse = null;
     msgLog = null;
+    uuidParam = null;
+    validatePathParam = false;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
     if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
@@ -50,12 +54,14 @@ module.exports.handler = async (event) => {
     //-- start with path parameters  ---
     uuidParam = await event.pathParameters.uuid;
 
-    validatePathParam = await validatePathParameters(uuidParam);
+    if (uuidParam != (null && undefined)) {
+      validatePathParam = await validatePathParameters(uuidParam);
+    }
 
     if (!validatePathParam) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check malformed id to get bioethanol prices based on your id',
+        `Bad request, check malformed id to get bioethanol prices based on your id ${uuidParam}`
       );
     }
     //-- end with path parameters  ---
@@ -69,7 +75,7 @@ module.exports.handler = async (event) => {
     if (item == (null || undefined)) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'The Bioetanol prices object with the requested id is not found in the database',
+        `The Bioetanol prices object with the requested id ${uuidParam} is not found in the database`
       );
     }
 
@@ -78,7 +84,7 @@ module.exports.handler = async (event) => {
     //-- end with dynamodb operations  ---
   } catch (error) {
     msgResponse =
-      'ERROR in get-by-uuid controller function for bioethanol-prices.';
+      "ERROR in get-by-uuid controller function for bioethanol-prices.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);

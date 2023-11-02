@@ -1,18 +1,18 @@
 //Enums
-const { statusCode } = require('../../enums/http/status-code');
+const { statusCode } = require("../../enums/http/status-code");
 //Helpers
-const { bodyResponse } = require('../../helpers/http/body-response');
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validateHeadersAndKeys,
-} = require('../../helpers/validations/headers/validate-headers-keys');
+} = require("../../helpers/validations/headers/validate-headers-keys");
 const {
   validatePathParameters,
-} = require('../../helpers/http/query-string-params');
+} = require("../../helpers/http/query-string-params");
 const {
   deleteItemByUuid,
-} = require('../../helpers/dynamodb/operations/delete');
+} = require("../../helpers/dynamodb/operations/delete");
 //const
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || "";
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
@@ -35,11 +35,14 @@ module.exports.handler = async (event) => {
     itemDeleted = null;
     msgResponse = null;
     msgLog = null;
+    validatePathParam = false;
 
     //-- start with validation headers and keys  ---
     eventHeaders = event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
     if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
@@ -49,12 +52,14 @@ module.exports.handler = async (event) => {
     //-- start with path parameters  ---
     uuid = event.pathParameters.uuid;
 
-    validatePathParam = await validatePathParameters(uuid);
+    if (uuid != (null && undefined)) {
+      validatePathParam = await validatePathParameters(uuid);
+    }
 
     if (!validatePathParam) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check malformed uuid',
+        "Bad request, check malformed uuid"
       );
     }
     //-- end with path parameters  ---
@@ -66,7 +71,7 @@ module.exports.handler = async (event) => {
     if (itemDeleted != true) {
       return await bodyResponse(
         INTERNAL_SERVER_ERROR_CODE,
-        `Unable to delete item based on uuid ${uuid}`,
+        `Unable to delete item based on uuid ${uuid}`
       );
     }
 
@@ -74,10 +79,10 @@ module.exports.handler = async (event) => {
 
     return await bodyResponse(
       OK_CODE,
-      `Successfully removed item based on uuid ${uuid}`,
+      `Successfully removed item based on uuid ${uuid}`
     );
   } catch (error) {
-    msgResponse = 'ERROR in delete controller function for bioethanol-prices.';
+    msgResponse = "ERROR in delete controller function for bioethanol-prices.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
