@@ -1,19 +1,19 @@
 //Enums
-const { statusCode } = require('../../enums/http/status-code');
+const { statusCode } = require("../../enums/http/status-code");
 //Helpers
-const { bodyResponse } = require('../../helpers/http/body-response');
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validateHeadersAndKeys,
-} = require('../../helpers/validations/headers/validate-headers-keys');
+} = require("../../helpers/validations/headers/validate-headers-keys");
 const {
   validatePathParameters,
-} = require('../../helpers/http/query-string-params');
+} = require("../../helpers/http/query-string-params");
 const {
   getAllItemsWithFilter,
-} = require('../../helpers/dynamodb/operations/get-all');
+} = require("../../helpers/dynamodb/operations/get-all");
 
 //Const-Vars
-const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
+const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || "";
 const OK_CODE = statusCode.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
@@ -39,8 +39,8 @@ module.exports.handler = async (event) => {
     items = null;
     msgResponse = null;
     msgLog = null;
-    pageSizeNro = 5;
-    orderAt = 'asc';
+    pageSizeNro = 20;
+    orderAt = "asc";
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
@@ -56,8 +56,10 @@ module.exports.handler = async (event) => {
     queryStrParams = event.queryStringParameters;
 
     if (queryStrParams != (null && undefined)) {
-      pageSizeNro = parseInt(await event.queryStringParameters.limit);
-      orderAt = await event.queryStringParameters.orderAt;
+      pageSizeNro = queryStrParams.limit
+        ? parseInt(queryStrParams.limit)
+        : pageSizeNro;
+      orderAt = queryStrParams.orderAt ? queryStrParams.orderAt : orderAt;
     }
     //-- end with pagination  ---
 
@@ -69,7 +71,7 @@ module.exports.handler = async (event) => {
     if (!validatePathParam) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check malformed createdAt value',
+        "Bad request, check malformed createdAt value"
       );
     }
     //-- end with path parameters  ---
@@ -78,16 +80,16 @@ module.exports.handler = async (event) => {
 
     items = await getAllItemsWithFilter(
       BIOET_PRECIOS_TABLE_NAME,
-      'createdAt',
+      "createdAt",
       createdAt,
       pageSizeNro,
-      orderAt,
+      orderAt
     );
 
-    if (items == null || !items.length) {
+    if (items == (null || undefined) || !items.length) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'The objects with the createdAt value is not found in the database',
+        "The objects with the createdAt value is not found in the database. Check if items exists."
       );
     }
     //-- end with dynamodb operations  ---
@@ -95,7 +97,7 @@ module.exports.handler = async (event) => {
     return await bodyResponse(OK_CODE, items);
   } catch (error) {
     msgResponse =
-      'ERROR in get-like-created_at controller function for bioethanol-prices.';
+      "ERROR in get-like-created_at controller function for bioethanol-prices.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);

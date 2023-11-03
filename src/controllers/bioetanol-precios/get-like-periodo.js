@@ -38,7 +38,7 @@ module.exports.handler = async (event) => {
     items = null;
     msgResponse = null;
     msgLog = null;
-    pageSizeNro = 5;
+    pageSizeNro = 20;
     orderAt = 'asc';
 
     //-- start with validation headers and keys  ---
@@ -55,8 +55,10 @@ module.exports.handler = async (event) => {
     queryStrParams = event.queryStringParameters;
 
     if (queryStrParams != (null && undefined)) {
-      pageSizeNro = parseInt(await event.queryStringParameters.limit);
-      orderAt = await event.queryStringParameters.orderAt;
+      pageSizeNro = queryStrParams.limit
+        ? parseInt(queryStrParams.limit)
+        : pageSizeNro;
+      orderAt = queryStrParams.orderAt ? queryStrParams.orderAt : orderAt;
     }
     //-- end with pagination  ---
 
@@ -83,10 +85,10 @@ module.exports.handler = async (event) => {
       orderAt,
     );
 
-    if (items == null || !items.length) {
+    if (items == (null || undefined) || !items.length) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'The objects with the periodo value is not found in the database',
+        'The objects with the periodo value is not found in the database. Check if items exists.',
       );
     }
     //-- end with dynamodb operations  ---

@@ -75,7 +75,7 @@ module.exports.handler = async (event) => {
     if (item == (null || undefined)) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        `The Bioetanol prices object with the requested id ${uuidParam} is not found in the database`
+        `The Bioetanol prices object with the requested id ${uuidParam} is not found in the database.`
       );
     }
 
