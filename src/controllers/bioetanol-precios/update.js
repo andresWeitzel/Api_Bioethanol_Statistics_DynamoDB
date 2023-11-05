@@ -49,9 +49,11 @@ module.exports.handler = async (event) => {
     msgLog = null;
 
     //-- start with validation headers and keys  ---
-    eventHeaders = event.headers;
+    eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
     if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;

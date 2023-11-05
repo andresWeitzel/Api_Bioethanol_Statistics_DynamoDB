@@ -40,11 +40,13 @@ module.exports.handler = async (event) => {
     msgLog = null;
     pageSizeNro = 20;
     orderAt = 'asc';
-
+    
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
     if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;

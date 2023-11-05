@@ -1,20 +1,22 @@
 //Enums
-const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
+const { statusCode } = require("../../enums/http/status-code");
 //Helpers
-const { bodyResponse } = require('../../helpers/http/body-response');
+const { bodyResponse } = require("../../helpers/http/body-response");
 const {
   validateHeadersAndKeys,
-} = require('../../helpers/validations/headers/validate-headers-keys');
+} = require("../../helpers/validations/headers/validate-headers-keys");
 const {
   validatePathParameters,
-} = require('../../helpers/http/query-string-params');
+} = require("../../helpers/http/query-string-params");
 const {
   getAllItemsWithFilter,
-} = require('../../helpers/dynamodb/operations/get-all');
+} = require("../../helpers/dynamodb/operations/get-all");
 
 //Const-Vars
-const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || "";
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
 let eventHeaders;
 let orderAt;
 let items;
@@ -33,7 +35,7 @@ module.exports.handler = async (event) => {
     //Init
     items = null;
     pageSizeNro = 5;
-    orderAt = 'asc';
+    orderAt = "asc";
     msgResponse = null;
     msgLog = null;
     fieldType = null;
@@ -42,9 +44,11 @@ module.exports.handler = async (event) => {
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != null) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -64,34 +68,34 @@ module.exports.handler = async (event) => {
     if (fieldType != (null && undefined)) {
       fieldType = fieldType.toLowerCase();
       switch (fieldType) {
-        case 'uuid':
-        case 'id':
-          fieldType = 'uuid';
+        case "uuid":
+        case "id":
+          fieldType = "uuid";
           break;
-        case 'tipo':
-        case 'type':
-          fieldType = 'tipo';
+        case "tipo":
+        case "type":
+          fieldType = "tipo";
           break;
-        case 'periodo':
-        case 'period':
-          fieldType = 'periodo';
+        case "periodo":
+        case "period":
+          fieldType = "periodo";
           break;
-        case 'produccion':
-        case 'producción':
-        case 'production':
-          fieldType = 'produccion';
+        case "produccion":
+        case "producción":
+        case "production":
+          fieldType = "produccion";
           break;
-        case 'ventas_totales':
-        case 'ventastotales':
-          fieldType = 'ventasTotales';
+        case "ventas_totales":
+        case "ventastotales":
+          fieldType = "ventasTotales";
           break;
-        case 'created_at':
-        case 'createddat':
-          fieldType = 'createdAt';
+        case "created_at":
+        case "createddat":
+          fieldType = "createdAt";
           break;
-        case 'updated_at':
-        case 'updateddat':
-          fieldType = 'updatedAt';
+        case "updated_at":
+        case "updateddat":
+          fieldType = "updatedAt";
           break;
         default:
           fieldType = null;
@@ -100,14 +104,14 @@ module.exports.handler = async (event) => {
     }
     if (fieldType == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
-        "The fieldType must only be 'uuid' , 'tipo' , 'periodo', 'produccion', 'ventasTotales', 'createdAt' or 'updatedAt' ",
+        BAD_REQUEST_CODE,
+        "The fieldType must only be 'uuid' , 'tipo' , 'periodo', 'produccion', 'ventasTotales', 'createdAt' or 'updatedAt' "
       );
     }
     if (fieldValue == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
-        'The fieldValue must not be null or undefined',
+        BAD_REQUEST_CODE,
+        "The fieldValue must not be null or undefined"
       );
     }
     //-- end with pagination  ---
@@ -119,23 +123,23 @@ module.exports.handler = async (event) => {
       fieldType,
       fieldValue,
       pageSizeNro,
-      orderAt,
+      orderAt
     );
 
-    if (items == null || items == value.IS_UNDEFINED) {
+    if (items == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
-        'The objects with the field type and value is not found in the database',
+        BAD_REQUEST_CODE,
+        "The objects with the field type and value is not found in the database"
       );
     }
     //-- end with dynamodb operations  ---
 
-    return await bodyResponse(statusCode.OK, items);
+    return await bodyResponse(OK_CODE, items);
   } catch (error) {
     msgResponse =
-      'ERROR in get-like-field-type controller function for bioethanol-types.';
+      "ERROR in get-like-field-type controller function for bioethanol-types.";
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };
