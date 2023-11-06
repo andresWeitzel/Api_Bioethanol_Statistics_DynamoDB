@@ -1,6 +1,5 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -11,8 +10,12 @@ const {
   validateHeadersAndKeys,
 } = require('../../helpers/validations/headers/validate-headers-keys');
 
-//Const/Vars
+//Const
 const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+//Vars
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -30,17 +33,19 @@ let msgLog;
 module.exports.handler = async (event) => {
   try {
     //Init
-    item = value.IS_NULL;
-    key = value.IS_NULL;
+    item = null;
+    key = null;
     msgResponse = null;
     msgLog = null;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -48,12 +53,14 @@ module.exports.handler = async (event) => {
     //-- start with path parameters  ---
     uuidParam = await event.pathParameters.uuid;
 
-    validatePathParam = await validatePathParameters(uuidParam);
+    if (uuidParam != (null && undefined)) {
+      validatePathParam = await validatePathParameters(uuidParam);
+    }
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
-        'Bad request, check malformed id to get bioethanol total based on your id',
+        BAD_REQUEST_CODE,
+        `Bad request, check malformed id to get bioethanol prices based on your uuid ${uuidParam}`,
       );
     }
     //-- end with path parameters  ---
@@ -64,14 +71,14 @@ module.exports.handler = async (event) => {
 
     item = await getOneItem(BIOET_TOTAL_TABLE_NAME, key);
 
-    if (item == value.IS_NULL || item.IS_UNDEFINED) {
+    if (item == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'The Bioetanol total object with the requested id is not found in the database',
       );
     }
 
-    return await bodyResponse(statusCode.OK, item);
+    return await bodyResponse(OK_CODE, item);
 
     //-- end with dynamodb operations  ---
   } catch (error) {
@@ -79,6 +86,6 @@ module.exports.handler = async (event) => {
       'ERROR in get-by-uuid controller function for bioethanol-total.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };

@@ -40,7 +40,7 @@ module.exports.handler = async (event) => {
     msgLog = null;
     pageSizeNro = 20;
     orderAt = 'asc';
-    
+
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 

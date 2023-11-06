@@ -51,7 +51,9 @@ module.exports.handler = async (event) => {
     queryStrParams = event.queryStringParameters;
 
     if (queryStrParams != (null && undefined)) {
-      pageSizeNro = queryStrParams.limit ? parseInt(queryStrParams.limit) : pageSizeNro;
+      pageSizeNro = queryStrParams.limit
+        ? parseInt(queryStrParams.limit)
+        : pageSizeNro;
       orderAt = queryStrParams.orderAt ? queryStrParams.orderAt : orderAt;
     }
     //-- end with pagination  ---

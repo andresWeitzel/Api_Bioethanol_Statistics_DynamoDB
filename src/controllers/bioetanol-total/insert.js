@@ -2,7 +2,6 @@
 const { BioetanolTotal } = require('../../models/BioetanolTotal');
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -17,8 +16,12 @@ const {
 } = require('../../helpers/validations/validator/http/request-body-add-item-params');
 const { currentDateTime } = require('../../helpers/date-time/dates');
 
-//Const/Vars
+//Const
 const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+//Vars
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
@@ -47,9 +50,11 @@ module.exports.handler = async (event) => {
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -62,7 +67,7 @@ module.exports.handler = async (event) => {
 
     if (!validateBodyAddItem) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check request body attributes. Missing or incorrect',
       );
     }
@@ -100,18 +105,18 @@ module.exports.handler = async (event) => {
 
     if (newBioetTotal == null || !newBioetTotal.length) {
       return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
+        INTERNAL_SERVER_ERROR_CODE,
         'An error has occurred, the object has not been inserted into the database',
       );
     }
 
     //-- end with dynamoDB operations  ---
 
-    return await bodyResponse(statusCode.OK, item);
+    return await bodyResponse(OK_CODE, item);
   } catch (error) {
     msgResponse = 'ERROR in insert controller function for bioethanol-total.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };
