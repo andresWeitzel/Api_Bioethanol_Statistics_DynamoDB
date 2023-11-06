@@ -18,9 +18,11 @@ const {
 } = require('../../helpers/http/query-string-params');
 const { getOneItem } = require('../../helpers/dynamodb/operations/get-one');
 const { updateOneItem } = require('../../helpers/dynamodb/operations/update');
-
-//Const-Vars
+//Const
 const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
 let eventHeaders;
 let eventBody;
 let validateBodyAddItem;
@@ -45,11 +47,13 @@ module.exports.handler = async (event) => {
     msgLog = null;
 
     //-- start with validation headers and keys  ---
-    eventHeaders = event.headers;
+    eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != null) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -61,7 +65,7 @@ module.exports.handler = async (event) => {
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check malformed uuid',
       );
     }
@@ -75,7 +79,7 @@ module.exports.handler = async (event) => {
 
     if (!validateBodyAddItem) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check request body attributes for bioetanol-tipos. Missing or incorrect',
       );
     }
@@ -87,9 +91,9 @@ module.exports.handler = async (event) => {
 
     oldItem = await getOneItem(BIOET_TIPO_TABLE_NAME, key);
 
-    if (oldItem == null || oldItem == undefined) {
+    if (oldItem == (null || undefined)) {
       return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
+        INTERNAL_SERVER_ERROR_CODE,
         `Internal Server Error. Unable to update object in db as failed to get a item by uuid ${uuid} . Check if the item exists in the database and try again.`,
       );
     }
@@ -119,18 +123,18 @@ module.exports.handler = async (event) => {
 
     if (updatedBioetTipo == (null || undefined)) {
       return await bodyResponse(
-        statusCode.INTERNAL_SERVER_ERROR,
+        INTERNAL_SERVER_ERROR_CODE,
         'An error has occurred, the object has not been updated into the database',
       );
     }
 
     //-- end with new item dynamoDB operations  ---
 
-    return await bodyResponse(statusCode.OK, updatedBioetTipo);
+    return await bodyResponse(OK_CODE, updatedBioetTipo);
   } catch (error) {
     msgResponse = 'ERROR in update controller function for bioethanol-types.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };

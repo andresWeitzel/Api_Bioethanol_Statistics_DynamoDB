@@ -92,6 +92,51 @@
 							"response": []
 						},
 						{
+							"name": "getLikeBioetCanAzucar",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/345?limit=3&orderAt=das",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"bioetanol-cana-azucar",
+										"345"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "das"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "getLikeCreatedAt",
 							"request": {
 								"method": "GET",
@@ -113,14 +158,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-10-13?limit=3&orderAt=das",
+									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-11?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"created-at",
-										"2023-10-13"
+										"2023-11"
 									],
 									"query": [
 										{
@@ -158,7 +203,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
+									"raw": "{{base_url}}/bioetanol-precios/field-type?limit=3&orderAt=asc&fieldType=periodo&fieldValue=2023-11",
 									"host": [
 										"{{base_url}}"
 									],
@@ -177,11 +222,11 @@
 										},
 										{
 											"key": "fieldType",
-											"value": "uuid"
+											"value": "periodo"
 										},
 										{
 											"key": "fieldValue",
-											"value": "a"
+											"value": "2023-11"
 										}
 									]
 								}
@@ -253,51 +298,6 @@
 										"bioetanol-precios",
 										"bioetanol-maiz",
 										"412"
-									],
-									"query": [
-										{
-											"key": "limit",
-											"value": "3"
-										},
-										{
-											"key": "orderAt",
-											"value": "das"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getLikeBioetCanAzucar",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/345?limit=3&orderAt=das",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-precios",
-										"bioetanol-cana-azucar",
-										"345"
 									],
 									"query": [
 										{
@@ -447,307 +447,6 @@
 			]
 		},
 		{
-			"name": "Bioetanol_Total",
-			"item": [
-				{
-					"name": "GET",
-					"item": [
-						{
-							"name": "getByUuid",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										"uuid",
-										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getByCreatedUpdateDate",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										"uuid",
-										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getAll",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/list?limit=3&orderAt=asc",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										"list"
-									],
-									"query": [
-										{
-											"key": "limit",
-											"value": "3"
-										},
-										{
-											"key": "orderAt",
-											"value": "asc"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getLikeFieldType",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										"field-type"
-									],
-									"query": [
-										{
-											"key": "limit",
-											"value": "3"
-										},
-										{
-											"key": "orderAt",
-											"value": "asc"
-										},
-										{
-											"key": "fieldType",
-											"value": "uuid"
-										},
-										{
-											"key": "fieldValue",
-											"value": "a"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "POST",
-					"item": [
-						{
-							"name": "insert",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										""
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "PUT",
-					"item": [
-						{
-							"name": "update",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
-								},
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										""
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "DELETE",
-					"item": [
-						{
-							"name": "delete",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/1263773a-43af-4784-973d-cbfd5840e079",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
-										"1263773a-43af-4784-973d-cbfd5840e079"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				}
-			]
-		},
-		{
 			"name": "Bioetanol_Tipos",
 			"item": [
 				{
@@ -781,41 +480,6 @@
 									],
 									"path": [
 										"bioetanol-tipos",
-										"uuid",
-										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "getByCreatedUpdateDate",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "x-api-key",
-										"value": "{{x-api-key}}",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "{{bearer-token}}",
-										"type": "text"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{base_url}}/bioetanol-total/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
-									"host": [
-										"{{base_url}}"
-									],
-									"path": [
-										"bioetanol-total",
 										"uuid",
 										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
 									]
@@ -1039,6 +703,307 @@
 									"path": [
 										"bioetanol-tipos",
 										"d9e29746-1e5e-4078-9b0d-e3ae0ae70906"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Bioetanol_Total",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "getByUuid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"uuid",
+										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getByCreatedUpdateDate",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/created-updated-at/2023-11-05",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"created-updated-at",
+										"2023-11-05"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getAll",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/list?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"list"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getLikeFieldType",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"field-type"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										},
+										{
+											"key": "fieldType",
+											"value": "uuid"
+										},
+										{
+											"key": "fieldValue",
+											"value": "a"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "insert",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT",
+					"item": [
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/1a9c7139-1fa7-4b32-a0e4-54b5d7b4b6f9",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"1a9c7139-1fa7-4b32-a0e4-54b5d7b4b6f9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"item": [
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/1263773a-43af-4784-973d-cbfd5840e079",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"1263773a-43af-4784-973d-cbfd5840e079"
 									]
 								}
 							},

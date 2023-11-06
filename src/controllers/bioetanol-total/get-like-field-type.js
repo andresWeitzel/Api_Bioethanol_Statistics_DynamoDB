@@ -1,20 +1,19 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
   validateHeadersAndKeys,
 } = require('../../helpers/validations/headers/validate-headers-keys');
 const {
-  validatePathParameters,
-} = require('../../helpers/http/query-string-params');
-const {
   getAllItemsWithFilter,
 } = require('../../helpers/dynamodb/operations/get-all');
-
-//Const-Vars
+//Const
 const BIOET_TOTAL_TABLE_NAME = process.env.BIOET_TOTAL_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+//Vars
 let eventHeaders;
 let orderAt;
 let items;
@@ -36,15 +35,17 @@ module.exports.handler = async (event) => {
     orderAt = 'asc';
     msgResponse = null;
     msgLog = null;
-    fieldType = null;
-    fieldValue = null;
+    fieldType = 'uuid';
+    fieldValue = 'a';
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != null) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -54,11 +55,17 @@ module.exports.handler = async (event) => {
 
     if (queryStrParams != (null && undefined)) {
       //fields
-      fieldType = event.queryStringParameters.fieldType;
-      fieldValue = event.queryStringParameters.fieldValue;
+      fieldType = queryStrParams.fieldType
+        ? queryStrParams.fieldType
+        : fieldType;
+      fieldValue = queryStrParams.fieldValue
+        ? queryStrParams.fieldValue
+        : fieldValue;
       //pagination
-      pageSizeNro = parseInt(await event.queryStringParameters.limit);
-      orderAt = await event.queryStringParameters.orderAt;
+      pageSizeNro = queryStrParams.limit
+        ? parseInt(queryStrParams.limit)
+        : pageSizeNro;
+      orderAt = queryStrParams.orderAt ? queryStrParams.orderAt : orderAt;
     }
 
     if (fieldType != (null && undefined)) {
@@ -96,13 +103,13 @@ module.exports.handler = async (event) => {
     }
     if (fieldType == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         "The fieldType must only be 'uuid', 'periodo', 'produccion', 'ventasTotales', 'createdAt' or 'updatedAt' ",
       );
     }
     if (fieldValue == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'The fieldValue must not be null or undefined',
       );
     }
@@ -118,20 +125,20 @@ module.exports.handler = async (event) => {
       orderAt,
     );
 
-    if (items == null || items == value.IS_UNDEFINED) {
+    if (items == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'The objects with the field type and value is not found in the database',
       );
     }
     //-- end with dynamodb operations  ---
 
-    return await bodyResponse(statusCode.OK, items);
+    return await bodyResponse(OK_CODE, items);
   } catch (error) {
     msgResponse =
       'ERROR in get-like-field-type controller function for bioethanol-total.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };

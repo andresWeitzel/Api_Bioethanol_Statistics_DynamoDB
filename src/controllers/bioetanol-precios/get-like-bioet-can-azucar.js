@@ -1,6 +1,5 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -16,12 +15,15 @@ const {
 //Const/Vars
 const BIOET_PRECIOS_TABLE_NAME = process.env.BIOET_PRECIOS_TABLE_NAME || '';
 const BIOET_PRECIOS_KEY_DYNAMO = 'bioetCanAzucar';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
 let orderAt;
 let items;
-let bioetCanAzucar;
+let bioetCanAzucarParam;
 let msgResponse;
 let msgLog;
 
@@ -33,18 +35,22 @@ let msgLog;
 module.exports.handler = async (event) => {
   try {
     //Init
-    items = value.IS_NULL;
-    pageSizeNro = 5;
+    items = null;
+    pageSizeNro = 20;
     orderAt = 'asc';
     msgResponse = null;
     msgLog = null;
+    bioetCanAzucarParam = null;
+    validatePathParam = false;
 
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != value.IS_NULL) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -52,20 +58,24 @@ module.exports.handler = async (event) => {
     //-- start with pagination  ---
     queryStrParams = event.queryStringParameters;
 
-    if (queryStrParams != value.IS_NULL) {
-      pageSizeNro = parseInt(await event.queryStringParameters.limit);
-      orderAt = await event.queryStringParameters.orderAt;
+    if (queryStrParams != (null && undefined)) {
+      pageSizeNro = queryStrParams.limit
+        ? parseInt(queryStrParams.limit)
+        : pageSizeNro;
+      orderAt = queryStrParams.orderAt ? queryStrParams.orderAt : orderAt;
     }
     //-- end with pagination  ---
 
     //-- start with path parameters  ---
-    bioetCanAzucar = await event.pathParameters.bioetCanAzucar;
+    bioetCanAzucarParam = await event.pathParameters.bioetCanAzucar;
 
-    validatePathParam = await validatePathParameters(bioetCanAzucar);
+    if (bioetCanAzucarParam != (null && undefined)) {
+      validatePathParam = await validatePathParameters(bioetCanAzucarParam);
+    }
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check malformed bioetCanAzucar value',
       );
     }
@@ -76,25 +86,25 @@ module.exports.handler = async (event) => {
     items = await getAllItemsWithFilter(
       BIOET_PRECIOS_TABLE_NAME,
       BIOET_PRECIOS_KEY_DYNAMO,
-      bioetCanAzucar,
+      bioetCanAzucarParam,
       pageSizeNro,
       orderAt,
     );
 
-    if (items == value.IS_NULL || items == value.IS_UNDEFINED) {
+    if (items == (null || undefined) || !items.length) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
-        'The objects with the bioetCanAzucar value is not found in the database',
+        BAD_REQUEST_CODE,
+        `The objects with the bioetCanAzucar price value ( $${bioetCanAzucarParam} ) is not found in the database. Check if items exists.`,
       );
     }
     //-- end with dynamodb operations  ---
 
-    return await bodyResponse(statusCode.OK, items);
+    return await bodyResponse(OK_CODE, items);
   } catch (error) {
     msgResponse =
       'ERROR in get-like-bioet-can-azucar controller function for bioethanol-prices.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };

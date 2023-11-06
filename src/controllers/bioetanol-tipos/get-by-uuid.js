@@ -1,6 +1,5 @@
 //Enums
 const { statusCode } = require('../../enums/http/status-code');
-const { value } = require('../../enums/general/values');
 //Helpers
 const { bodyResponse } = require('../../helpers/http/body-response');
 const {
@@ -13,6 +12,9 @@ const {
 
 //Const/Vars
 const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
 let eventHeaders;
 let checkEventHeadersAndKeys;
 let validatePathParam;
@@ -38,9 +40,11 @@ module.exports.handler = async (event) => {
     //-- start with validation headers and keys  ---
     eventHeaders = await event.headers;
 
-    checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
 
-    if (checkEventHeadersAndKeys != null) {
+    if (checkEventHeadersAndKeys != (null && undefined)) {
       return checkEventHeadersAndKeys;
     }
     //-- end with validation headers and keys  ---
@@ -48,11 +52,13 @@ module.exports.handler = async (event) => {
     //-- start with path parameters  ---
     uuidParam = await event.pathParameters.uuid;
 
-    validatePathParam = await validatePathParameters(uuidParam);
+    if (uuidParam != (null && undefined)) {
+      validatePathParam = await validatePathParameters(uuidParam);
+    }
 
     if (!validatePathParam) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'Bad request, check malformed id to get bioetanol tipos based on your uuid',
       );
     }
@@ -66,12 +72,12 @@ module.exports.handler = async (event) => {
 
     if (item == (null || undefined)) {
       return await bodyResponse(
-        statusCode.BAD_REQUEST,
+        BAD_REQUEST_CODE,
         'The Bioetanol tipos object with the requested uuid is not found in the database',
       );
     }
 
-    return await bodyResponse(statusCode.OK, item);
+    return await bodyResponse(OK_CODE, item);
 
     //-- end with dynamodb operations  ---
   } catch (error) {
@@ -79,6 +85,6 @@ module.exports.handler = async (event) => {
       'ERROR in get-by-uuid controller function for bioetanol-tipos.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
-    return await bodyResponse(statusCode.INTERNAL_SERVER_ERROR, msgResponse);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
   }
 };
