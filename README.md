@@ -63,7 +63,8 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 
   <br>
 
-`Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+Api Rest for the statistical management of the production and marketing of bioethanol based on cane and corn. For its main architecture, all dynamo operations are covered through modularized helpers, endpoints through controllers, enumerations are used, etc. All necessary CRUD operations are also applied, as well as validations of credentials, tokens, headers, body, etc. for each endpoint of each table. The dynamodb tables involved are bioethanolPrices, bioethanolTotal, and bioethanolTypes.
+`Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
 
 <br>
 
@@ -111,44 +112,34 @@ sls -v
 npm i
 ```
 
-*   `Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
-*   We create a file to store the ssm variables used in the project (Even though it is a project with non-commercial purposes, it is a good practice to use environment variables).
-    *   Right click on the project root
-    *   New file
-    *   We create the file with the name `serverless_ssm.yml`. This should be at the same height as the serverless.yml
-    *   We add the necessary ssm within the file.
-    ```git
-
-    # AUTHENTICATION
-    X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
-
-    BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT 4fwpMeJf36POk6yJV_adQssw5c'
-
-    #API VALUES
-    API_VERSION : 'v1'
-
-    # DYNAMODB VALUES
-    BIOET_PRECIOS_TABLE_NAME : 'bioethanol-prices'
-    REGION: 'us-east-1'
-    ACCESS_KEY_RANDOM_VALUE: 'xxxx'
-    SECRET_KEY_RANDOM_VALUE: 'xxxx'
-    ENDPOINT: "http://127.0.0.1:8000"
-
-    ```
+*   `Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+*   For simplification purposes, the file for ssm variables (serverless\_ssm.yml) is included. It is recommended not to include or change credentials, token, etc.
 *   The following script configured in the project's package.json is responsible for
-    *   Lift serverless-offline (serverless-offline)
+    *   Lift serverless-offline ("serverless-offline")
+    *   run serverless-offline ("start")
+    *   run nodemon and serverless ("start:dev")
+    *   format all js and ts files with prettier ("format-prettier")
+    *   format all .md files with remark ("format-remark")
+    *   etc.
     ```git
-     "scripts": {
-       "serverless-offline": "sls offline start",
-       "start": "npm run serverless-offline"
-     },
+         "serverless-offline": "sls offline start",
+         "start": "npm run serverless-offline",
+         "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\"",
+         "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
+         "check": "remark . --quiet --frail",
+         "format-remark": "remark . --quiet --frail --output",
+         "format-md": "remark . --output"
     ```
-
-<!---->
-
-    * We run the app from terminal.
+    *   We run the app from terminal.
     ```git
-    npm start
+    npm run start
+    ```
+    *   We run the app with nodemon to auto detect changes from the server.
+```git
+npm run start:dev
+```
+
+*   `Important`: It is possible that there are other previous steps that have not been included due to synchronization between docs in relation to development. Please open a conversation thread within the 'Issues' section of the project.
 
 <br>
 
@@ -157,9 +148,9 @@ npm i
 ### 1.2) Project configuration from scratch [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+<summary>View</summary>
 
-  <br>
+<br>
 
 *   We create a work environment through some IDE, we may or may not create a root folder for the project, we position ourselves on it
 
@@ -231,7 +222,7 @@ plugins:
 ```
 
 *   We install the plugin to use dynamodb locally (Not the dynamoDB service, this is configured in the files within .dynamodb).
-*   `Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+*   `Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
 
 ```git
 npm install serverless-dynamodb-local --save-dev
@@ -389,6 +380,10 @@ etc.....
 | ------------- |
 | Prettier - Code formatter |
 | YAML - Autoformatter .yml (alt+shift+f) |
+| GitLens - Tracking changes |
+| Serverless Framework - Autocompleted with snippets |
+| Tabnine - AI Autocomplete |
+| Others |
 
 <br>
 
