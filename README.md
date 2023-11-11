@@ -358,6 +358,7 @@ etc.....
 | [Serverless Plugin](https://www.serverless.com/plugins/) | 6.2.2 | Libraries for Modular Definition |
 | [Systems Manager Parameter Store (SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) | 3.0 | Management of Environment Variables |
 | [Amazon Api Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) | 2.0 | API Manager, Authentication, Control and Processing |
+| [Amazon DynamoDB](https://aws.amazon.com/es/dynamodb/) | 2017.11.29 | Fast and flexible NoSQL database service for single-digit millisecond performance at any scale |
 | [NodeJS](https://nodejs.org/en/) | 14.18.1 | JS Library |
 | [VSC](https://code.visualstudio.com/docs) | 1.72.2 | IDE |
 | [Postman](https://www.postman.com/downloads/) | 10.11 | Http Client |
@@ -369,6 +370,7 @@ etc.....
 | **Plugin** | **Description** |
 | ------------- | ------------- |
 | [Serverless Plugin](https://www.serverless.com/plugins/) | Libraries for Modular Definition |
+| [serverless-dynamodb-local](https://www.serverless.com/plugins/serverless-dynamodb-local) | Allows to run dynamodb locally for serverless |
 | [serverless-offline](https://www.npmjs.com/package/serverless-offline) | This serverless plugin emulates AWS λ and API Gateway on-premises |
 | [serverless-offline-ssm](https://www.npmjs.com/package/serverless-offline-ssm) | finds environment variables that match the SSM parameters at build time and replaces them from a file |
 
@@ -397,6 +399,33 @@ etc.....
 
 <details>
    <summary>View</summary>
+<br>
+
+### 2.0.1) Variables in Postman
+
+
+| **Variable** | **Value** |
+| ------------- | ------------- |
+| base_url | http://localhost:4000/dev/v1 |
+| x-api-key | f98d8cd98h73s204e3456998ecl9427j |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+
+* `Important`: Key values included are for local testing only.
+
+
+### 2.0.2) Bioetanol_Precios endpoints
+
+### GET type operations:
+
+*   {{base_url}}/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
+*   {{base_url}}/bioetanol-precios/uuid/`uuidValue`
+*   {{base_url}}/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   {{base_url}}/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   {{base_url}}/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
+*   {{base_url}}/bioetanol-precios/periodo/`periodoValue`
+*   {{base_url}}/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{user-id}}`
+
 
 <br>
 
