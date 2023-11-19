@@ -416,7 +416,7 @@ etc.....
 
 ### 2.0.2) Bioetanol_Precios endpoints
 
-### GET type operations:
+#### GET type operations:
 
 *   `base_url`/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
 *   `base_url`/bioetanol-precios/uuid/`uuidValue`
@@ -428,6 +428,31 @@ etc.....
 *   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
 
 
+#### POST type operations:
+
+* `base_url`/bioetanol-precios/
+
+#### PUT type operations:
+
+* `base_url`/bioetanol-precios/`uuid`
+
+#### DELETE type operations:
+
+* `base_url`/bioetanol-precios/`uuid`
+
+<br>
+
+### 2.0.3) Bioetanol_Tipos endpoints
+
+* `To summarize the documentation, review the postman collection endpoints`
+
+<br>
+
+### 2.0.4) Bioetanol_Total endpoints
+
+* `To summarize the documentation, review the postman collection endpoints`
+
+
 <br>
 
 </details>
@@ -436,7 +461,324 @@ etc.....
 
 <details>
    <summary>View</summary>
-   //check
+<br>
+
+### 2.1.0) Variables in Postman
+
+
+| **Variable** | **Value** |
+| ------------- | ------------- |
+| base_url | http://localhost:4000/dev/v1 |
+| x-api-key | f98d8cd98h73s204e3456998ecl9427j |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+
+* `Important`: Key values included are for local testing only.
+
+<br>
+
+
+### 2.1.1) Bioetanol_Precios endpoints
+
+### Get All Bioetanol-precios items
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": [
+        {
+            "createdAt": "2023-11-18 21:55:01",
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "periodo": "2023-11",
+            "bioetMaiz": "412,23",
+            "bioetCanAzucar": "345,33",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "An error has occurred, failed to list database objects. Check if items exists."
+}
+```
+
+<br>
+
+### Get By UUID Bioetanol-precios
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "createdAt": "2023-11-18 21:55:01",
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "periodo": "2023-11",
+        "bioetMaiz": "412,23",
+        "bioetCanAzucar": "345,33",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "The Bioetanol prices object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+* `To summarize the documentation, review the postman collection endpoints for GET operations.`
+
+<br>
+
+### Add Bioetanol-precios item
+
+#### Request (POST)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "periodo":"2023-11",
+    "bioetanol_azucar":"345,33",
+    "bioetanol_maiz":"412,23"
+}'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "periodo": "2023-11",
+        "bioetCanAzucar": "345,33",
+        "bioetMaiz": "412,23",
+        "createdAt": "2023-11-18 21:55:01",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check request body attributes. Missing or incorrect"
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+
+<br>
+
+### Update Bioetanol-precios item
+
+#### Request (PUT)
+
+```postman
+curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67ecfcf7-c338-43d8-9220-4d7b43b7e914' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "periodo":"2023-11",
+    "bioetanol_azucar":"345,33",
+    "bioetanol_maiz":"412,23"
+}'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "createdAt": "2023-11-18 22:01:34",
+        "periodo": "2023-11",
+        "uuid": "b58fd5cb-ed0b-461c-bfea-50c240e51280",
+        "bioetMaiz": "412,23",
+        "bioetCanAzucar": "345,33",
+        "updatedAt": "2023-11-18 22:03:34"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check request body attributes for bioetanol-precios. Missing or incorrect"
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
+}
+```
+
+
+
+<br>
+
+### Delete Bioetanol-precios item
+
+#### Request (DELETE)
+
+```postman
+curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data ''
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": "Successfully removed item based on uuid b58fd5cb-ed0b-461c-bfea-50c240e51280"
+}
+```
+
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+}
+```
+
+
+
+
 
 <br>
 
