@@ -20,6 +20,7 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 *   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 *   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
 *   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
+*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/img/youtube-logo.png" width="5%" height="5%" />
 
 <br>
 
@@ -62,7 +63,8 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 
   <br>
 
-`Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+Api Rest for the statistical management of the production and marketing of bioethanol based on cane and corn. For its main architecture, all dynamo operations are covered through modularized helpers, endpoints through controllers, enumerations are used, etc. All necessary CRUD operations are also applied, as well as validations of credentials, tokens, headers, body, etc. for each endpoint of each table. The dynamodb tables involved are bioethanolPrices, bioethanolTotal, and bioethanolTypes.
+`Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
 
 <br>
 
@@ -110,44 +112,34 @@ sls -v
 npm i
 ```
 
-*   `Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
-*   We create a file to store the ssm variables used in the project (Even though it is a project with non-commercial purposes, it is a good practice to use environment variables).
-    *   Right click on the project root
-    *   New file
-    *   We create the file with the name `serverless_ssm.yml`. This should be at the same height as the serverless.yml
-    *   We add the necessary ssm within the file.
-    ```git
-
-    # AUTHENTICATION
-    X_API_KEY : 'f98d8cd98h73s204e3456998ecl9427j'
-
-    BEARER_TOKEN : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT 4fwpMeJf36POk6yJV_adQssw5c'
-
-    #API VALUES
-    API_VERSION : 'v1'
-
-    # DYNAMODB VALUES
-    BIOET_PRECIOS_TABLE_NAME : 'bioethanol-prices'
-    REGION: 'us-east-1'
-    ACCESS_KEY_RANDOM_VALUE: 'xxxx'
-    SECRET_KEY_RANDOM_VALUE: 'xxxx'
-    ENDPOINT: "http://127.0.0.1:8000"
-
-    ```
+*   `Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+*   For simplification purposes, the file for ssm variables (serverless\_ssm.yml) is included. It is recommended not to include or change credentials, token, etc.
 *   The following script configured in the project's package.json is responsible for
-    *   Lift serverless-offline (serverless-offline)
+    *   Lift serverless-offline ("serverless-offline")
+    *   run serverless-offline ("start")
+    *   run nodemon and serverless ("start:dev")
+    *   format all js and ts files with prettier ("format-prettier")
+    *   format all .md files with remark ("format-remark")
+    *   etc.
     ```git
-     "scripts": {
-       "serverless-offline": "sls offline start",
-       "start": "npm run serverless-offline"
-     },
+         "serverless-offline": "sls offline start",
+         "start": "npm run serverless-offline",
+         "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\"",
+         "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
+         "check": "remark . --quiet --frail",
+         "format-remark": "remark . --quiet --frail --output",
+         "format-md": "remark . --output"
     ```
-
-<!---->
-
-    * We run the app from terminal.
+    *   We run the app from terminal.
     ```git
-    npm start
+    npm run start
+    ```
+    *   We run the app with nodemon to auto detect changes from the server.
+```git
+npm run start:dev
+```
+
+*   `Important`: It is possible that there are other previous steps that have not been included due to synchronization between docs in relation to development. Please open a conversation thread within the 'Issues' section of the project.
 
 <br>
 
@@ -156,9 +148,9 @@ npm i
 ### 1.2) Project configuration from scratch [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+<summary>View</summary>
 
-  <br>
+<br>
 
 *   We create a work environment through some IDE, we may or may not create a root folder for the project, we position ourselves on it
 
@@ -230,7 +222,7 @@ plugins:
 ```
 
 *   We install the plugin to use dynamodb locally (Not the dynamoDB service, this is configured in the files within .dynamodb).
-*   `Important`: There are security alerts from dependabot pointing against the "serverless-dynamodb-local" plugin. Do not apply security patches to said plugin, since version `^1.0.2` has problems when creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
+*   `Important`: There are security alerts from dependabot that were closed as they point to the "serverless-dynamodb-local" plugin. Do not apply security patches to that plugin, as version `^1.0.2` has problems creating tables and running the dynamo service. It is recommended to keep the latest stable version `^0.2.40` with the security alerts generated.
 
 ```git
 npm install serverless-dynamodb-local --save-dev
@@ -366,6 +358,7 @@ etc.....
 | [Serverless Plugin](https://www.serverless.com/plugins/) | 6.2.2 | Libraries for Modular Definition |
 | [Systems Manager Parameter Store (SSM)](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html) | 3.0 | Management of Environment Variables |
 | [Amazon Api Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) | 2.0 | API Manager, Authentication, Control and Processing |
+| [Amazon DynamoDB](https://aws.amazon.com/es/dynamodb/) | 2017.11.29 | Fast and flexible NoSQL database service for single-digit millisecond performance at any scale |
 | [NodeJS](https://nodejs.org/en/) | 14.18.1 | JS Library |
 | [VSC](https://code.visualstudio.com/docs) | 1.72.2 | IDE |
 | [Postman](https://www.postman.com/downloads/) | 10.11 | Http Client |
@@ -377,6 +370,7 @@ etc.....
 | **Plugin** | **Description** |
 | ------------- | ------------- |
 | [Serverless Plugin](https://www.serverless.com/plugins/) | Libraries for Modular Definition |
+| [serverless-dynamodb-local](https://www.serverless.com/plugins/serverless-dynamodb-local) | Allows to run dynamodb locally for serverless |
 | [serverless-offline](https://www.npmjs.com/package/serverless-offline) | This serverless plugin emulates AWS λ and API Gateway on-premises |
 | [serverless-offline-ssm](https://www.npmjs.com/package/serverless-offline-ssm) | finds environment variables that match the SSM parameters at build time and replaces them from a file |
 
@@ -388,6 +382,10 @@ etc.....
 | ------------- |
 | Prettier - Code formatter |
 | YAML - Autoformatter .yml (alt+shift+f) |
+| GitLens - Tracking changes |
+| Serverless Framework - Autocompleted with snippets |
+| Tabnine - AI Autocomplete |
+| Others |
 
 <br>
 
@@ -401,6 +399,59 @@ etc.....
 
 <details>
    <summary>View</summary>
+<br>
+
+### 2.0.1) Variables in Postman
+
+
+| **Variable** | **Value** |
+| ------------- | ------------- |
+| base_url | http://localhost:4000/dev/v1 |
+| x-api-key | f98d8cd98h73s204e3456998ecl9427j |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+
+* `Important`: Key values included are for local testing only.
+
+<br>
+
+### 2.0.2) Bioetanol_Precios endpoints
+
+#### GET type operations:
+
+*   `base_url`/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/uuid/`uuidValue`
+*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
+*   `base_url`/bioetanol-precios/periodo/`periodoValue`
+*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
+
+
+#### POST type operations:
+
+* `base_url`/bioetanol-precios/
+
+#### PUT type operations:
+
+* `base_url`/bioetanol-precios/`uuid`
+
+#### DELETE type operations:
+
+* `base_url`/bioetanol-precios/`uuid`
+
+<br>
+
+### 2.0.3) Bioetanol_Tipos endpoints
+
+* `To summarize the documentation, review the postman collection endpoints`
+
+<br>
+
+### 2.0.4) Bioetanol_Total endpoints
+
+* `To summarize the documentation, review the postman collection endpoints`
+
 
 <br>
 
@@ -410,6 +461,324 @@ etc.....
 
 <details>
    <summary>View</summary>
+<br>
+
+### 2.1.0) Variables in Postman
+
+
+| **Variable** | **Value** |
+| ------------- | ------------- |
+| base_url | http://localhost:4000/dev/v1 |
+| x-api-key | f98d8cd98h73s204e3456998ecl9427j |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+
+* `Important`: Key values included are for local testing only.
+
+<br>
+
+
+### 2.1.1) Bioetanol_Precios endpoints
+
+### Get All Bioetanol-precios items
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": [
+        {
+            "createdAt": "2023-11-18 21:55:01",
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "periodo": "2023-11",
+            "bioetMaiz": "412,23",
+            "bioetCanAzucar": "345,33",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "An error has occurred, failed to list database objects. Check if items exists."
+}
+```
+
+<br>
+
+### Get By UUID Bioetanol-precios
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "createdAt": "2023-11-18 21:55:01",
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "periodo": "2023-11",
+        "bioetMaiz": "412,23",
+        "bioetCanAzucar": "345,33",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "The Bioetanol prices object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+* `To summarize the documentation, review the postman collection endpoints for GET operations.`
+
+<br>
+
+### Add Bioetanol-precios item
+
+#### Request (POST)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "periodo":"2023-11",
+    "bioetanol_azucar":"345,33",
+    "bioetanol_maiz":"412,23"
+}'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "periodo": "2023-11",
+        "bioetCanAzucar": "345,33",
+        "bioetMaiz": "412,23",
+        "createdAt": "2023-11-18 21:55:01",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check request body attributes. Missing or incorrect"
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+
+<br>
+
+### Update Bioetanol-precios item
+
+#### Request (PUT)
+
+```postman
+curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67ecfcf7-c338-43d8-9220-4d7b43b7e914' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "periodo":"2023-11",
+    "bioetanol_azucar":"345,33",
+    "bioetanol_maiz":"412,23"
+}'
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": {
+        "createdAt": "2023-11-18 22:01:34",
+        "periodo": "2023-11",
+        "uuid": "b58fd5cb-ed0b-461c-bfea-50c240e51280",
+        "bioetMaiz": "412,23",
+        "bioetCanAzucar": "345,33",
+        "updatedAt": "2023-11-18 22:03:34"
+    }
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check request body attributes for bioetanol-precios. Missing or incorrect"
+}
+```
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
+}
+```
+
+
+
+<br>
+
+### Delete Bioetanol-precios item
+
+#### Request (DELETE)
+
+```postman
+curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data ''
+```
+
+
+#### Response (200 OK)
+
+```postman
+{
+    "message": "Successfully removed item based on uuid b58fd5cb-ed0b-461c-bfea-50c240e51280"
+}
+```
+
+
+
+#### Response (400 Bad Request)
+
+```postman
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+
+#### Response (401 Unauthorized)
+
+```postman
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```postman
+{
+    "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+}
+```
+
+
+
+
 
 <br>
 
