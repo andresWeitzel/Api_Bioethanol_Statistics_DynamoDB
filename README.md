@@ -412,19 +412,20 @@ etc.....
 
 * `Important`: Key values included are for local testing only.
 
+<br>
 
 ### 2.0.2) Bioetanol_Precios endpoints
 
 ### GET type operations:
 
-*   {{base_url}}/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
-*   {{base_url}}/bioetanol-precios/uuid/`uuidValue`
-*   {{base_url}}/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   {{base_url}}/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   {{base_url}}/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
-*   {{base_url}}/bioetanol-precios/periodo/`periodoValue`
-*   {{base_url}}/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   `All endpoints are optional paginated except /test, /db-connection and /id/{user-id}}`
+*   `base_url`/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/uuid/`uuidValue`
+*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
+*   `base_url`/bioetanol-precios/periodo/`periodoValue`
+*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
 
 
 <br>
