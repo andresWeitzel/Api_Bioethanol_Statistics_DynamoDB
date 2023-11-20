@@ -395,6 +395,8 @@ etc.....
 
 ## Section 2) Endpoints and Examples.
 
+* Update here
+
 ### 2.0) Endpoints and resources [🔝](#index-)
 
 <details>
