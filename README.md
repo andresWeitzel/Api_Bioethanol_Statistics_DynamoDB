@@ -364,6 +364,8 @@ etc.....
 | [Postman](https://www.postman.com/downloads/) | 10.11 | Http Client |
 | [CMD](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd) | 10 | Command Prompt for command line |
 | [Git](https://git-scm.com/downloads) | 2.29.1 | Version Control |
+| Others | - | Others |
+
 
 </br>
 
