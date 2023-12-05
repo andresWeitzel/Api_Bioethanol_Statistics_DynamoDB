@@ -14,5 +14,21 @@ const statusCode = {
   BAD_GATEWAY: 502,
   SERVICE_UNAVAILABLE: 503,
 };
+/**
+ * @description We define the status code details according to its technical definition
+ * @returns the status code details
+ * @example OK --> OK
+ */
+const statusCodeDetails = {
+  OK: "OK",
+  CREATED: "CREATED",
+  BAD_REQUEST: "BAD_REQUEST",
+  UNAUTHORIZED: "UNAUTHORIZED",
+  FORBIDDEN: "FORBIDDEN",
+  NOT_FOUND: "NOT_FOUND",
+  INTERNAL_SERVER_ERROR: "INTERNAL_SERVER_ERROR",
+  BAD_GATEWAY: "BAD_GATEWAY",
+  SERVICE_UNAVAILABLE: "SERVICE_UNAVAILABLE",
+};
 
-module.exports = { statusCode };
+module.exports = { statusCode, statusCodeDetails };
