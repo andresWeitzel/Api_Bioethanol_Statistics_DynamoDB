@@ -65,10 +65,9 @@ describe("- validatePathParameters helper (Unit test)", () => {
   });
 
   describe("3) Check cases for error.", () => {
-    msg = "Should return a boolean with value false if an error is passed";
+    msg = "Should return a boolean with value false if an new Error is passed";
     it(msg, async () => {
-      validatePathParametersResult = await validatePathParameters(new Error());
-      await expect(() => validatePathParametersResult).not.toThrow(Error);
+      await expect(async() =>  await validatePathParameters(new Error())).not.toThrow(Error);
     });
   });
 });
