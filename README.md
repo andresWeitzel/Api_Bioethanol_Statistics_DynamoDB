@@ -135,6 +135,7 @@ npm i
     npm run start
     ```
     *   We run the app with nodemon to auto detect changes from the server.
+
 ```git
 npm run start:dev
 ```
@@ -366,7 +367,6 @@ etc.....
 | [Git](https://git-scm.com/downloads) | 2.29.1 | Version Control |
 | Others | - | Others |
 
-
 </br>
 
 | **Plugin** | **Description** |
@@ -405,55 +405,52 @@ etc.....
 
 ### 2.0.1) Variables in Postman
 
-
 | **Variable** | **Value** |
 | ------------- | ------------- |
-| base_url | http://localhost:4000/dev/v1 |
+| base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
 
-* `Important`: Key values included are for local testing only.
+*   `Important`: Key values included are for local testing only.
 
 <br>
 
-### 2.0.2) Bioetanol_Precios endpoints
+### 2.0.2) Bioetanol\_Precios endpoints
 
 #### GET type operations:
 
-*   `base_url`/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/list?limit=`limitValue`\&orderAt=`orderAtValue`
 *   `base_url`/bioetanol-precios/uuid/`uuidValue`
-*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
+*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`\&orderAt=`orderAtValue`\&fieldType=`fieldTypeValue`\&fieldValue=`fieldValueValue`
 *   `base_url`/bioetanol-precios/periodo/`periodoValue`
-*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`\&orderAt=`orderAtValue`
 *   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
-
 
 #### POST type operations:
 
-* `base_url`/bioetanol-precios/
+*   `base_url`/bioetanol-precios/
 
 #### PUT type operations:
 
-* `base_url`/bioetanol-precios/`uuid`
+*   `base_url`/bioetanol-precios/`uuid`
 
 #### DELETE type operations:
 
-* `base_url`/bioetanol-precios/`uuid`
+*   `base_url`/bioetanol-precios/`uuid`
 
 <br>
 
-### 2.0.3) Bioetanol_Tipos endpoints
+### 2.0.3) Bioetanol\_Tipos endpoints
 
-* `To summarize the documentation, review the postman collection endpoints`
+*   `To summarize the documentation, review the postman collection endpoints`
 
 <br>
 
-### 2.0.4) Bioetanol_Total endpoints
+### 2.0.4) Bioetanol\_Total endpoints
 
-* `To summarize the documentation, review the postman collection endpoints`
-
+*   `To summarize the documentation, review the postman collection endpoints`
 
 <br>
 
@@ -467,19 +464,17 @@ etc.....
 
 ### 2.1.0) Variables in Postman
 
-
 | **Variable** | **Value** |
 | ------------- | ------------- |
-| base_url | http://localhost:4000/dev/v1 |
+| base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
 
-* `Important`: Key values included are for local testing only.
+*   `Important`: Key values included are for local testing only.
 
 <br>
 
-
-### 2.1.1) Bioetanol_Precios endpoints
+### 2.1.1) Bioetanol\_Precios endpoints
 
 ### Get All Bioetanol-precios items
 
@@ -491,7 +486,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
-
 
 #### Response (200 OK)
 
@@ -517,7 +511,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -548,7 +541,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 --header 'Content-Type: application/json'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -564,7 +556,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -573,7 +564,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -581,7 +571,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -593,7 +582,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 <br>
 
-* `To summarize the documentation, review the postman collection endpoints for GET operations.`
+*   `To summarize the documentation, review the postman collection endpoints for GET operations.`
 
 <br>
 
@@ -613,7 +602,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -629,7 +617,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -637,7 +624,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
     "message": "Bad request, check request body attributes. Missing or incorrect"
 }
 ```
-
 
 #### Response (400 Bad Request)
 
@@ -647,7 +633,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }
 ```
 
-
 #### Response (401 Unauthorized)
 
 ```postman
@@ -655,7 +640,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
     "message": "Not authenticated, check x_api_key and Authorization"
 }
 ```
-
 
 <br>
 
@@ -675,7 +659,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -691,7 +674,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -700,7 +682,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -708,7 +689,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -726,8 +706,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
-
 <br>
 
 ### Delete Bioetanol-precios item
@@ -742,7 +720,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 --data ''
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -751,8 +728,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 }
 ```
 
-
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -760,7 +735,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -777,10 +751,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
     "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
 }
 ```
-
-
-
-
 
 <br>
 
