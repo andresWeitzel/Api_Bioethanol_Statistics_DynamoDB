@@ -10,7 +10,10 @@
     "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
     "check": "remark . --quiet --frail",
     "format-remark": "remark . --quiet --frail --output",
-    "format-md": "remark . --output"
+    "format-md": "remark . --output",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch --verbose",
+    "test:cov": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
   },
   "homepage": "https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS#readme",
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "prettier": "^2.8.8",
     "serverless": "^3.35.2",
