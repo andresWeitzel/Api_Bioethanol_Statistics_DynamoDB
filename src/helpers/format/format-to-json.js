@@ -13,13 +13,13 @@ const formatToJson = async (obj) => {
     msgLog = null;
     if (obj == (null || undefined)) {
       return obj;
-    } else if (typeof obj != "object") {
+    } else if (typeof obj != 'object') {
       obj = await JSON.parse(obj);
     }
 
     return obj;
   } catch (error) {
-    msgResponse = "ERROR in formatToJson() function.";
+    msgResponse = 'ERROR in formatToJson() function.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;
