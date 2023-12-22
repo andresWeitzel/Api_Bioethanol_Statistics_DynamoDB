@@ -59,6 +59,7 @@ describe('- formatToJson helper (Unit test)', () => {
     });
   });
 
+  //For refactor
   //checks errors here
   describe('2) Check cases for error.', () => {
     // msg = "Should not throw an Error if an new Error() is passed";
