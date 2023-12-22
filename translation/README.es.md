@@ -74,71 +74,72 @@ Api Rest para la gestión estadística de la producción y comercialización de 
 <details>
   <summary>Ver</summary>
 
-* Creamos un ambiente de trabajo a través de algún IDE, podemos o no crear una carpeta raíz para el proyecto, nos posicionamos en ella.
+*   Creamos un ambiente de trabajo a través de algún IDE, podemos o no crear una carpeta raíz para el proyecto, nos posicionamos en ella.
 
 ```git
 cd 'nombre_proyecto'
 ```
 
-* Una vez creado un entorno de trabajo clonamos el proyecto
+*   Una vez creado un entorno de trabajo clonamos el proyecto
 
 ```git
 git clone https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS
 ```
 
-* Nos posicionamos en el proyecto
+*   Nos posicionamos en el proyecto
 
 ```git
 cd 'nombre_proyecto'
 ```
 
-* Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
-* Instalamos Serverless Framework globalmente si aún no lo realizamos.
+*   Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
+*   Instalamos Serverless Framework globalmente si aún no lo realizamos.
 
 ```git
 npm install -g serverless
 ```
 
-*Verificamos la versión de Serverless instalada
+\*Verificamos la versión de Serverless instalada
 
 ```git
 sls -v
 ```
 
-* Instalamos todos los paquetes necesarios
+*   Instalamos todos los paquetes necesarios
 
 ```git
 npm i
 ```
 
-* `Importante`: Hay alertas de seguridad de dependabot que se cerraron porque apuntan al complemento "serverless-dynamodb-local". No aplique parches de seguridad a ese complemento, ya que la versión `^1.0.2` tiene problemas para crear tablas y ejecutar el servicio dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
-* Para simplificar, se incluye el archivo de variables ssm (serverless\_ssm.yml). Se recomienda no incluir ni cambiar credenciales, token, etc.
-* El siguiente script configurado en el package.json del proyecto es responsable de
-     * Levantar serverless ("serverless-offline")
-     * Ejecutar serverless-offline ("start")
-    *  Ejecutar nodemon y serverless ("start:dev")
-    *  Dar formato archivo .js y .ts con prettier ("format-prettier")
-    *  Dar formato archivo .md con remark ("format-remark")
+*   `Importante`: Hay alertas de seguridad de dependabot que se cerraron porque apuntan al complemento "serverless-dynamodb-local". No aplique parches de seguridad a ese complemento, ya que la versión `^1.0.2` tiene problemas para crear tablas y ejecutar el servicio dynamo. Se recomienda mantener la última versión estable `^0.2.40` con las alertas de seguridad generadas.
+*   Para simplificar, se incluye el archivo de variables ssm (serverless\_ssm.yml). Se recomienda no incluir ni cambiar credenciales, token, etc.
+*   El siguiente script configurado en el package.json del proyecto es responsable de
+    *   Levantar serverless ("serverless-offline")
+    *   Ejecutar serverless-offline ("start")
+    *   Ejecutar nodemon y serverless ("start:dev")
+    *   Dar formato archivo .js y .ts con prettier ("format-prettier")
+    *   Dar formato archivo .md con remark ("format-remark")
     *   etc.
-     ```git
-         "serverless-offline": "sls offline start",
-         "start": "npm run serverless-offline",
-         "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\"",
-         "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
-         "check": "remark . --quiet --frail",
-         "format-remark": "remark . --quiet --frail --output",
-         "format-md": "remark . --output"
-     ```
-     * Ejecutamos la aplicación desde la terminal.
-     ```git
-     npm run start
-     ```
-     * Ejecutamos la aplicación con nodemon para detectar automáticamente los cambios del servidor.
+    ```git
+        "serverless-offline": "sls offline start",
+        "start": "npm run serverless-offline",
+        "start:dev": "nodemon -e js,ts,yml,json --exec \"sls offline start\"",
+        "format-prettier": "prettier --write \"{src,test}/**/*.{js,ts}\"",
+        "check": "remark . --quiet --frail",
+        "format-remark": "remark . --quiet --frail --output",
+        "format-md": "remark . --output"
+    ```
+    *   Ejecutamos la aplicación desde la terminal.
+    ```git
+    npm run start
+    ```
+    *   Ejecutamos la aplicación con nodemon para detectar automáticamente los cambios del servidor.
+
 ```git
 npm run start:dev
 ```
 
-*`Importante`: Es posible que existan otros pasos previos que no se hayan incluido por sincronización entre documentos con relación al desarrollo. Abra un hilo de conversación dentro de la sección 'Problemas' del proyecto.
+\*`Importante`: Es posible que existan otros pasos previos que no se hayan incluido por sincronización entre documentos con relación al desarrollo. Abra un hilo de conversación dentro de la sección 'Problemas' del proyecto.
 
 <br>
 
@@ -387,7 +388,6 @@ etc.....
 | Tabnine - AI Autocomplete |
 | Others |
 
-
 <br>
 
 </details>
@@ -398,62 +398,58 @@ etc.....
 
 ### 2.0) Endpoints y recursos [🔝](#índice-)
 
-
 <details>
    <summary>View</summary>
 <br>
 
 ### 2.0.1) Variables en Postman
 
-
 | **Variable** | **Value** |
 | ------------- | ------------- |
-| base_url | http://localhost:4000/dev/v1 |
+| base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
 
-* `Importante`: Los valores de las keys se incluten para pruebas locales.
+*   `Importante`: Los valores de las keys se incluten para pruebas locales.
 
 <br>
 
-### 2.0.2) Bioetanol_Precios endpoints
+### 2.0.2) Bioetanol\_Precios endpoints
 
 #### GET operaciones:
 
-*   `base_url`/bioetanol-precios/list?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/list?limit=`limitValue`\&orderAt=`orderAtValue`
 *   `base_url`/bioetanol-precios/uuid/`uuidValue`
-*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`&orderAt=`orderAtValue`
-*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`&orderAt=`orderAtValue`&fieldType=`fieldTypeValue`&fieldValue=`fieldValueValue`
+*   `base_url`/bioetanol-precios/bioetanol-cana-azucar/`bioetanolCanaAzucarValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/created-at/`createdAtvalue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/field-type?limit=`limitValue`\&orderAt=`orderAtValue`\&fieldType=`fieldTypeValue`\&fieldValue=`fieldValueValue`
 *   `base_url`/bioetanol-precios/periodo/`periodoValue`
-*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-precios/bioetanol-maiz/`bioetanolMaizValue`?limit=`limitValue`\&orderAt=`orderAtValue`
 *   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
-
 
 #### POST operaciones:
 
-* `base_url`/bioetanol-precios/
+*   `base_url`/bioetanol-precios/
 
 #### PUT operaciones:
 
-* `base_url`/bioetanol-precios/`uuid`
+*   `base_url`/bioetanol-precios/`uuid`
 
 #### DELETE operaciones:
 
-* `base_url`/bioetanol-precios/`uuid`
+*   `base_url`/bioetanol-precios/`uuid`
 
 <br>
 
-### 2.0.3) Bioetanol_Tipos endpoints
+### 2.0.3) Bioetanol\_Tipos endpoints
 
-* `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
+*   `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
 
 <br>
 
-### 2.0.4) Bioetanol_Total endpoints
+### 2.0.4) Bioetanol\_Total endpoints
 
-* `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
-
+*   `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
 
 <br>
 
@@ -464,20 +460,19 @@ etc.....
 <details>
   <summary>Ver</summary>
 
-  ### 2.1.0) Variables en Postman
-
+### 2.1.0) Variables en Postman
 
 | **Variable** | **Value** |
 | ------------- | ------------- |
-| base_url | http://localhost:4000/dev/v1 |
+| base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
 
-* `Importante`: Los valores de las keys se incluten para pruebas locales.
+*   `Importante`: Los valores de las keys se incluten para pruebas locales.
 
 <br>
 
-### 2.1.1) Bioetanol_Precios endpoints
+### 2.1.1) Bioetanol\_Precios endpoints
 
 ### Get All Bioetanol-precios items
 
@@ -489,7 +484,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
-
 
 #### Response (200 OK)
 
@@ -515,7 +509,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -546,7 +539,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 --header 'Content-Type: application/json'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -562,7 +554,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -571,7 +562,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -579,7 +569,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -591,7 +580,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 <br>
 
-* `To summarize the documentation, review the postman collection endpoints for GET operations.`
+*   `To summarize the documentation, review the postman collection endpoints for GET operations.`
 
 <br>
 
@@ -611,7 +600,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -627,7 +615,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -635,7 +622,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
     "message": "Bad request, check request body attributes. Missing or incorrect"
 }
 ```
-
 
 #### Response (400 Bad Request)
 
@@ -645,7 +631,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }
 ```
 
-
 #### Response (401 Unauthorized)
 
 ```postman
@@ -653,7 +638,6 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
     "message": "Not authenticated, check x_api_key and Authorization"
 }
 ```
-
 
 <br>
 
@@ -673,7 +657,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }'
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -689,7 +672,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -698,7 +680,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -706,7 +687,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -724,8 +704,6 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-
-
 <br>
 
 ### Delete Bioetanol-precios item
@@ -740,7 +718,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 --data ''
 ```
 
-
 #### Response (200 OK)
 
 ```postman
@@ -749,8 +726,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 }
 ```
 
-
-
 #### Response (400 Bad Request)
 
 ```postman
@@ -758,7 +733,6 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
     "message": "Bad request, check missing or malformed headers"
 }
 ```
-
 
 #### Response (401 Unauthorized)
 
@@ -776,14 +750,11 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 }
 ```
 
-
 <br>
 
 </details>
 
-
 <br>
-
 
 ## Sección 3) Prueba de funcionalidad y Referencias.
 
