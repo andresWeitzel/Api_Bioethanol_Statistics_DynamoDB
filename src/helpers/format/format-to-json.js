@@ -14,6 +14,7 @@ const formatToJson = async (obj) => {
     if (obj == (null || undefined)) {
       return obj;
     } else if (typeof obj != 'object') {
+      
       obj = await JSON.parse(obj);
     }
 

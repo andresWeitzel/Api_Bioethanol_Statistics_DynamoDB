@@ -59,9 +59,17 @@ describe("- formatToJson helper (Unit test)", () => {
       formatToJsonResult = await formatToJson();
       await expect(formatToJsonResult == undefined).toBe(true);
     });
+
+    msg = "Should return a number value if zero (0) value is passed";
+
+    it(msg, async () => {
+      formatToJsonResult = await formatToJson(0);
+    
+      await expect(typeof formatToJsonResult == "number").toBe(true);
+    });
   });
 
-  describe("2) Check cases for error.", () => {
+  describe("3) Check cases for error.", () => {
     msg = "Should not throw an error if a new Error() is passed as a parameter";
 
     it(msg, async () => {
@@ -79,19 +87,6 @@ describe("- formatToJson helper (Unit test)", () => {
 
       await expect(typeof formatToJsonResult == "object").toBe(true);
       await expect(formatToJsonResult).toEqual(errorObj);
-    });
-
-    msg =
-      'Should return a string with "ERROR in formatToJson() function." value if zero (0) value is passed';
-
-    it(msg, async () => {
-      let formatToJsonErrorMsg = "ERROR in formatToJson() function.";
-
-      formatToJsonResult = formatToJsonResult.toLowerCase();
-
-      formatToJsonErrorMsg = formatToJsonErrorMsg.toLowerCase();
-
-      await expect(async () => await formatToJson(0)).not.toThrow(Error);
     });
   });
 });
