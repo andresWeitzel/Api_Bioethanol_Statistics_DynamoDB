@@ -1,6 +1,6 @@
 //Const
 const CALCULATE_CHARACTS_ERROR =
-  "ERROR in calculateNumberOfCharactersMatch() helper function.";
+  'ERROR in calculateNumberOfCharactersMatch() helper function.';
 //Vars
 let msgResponse;
 let msgLog;
@@ -14,7 +14,7 @@ let msgLog;
  */
 const calculateNumberOfCharactersMatch = async (
   stringToCompare,
-  characters
+  characters,
 ) => {
   try {
     let stringToCompareArray = [...stringToCompare];
