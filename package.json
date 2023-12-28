@@ -13,7 +13,8 @@
     "format-md": "remark . --output",
     "test": "jest --verbose",
     "test:watch": "jest --watch --verbose",
-    "test:cov": "jest --coverage --verbose"
+    "test:cov": "jest --coverage --verbose",
+    "test:dates-helper": "jest --verbose ./src/test/helpers/date-time/*"
   },
   "repository": {
     "type": "git",
