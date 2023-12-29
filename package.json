@@ -14,7 +14,8 @@
     "test": "jest --verbose",
     "test:watch": "jest --watch --verbose",
     "test:cov": "jest --coverage --verbose",
-    "test:dates-helper": "jest --verbose ./src/test/helpers/date-time/*"
+    "test:dates-helper": "jest --verbose ./src/test/helpers/date-time/*",
+    "test:dates-dynamodb": "jest --verbose ./src/test/helpers/dynamodb/*"
   },
   "repository": {
     "type": "git",
