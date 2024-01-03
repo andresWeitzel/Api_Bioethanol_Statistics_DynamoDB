@@ -12,10 +12,10 @@
     "format-remark": "remark . --quiet --frail --output",
     "format-md": "remark . --output",
     "test": "jest --verbose",
-    "test:watch": "jest --watch --verbose",
-    "test:cov": "jest --coverage --verbose",
-    "test:dates-helper": "jest --verbose ./src/test/helpers/date-time/*",
-    "test:dates-dynamodb": "jest --verbose ./src/test/helpers/dynamodb/*"
+    "test:watch": "jest --watch --verbose --detectOpenHandles",
+    "test:cov": "jest --coverage --verbose --detectOpenHandles",
+    "test:dates-helper": "jest --verbose --detectOpenHandles ./src/test/helpers/date-time/*",
+    "test:dates-dynamodb": "jest --verbose --detectOpenHandles ./src/test/helpers/dynamodb/*"
   },
   "repository": {
     "type": "git",
