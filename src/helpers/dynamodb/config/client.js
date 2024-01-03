@@ -1,7 +1,9 @@
 //External
 const { DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-//Const-vars
+//Const
+const DYNAMO_DB_CLIENT_ERROR = 'ERROR in dynamoDBClient helper function.';
+//Vars
 let client;
 let dynamo;
 let msgResponse;
@@ -24,7 +26,7 @@ const dynamoDBClient = async () => {
 
     return dynamo;
   } catch (error) {
-    msgResponse = 'ERROR in dynamoDBClient() function.';
+    msgResponse = DYNAMO_DB_CLIENT_ERROR;
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;
