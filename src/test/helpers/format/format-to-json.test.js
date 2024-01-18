@@ -2,7 +2,12 @@
 const { formatToJson } = require('../../../helpers/format/format-to-json');
 //Const
 const MOCK_OBJECT = {};
-const MOCK_OBJECT_WITH_CONTENT = { test01: 'test01', test02: 'test02' };
+const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
+const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
+const MOCK_OBJECT_WITH_CONTENT = {
+  test01: MOCK_OBJECT_VALUE_01,
+  test02: MOCK_OBJECT_VALUE_02,
+};
 //Vars
 let formatToJsonResult;
 

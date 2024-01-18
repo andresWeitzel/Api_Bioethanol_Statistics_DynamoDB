@@ -1,22 +1,14 @@
 'use strict';
 //Helpers
-
-const {
-  statusCode,
-  statusCodeDetails,
-} = require('../../../enums/http/status-code');
 const {
   validatePathParameters,
 } = require('../../../helpers/http/query-string-params');
 //const
-const OK_CODE = statusCode.OK;
-const OK_CODE_DETAILS = statusCodeDetails.OK;
-const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
-const BAD_REQUEST_CODE_DETAILS = statusCodeDetails.BAD_REQUEST_CODE_DETAILS;
 const MOCK_OBJECT = {};
+const MOCK_VALID_OBJECT_01 = process.env.MOCK_VALID_OBJECT_01;
+const MOCK_VALID_OBJECT = { queryParam: MOCK_VALID_OBJECT_01 };
+const MOCK_INVALID_OBJECT = {};
 //Vars
-let validObjectForTest = { queryParam: '12315236751236516235' };
-let invalidObjectForTest = {};
 let msg;
 let validatePathParametersResult;
 
@@ -49,7 +41,7 @@ describe('- validatePathParameters helper (Unit test)', () => {
       'Should return a boolean with value true if the parameter is not null, undefined,the length is not < 0, the length is not > 255 or not === 0.';
     it(msg, async () => {
       validatePathParametersResult = await validatePathParameters(
-        validObjectForTest,
+        MOCK_VALID_OBJECT,
       );
       await expect(validatePathParametersResult == true).toBe(true);
     });
@@ -57,9 +49,8 @@ describe('- validatePathParameters helper (Unit test)', () => {
     msg =
       'Should return a boolean with value false if the parameter is null, undefined,the length is < 0, the length is > 255 or lenght === 0.';
     it(msg, async () => {
-      validatePathParametersResult = await validatePathParameters(
-        invalidObjectForTest,
-      );
+      MOCK_INVALID_OBJECT,
+        (validatePathParametersResult = await validatePathParameters());
       await expect(validatePathParametersResult == false).toBe(true);
     });
   });
