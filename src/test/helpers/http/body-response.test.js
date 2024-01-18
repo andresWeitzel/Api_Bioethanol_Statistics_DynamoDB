@@ -10,7 +10,6 @@ const OK_CODE = statusCode.OK;
 const OK_CODE_DETAILS = statusCodeDetails.OK;
 const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
 const BAD_REQUEST_CODE_DETAILS = statusCodeDetails.BAD_REQUEST_CODE_DETAILS;
-const MOCK_OBJECT = {};
 //Vars
 let msg;
 let bodyResponseResult;
