@@ -1,6 +1,6 @@
 service: api-bioetanol-estadisticas-dynamodb-aws
 
-frameworkVersion: '3'
+frameworkVersion: '3' 
 
 provider:
   name: aws
