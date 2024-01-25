@@ -1,25 +1,37 @@
 //Helpers
-const { formatToString } = require("../../../helpers/format/format-to-string");
+const { formatToString } = require('../../../helpers/format/format-to-string');
 //Const
-const MOCK_OBJECT = {};
-const MOCK_STRING = "mock_string";
-const MOCK_OBJECT_WITH_CONTENT = { test01: "test01", test02: "test02" };
+// const MOCK_OBJECT = {};
+// const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
+// const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
+// const MOCK_OBJECT_WITH_CONTENT = {
+//   test01: MOCK_OBJECT_VALUE_01,
+//   test02: MOCK_OBJECT_VALUE_02,
+// };
 //Vars
 let formatToStringResult;
 
-describe("- formatToString helper (Unit test)", () => {
-  describe("1) Check cases for arguments.", () => {
+describe('- formatToString helper (Unit test)', () => {
+  const MOCK_OBJECT = {};
+  const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
+  const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
+  const MOCK_OBJECT_WITH_CONTENT = {
+    test01: MOCK_OBJECT_VALUE_01,
+    test02: MOCK_OBJECT_VALUE_02,
+  };
+  describe('1) Check cases for arguments.', () => {
     msg =
-      "Should return a string value if not passed a string type to parameter";
+      'Should return a string value if not passed a string type to parameter';
     it(msg, async () => {
       formatToStringResult = await formatToString(MOCK_OBJECT);
-      await expect(typeof formatToStringResult == "string").toBe(true);
+      await expect(typeof formatToStringResult == 'string').toBe(true);
     });
 
-    msg = "Should return a string value if passed a string type to parameter";
+    msg = 'Should return a string value if passed a string type to parameter';
     it(msg, async () => {
-      formatToStringResult = await formatToString(MOCK_STRING);
-      await expect(typeof formatToStringResult == "string").toBe(true);
+      console.log({ ASDA: MOCK_OBJECT_VALUE_01 });
+      formatToStringResult = await formatToString(MOCK_OBJECT_VALUE_01);
+      await expect(typeof formatToStringResult == 'string').toBe(true);
     });
 
     // msg =

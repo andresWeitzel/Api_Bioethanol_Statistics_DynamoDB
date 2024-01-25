@@ -1,5 +1,6 @@
 //Const
-const FORMAT_TO_STRING_ERROR_MESSAGE = 'ERROR in formatToString helper function.';
+const FORMAT_TO_STRING_ERROR_MESSAGE =
+  'ERROR in formatToString helper function.';
 //Vars
 let msgResponse;
 let msgLog;

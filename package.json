@@ -31,6 +31,7 @@
   "homepage": "https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS#readme",
   "devDependencies": {
     "@types/jest": "^29.5.11",
+    "dotenv": "^16.4.0",
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "prettier": "^2.8.8",
