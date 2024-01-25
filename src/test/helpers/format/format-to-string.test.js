@@ -1,24 +1,19 @@
 //Helpers
 const { formatToString } = require('../../../helpers/format/format-to-string');
 //Const
-// const MOCK_OBJECT = {};
-// const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
-// const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
-// const MOCK_OBJECT_WITH_CONTENT = {
-//   test01: MOCK_OBJECT_VALUE_01,
-//   test02: MOCK_OBJECT_VALUE_02,
-// };
+const MOCK_OBJECT = {};
+const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
+const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
+const MOCK_BOOLEAN_VALUE_01 = process.env.MOCK_BOOLEAN_VALUE_01;
+const MOCK_NUMBER_VALUE_01 = process.env.MOCK_NUMBER_VALUE_01;
+const MOCK_OBJECT_WITH_CONTENT = {
+  test01: MOCK_OBJECT_VALUE_01,
+  test02: MOCK_OBJECT_VALUE_02,
+};
 //Vars
 let formatToStringResult;
 
 describe('- formatToString helper (Unit test)', () => {
-  const MOCK_OBJECT = {};
-  const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
-  const MOCK_OBJECT_VALUE_02 = process.env.MOCK_OBJECT_VALUE_02;
-  const MOCK_OBJECT_WITH_CONTENT = {
-    test01: MOCK_OBJECT_VALUE_01,
-    test02: MOCK_OBJECT_VALUE_02,
-  };
   describe('1) Check cases for arguments.', () => {
     msg =
       'Should return a string value if not passed a string type to parameter';
@@ -29,8 +24,20 @@ describe('- formatToString helper (Unit test)', () => {
 
     msg = 'Should return a string value if passed a string type to parameter';
     it(msg, async () => {
-      console.log({ ASDA: MOCK_OBJECT_VALUE_01 });
       formatToStringResult = await formatToString(MOCK_OBJECT_VALUE_01);
+      await expect(typeof formatToStringResult == 'string').toBe(true);
+    });
+
+    
+    msg = 'Should return a string value if passed a boolean type to parameter';
+    it(msg, async () => {
+      formatToStringResult = await formatToString(MOCK_BOOLEAN_VALUE_01);
+      await expect(typeof formatToStringResult == 'string').toBe(true);
+    });
+
+    msg = 'Should return a string value if passed a number type to parameter';
+    it(msg, async () => {
+      formatToStringResult = await formatToString(MOCK_NUMBER_VALUE_01);
       await expect(typeof formatToStringResult == 'string').toBe(true);
     });
 

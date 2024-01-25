@@ -23,7 +23,6 @@ describe('- formatToJson helper (Unit test)', () => {
       'Should return an object with the same values passed as a parameter. If the parameter is not an object, one will be returned';
 
     it(msg, async () => {
-      console.log('SDDD' + MOCK_OBJECT_VALUE_01);
       formatToJsonResult = await formatToJson(MOCK_OBJECT_WITH_CONTENT);
       await expect(typeof formatToJsonResult == 'object').toBe(true);
 
