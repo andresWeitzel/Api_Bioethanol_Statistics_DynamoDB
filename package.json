@@ -11,11 +11,12 @@
     "check": "remark . --quiet --frail",
     "format-remark": "remark . --quiet --frail --output",
     "format-md": "remark . --output",
-    "test": "jest --verbose",
+    "test": "jest --verbose --detectOpenHandles",
     "test:watch": "jest --watch --verbose --detectOpenHandles",
     "test:cov": "jest --coverage --verbose --detectOpenHandles",
-    "test:dates-helper": "jest --verbose --detectOpenHandles ./src/test/helpers/date-time/*",
-    "test:dates-dynamodb": "jest --verbose --detectOpenHandles ./src/test/helpers/dynamodb/*"
+    "test:dates-helpers": "jest --verbose --detectOpenHandles ./src/test/helpers/date-time/*",
+    "test:dates-dynamodb-helpers": "jest --verbose --detectOpenHandles ./src/test/helpers/dynamodb/*",
+    "test:format-helpers": "jest --verbose --detectOpenHandles ./src/test/helpers/format/*"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
   "homepage": "https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS#readme",
   "devDependencies": {
     "@types/jest": "^29.5.11",
+    "dotenv": "^16.4.0",
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
     "prettier": "^2.8.8",

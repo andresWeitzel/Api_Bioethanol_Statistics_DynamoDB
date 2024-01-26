@@ -1,4 +1,7 @@
-//Const-vars
+//Const
+const FORMAT_TO_STRING_ERROR_MESSAGE =
+  'ERROR in formatToString helper function.';
+//Vars
 let msgResponse;
 let msgLog;
 /**
@@ -16,7 +19,7 @@ const formatToString = async (obj) => {
 
     return obj;
   } catch (error) {
-    msgResponse = 'ERROR in formatToString() function.';
+    msgResponse = FORMAT_TO_STRING_ERROR_MESSAGE;
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;

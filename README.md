@@ -1,6 +1,5 @@
 ![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
 
-
 <p align="right">
      <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md" target="_blank">
        <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
@@ -840,6 +839,10 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 
 *   [remark-inline-links](https://github.com/remarkjs/remark-inline-links)
 *   [remark-lint-list-item-indent](https://www.npmjs.com/package/remark-lint-list-item-indent)
+
+#### Testing
+
+*   [How to mock process env in jest](https://jestjs.io/docs/configuration#setupfiles-array)
 
 <br>
 
