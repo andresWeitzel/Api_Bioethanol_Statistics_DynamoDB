@@ -8,6 +8,8 @@ const MOCK_NUMBER_VALUE_01 = process.env.MOCK_NUMBER_VALUE_01;
 //Vars
 let formatToStringResult;
 
+//Updated cases for catch
+
 describe('- formatToString helper (Unit test)', () => {
   describe('1) Check cases for arguments.', () => {
     msg =
