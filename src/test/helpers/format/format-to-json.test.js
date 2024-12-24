@@ -1,5 +1,5 @@
 //Helpers
-const { formatToJson } = require('../../../helpers/format/format-to-json');
+const { formatToJson } = require("../../../helpers/format/format-to-json");
 //Const
 const MOCK_OBJECT = {};
 const MOCK_OBJECT_VALUE_01 = process.env.MOCK_OBJECT_VALUE_01;
@@ -11,87 +11,111 @@ const MOCK_OBJECT_WITH_CONTENT = {
 //Vars
 let formatToJsonResult;
 
-describe('- formatToJson helper (Unit test)', () => {
-  describe('1) Check cases for arguments.', () => {
-    msg = 'Should return an object passing values to all parameters.';
+describe("- formatToJson helper (Unit test)", () => {
+  describe("1) Check cases for arguments.", () => {
+    msg = "Should return an object passing values to all parameters.";
     it(msg, async () => {
       formatToJsonResult = await formatToJson(MOCK_OBJECT);
-      await expect(typeof formatToJsonResult == 'object').toBe(true);
+      expect(typeof formatToJsonResult == "object").toBe(true);
     });
 
     msg =
-      'Should return an object with the same values passed as a parameter. If the parameter is not an object, one will be returned';
+      "Should return an object with the same values passed as a parameter. If the parameter is not an object, one will be returned";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson(MOCK_OBJECT_WITH_CONTENT);
-      await expect(typeof formatToJsonResult == 'object').toBe(true);
+      expect(typeof formatToJsonResult == "object").toBe(true);
 
-      await expect(formatToJsonResult == MOCK_OBJECT_WITH_CONTENT).toBe(true);
+      expect(formatToJsonResult == MOCK_OBJECT_WITH_CONTENT).toBe(true);
     });
 
     msg =
-      'Should return an object with the same values passed as a parameter, if other parameters are passed';
+      "Should return an object with the same values passed as a parameter, if other parameters are passed";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson(
         MOCK_OBJECT_WITH_CONTENT,
-        MOCK_OBJECT,
+        MOCK_OBJECT
       );
-      await expect(typeof formatToJsonResult == 'object').toBe(true);
+      expect(typeof formatToJsonResult == "object").toBe(true);
 
-      await expect(formatToJsonResult == MOCK_OBJECT_WITH_CONTENT).toBe(true);
+      expect(formatToJsonResult == MOCK_OBJECT_WITH_CONTENT).toBe(true);
     });
   });
 
-  describe('2) Check cases for return.', () => {
-    msg = 'Should return null if null value is passed';
+  describe("2) Check cases for return.", () => {
+    msg = "Should return null if null value is passed";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson(null);
-      await expect(formatToJsonResult == null).toBe(true);
+      expect(formatToJsonResult == null).toBe(true);
     });
 
-    msg = 'Should return undefined if undefined value is passed';
+    msg = "Should return undefined if undefined value is passed";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson(undefined);
-      await expect(formatToJsonResult == undefined).toBe(true);
+      expect(formatToJsonResult == undefined).toBe(true);
     });
 
-    msg = 'Should return undefined if no parameter is passed';
+    msg = "Should return undefined if no parameter is passed";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson();
-      await expect(formatToJsonResult == undefined).toBe(true);
+      expect(formatToJsonResult == undefined).toBe(true);
     });
 
-    msg = 'Should return a number value if zero (0) value is passed';
+    msg = "Should return a number value if zero (0) value is passed";
 
     it(msg, async () => {
       formatToJsonResult = await formatToJson(0);
 
-      await expect(typeof formatToJsonResult == 'number').toBe(true);
+      expect(typeof formatToJsonResult == "number").toBe(true);
     });
   });
 
-  describe('3) Check cases for error.', () => {
-    msg = 'Should not throw an error if a new Error() is passed as a parameter';
+  describe("3) Check cases for error.", () => {
+    msg = "Should not throw an error if a new Error() is passed as a parameter";
 
     it(msg, async () => {
-      await expect(async () => await formatToJson(new Error())).not.toThrow(
-        Error,
-      );
+      expect(async () => await formatToJson(new Error())).not.toThrow(Error);
     });
 
     msg =
-      'Should return a object with ERROR value if a new Error() value is passed';
+      "Should return a object with ERROR value if a new Error() value is passed";
 
     it(msg, async () => {
       let errorObj = new Error();
       formatToJsonResult = await formatToJson(new Error());
 
-      await expect(typeof formatToJsonResult == 'object').toBe(true);
-      await expect(formatToJsonResult).toEqual(errorObj);
+      expect(typeof formatToJsonResult == "object").toBe(true);
+      expect(formatToJsonResult).toEqual(errorObj);
+    });
+    it("Should handle circular references without throwing an error.", async () => {
+      const circularObj = {};
+      circularObj.self = circularObj; // Circular reference
+      formatToJsonResult = await formatToJson(circularObj);
+      await expect(typeof formatToJsonResult).toBe("object");
+    });
+    it("Should not throw an error when passed a function.", async () => {
+      const func = () => "test";
+      expect(async () => await formatToJson(func)).not.toThrow();
+    });
+  });
+  describe("4) Additional edge cases.", () => {
+    it("Should handle large objects without performance issues.", async () => {
+      const largeObject = {};
+      for (let i = 0; i < 10000; i++) {
+        largeObject[`key${i}`] = `value${i}`;
+      }
+      formatToJsonResult = await formatToJson(largeObject);
+      expect(Object.keys(formatToJsonResult).length).toBe(10000);
+    });
+
+    it("Should convert a Date object into a string or object representation.", async () => {
+      const date = new Date();
+      formatToJsonResult = await formatToJson(date);
+      expect(typeof formatToJsonResult).toBe("object");
     });
   });
 });
