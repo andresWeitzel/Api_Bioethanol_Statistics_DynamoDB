@@ -1,9 +1,6 @@
 //External Imports
 const { Validator } = require('node-input-validator');
 //Const/vars
-let validateCheck;
-let validatorObj;
-let eventBodyObj;
 let msgResponse;
 let msgLog;
 
@@ -13,37 +10,33 @@ let msgLog;
  * @returns a boolean
  */
 const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
-  eventBodyObj = null;
-  validatorObj = null;
-  validateCheck = false;
-  msgResponse = null;
-  msgLog = null;
-
   try {
-    if (eventBody != null) {
-      eventBodyObj = {
-        data: {
-          periodo: await eventBody.periodo,
-          bioetanol_azucar: await eventBody.bioetanol_azucar,
-          bioetanol_maiz: await eventBody.bioetanol_maiz,
-        },
-      };
-
-      validatorObj = new Validator(
-        {
-          eventBodyObj,
-        },
-        {
-          'eventBodyObj.data.periodo': 'required|string|maxLength:12',
-          'eventBodyObj.data.bioetanol_azucar':
-            'required|string|minLength:3|maxLength:10',
-          'eventBodyObj.data.bioetanol_maiz':
-            'required|string|minLength:3|maxLength:10',
-        },
-      );
-      validateCheck = await validatorObj.check();
+    if (!eventBody) {
+      return
     }
-    return validateCheck;
+
+    // Construcción del objeto a validar
+    const eventBodyObj = {
+      data: {
+        periodo: eventBody.periodo,
+        bioetanol_azucar: eventBody.bioetanol_azucar,
+        bioetanol_maiz: eventBody.bioetanol_maiz,
+      },
+    };
+
+    // Reglas de validación
+    const rules = {
+      'data.periodo': 'required|string|maxLength:12',
+      'data.bioetanol_azucar': 'required|string|minLength:3|maxLength:10',
+      'data.bioetanol_maiz': 'required|string|minLength:3|maxLength:10',
+    };
+
+    // Validación con la biblioteca Validator
+    const validator = new Validator(eventBodyObj, rules);
+    const isValid = await validator.check();
+
+    // Retornar el resultado de la validación
+    return isValid;
   } catch (error) {
     msgResponse = 'ERROR in validateBodyAddItemParamsBioetPrecios() function.';
     msgLog = msgResponse + `Caused by ${error}`;
@@ -53,89 +46,80 @@ const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
 };
 
 /**
- * @description We validate the request body parameters for add an item to the bioethanol total table into database
- * @param {object} eventBody event.body type
- * @returns a boolean
+ * @description Validates the request body parameters for adding an item to the bioethanol total table in the database.
+ * @param {object} eventBody - The body of the event.
+ * @returns {boolean} True if the validation passes, otherwise false.
  */
 const validateBodyAddItemParamsBioetTotal = async (eventBody) => {
-  eventBodyObj = null;
-  validatorObj = null;
-  validateCheck = false;
-  msgResponse = null;
-  msgLog = null;
-
   try {
-    if (eventBody != null) {
-      eventBodyObj = {
-        data: {
-          periodo: await eventBody.periodo,
-          produccion: await eventBody.produccion,
-          ventas_totales: await eventBody.ventas_totales,
-        },
-      };
-
-      validatorObj = new Validator(
-        {
-          eventBodyObj,
-        },
-        {
-          'eventBodyObj.data.periodo': 'required|string|maxLength:12',
-          'eventBodyObj.data.produccion':
-            'required|string|minLength:3|maxLength:20',
-          'eventBodyObj.data.ventas_totales':
-            'required|string|minLength:3|maxLength:20',
-        },
-      );
-      validateCheck = await validatorObj.check();
+    if (!eventBody) {
+      return
     }
-    return validateCheck;
+
+    // Build the object to validate
+    const eventBodyObj = {
+      data: {
+        periodo: eventBody.periodo,
+        produccion: eventBody.produccion,
+        ventas_totales: eventBody.ventas_totales,
+      },
+    };
+
+    // Validation rules
+    const rules = {
+      'data.periodo': 'required|string|maxLength:12',
+      'data.produccion': 'required|string|minLength:3|maxLength:20',
+      'data.ventas_totales': 'required|string|minLength:3|maxLength:20',
+    };
+
+    // Perform validation
+    const validator = new Validator(eventBodyObj, rules);
+    const isValid = await validator.check();
+
+    return isValid; // Return validation result
   } catch (error) {
-    msgResponse = 'ERROR in validateBodyAddItemParamsBioetTotal() function.';
+    msgResponse = 'ERROR in validateBodyAddItemParamsBioetPrecios() function.';
     msgLog = msgResponse + `Caused by ${error}`;
     console.log(msgLog);
     return msgResponse;
   }
 };
 
+
 /**
- * @description We validate the request body parameters for add an item to the bioethanol total table into database
- * @param {object} eventBody event.body type
- * @returns a boolean
+ * @description Validates the request body parameters for adding an item to the bioethanol types table in the database.
+ * @param {object} eventBody - The body of the event.
+ * @returns {boolean} True if the validation passes, otherwise false.
  */
 const validateBodyAddItemParamsBioetTipos = async (eventBody) => {
-  eventBodyObj = null;
-  validatorObj = null;
-  validateCheck = false;
-  msgResponse = null;
-  msgLog = null;
-
   try {
-    if (eventBody != null) {
-      eventBodyObj = {
-        data: {
-          tipo: await eventBody.tipo,
-          periodo: await eventBody.periodo,
-          produccion: await eventBody.produccion,
-          ventas_totales: await eventBody.ventas_totales,
-        },
-      };
-
-      validatorObj = new Validator(
-        {
-          eventBodyObj,
-        },
-        {
-          'eventBodyObj.data.tipo': 'required|string|maxLength:12',
-          'eventBodyObj.data.periodo': 'required|string|maxLength:12',
-          'eventBodyObj.data.produccion':
-            'required|string|minLength:3|maxLength:20',
-          'eventBodyObj.data.ventas_totales':
-            'required|string|minLength:3|maxLength:20',
-        },
-      );
-      validateCheck = await validatorObj.check();
+    if (!eventBody) {
+      return
     }
-    return validateCheck;
+
+    // Build the object to validate
+    const eventBodyObj = {
+      data: {
+        tipo: eventBody.tipo,
+        periodo: eventBody.periodo,
+        produccion: eventBody.produccion,
+        ventas_totales: eventBody.ventas_totales,
+      },
+    };
+
+    // Validation rules
+    const rules = {
+      'data.tipo': 'required|string|maxLength:12',
+      'data.periodo': 'required|string|maxLength:12',
+      'data.produccion': 'required|string|minLength:3|maxLength:20',
+      'data.ventas_totales': 'required|string|minLength:3|maxLength:20',
+    };
+
+    // Perform validation
+    const validator = new Validator(eventBodyObj, rules);
+    const isValid = await validator.check();
+
+    return isValid; // Return validation result
   } catch (error) {
     msgResponse = 'ERROR in validateBodyAddItemParamsBioetTipos() function.';
     msgLog = msgResponse + `Caused by ${error}`;
