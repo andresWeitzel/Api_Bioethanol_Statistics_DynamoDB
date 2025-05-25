@@ -312,6 +312,161 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "getLikeTrends",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-precios/trends?periodo_inicio=1996-01&periodo_fin=2034-12&tipo_bioetanol=maiz&ventana_movil=3&tipo_tendencia=mensual",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-precios",
+										"trends"
+									],
+									"query": [
+										{
+											"key": "periodo_inicio",
+											"value": "1996-01"
+										},
+										{
+											"key": "periodo_fin",
+											"value": "2034-12"
+										},
+										{
+											"key": "tipo_bioetanol",
+											"value": "maiz"
+										},
+										{
+											"key": "ventana_movil",
+											"value": "3"
+										},
+										{
+											"key": "tipo_tendencia",
+											"value": "mensual"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeTrends",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/trends?periodo_inicio=1996-01&periodo_fin=2034-12&tipo_bioetanol=maiz&ventana_movil=3&tipo_tendencia=mensual",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"trends"
+											],
+											"query": [
+												{
+													"key": "periodo_inicio",
+													"value": "1996-01"
+												},
+												{
+													"key": "periodo_fin",
+													"value": "2034-12"
+												},
+												{
+													"key": "tipo_bioetanol",
+													"value": "maiz"
+												},
+												{
+													"key": "ventana_movil",
+													"value": "3"
+												},
+												{
+													"key": "tipo_tendencia",
+													"value": "mensual"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "vary",
+											"value": "origin"
+										},
+										{
+											"key": "access-control-expose-headers",
+											"value": "WWW-Authenticate,Server-Authorization"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "908"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Sun, 25 May 2025 22:34:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"tendencias\": [\n            {\n                \"periodo\": \"2023-12\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            },\n            {\n                \"periodo\": \"2023-11\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            },\n            {\n                \"periodo\": \"2023-11\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            }\n        ],\n        \"estadisticas\": {\n            \"precio_maximo_maiz\": 412.23,\n            \"precio_minimo_maiz\": 412.23,\n            \"precio_promedio_maiz\": 412.23,\n            \"precio_maximo_cana\": 12345.33,\n            \"precio_minimo_cana\": 345.33,\n            \"precio_promedio_cana\": 4678.663333333333,\n            \"correlacion\": 0\n        }\n    }\n}"
+								}
+							]
 						}
 					]
 				},

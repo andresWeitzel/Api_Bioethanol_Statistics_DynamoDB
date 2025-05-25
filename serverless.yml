@@ -123,6 +123,24 @@ functions:
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/bioetanol-cana-azucar/{bioetCanAzucar}'
           private: true
 
+  getBioetanolPreciosTrends:
+    handler: src/controllers/bioetanol-precios/get-trends.handler
+    description: Function to get bioethanol price trends and statistics
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_PRECIOS_TABLE_NAME}/trends'
+          cors: true
+          request:
+            parameters:
+              querystrings:
+                periodo_inicio: true
+                periodo_fin: true
+                tipo_bioetanol: false
+                ventana_movil: false
+                tipo_tendencia: false
+
   # -- BIOETANOL TOTAL --
   insertBioetanolTotal:
     handler: src/controllers/bioetanol-total/insert.handler
@@ -242,6 +260,8 @@ functions:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/field-type'
           private: true                 
+
+
 custom:
   serverless-offline-ssm:
     stages:
