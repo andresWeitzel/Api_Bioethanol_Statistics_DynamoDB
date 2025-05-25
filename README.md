@@ -1,36 +1,36 @@
-![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
+![Index app](./doc/datos/bioetanolTablas.png)
 
 <div align="right">
   <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
   <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
-  <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+    <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
   <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
   <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
   <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
   <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
-  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/sequelize.png" />
   <img width="25" height="27" src="./doc/assets/icons/aws/png/rds.png" />
-  <img width="30" height="30" src="./doc/assets/icons/devops/png/vsc.png" />
-  <img width="23" height="23" src="./doc/assets/icons/devops/png/docker.png" />
+     <img width="24" height="24" src="./doc/assets/icons/backend/javascript-typescript/png/typescript.png" />
+  <img width="32" height="32" src="./doc/assets/icons/devops/png/vsc.png" />
 
-</div>
+
+</div> 
 
 <br>
 
 <br>
 
-<div align="right">
-     <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md" target="_blank">
-       <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
-   </a>
-    <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md" target="_blank">
-       <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
-   </a>
+<div align="right"> 
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md">
+    <img width="65" height="40" src="./doc/assets/translation/arg-flag.jpg" />
+  </a> 
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md">
+    <img width="65" height="40" src="./doc/assets/translation/eeuu-flag.jpg" />
+  </a> 
 </div>
 
 <div align="center">
 
-# Bioethanol\_Statistics\_DynamoDB\_AWS
+# Bioethanol Statistics DynamoDB AWS
 
 </div>
 
@@ -39,7 +39,7 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 *   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 *   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
 *   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
-*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/img/youtube-logo.png" width="5%" height="5%" />
+*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" />
 
 <br>
 
