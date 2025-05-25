@@ -1,25 +1,43 @@
-![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
+![Index app](../doc/datos/bioetanolTablas.png)
 
-<p align="right">
-    <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md" target="_blank">
-      <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
+<div align="right">
+  <img width="25" height="25" src="../doc/assets/icons/devops/png/aws.png" />
+  <img width="25" height="25" src="../doc/assets/icons/aws/png/lambda.png" />
+    <img width="27" height="27" src="../doc/assets/icons/devops/png/postman.png" />
+  <img width="29" height="27" src="../doc/assets/icons/devops/png/git.png" />
+  <img width="28" height="27" src="../doc/assets/icons/aws/png/api-gateway.png" />
+  <img width="27" height="27" src="../doc/assets/icons/aws/png/parameter-store.png" />
+  <img width="27" height="27" src="../doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+  <img width="25" height="27" src="../doc/assets/icons/aws/png/rds.png" />
+     <img width="24" height="24" src="../doc/assets/icons/backend/javascript-typescript/png/typescript.png" />
+  <img width="32" height="32" src="../doc/assets/icons/devops/png/vsc.png" />
+</div> 
+
+<br>
+
+<br>
+
+<div align="right">
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md">
+    <img width="65" height="40" src="../doc/assets/translation/arg-flag.jpg" />
   </a> 
-   <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md" target="_blank">
-      <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md">
+    <img width="65" height="40" src="../doc/assets/translation/eeuu-flag.jpg" />
   </a> 
-</p>
+</div>
 
 <div align="center">
 
-# Bioetanol\_Estadisticas\_DynamoDB\_AWS
+# Bioetanol Estadísticas DynamoDB AWS
 
-</div>  
+</div>
 
 Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
 
 *   [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 *   [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
 *   [Excel Estadisticas Secretaría de Energía](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hidrocarburos%2Fbio%2Festadisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
+*   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/img/youtube-logo.png" width="5%" height="5%" />
 
 <br>
 

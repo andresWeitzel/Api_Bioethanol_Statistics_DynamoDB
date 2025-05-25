@@ -1,17 +1,36 @@
-![Index app](https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/datos/bioetanolTablas.png)
+![Index app](./doc/datos/bioetanolTablas.png)
 
-<p align="right">
-     <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md" target="_blank">
-       <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/arg-flag.jpg" width="10%" height="10%" />
-   </a>
-    <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md" target="_blank">
-       <img src="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/doc/assets/translation/eeuu-flag.jpg" width="10%" height="10%" />
-   </a>
-</p>
+<div align="right">
+  <img width="25" height="25" src="./doc/assets/icons/devops/png/aws.png" />
+  <img width="25" height="25" src="./doc/assets/icons/aws/png/lambda.png" />
+    <img width="27" height="27" src="./doc/assets/icons/devops/png/postman.png" />
+  <img width="29" height="27" src="./doc/assets/icons/devops/png/git.png" />
+  <img width="28" height="27" src="./doc/assets/icons/aws/png/api-gateway.png" />
+  <img width="27" height="25" src="./doc/assets/icons/aws/png/parameter-store.png" />
+  <img width="27" height="27" src="./doc/assets/icons/backend/javascript-typescript/png/nodejs.png" />
+  <img width="25" height="27" src="./doc/assets/icons/aws/png/rds.png" />
+     <img width="24" height="24" src="./doc/assets/icons/backend/javascript-typescript/png/typescript.png" />
+  <img width="32" height="32" src="./doc/assets/icons/devops/png/vsc.png" />
+
+
+</div> 
+
+<br>
+
+<br>
+
+<div align="right">
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md">
+    <img width="65" height="40" src="./doc/assets/translation/arg-flag.jpg" />
+  </a> 
+  <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md">
+    <img width="65" height="40" src="./doc/assets/translation/eeuu-flag.jpg" />
+  </a> 
+</div>
 
 <div align="center">
 
-# Bioethanol\_Statistics\_DynamoDB\_AWS
+# Bioethanol Statistics DynamoDB AWS
 
 </div>
 
