@@ -39,7 +39,7 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 *   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
 *   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
 *   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
-*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/img/youtube-logo.png" width="5%" height="5%" />
+*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" />
 
 <br>
 
