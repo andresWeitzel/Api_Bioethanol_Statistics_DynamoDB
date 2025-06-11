@@ -434,7 +434,7 @@ etc.....
 
 <br>
 
-### 2.0.2) Bioetanol\_Precios endpoints
+### 2.0.2) Bioetanol_Precios endpoints
 
 #### GET type operations:
 
@@ -493,7 +493,7 @@ etc.....
 
 <br>
 
-### 2.1.1) Bioetanol\_Precios endpoints
+### 2.1.1) Bioetanol_Precios endpoints
 
 ### Get All Bioetanol-precios items
 
@@ -508,7 +508,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 
 #### Response (200 OK)
 
-```postman
+```json
 {
     "message": [
         {
@@ -517,6 +517,12 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
             "periodo": "2023-11",
             "bioetMaiz": "412,23",
             "bioetCanAzucar": "345,33",
+            "unidadMedida": "USD/m3",
+            "fuenteDatos": "Secretaría de Energía",
+            "region": "Norte",
+            "variacionAnual": "5.2",
+            "variacionMensual": "1.8",
+            "observaciones": "Precios estables en el mercado",
             "updatedAt": "2023-11-18 21:55:01"
         }
     ]
@@ -525,7 +531,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 
 #### Response (400 Bad Request)
 
-```postman
+```json
 {
     "message": "Bad request, check missing or malformed headers"
 }
@@ -533,7 +539,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 
 #### Response (401 Unauthorized)
 
-```postman
+```json
 {
     "message": "Not authenticated, check x_api_key and Authorization"
 }
@@ -541,11 +547,15 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 
 #### Response (500 Internal Server Error)
 
-```postman
+```json
 {
     "message": "An error has occurred, failed to list database objects. Check if items exists."
 }
 ```
+
+<br>
+
+---
 
 <br>
 
@@ -562,7 +572,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 #### Response (200 OK)
 
-```postman
+```json
 {
     "message": {
         "createdAt": "2023-11-18 21:55:01",
@@ -570,6 +580,12 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
         "periodo": "2023-11",
         "bioetMaiz": "412,23",
         "bioetCanAzucar": "345,33",
+        "unidadMedida": "USD/m3",
+        "fuenteDatos": "Secretaría de Energía",
+        "region": "Norte",
+        "variacionAnual": "5.2",
+        "variacionMensual": "1.8",
+        "observaciones": "Precios estables en el mercado",
         "updatedAt": "2023-11-18 21:55:01"
     }
 }
@@ -577,15 +593,15 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 #### Response (400 Bad Request)
 
-```postman
+```json
 {
     "message": "The Bioetanol prices object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
 }
 ```
 
-#### Response (400 Bad Request)
+#### Response (400 Bad Request - Headers)
 
-```postman
+```json
 {
     "message": "Bad request, check missing or malformed headers"
 }
@@ -593,7 +609,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 #### Response (401 Unauthorized)
 
-```postman
+```json
 {
     "message": "Not authenticated, check x_api_key and Authorization"
 }
@@ -601,7 +617,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99
 
 <br>
 
-*   `To summarize the documentation, review the postman collection endpoints for GET operations.`
+---
 
 <br>
 
@@ -615,21 +631,33 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json' \
 --data '{
-    "periodo":"2023-11",
-    "bioetanol_azucar":"345,33",
-    "bioetanol_maiz":"412,23"
+    "periodo": "2023-11",
+    "bioetanol_azucar": "345,33",
+    "bioetanol_maiz": "412,23",
+    "unidad_medida": "USD/m3",
+    "fuente_datos": "Secretaría de Energía",
+    "region": "Norte",
+    "variacion_anual": "5.2",
+    "variacion_mensual": "1.8",
+    "observaciones": "Precios estables en el mercado"
 }'
 ```
 
 #### Response (200 OK)
 
-```postman
+```json
 {
     "message": {
         "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
         "periodo": "2023-11",
         "bioetCanAzucar": "345,33",
         "bioetMaiz": "412,23",
+        "unidadMedida": "USD/m3",
+        "fuenteDatos": "Secretaría de Energía",
+        "region": "Norte",
+        "variacionAnual": "5.2",
+        "variacionMensual": "1.8",
+        "observaciones": "Precios estables en el mercado",
         "createdAt": "2023-11-18 21:55:01",
         "updatedAt": "2023-11-18 21:55:01"
     }
@@ -638,15 +666,15 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 
 #### Response (400 Bad Request)
 
-```postman
+```json
 {
     "message": "Bad request, check request body attributes. Missing or incorrect"
 }
 ```
 
-#### Response (400 Bad Request)
+#### Response (400 Bad Request - Headers)
 
-```postman
+```json
 {
     "message": "Bad request, check missing or malformed headers"
 }
@@ -654,11 +682,15 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 
 #### Response (401 Unauthorized)
 
-```postman
+```json
 {
     "message": "Not authenticated, check x_api_key and Authorization"
 }
 ```
+
+<br>
+
+---
 
 <br>
 
@@ -672,15 +704,21 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json' \
 --data '{
-    "periodo":"2023-11",
-    "bioetanol_azucar":"345,33",
-    "bioetanol_maiz":"412,23"
+    "periodo": "2023-11",
+    "bioetanol_azucar": "345,33",
+    "bioetanol_maiz": "412,23",
+    "unidad_medida": "USD/m3",
+    "fuente_datos": "Secretaría de Energía",
+    "region": "Norte",
+    "variacion_anual": "5.2",
+    "variacion_mensual": "1.8",
+    "observaciones": "Precios estables en el mercado"
 }'
 ```
 
 #### Response (200 OK)
 
-```postman
+```json
 {
     "message": {
         "createdAt": "2023-11-18 22:01:34",
@@ -688,6 +726,12 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
         "uuid": "b58fd5cb-ed0b-461c-bfea-50c240e51280",
         "bioetMaiz": "412,23",
         "bioetCanAzucar": "345,33",
+        "unidadMedida": "USD/m3",
+        "fuenteDatos": "Secretaría de Energía",
+        "region": "Norte",
+        "variacionAnual": "5.2",
+        "variacionMensual": "1.8",
+        "observaciones": "Precios estables en el mercado",
         "updatedAt": "2023-11-18 22:03:34"
     }
 }
@@ -695,15 +739,15 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 
 #### Response (400 Bad Request)
 
-```postman
+```json
 {
     "message": "Bad request, check request body attributes for bioetanol-precios. Missing or incorrect"
 }
 ```
 
-#### Response (400 Bad Request)
+#### Response (400 Bad Request - Headers)
 
-```postman
+```json
 {
     "message": "Bad request, check missing or malformed headers"
 }
@@ -711,7 +755,7 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 
 #### Response (401 Unauthorized)
 
-```postman
+```json
 {
     "message": "Not authenticated, check x_api_key and Authorization"
 }
@@ -719,11 +763,15 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 
 #### Response (500 Internal Server Error)
 
-```postman
+```json
 {
     "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
 }
 ```
+
+<br>
+
+---
 
 <br>
 
@@ -735,21 +783,20 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
---header 'Content-Type: application/json' \
---data ''
+--header 'Content-Type: application/json'
 ```
 
 #### Response (200 OK)
 
-```postman
+```json
 {
     "message": "Successfully removed item based on uuid b58fd5cb-ed0b-461c-bfea-50c240e51280"
 }
 ```
 
-#### Response (400 Bad Request)
+#### Response (400 Bad Request - Headers)
 
-```postman
+```json
 {
     "message": "Bad request, check missing or malformed headers"
 }
@@ -757,7 +804,7 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 
 #### Response (401 Unauthorized)
 
-```postman
+```json
 {
     "message": "Not authenticated, check x_api_key and Authorization"
 }
@@ -765,7 +812,7 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 
 #### Response (500 Internal Server Error)
 
-```postman
+```json
 {
     "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
 }

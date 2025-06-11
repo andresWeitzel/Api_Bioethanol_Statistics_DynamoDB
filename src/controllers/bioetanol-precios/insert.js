@@ -82,6 +82,12 @@ module.exports.handler = async (event) => {
     periodo = await eventBody.periodo;
     bioetCanAzucar = await eventBody.bioetanol_azucar;
     bioetMaiz = await eventBody.bioetanol_maiz;
+    const unidadMedida = await eventBody.unidad_medida;
+    const fuenteDatos = await eventBody.fuente_datos;
+    const region = await eventBody.region;
+    const variacionAnual = await eventBody.variacion_anual;
+    const variacionMensual = await eventBody.variacion_mensual;
+    const observaciones = await eventBody.observaciones;
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
@@ -90,6 +96,12 @@ module.exports.handler = async (event) => {
       periodo,
       bioetCanAzucar,
       bioetMaiz,
+      unidadMedida,
+      fuenteDatos,
+      region,
+      variacionAnual,
+      variacionMensual,
+      observaciones,
       createdAt,
       updatedAt,
     );
@@ -99,6 +111,12 @@ module.exports.handler = async (event) => {
       periodo: await bioetPrecio.getPeriodo(),
       bioetCanAzucar: await bioetPrecio.getBioetCanAzucar(),
       bioetMaiz: await bioetPrecio.getBioetMaiz(),
+      unidadMedida: await bioetPrecio.getUnidadMedida(),
+      fuenteDatos: await bioetPrecio.getFuenteDatos(),
+      region: await bioetPrecio.getRegion(),
+      variacionAnual: await bioetPrecio.getVariacionAnual(),
+      variacionMensual: await bioetPrecio.getVariacionMensual(),
+      observaciones: await bioetPrecio.getObservaciones(),
       createdAt: await bioetPrecio.getCreatedAt(),
       updatedAt: await bioetPrecio.getUpdatedAt(),
     };

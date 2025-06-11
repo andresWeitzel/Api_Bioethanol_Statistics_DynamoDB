@@ -29,7 +29,6 @@ let msgLog;
 module.exports.handler = async (event) => {
   try {
     //Init
-    obj = null;
     items = null;
     msgResponse = null;
     msgLog = null;

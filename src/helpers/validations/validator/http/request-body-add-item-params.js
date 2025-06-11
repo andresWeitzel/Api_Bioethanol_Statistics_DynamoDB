@@ -21,6 +21,12 @@ const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
         periodo: eventBody.periodo,
         bioetanol_azucar: eventBody.bioetanol_azucar,
         bioetanol_maiz: eventBody.bioetanol_maiz,
+        unidad_medida: eventBody.unidad_medida,
+        fuente_datos: eventBody.fuente_datos,
+        region: eventBody.region,
+        variacion_anual: eventBody.variacion_anual,
+        variacion_mensual: eventBody.variacion_mensual,
+        observaciones: eventBody.observaciones
       },
     };
 
@@ -29,6 +35,12 @@ const validateBodyAddItemParamsBioetPrecios = async (eventBody) => {
       'data.periodo': 'required|string|maxLength:12',
       'data.bioetanol_azucar': 'required|string|minLength:3|maxLength:10',
       'data.bioetanol_maiz': 'required|string|minLength:3|maxLength:10',
+      'data.unidad_medida': 'required|string|maxLength:10',
+      'data.fuente_datos': 'required|string|maxLength:50',
+      'data.region': 'required|string|maxLength:30',
+      'data.variacion_anual': 'required|string|maxLength:10',
+      'data.variacion_mensual': 'required|string|maxLength:10',
+      'data.observaciones': 'required|string|maxLength:200'
     };
 
     // Validación con la biblioteca Validator

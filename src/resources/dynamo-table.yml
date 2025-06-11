@@ -12,7 +12,11 @@ Resources:
         - AttributeName: bioetCanAzucar
           AttributeType: S
         - AttributeName: bioetMaiz
-          AttributeType: S  
+          AttributeType: S
+        - AttributeName: region
+          AttributeType: S
+        - AttributeName: unidadMedida
+          AttributeType: S
       KeySchema:
         - AttributeName: uuid
           KeyType: HASH
@@ -46,7 +50,25 @@ Resources:
             ProjectionType: ALL
           ProvisionedThroughput:
             ReadCapacityUnits: 1
-            WriteCapacityUnits: 1                
+            WriteCapacityUnits: 1
+        - IndexName: region
+          KeySchema:
+            - AttributeName: region
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+        - IndexName: unidadMedida
+          KeySchema:
+            - AttributeName: unidadMedida
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
 #-- End with bioetanolPrecios --         
 #-- Start with bioetanolTotal -- 
   bioetanolTotal:
