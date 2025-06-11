@@ -63,14 +63,18 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetPrecios(
-      eventBody,
-    );
+    const validationResult = await validateBodyAddItemParamsBioetPrecios(eventBody);
 
-    if (!validateBodyAddItem) {
+    if (!validationResult.isValid) {
+      let errorMessage = 'Bad request, check request body attributes:\n';
+      
+      for (const [field, error] of Object.entries(validationResult.errors)) {
+        errorMessage += `- ${field}: ${error.message}\n`;
+      }
+
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check request body attributes. Missing or incorrect',
+        errorMessage.trim()
       );
     }
     //-- end with body validations  ---
@@ -82,16 +86,16 @@ module.exports.handler = async (event) => {
     periodo = await eventBody.periodo;
     bioetCanAzucar = await eventBody.bioetanol_azucar;
     bioetMaiz = await eventBody.bioetanol_maiz;
-    const unidadMedida = await eventBody.unidad_medida;
-    const fuenteDatos = await eventBody.fuente_datos;
-    const region = await eventBody.region;
-    const variacionAnual = await eventBody.variacion_anual;
-    const variacionMensual = await eventBody.variacion_mensual;
-    const observaciones = await eventBody.observaciones;
+    unidadMedida = await eventBody.unidad_medida;
+    fuenteDatos = await eventBody.fuente_datos;
+    region = await eventBody.region;
+    variacionAnual = await eventBody.variacion_anual;
+    variacionMensual = await eventBody.variacion_mensual;
+    observaciones = await eventBody.observaciones;
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
-    let bioetPrecio = new BioetanolPrecio(
+    newBioetPrecio = new BioetanolPrecio(
       uuid,
       periodo,
       bioetCanAzucar,
@@ -103,22 +107,22 @@ module.exports.handler = async (event) => {
       variacionMensual,
       observaciones,
       createdAt,
-      updatedAt,
+      updatedAt
     );
 
     item = {
-      uuid: await bioetPrecio.getUuid(),
-      periodo: await bioetPrecio.getPeriodo(),
-      bioetCanAzucar: await bioetPrecio.getBioetCanAzucar(),
-      bioetMaiz: await bioetPrecio.getBioetMaiz(),
-      unidadMedida: await bioetPrecio.getUnidadMedida(),
-      fuenteDatos: await bioetPrecio.getFuenteDatos(),
-      region: await bioetPrecio.getRegion(),
-      variacionAnual: await bioetPrecio.getVariacionAnual(),
-      variacionMensual: await bioetPrecio.getVariacionMensual(),
-      observaciones: await bioetPrecio.getObservaciones(),
-      createdAt: await bioetPrecio.getCreatedAt(),
-      updatedAt: await bioetPrecio.getUpdatedAt(),
+      uuid: newBioetPrecio.getUuid(),
+      periodo: newBioetPrecio.getPeriodo(),
+      bioetCanAzucar: newBioetPrecio.getBioetCanAzucar(),
+      bioetMaiz: newBioetPrecio.getBioetMaiz(),
+      unidadMedida: newBioetPrecio.getUnidadMedida(),
+      fuenteDatos: newBioetPrecio.getFuenteDatos(),
+      region: newBioetPrecio.getRegion(),
+      variacionAnual: newBioetPrecio.getVariacionAnual(),
+      variacionMensual: newBioetPrecio.getVariacionMensual(),
+      observaciones: newBioetPrecio.getObservaciones(),
+      createdAt: newBioetPrecio.getCreatedAt(),
+      updatedAt: newBioetPrecio.getUpdatedAt()
     };
 
     newBioetPrecio = await insertItem(BIOET_PRECIOS_TABLE_NAME, item);

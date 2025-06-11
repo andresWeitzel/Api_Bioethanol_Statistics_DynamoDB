@@ -461,9 +461,31 @@ etc.....
 
 <br>
 
-### 2.0.3) Bioetanol\_Tipos endpoints
+### 2.0.3) Bioetanol_Tipos endpoints
 
-*   `To summarize the documentation, review the postman collection endpoints`
+#### GET type operations:
+
+*   `base_url`/bioetanol-tipos/list?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/uuid/`uuidValue`
+*   `base_url`/bioetanol-tipos/tipo/`tipoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/periodo/`periodoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/produccion/`produccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/ventas-totales/`ventasTotalesValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/ubicacion/`ubicacionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/estado-operativo/`estadoOperativoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
+
+#### POST type operations:
+
+*   `base_url`/bioetanol-tipos/
+
+#### PUT type operations:
+
+*   `base_url`/bioetanol-tipos/`uuid`
+
+#### DELETE type operations:
+
+*   `base_url`/bioetanol-tipos/`uuid`
 
 <br>
 
@@ -791,6 +813,323 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 ```json
 {
     "message": "Successfully removed item based on uuid b58fd5cb-ed0b-461c-bfea-50c240e51280"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```json
+{
+    "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+}
+```
+
+<br>
+
+### 2.1.2) Bioetanol_Tipos endpoints
+
+### Get All Bioetanol-tipos items
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/list?limit=3&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "tipo": "caña_azucar",
+            "periodo": "2023-11",
+            "produccion": "150000",
+            "ventasTotales": "145000",
+            "capacidadInstalada": "180000",
+            "eficienciaProduccion": "85",
+            "materiaPrima": "caña de azúcar",
+            "ubicacion": "Norte",
+            "estadoOperativo": "activo",
+            "observaciones": "Producción estable",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```json
+{
+    "message": "An error has occurred, failed to list database objects. Check if items exists."
+}
+```
+
+---
+
+### Get By UUID Bioetanol-tipos
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": {
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "tipo": "caña_azucar",
+        "periodo": "2023-11",
+        "produccion": "150000",
+        "ventasTotales": "145000",
+        "capacidadInstalada": "180000",
+        "eficienciaProduccion": "85",
+        "materiaPrima": "caña de azúcar",
+        "ubicacion": "Norte",
+        "estadoOperativo": "activo",
+        "observaciones": "Producción estable",
+        "createdAt": "2023-11-18 21:55:01",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The Bioetanol types object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+---
+
+### Add Bioetanol-tipos item
+
+#### Request (POST)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "tipo": "caña_azucar",
+    "periodo": "2023-11",
+    "produccion": "150000",
+    "ventas_totales": "145000",
+    "capacidad_instalada": "180000",
+    "eficiencia_produccion": "85",
+    "materia_prima": "caña de azúcar",
+    "ubicacion": "Norte",
+    "estado_operativo": "activo",
+    "observaciones": "Producción estable"
+}'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": {
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "tipo": "caña_azucar",
+        "periodo": "2023-11",
+        "produccion": "150000",
+        "ventasTotales": "145000",
+        "capacidadInstalada": "180000",
+        "eficienciaProduccion": "85",
+        "materiaPrima": "caña de azúcar",
+        "ubicacion": "Norte",
+        "estadoOperativo": "activo",
+        "observaciones": "Producción estable",
+        "createdAt": "2023-11-18 21:55:01",
+        "updatedAt": "2023-11-18 21:55:01"
+    }
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "Bad request, check request body attributes. Missing or incorrect"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+---
+
+### Update Bioetanol-tipos item
+
+#### Request (PUT)
+
+```postman
+curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-tipos/67ecfcf7-c338-43d8-9220-4d7b43b7e914' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json' \
+--data '{
+    "tipo": "caña_azucar",
+    "periodo": "2023-11",
+    "produccion": "160000",
+    "ventas_totales": "155000",
+    "capacidad_instalada": "180000",
+    "eficiencia_produccion": "88",
+    "materia_prima": "caña de azúcar",
+    "ubicacion": "Norte",
+    "estado_operativo": "activo",
+    "observaciones": "Producción mejorada"
+}'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": {
+        "uuid": "67ecfcf7-c338-43d8-9220-4d7b43b7e914",
+        "tipo": "caña_azucar",
+        "periodo": "2023-11",
+        "produccion": "160000",
+        "ventasTotales": "155000",
+        "capacidadInstalada": "180000",
+        "eficienciaProduccion": "88",
+        "materiaPrima": "caña de azúcar",
+        "ubicacion": "Norte",
+        "estadoOperativo": "activo",
+        "observaciones": "Producción mejorada",
+        "createdAt": "2023-11-18 21:55:01",
+        "updatedAt": "2023-11-18 22:03:34"
+    }
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "Bad request, check request body attributes for bioetanol-tipos. Missing or incorrect"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```json
+{
+    "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
+}
+```
+
+---
+
+### Delete Bioetanol-tipos item
+
+#### Request (DELETE)
+
+```postman
+curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": "Successfully removed item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
 }
 ```
 

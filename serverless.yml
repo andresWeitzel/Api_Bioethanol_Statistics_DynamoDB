@@ -259,7 +259,61 @@ functions:
       - http:
           method: get
           path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/field-type'
-          private: true                 
+          private: true
+  getLikeTipoBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-tipo.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the tipo
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/tipo/{tipo}'
+          private: true
+  getLikePeriodoBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-periodo.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the periodo
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/periodo/{periodo}'
+          private: true
+  getLikeProduccionBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-produccion.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the produccion
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/produccion/{produccion}'
+          private: true
+  getLikeVentasTotalesBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-ventas-totales.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the ventasTotales
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/ventas-totales/{ventasTotales}'
+          private: true
+  getLikeUbicacionBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-ubicacion.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the ubicacion
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/ubicacion/{ubicacion}'
+          private: true
+  getLikeEstadoOperativoBioetanolTipos:
+    handler: src/controllers/bioetanol-tipos/get-like-estado-operativo.handler
+    description: Function to obtain all the objects of the bioethanol types table according to the estadoOperativo
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    events:
+      - http:
+          method: get
+          path: '/${file(./serverless_ssm.yml):API_VERSION}/${file(./serverless_ssm.yml):BIOET_TIPO_TABLE_NAME}/estado-operativo/{estadoOperativo}'
+          private: true
 
 
 custom:

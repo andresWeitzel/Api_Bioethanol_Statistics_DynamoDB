@@ -1,0 +1,111 @@
+//Enums
+const { statusCode } = require('../../enums/http/status-code');
+//Helpers
+const { bodyResponse } = require('../../helpers/http/body-response');
+const {
+  validateHeadersAndKeys,
+} = require('../../helpers/validations/headers/validate-headers-keys');
+const {
+  validatePathParameters,
+} = require('../../helpers/http/query-string-params');
+const {
+  getAllItemsWithFilter,
+} = require('../../helpers/dynamodb/operations/get-all');
+
+//Const-Vars
+const BIOET_TIPO_TABLE_NAME = process.env.BIOET_TIPO_TABLE_NAME || '';
+const BIOET_TIPO_KEY_DYNAMO = 'tipo';
+const OK_CODE = statusCode.OK;
+const BAD_REQUEST_CODE = statusCode.BAD_REQUEST;
+const INTERNAL_SERVER_ERROR_CODE = statusCode.INTERNAL_SERVER_ERROR;
+let eventHeaders;
+let checkEventHeadersAndKeys;
+let validatePathParam;
+let orderAt;
+let items;
+let tipo;
+let msgResponse;
+let msgLog;
+let pageSizeNro;
+
+/**
+ * @description Function to obtain all the objects of the bioethanol types table according to the tipo
+ * @param {Object} event Object type
+ * @returns a response with the objects found
+ */
+module.exports.handler = async (event) => {
+  try {
+    //Init
+    pageSizeNro = 5;
+    orderAt = 'asc';
+
+    //-- start with validation headers and keys  ---
+    eventHeaders = await event.headers;
+
+    if (eventHeaders != (null && undefined)) {
+      checkEventHeadersAndKeys = await validateHeadersAndKeys(eventHeaders);
+    }
+
+    if (checkEventHeadersAndKeys != (null && undefined)) {
+      return checkEventHeadersAndKeys;
+    }
+    //-- end with validation headers and keys  ---
+
+    //-- start with path parameters  ---
+    validatePathParam = await validatePathParameters(event);
+
+    if (!validatePathParam) {
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        'Bad request, check missing or malformed path parameters',
+      );
+    }
+
+    tipo = await event.pathParameters.tipo;
+
+    if (tipo == (null || undefined)) {
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        'Bad request, check missing or malformed path parameters',
+      );
+    }
+
+    // Normalize tipo value
+    tipo = tipo.toLowerCase();
+    if (tipo === 'can_azuc' || tipo === 'cana_azucar' || tipo === 'azucar' || tipo === 'base_azucar' || tipo === 'caña') {
+      tipo = 'caña_azucar';
+    } else if (tipo === 'maiz' || tipo === 'maíz' || tipo === 'base_maiz') {
+      tipo = 'maiz';
+    } else {
+      return await bodyResponse(
+        BAD_REQUEST_CODE,
+        'Bad request, tipo must be one of: caña_azucar, maiz',
+      );
+    }
+    //-- end with path parameters  ---
+
+    //-- start with dynamoDB operations  ---
+    items = await getAllItemsWithFilter(
+      BIOET_TIPO_TABLE_NAME,
+      BIOET_TIPO_KEY_DYNAMO,
+      tipo,
+      pageSizeNro,
+      orderAt
+    );
+
+    if (items == (null || undefined)) {
+      return await bodyResponse(
+        INTERNAL_SERVER_ERROR_CODE,
+        'An error has occurred, failed to list database objects. Check if items exists.',
+      );
+    }
+    //-- end with dynamoDB operations  ---
+
+    return await bodyResponse(OK_CODE, items);
+  } catch (error) {
+    msgResponse = 'ERROR in get-like-tipo() function for bioetanol-tipos.';
+    msgLog = msgResponse + `Caused by ${error}`;
+    console.log(msgLog);
+    return await bodyResponse(INTERNAL_SERVER_ERROR_CODE, msgResponse);
+  }
+}; 

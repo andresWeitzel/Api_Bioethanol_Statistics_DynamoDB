@@ -26,6 +26,7 @@ const insertItem = async (tableName, item) => {
       new PutCommand({
         TableName: tableName,
         Item: item,
+        removeUndefinedValues: true
       }),
     );
 
