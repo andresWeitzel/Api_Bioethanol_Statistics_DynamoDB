@@ -34,6 +34,7 @@ let newItem;
 let newBioetanolTipoObj;
 let msgResponse;
 let msgLog;
+let checkEventHeadersAndKeys;
 
 /**
  * @description Function to update one object into the bioethanol types table
@@ -72,7 +73,6 @@ module.exports.handler = async (event) => {
     //-- end with path parameters  ---
 
     //-- start with body validations  ---
-
     eventBody = await formatToJson(event.body);
 
     validateBodyAddItem = await validateBodyAddItemParamsBioetTipos(eventBody);
@@ -86,7 +86,6 @@ module.exports.handler = async (event) => {
     //-- end with body validations  ---
 
     //-- start with old item dynamoDB operations  ---
-
     key = { uuid: uuid };
 
     oldItem = await getOneItem(BIOET_TIPO_TABLE_NAME, key);
@@ -99,24 +98,69 @@ module.exports.handler = async (event) => {
     }
     //-- end with old item dynamoDB operations  ---
 
-    //-- start with new item dynamoDB operations  ---
+    //-- start with dynamoDB operations  ---
+    tipo = await eventBody.tipo;
+    periodo = await eventBody.periodo;
+    produccion = await eventBody.produccion;
+    ventasTotales = await eventBody.ventas_totales;
+    capacidadInstalada = await eventBody.capacidad_instalada;
+    eficienciaProduccion = await eventBody.eficiencia_produccion;
+    materiaPrima = await eventBody.materia_prima;
+    ubicacion = await eventBody.ubicacion;
+    estadoOperativo = await eventBody.estado_operativo;
+    observaciones = await eventBody.observaciones;
+    updatedAt = await currentDateTime();
+
+    if (tipo != (null && undefined)) {
+      tipo = tipo.toLowerCase();
+      switch (tipo) {
+        case 'can_azuc':
+        case 'cana_azucar':
+        case 'azucar':
+        case 'base_azucar':
+        case 'caña':
+          tipo = 'caña_azucar';
+          break;
+        case 'maiz':
+        case 'maíz':
+        case 'base_maiz':
+          tipo = 'maiz';
+          break;
+        default:
+          tipo = null;
+          break;
+      }
+    }
 
     newBioetanolTipoObj = new BioetanolTipo(
       uuid,
-      eventBody.tipo,
-      eventBody.periodo,
-      eventBody.produccion,
-      eventBody.ventas_totales,
-      await currentDateTime(),
-      await currentDateTime(),
+      tipo,
+      periodo,
+      produccion,
+      ventasTotales,
+      capacidadInstalada,
+      eficienciaProduccion,
+      materiaPrima,
+      ubicacion,
+      estadoOperativo,
+      observaciones,
+      oldItem.createdAt,
+      updatedAt
     );
 
+    // Remove uuid from update object since it's the primary key
     newItem = {
       tipo: newBioetanolTipoObj.getTipo(),
       periodo: newBioetanolTipoObj.getPeriodo(),
       produccion: newBioetanolTipoObj.getProduccion(),
-      ventas_totales: newBioetanolTipoObj.getVentasTotales(),
-      updatedAt: newBioetanolTipoObj.getUpdatedAt(),
+      ventasTotales: newBioetanolTipoObj.getVentasTotales(),
+      capacidadInstalada: newBioetanolTipoObj.getCapacidadInstalada(),
+      eficienciaProduccion: newBioetanolTipoObj.getEficienciaProduccion(),
+      materiaPrima: newBioetanolTipoObj.getMateriaPrima(),
+      ubicacion: newBioetanolTipoObj.getUbicacion(),
+      estadoOperativo: newBioetanolTipoObj.getEstadoOperativo(),
+      observaciones: newBioetanolTipoObj.getObservaciones(),
+      updatedAt: newBioetanolTipoObj.getUpdatedAt()
     };
 
     updatedBioetTipo = await updateOneItem(BIOET_TIPO_TABLE_NAME, key, newItem);

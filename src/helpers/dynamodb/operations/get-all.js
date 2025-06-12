@@ -56,7 +56,8 @@ const getAllItems = async (tableName, pageSizeNro, orderAt) => {
 /**
  * @description get all items from the database according to the filter applied
  * @param {String} tableName string type
- * @param {String} tableName string type
+ * @param {String} filter string type
+ * @param {String} filterValue string type
  * @param {BigInt} pageSizeNro BigInt type
  * @param {String} orderAt String type
  * @returns a list with all items from the db in json format
@@ -75,6 +76,7 @@ const getAllItemsWithFilter = async (
     msgLog = null;
     orderAt = orderAt.toLowerCase();
 
+
     if (orderAt == 'asc' || orderAt == null) {
       orderAt = true;
     } else {
@@ -83,16 +85,20 @@ const getAllItemsWithFilter = async (
 
     dynamo = await dynamoDBClient();
 
+    // Exact match search
+    const filterExpression = '#filter = :filterValue';
+    const expressionAttributeValues = {
+      ':filterValue': filterValue,
+    };
+
     metadata = await dynamo.send(
       new ScanCommand({
         TableName: tableName,
-        FilterExpression: 'contains(#filter, :filterValue)',
+        FilterExpression: filterExpression,
         ExpressionAttributeNames: {
           '#filter': filter,
         },
-        ExpressionAttributeValues: {
-          ':filterValue': filterValue,
-        },
+        ExpressionAttributeValues: expressionAttributeValues,
         Limit: pageSizeNro,
         ScanIndexForward: orderAt,
       }),

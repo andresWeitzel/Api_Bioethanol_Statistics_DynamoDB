@@ -110,15 +110,27 @@ module.exports.handler = async (event) => {
       eventBody.periodo,
       eventBody.bioetanol_azucar,
       eventBody.bioetanol_maiz,
-      await currentDateTime(),
-      await currentDateTime(),
+      eventBody.unidad_medida,
+      eventBody.fuente_datos,
+      eventBody.region,
+      eventBody.variacion_anual,
+      eventBody.variacion_mensual,
+      eventBody.observaciones,
+      oldItem.createdAt,
+      await currentDateTime()
     );
 
     newItem = {
       periodo: newBioetanolPrecioObj.getPeriodo(),
       bioetCanAzucar: newBioetanolPrecioObj.getBioetCanAzucar(),
       bioetMaiz: newBioetanolPrecioObj.getBioetMaiz(),
-      updatedAt: newBioetanolPrecioObj.getUpdatedAt(),
+      unidadMedida: newBioetanolPrecioObj.getUnidadMedida(),
+      fuenteDatos: newBioetanolPrecioObj.getFuenteDatos(),
+      region: newBioetanolPrecioObj.getRegion(),
+      variacionAnual: newBioetanolPrecioObj.getVariacionAnual(),
+      variacionMensual: newBioetanolPrecioObj.getVariacionMensual(),
+      observaciones: newBioetanolPrecioObj.getObservaciones(),
+      updatedAt: newBioetanolPrecioObj.getUpdatedAt()
     };
 
     updatedBioetPrecio = await updateOneItem(

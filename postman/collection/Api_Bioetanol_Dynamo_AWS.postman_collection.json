@@ -54,7 +54,86 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getAll",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/list?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"list"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 13:57:31 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-06 10:54:40\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"8d0d8550-1d47-48f9-b165-3a03326d4057\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-06 10:54:40\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getByUuid",
@@ -78,18 +157,88 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb",
+									"raw": "{{base_url}}/bioetanol-precios/uuid/15b757fb-837f-41ae-81da-1401120ed816",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"uuid",
-										"3f86f08e-99a6-442f-b31c-1668cbe76edb"
+										"15b757fb-837f-41ae-81da-1401120ed816"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getByUuid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/uuid/15b757fb-837f-41ae-81da-1401120ed816",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"uuid",
+												"15b757fb-837f-41ae-81da-1401120ed816"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "454"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 18:44:17 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"createdAt\": \"2025-06-11 15:43:15\",\n        \"variacionMensual\": \"0.8\",\n        \"periodo\": \"2024-03\",\n        \"unidadMedida\": \"USD/L\",\n        \"observaciones\": \"Precios estables con tendencia alcista\",\n        \"fuenteDatos\": \"Ministerio de Energía\",\n        \"region\": \"Norte\",\n        \"uuid\": \"15b757fb-837f-41ae-81da-1401120ed816\",\n        \"bioetMaiz\": \"0.75\",\n        \"bioetCanAzucar\": \"0.85\",\n        \"variacionAnual\": \"5.2\",\n        \"updatedAt\": \"2025-06-11 15:43:15\"\n    }\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeBioetCanAzucar",
@@ -113,14 +262,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/345?limit=3&orderAt=das",
+									"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/0.85?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"bioetanol-cana-azucar",
-										"345"
+										"0.85"
 									],
 									"query": [
 										{
@@ -134,7 +283,87 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeBioetCanAzucar",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/bioetanol-cana-azucar/0.85?limit=3&orderAt=das",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"bioetanol-cana-azucar",
+												"0.85"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "das"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 14:04:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-06 10:54:40\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"8d0d8550-1d47-48f9-b165-3a03326d4057\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-06 10:54:40\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeCreatedAt",
@@ -158,14 +387,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/created-at/2023-11?limit=3&orderAt=das",
+									"raw": "{{base_url}}/bioetanol-precios/created-at/2025-06-11 15:43:15?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"created-at",
-										"2023-11"
+										"2025-06-11 15:43:15"
 									],
 									"query": [
 										{
@@ -179,7 +408,87 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeCreatedAt",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/created-at/2025-06-11 15:43:15?limit=3&orderAt=das",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"created-at",
+												"2025-06-11 15:43:15"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "das"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 18:45:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-11 15:43:15\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"15b757fb-837f-41ae-81da-1401120ed816\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-11 15:43:15\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeFieldType",
@@ -203,7 +512,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/field-type?limit=3&orderAt=asc&fieldType=periodo&fieldValue=2023-11",
+									"raw": "{{base_url}}/bioetanol-precios/field-type?limit=3&orderAt=asc&fieldType=periodo&fieldValue=2024-03",
 									"host": [
 										"{{base_url}}"
 									],
@@ -226,12 +535,99 @@
 										},
 										{
 											"key": "fieldValue",
-											"value": "2023-11"
+											"value": "2024-03"
 										}
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeFieldType",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/field-type?limit=3&orderAt=asc&fieldType=periodo&fieldValue=2024-03",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"field-type"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												},
+												{
+													"key": "fieldType",
+													"value": "periodo"
+												},
+												{
+													"key": "fieldValue",
+													"value": "2024-03"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 14:16:20 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-06 10:54:40\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"8d0d8550-1d47-48f9-b165-3a03326d4057\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-06 10:54:40\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikePeriodo",
@@ -255,18 +651,88 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/periodo/2023",
+									"raw": "{{base_url}}/bioetanol-precios/periodo/2024-03",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"periodo",
-										"2023"
+										"2024-03"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikePeriodo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/periodo/2024-03",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"periodo",
+												"2024-03"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 18:46:08 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-11 15:43:15\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"15b757fb-837f-41ae-81da-1401120ed816\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-11 15:43:15\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeBioetMaiz",
@@ -290,14 +756,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/bioetanol-maiz/412?limit=3&orderAt=das",
+									"raw": "{{base_url}}/bioetanol-precios/bioetanol-maiz/0.75?limit=3&orderAt=das",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
 										"bioetanol-maiz",
-										"412"
+										"0.75"
 									],
 									"query": [
 										{
@@ -311,7 +777,87 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeBioetMaiz",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/bioetanol-maiz/0.75?limit=3&orderAt=das",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"bioetanol-maiz",
+												"0.75"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "das"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "490"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 14:19:05 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"createdAt\": \"2025-06-06 10:54:40\",\n            \"variacionMensual\": \"0.8\",\n            \"periodo\": \"2024-03\",\n            \"unidadMedida\": \"USD/L\",\n            \"observaciones\": \"Precios estables con tendencia alcista\",\n            \"fuenteDatos\": \"Ministerio de Energía\",\n            \"region\": \"Norte\",\n            \"uuid\": \"8d0d8550-1d47-48f9-b165-3a03326d4057\",\n            \"bioetMaiz\": \"0.75\",\n            \"bioetCanAzucar\": \"0.85\",\n            \"variacionAnual\": \"5.2\",\n            \"updatedAt\": \"2025-06-06 10:54:40\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeTrends",
@@ -444,7 +990,7 @@
 										},
 										{
 											"key": "content-length",
-											"value": "908"
+											"value": "495"
 										},
 										{
 											"key": "accept-ranges",
@@ -452,7 +998,7 @@
 										},
 										{
 											"key": "Date",
-											"value": "Sun, 25 May 2025 22:34:03 GMT"
+											"value": "Fri, 06 Jun 2025 14:19:41 GMT"
 										},
 										{
 											"key": "Connection",
@@ -464,7 +1010,7 @@
 										}
 									],
 									"cookie": [],
-									"body": "{\n    \"message\": {\n        \"tendencias\": [\n            {\n                \"periodo\": \"2023-12\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            },\n            {\n                \"periodo\": \"2023-11\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            },\n            {\n                \"periodo\": \"2023-11\",\n                \"precio_maiz\": 412.23,\n                \"promedio_movil_maiz\": 412.23,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            }\n        ],\n        \"estadisticas\": {\n            \"precio_maximo_maiz\": 412.23,\n            \"precio_minimo_maiz\": 412.23,\n            \"precio_promedio_maiz\": 412.23,\n            \"precio_maximo_cana\": 12345.33,\n            \"precio_minimo_cana\": 345.33,\n            \"precio_promedio_cana\": 4678.663333333333,\n            \"correlacion\": 0\n        }\n    }\n}"
+									"body": "{\n    \"message\": {\n        \"tendencias\": [\n            {\n                \"periodo\": \"2024-03\",\n                \"precio_maiz\": 0.75,\n                \"promedio_movil_maiz\": 0.75,\n                \"variacion_porcentual_maiz\": 0,\n                \"tendencia_maiz\": \"stable\"\n            }\n        ],\n        \"estadisticas\": {\n            \"precio_maximo_maiz\": 0.75,\n            \"precio_minimo_maiz\": 0.75,\n            \"precio_promedio_maiz\": 0.75,\n            \"precio_maximo_cana\": 0.85,\n            \"precio_minimo_cana\": 0.85,\n            \"precio_promedio_cana\": 0.85,\n            \"correlacion\": 0\n        }\n    }\n}"
 								}
 							]
 						}
@@ -496,7 +1042,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"bioetanol_azucar\":\"345,33\",\r\n    \"bioetanol_maiz\":\"412,23\"\r\n}"
+									"raw": "{\r\n  \"periodo\": \"2024-03\",\r\n  \"bioetanol_azucar\": \"0.85\",\r\n  \"bioetanol_maiz\": \"0.75\",\r\n  \"unidad_medida\": \"USD/L\",\r\n  \"fuente_datos\": \"Ministerio de Energía\",\r\n  \"region\": \"Norte\",\r\n  \"variacion_anual\": \"5.2\",\r\n  \"variacion_mensual\": \"0.8\",\r\n  \"observaciones\": \"Precios estables con tendencia alcista\"\r\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/bioetanol-precios/",
@@ -509,7 +1055,76 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "insert",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"periodo\": \"2024-03\",\r\n  \"bioetanol_azucar\": \"0.85\",\r\n  \"bioetanol_maiz\": \"0.75\",\r\n  \"unidad_medida\": \"USD/L\",\r\n  \"fuente_datos\": \"Ministerio de Energía\",\r\n  \"region\": \"Norte\",\r\n  \"variacion_anual\": \"5.2\",\r\n  \"variacion_mensual\": \"0.8\",\r\n  \"observaciones\": \"Precios estables con tendencia alcista\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "454"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 13:54:40 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"uuid\": \"8d0d8550-1d47-48f9-b165-3a03326d4057\",\n        \"periodo\": \"2024-03\",\n        \"bioetCanAzucar\": \"0.85\",\n        \"bioetMaiz\": \"0.75\",\n        \"unidadMedida\": \"USD/L\",\n        \"fuenteDatos\": \"Ministerio de Energía\",\n        \"region\": \"Norte\",\n        \"variacionAnual\": \"5.2\",\n        \"variacionMensual\": \"0.8\",\n        \"observaciones\": \"Precios estables con tendencia alcista\",\n        \"createdAt\": \"2025-06-06 10:54:40\",\n        \"updatedAt\": \"2025-06-06 10:54:40\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -539,20 +1154,89 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"bioetanol_azucar\":\"345,33\",\r\n    \"bioetanol_maiz\":\"412,23\"\r\n}"
+									"raw": "{\r\n  \"periodo\": \"2025-03\",\r\n  \"bioetanol_azucar\": \"0.85\",\r\n  \"bioetanol_maiz\": \"0.75\",\r\n  \"unidad_medida\": \"USD/L\",\r\n  \"fuente_datos\": \"Ministerio de Energía\",\r\n  \"region\": \"Norte\",\r\n  \"variacion_anual\": \"5.2\",\r\n  \"variacion_mensual\": \"0.8\",\r\n  \"observaciones\": \"Precios estables con tendencia alcista\"\r\n}\r\n"
 								},
 								"url": {
-									"raw": "{{base_url}}/bioetanol-precios/67ecfcf7-c338-43d8-9220-4d7b43b7e914",
+									"raw": "{{base_url}}/bioetanol-precios/f625b0a9-ec49-43e2-9bcb-981cf612eb0d",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-precios",
-										"67ecfcf7-c338-43d8-9220-4d7b43b7e914"
+										"f625b0a9-ec49-43e2-9bcb-981cf612eb0d"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"periodo\": \"2025-03\",\r\n  \"bioetanol_azucar\": \"0.85\",\r\n  \"bioetanol_maiz\": \"0.75\",\r\n  \"unidad_medida\": \"USD/L\",\r\n  \"fuente_datos\": \"Ministerio de Energía\",\r\n  \"region\": \"Norte\",\r\n  \"variacion_anual\": \"5.2\",\r\n  \"variacion_mensual\": \"0.8\",\r\n  \"observaciones\": \"Precios estables con tendencia alcista\"\r\n}\r\n"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/f625b0a9-ec49-43e2-9bcb-981cf612eb0d",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"f625b0a9-ec49-43e2-9bcb-981cf612eb0d"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "454"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 18:44:09 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"createdAt\": \"2025-06-06 15:43:54\",\n        \"variacionMensual\": \"0.8\",\n        \"periodo\": \"2025-03\",\n        \"unidadMedida\": \"USD/L\",\n        \"observaciones\": \"Precios estables con tendencia alcista\",\n        \"fuenteDatos\": \"Ministerio de Energía\",\n        \"region\": \"Norte\",\n        \"uuid\": \"f625b0a9-ec49-43e2-9bcb-981cf612eb0d\",\n        \"bioetMaiz\": \"0.75\",\n        \"variacionAnual\": \"5.2\",\n        \"bioetCanAzucar\": \"0.85\",\n        \"updatedAt\": \"2025-06-06 15:44:09\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -595,7 +1279,76 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "delete",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-precios/f625b0a9-ec49-43e2-9bcb-981cf612eb0d",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-precios",
+												"f625b0a9-ec49-43e2-9bcb-981cf612eb0d"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "95"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 18:44:50 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Successfully removed item based on uuid f625b0a9-ec49-43e2-9bcb-981cf612eb0d\"\n}"
+								}
+							]
 						}
 					]
 				}
@@ -629,18 +1382,88 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-tipos/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
+									"raw": "{{base_url}}/bioetanol-tipos/uuid/6975ebe5-33a1-4b1b-89d6-588df05b81de",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-tipos",
 										"uuid",
-										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
+										"6975ebe5-33a1-4b1b-89d6-588df05b81de"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getByUuid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/uuid/6975ebe5-33a1-4b1b-89d6-588df05b81de",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"uuid",
+												"6975ebe5-33a1-4b1b-89d6-588df05b81de"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "488"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 02:33:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"estadoOperativo\": \"Activo\",\n        \"tipo\": \"maiz\",\n        \"ubicacion\": \"Plantel Norte\",\n        \"periodo\": \"2024-03\",\n        \"eficienciaProduccion\": \"85333\",\n        \"ventasTotales\": \"14500\",\n        \"uuid\": \"6975ebe5-33a1-4b1b-89d6-588df05b81de\",\n        \"createdAt\": \"2025-06-10 23:33:05\",\n        \"capacidadInstalada\": \"20000\",\n        \"observaciones\": \"Operando a capacidad máxima\",\n        \"produccion\": \"15000\",\n        \"materiaPrima\": \"Caña de Azúcar\",\n        \"updatedAt\": \"2025-06-10 23:33:05\"\n    }\n}"
+								}
+							]
 						},
 						{
 							"name": "getAll",
@@ -684,7 +1507,86 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getAll",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/list?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"list"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "526"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:33:55 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeFieldType",
@@ -708,7 +1610,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-tipos/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
+									"raw": "{{base_url}}/bioetanol-tipos/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=ca84e7fd-41e5-4035-bbc5-60d3c6e46759",
 									"host": [
 										"{{base_url}}"
 									],
@@ -731,12 +1633,873 @@
 										},
 										{
 											"key": "fieldValue",
-											"value": "a"
+											"value": "ca84e7fd-41e5-4035-bbc5-60d3c6e46759"
 										}
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeFieldType",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=ca84e7fd-41e5-4035-bbc5-60d3c6e46759",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"field-type"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												},
+												{
+													"key": "fieldType",
+													"value": "uuid"
+												},
+												{
+													"key": "fieldValue",
+													"value": "ca84e7fd-41e5-4035-bbc5-60d3c6e46759"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "526"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 18:40:24 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"ca84e7fd-41e5-4035-bbc5-60d3c6e46759\",\n            \"createdAt\": \"2025-06-11 15:38:46\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 15:38:46\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeTipo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/tipo/maiz?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"tipo",
+										"maiz"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeTipo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/tipo/maiz?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"tipo",
+												"maiz"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:35:21 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeUbicacion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/ubicacion/Plantel Norte?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"ubicacion",
+										"Plantel Norte"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeUbicacion",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/ubicacion/Plantel?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"ubicacion",
+												"Plantel"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:35:45 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeVentasTotales",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/ventas-totales/14500?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"ventas-totales",
+										"14500"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeVentasTotales",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/ventas-totales/14500?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"ventas-totales",
+												"14500"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:36:05 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeProduccion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/produccion/15000?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"produccion",
+										"15000"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeProduccion",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/produccion/15000?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"produccion",
+												"15000"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:36:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikePeriodo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/periodo/2024-03?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"periodo",
+										"2024-03"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikePeriodo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/periodo/2024-03?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"periodo",
+												"2024-03"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:37:36 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeEstadoOperativo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-tipos/estado-operativo/Activo?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-tipos",
+										"estado-operativo",
+										"Activo"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeEstadoOperativo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/estado-operativo/Activo?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"estado-operativo",
+												"Activo"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "vary",
+											"value": "accept-encoding"
+										},
+										{
+											"key": "content-encoding",
+											"value": "gzip"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:38:04 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										},
+										{
+											"key": "Transfer-Encoding",
+											"value": "chunked"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"d24789f0-9add-406e-b403-0cc109fec6d0\",\n            \"createdAt\": \"2025-06-11 11:35:09\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:35:09\"\n        },\n        {\n            \"estadoOperativo\": \"Activo\",\n            \"tipo\": \"maiz\",\n            \"ubicacion\": \"Plantel Norte\",\n            \"periodo\": \"2024-03\",\n            \"eficienciaProduccion\": \"85333\",\n            \"ventasTotales\": \"14500\",\n            \"uuid\": \"6294d2cd-37fe-47bc-b1a4-b4774e6e49c4\",\n            \"createdAt\": \"2025-06-11 11:33:50\",\n            \"capacidadInstalada\": \"20000\",\n            \"observaciones\": \"Operando a capacidad máxima\",\n            \"produccion\": \"15000\",\n            \"materiaPrima\": \"Caña de Azúcar\",\n            \"updatedAt\": \"2025-06-11 11:33:50\"\n        }\n    ]\n}"
+								}
+							]
 						}
 					]
 				},
@@ -766,7 +2529,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"tipo\":\"maiz\",\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+									"raw": "{\r\n  \"tipo\": \"maiz\",\r\n  \"periodo\": \"2024-03\",\r\n  \"produccion\": \"15000\",\r\n  \"ventas_totales\": \"14500\",\r\n  \"capacidad_instalada\": \"20000\",\r\n  \"eficiencia_produccion\": \"85333\",\r\n  \"materia_prima\": \"Caña de Azúcar\",\r\n  \"ubicacion\": \"Plantel Norte\",\r\n  \"estado_operativo\": \"Activo\",\r\n  \"observaciones\": \"Operando a capacidad máxima\"\r\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/bioetanol-tipos/",
@@ -779,7 +2542,144 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "insert",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"tipo\": \"maiz\",\r\n  \"periodo\": \"2024-03\",\r\n  \"produccion\": \"15000\",\r\n  \"ventas_totales\": \"14500\",\r\n  \"capacidad_instalada\": \"20000\",\r\n  \"eficiencia_produccion\": \"85\",\r\n  \"materia_prima\": \"Caña de Azúcar\",\r\n  \"ubicacion\": \"Plantel Norte\",\r\n  \"estado_operativo\": \"Activo\",\r\n  \"observaciones\": \"Operando a capacidad máxima\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "485"
+										},
+										{
+											"key": "Date",
+											"value": "Fri, 06 Jun 2025 18:48:01 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"uuid\": \"6d1356fc-4063-4771-b4bc-08bc64f0fe5b\",\n        \"tipo\": \"maiz\",\n        \"periodo\": \"2024-03\",\n        \"produccion\": \"15000\",\n        \"ventasTotales\": \"14500\",\n        \"capacidadInstalada\": \"20000\",\n        \"eficienciaProduccion\": \"85\",\n        \"materiaPrima\": \"Caña de Azúcar\",\n        \"ubicacion\": \"Plantel Norte\",\n        \"estadoOperativo\": \"Activo\",\n        \"observaciones\": \"Operando a capacidad máxima\",\n        \"createdAt\": \"2025-06-06 15:48:01\",\n        \"updatedAt\": \"2025-06-06 15:48:01\"\n    }\n}"
+								},
+								{
+									"name": "insert",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"tipo\": \"maiz\",\r\n  \"periodo\": \"2024-03\",\r\n  \"produccion\": \"15000\",\r\n  \"ventas_totales\": \"14500\",\r\n  \"capacidad_instalada\": \"20000\",\r\n  \"eficiencia_produccion\": \"85333\",\r\n  \"materia_prima\": \"Caña de Azúcar\",\r\n  \"ubicacion\": \"Plantel Norte\",\r\n  \"estado_operativo\": \"Activo\",\r\n  \"observaciones\": \"Operando a capacidad máxima\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "488"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 02:33:05 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"uuid\": \"6975ebe5-33a1-4b1b-89d6-588df05b81de\",\n        \"tipo\": \"maiz\",\n        \"periodo\": \"2024-03\",\n        \"produccion\": \"15000\",\n        \"ventasTotales\": \"14500\",\n        \"capacidadInstalada\": \"20000\",\n        \"eficienciaProduccion\": \"85333\",\n        \"materiaPrima\": \"Caña de Azúcar\",\n        \"ubicacion\": \"Plantel Norte\",\n        \"estadoOperativo\": \"Activo\",\n        \"observaciones\": \"Operando a capacidad máxima\",\n        \"createdAt\": \"2025-06-10 23:33:05\",\n        \"updatedAt\": \"2025-06-10 23:33:05\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -809,20 +2709,89 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"tipo\":\"maiz\",\r\n    \"periodo\":\"2023-12\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+									"raw": "{\r\n  \"tipo\": \"maiz\",\r\n        \"periodo\": \"2024-03\",\r\n        \"produccion\": \"15000\",\r\n        \"ventasTotales\": \"14500\",\r\n        \"capacidadInstalada\": \"20000\",\r\n        \"eficienciaProduccion\": \"85333\",\r\n        \"materiaPrima\": \"Caña de Azúcar\",\r\n        \"ubicacion\": \"Plantel Norte\",\r\n        \"estadoOperativo\": \"Activo\",\r\n        \"observaciones\": \"Operando a capacidad máxima\",\r\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/bioetanol-tipos/2a3c3b16-ea7a-4150-9791-4480deb7d8cb",
+									"raw": "{{base_url}}/bioetanol-tipos/90ec2f56-2d8d-4596-a650-7e970dd5da1f",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-tipos",
-										"2a3c3b16-ea7a-4150-9791-4480deb7d8cb"
+										"90ec2f56-2d8d-4596-a650-7e970dd5da1f"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"tipo\": \"maiz\",\r\n        \"periodo\": \"2024-03\",\r\n        \"produccion\": \"15000\",\r\n        \"ventasTotales\": \"14500\",\r\n        \"capacidadInstalada\": \"20000\",\r\n        \"eficienciaProduccion\": \"85333\",\r\n        \"materiaPrima\": \"Caña de Azúcar\",\r\n        \"ubicacion\": \"Plantel Norte\",\r\n        \"estadoOperativo\": \"Activo\",\r\n        \"observaciones\": \"Operando a capacidad máxima\",\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-tipos/11bdc1da-5466-429c-af4d-d2dc976fbb3d",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-tipos",
+												"11bdc1da-5466-429c-af4d-d2dc976fbb3d"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "488"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 03:09:54 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"estadoOperativo\": \"Activo\",\n        \"tipo\": \"maiz\",\n        \"ubicacion\": \"Plantel Norte\",\n        \"eficienciaProduccion\": \"85333\",\n        \"periodo\": \"2024-03\",\n        \"ventasTotales\": \"14500\",\n        \"uuid\": \"11bdc1da-5466-429c-af4d-d2dc976fbb3d\",\n        \"createdAt\": \"2025-06-11 00:09:39\",\n        \"capacidadInstalada\": \"20000\",\n        \"observaciones\": \"Operando a capacidad máxima\",\n        \"materiaPrima\": \"Caña de Azúcar\",\n        \"produccion\": \"15000\",\n        \"updatedAt\": \"2025-06-11 00:09:53\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -895,18 +2864,88 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-total/uuid/f243a312-1d38-4b3c-9d65-233d26f6ccee",
+									"raw": "{{base_url}}/bioetanol-total/uuid/784ee6f2-c70c-4eb7-ae52-2758a7c19d77",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-total",
 										"uuid",
-										"f243a312-1d38-4b3c-9d65-233d26f6ccee"
+										"784ee6f2-c70c-4eb7-ae52-2758a7c19d77"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getByUuid",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/uuid/784ee6f2-c70c-4eb7-ae52-2758a7c19d77",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"uuid",
+												"784ee6f2-c70c-4eb7-ae52-2758a7c19d77"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "421"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:08:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"estadoOperativo\": \"activo\",\n        \"createdAt\": \"2025-06-11 11:08:07\",\n        \"ubicacion\": \"Nacional\",\n        \"capacidadInstalada\": \"350000\",\n        \"periodo\": \"2023-11\",\n        \"eficienciaProduccion\": \"822\",\n        \"observaciones\": \"Producción total estable\",\n        \"ventasTotales\": \"290000\",\n        \"uuid\": \"784ee6f2-c70c-4eb7-ae52-2758a7c19d77\",\n        \"produccion\": \"300000\",\n        \"updatedAt\": \"2025-06-11 11:08:07\"\n    }\n}"
+								}
+							]
 						},
 						{
 							"name": "getByCreatedUpdateDate",
@@ -930,18 +2969,88 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-total/created-updated-at/2023-11-05",
+									"raw": "{{base_url}}/bioetanol-total/created-updated-at/2025-06-11 14:47:18",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-total",
 										"created-updated-at",
-										"2023-11-05"
+										"2025-06-11 14:47:18"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getByCreatedUpdateDate",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/created-updated-at/2025-06-11",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"created-updated-at",
+												"2025-06-11"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "493"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:09:12 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        [\n            {\n                \"estadoOperativo\": \"activo\",\n                \"createdAt\": \"2025-06-11 11:08:07\",\n                \"ubicacion\": \"Nacional\",\n                \"capacidadInstalada\": \"350000\",\n                \"periodo\": \"2023-11\",\n                \"eficienciaProduccion\": \"822\",\n                \"observaciones\": \"Producción total estable\",\n                \"ventasTotales\": \"290000\",\n                \"uuid\": \"784ee6f2-c70c-4eb7-ae52-2758a7c19d77\",\n                \"produccion\": \"300000\",\n                \"updatedAt\": \"2025-06-11 11:08:07\"\n            }\n        ]\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getAll",
@@ -985,7 +3094,86 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getAll",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/list?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"list"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:08:14 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:08:07\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"784ee6f2-c70c-4eb7-ae52-2758a7c19d77\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:08:07\"\n        }\n    ]\n}"
+								}
+							]
 						},
 						{
 							"name": "getLikeFieldType",
@@ -1009,7 +3197,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
+									"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=17ec8221-a43a-4b8f-bef8-4bd295347114",
 									"host": [
 										"{{base_url}}"
 									],
@@ -1032,12 +3220,1060 @@
 										},
 										{
 											"key": "fieldValue",
-											"value": "a"
+											"value": "17ec8221-a43a-4b8f-bef8-4bd295347114"
 										}
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "getLikeFieldType",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=a",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"field-type"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												},
+												{
+													"key": "fieldType",
+													"value": "uuid"
+												},
+												{
+													"key": "fieldValue",
+													"value": "a"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:09:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:08:07\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"784ee6f2-c70c-4eb7-ae52-2758a7c19d77\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:08:07\"\n        }\n    ]\n}"
+								},
+								{
+									"name": "getLikeFieldType",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/field-type?limit=3&orderAt=asc&fieldType=uuid&fieldValue=17ec8221-a43a-4b8f-bef8-4bd295347114",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"field-type"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												},
+												{
+													"key": "fieldType",
+													"value": "uuid"
+												},
+												{
+													"key": "fieldValue",
+													"value": "17ec8221-a43a-4b8f-bef8-4bd295347114"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 15:19:37 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 12:19:22\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"17ec8221-a43a-4b8f-bef8-4bd295347114\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 12:19:22\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeUbicacion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/ubicacion/Nacional?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"ubicacion",
+										"Nacional"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeUbicacion",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/ubicacion/Nacional?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"ubicacion",
+												"Nacional"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:33:07 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeEstadoOperativo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/estado-operativo/activo?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"estado-operativo",
+										"activo"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeEstadoOperativo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/estado-operativo/activo?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"estado-operativo",
+												"activo"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:32:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeEficienciaProduccion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/eficiencia-produccion/822?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"eficiencia-produccion",
+										"822"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeEficienciaProduccion",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/eficiencia-produccion/822?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"eficiencia-produccion",
+												"822"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:28:59 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeCapacidadInstalada",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/capacidad-instalada/350000?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"capacidad-instalada",
+										"350000"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeCapacidadInstalada",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/capacidad-instalada/350000?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"capacidad-instalada",
+												"350000"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:29:15 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeVentasTotales",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/ventas-totales/290000?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"ventas-totales",
+										"290000"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeVentasTotales",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/ventas-totales/290000?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"ventas-totales",
+												"290000"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:40:02 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikeProduccion",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/produccion/300000?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"produccion",
+										"300000"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikeProduccion",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/produccion/300000?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"produccion",
+												"300000"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:42:16 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:22:52\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"0347944a-d32f-4dbd-be74-fa5fadf82c40\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:22:52\"\n        }\n    ]\n}"
+								}
+							]
+						},
+						{
+							"name": "getLikePeriodo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-api-key",
+										"value": "{{x-api-key}}",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{bearer-token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/bioetanol-total/periodo/2023-11?limit=3&orderAt=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"bioetanol-total",
+										"periodo",
+										"2023-11"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "3"
+										},
+										{
+											"key": "orderAt",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "getLikePeriodo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/periodo/2023-11?limit=3&orderAt=asc",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"periodo",
+												"2023-11"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "3"
+												},
+												{
+													"key": "orderAt",
+													"value": "asc"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "455"
+										},
+										{
+											"key": "accept-ranges",
+											"value": "bytes"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:47:28 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": [\n        {\n            \"estadoOperativo\": \"activo\",\n            \"createdAt\": \"2025-06-11 11:47:08\",\n            \"ubicacion\": \"Nacional\",\n            \"capacidadInstalada\": \"350000\",\n            \"periodo\": \"2023-11\",\n            \"eficienciaProduccion\": \"822\",\n            \"observaciones\": \"Producción total estable\",\n            \"ventasTotales\": \"290000\",\n            \"uuid\": \"8b8b6cea-595a-4971-a705-86b8d76237e9\",\n            \"produccion\": \"300000\",\n            \"updatedAt\": \"2025-06-11 11:47:08\"\n        }\n    ]\n}"
+								}
+							]
 						}
 					]
 				},
@@ -1067,7 +4303,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+									"raw": "{\r\n    \"periodo\": \"2023-11\",\r\n    \"produccion\": \"300000\",\r\n    \"ventas_totales\": \"290000\",\r\n    \"capacidad_instalada\": \"350000\",\r\n    \"eficiencia_produccion\": \"822\",\r\n    \"ubicacion\": \"Nacional\",\r\n    \"estado_operativo\": \"activo\",\r\n    \"observaciones\": \"Producción total estable\"\r\n}"
 								},
 								"url": {
 									"raw": "{{base_url}}/bioetanol-total/",
@@ -1080,7 +4316,76 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "insert",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"periodo\": \"2023-11\",\r\n    \"produccion\": \"300000\",\r\n    \"ventas_totales\": \"290000\",\r\n    \"capacidad_instalada\": \"350000\",\r\n    \"eficiencia_produccion\": \"822\",\r\n    \"ubicacion\": \"Nacional\",\r\n    \"estado_operativo\": \"activo\",\r\n    \"observaciones\": \"Producción total estable\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												""
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "421"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 13:55:39 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"uuid\": \"bb3bf92b-98b9-4cb3-a337-8618631d0581\",\n        \"periodo\": \"2023-11\",\n        \"produccion\": \"300000\",\n        \"ventasTotales\": \"290000\",\n        \"capacidadInstalada\": \"350000\",\n        \"eficienciaProduccion\": \"822\",\n        \"ubicacion\": \"Nacional\",\n        \"estadoOperativo\": \"activo\",\n        \"observaciones\": \"Producción total estable\",\n        \"createdAt\": \"2025-06-11 10:55:39\",\n        \"updatedAt\": \"2025-06-11 10:55:39\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -1110,20 +4415,89 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"periodo\":\"2023-11\",\r\n    \"produccion\":\"345,33\",\r\n    \"ventas_totales\":\"412,23\"   \r\n}"
+									"raw": "{\r\n        \"estado_operativo\": \"activo\",\r\n            \"createdAt\": \"2025-06-11 10:57:52\",\r\n            \"ubicacion\": \"Nacional\",\r\n            \"capacidad_instalada\": \"350000\",\r\n            \"periodo\": \"2023-11\",\r\n            \"eficiencia_produccion\": \"822\",\r\n            \"observaciones\": \"Producción total estable\",\r\n            \"ventas_totales\": \"290000\",\r\n            \"produccion\": \"300000\"\r\n}"
 								},
 								"url": {
-									"raw": "{{base_url}}/bioetanol-total/1a9c7139-1fa7-4b32-a0e4-54b5d7b4b6f9",
+									"raw": "{{base_url}}/bioetanol-total/64679421-2722-4a23-b70e-a9d610d59f15",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-total",
-										"1a9c7139-1fa7-4b32-a0e4-54b5d7b4b6f9"
+										"64679421-2722-4a23-b70e-a9d610d59f15"
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "update",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "x-api-key",
+												"value": "{{x-api-key}}",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{bearer-token}}",
+												"type": "text"
+											},
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n        \"estado_operativo\": \"activo\",\r\n            \"createdAt\": \"2025-06-11 10:57:52\",\r\n            \"ubicacion\": \"Nacional\",\r\n            \"capacidad_instalada\": \"350000\",\r\n            \"periodo\": \"2023-11\",\r\n            \"eficiencia_produccion\": \"822\",\r\n            \"observaciones\": \"Producción total estable\",\r\n            \"ventas_totales\": \"290000\",\r\n            \"produccion\": \"300000\"\r\n}"
+										},
+										"url": {
+											"raw": "{{base_url}}/bioetanol-total/64679421-2722-4a23-b70e-a9d610d59f15",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"bioetanol-total",
+												"64679421-2722-4a23-b70e-a9d610d59f15"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "content-type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "cache-control",
+											"value": "no-cache"
+										},
+										{
+											"key": "content-length",
+											"value": "421"
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 11 Jun 2025 14:07:03 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": {\n        \"estadoOperativo\": \"activo\",\n        \"createdAt\": \"2025-06-11 11:06:29\",\n        \"ubicacion\": \"Nacional\",\n        \"capacidadInstalada\": \"350000\",\n        \"eficienciaProduccion\": \"822\",\n        \"periodo\": \"2023-11\",\n        \"observaciones\": \"Producción total estable\",\n        \"ventasTotales\": \"290000\",\n        \"uuid\": \"64679421-2722-4a23-b70e-a9d610d59f15\",\n        \"produccion\": \"300000\",\n        \"updatedAt\": \"2025-06-11 11:07:02\"\n    }\n}"
+								}
+							]
 						}
 					]
 				},
@@ -1152,13 +4526,13 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/bioetanol-total/1263773a-43af-4784-973d-cbfd5840e079",
+									"raw": "{{base_url}}/bioetanol-total/64679421-2722-4a23-b70e-a9d610d59f15",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"bioetanol-total",
-										"1263773a-43af-4784-973d-cbfd5840e079"
+										"64679421-2722-4a23-b70e-a9d610d59f15"
 									]
 								}
 							},

@@ -11,10 +11,6 @@ let msgLog;
  */
 const validateHeadersParams = async (eventHeaders) => {
   try {
-    if (!eventBody) {
-      return
-    }
-
     // Build the object to validate
     const eventHeadersObj = {
       headers: {
@@ -43,7 +39,6 @@ const validateHeadersParams = async (eventHeaders) => {
     return msgResponse;
   }
 };
-
 
 module.exports = {
   validateHeadersParams,

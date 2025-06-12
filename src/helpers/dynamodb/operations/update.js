@@ -22,7 +22,13 @@ const updateOneItem = async (tableName, key, item) => {
     itemUpdated = null;
     msgResponse = null;
     msgLog = null;
-    const itemKeys = Object.keys(item);
+
+    // Filter out undefined values
+    const filteredItem = Object.fromEntries(
+      Object.entries(item).filter(([_, value]) => value !== undefined)
+    );
+    
+    const itemKeys = Object.keys(filteredItem);
 
     dynamo = await dynamoDBClient();
 
@@ -44,7 +50,7 @@ const updateOneItem = async (tableName, key, item) => {
         ExpressionAttributeValues: itemKeys.reduce(
           (accumulator, k, index) => ({
             ...accumulator,
-            [`:value${index}`]: item[k],
+            [`:value${index}`]: filteredItem[k],
           }),
           {},
         ),

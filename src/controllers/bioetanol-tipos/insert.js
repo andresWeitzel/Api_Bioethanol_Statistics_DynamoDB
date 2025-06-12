@@ -12,7 +12,7 @@ const { generateUUID } = require('../../helpers/math/generate-uuid');
 const { formatToJson } = require('../../helpers/format/format-to-json');
 const { formatToString } = require('../../helpers/format/format-to-string');
 const {
-  validateBodyAddItemParamsBioetTotal,
+  validateBodyAddItemParamsBioetTipos,
 } = require('../../helpers/validations/validator/http/request-body-add-item-params');
 const { currentDateTime } = require('../../helpers/date-time/dates');
 //Const
@@ -31,7 +31,14 @@ let uuid;
 let periodo;
 let produccion;
 let ventasTotales;
+let capacidadInstalada;
+let eficienciaProduccion;
+let materiaPrima;
+let ubicacion;
+let estadoOperativo;
+let observaciones;
 let createdAt;
+let updatedAt;
 let msgResponse;
 let msgLog;
 
@@ -62,12 +69,18 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
+    const validationResult = await validateBodyAddItemParamsBioetTipos(eventBody);
 
-    if (!validateBodyAddItem) {
+    if (!validationResult.isValid) {
+      let errorMessage = 'Bad request, check request body attributes:\n';
+      
+      for (const [field, error] of Object.entries(validationResult.errors)) {
+        errorMessage += `- ${field}: ${error.message}\n`;
+      }
+
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check request body attributes. Missing or incorrect',
+        errorMessage.trim()
       );
     }
     //-- end with body validations  ---
@@ -80,6 +93,12 @@ module.exports.handler = async (event) => {
     periodo = await eventBody.periodo;
     produccion = await eventBody.produccion;
     ventasTotales = await eventBody.ventas_totales;
+    capacidadInstalada = await eventBody.capacidad_instalada;
+    eficienciaProduccion = await eventBody.eficiencia_produccion;
+    materiaPrima = await eventBody.materia_prima;
+    ubicacion = await eventBody.ubicacion;
+    estadoOperativo = await eventBody.estado_operativo;
+    observaciones = await eventBody.observaciones;
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
@@ -103,31 +122,44 @@ module.exports.handler = async (event) => {
           break;
       }
     }
-    if (tipo == (null && undefined)) {
+
+    if (tipo == null) {
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        "The type must only be 'caña_azucar' or 'maiz'",
+        'Bad request, tipo must be one of: caña_azucar, maiz',
       );
     }
 
-    let bioetTipoObj = new BioetanolTipo(
+    newBioetTipo = new BioetanolTipo(
       uuid,
       tipo,
       periodo,
       produccion,
       ventasTotales,
+      capacidadInstalada,
+      eficienciaProduccion,
+      materiaPrima,
+      ubicacion,
+      estadoOperativo,
+      observaciones,
       createdAt,
-      updatedAt,
+      updatedAt
     );
 
     item = {
-      uuid: await bioetTipoObj.getUuid(),
-      tipo: await bioetTipoObj.getTipo(),
-      periodo: await bioetTipoObj.getPeriodo(),
-      produccion: await bioetTipoObj.getProduccion(),
-      ventasTotales: await bioetTipoObj.getVentasTotales(),
-      createdAt: await bioetTipoObj.getCreatedAt(),
-      updatedAt: await bioetTipoObj.getUpdatedAt(),
+      uuid: newBioetTipo.getUuid(),
+      tipo: newBioetTipo.getTipo(),
+      periodo: newBioetTipo.getPeriodo(),
+      produccion: newBioetTipo.getProduccion(),
+      ventasTotales: newBioetTipo.getVentasTotales(),
+      capacidadInstalada: newBioetTipo.getCapacidadInstalada(),
+      eficienciaProduccion: newBioetTipo.getEficienciaProduccion(),
+      materiaPrima: newBioetTipo.getMateriaPrima(),
+      ubicacion: newBioetTipo.getUbicacion(),
+      estadoOperativo: newBioetTipo.getEstadoOperativo(),
+      observaciones: newBioetTipo.getObservaciones(),
+      createdAt: newBioetTipo.getCreatedAt(),
+      updatedAt: newBioetTipo.getUpdatedAt()
     };
 
     newBioetTipo = await insertItem(BIOET_TIPO_TABLE_NAME, item);
