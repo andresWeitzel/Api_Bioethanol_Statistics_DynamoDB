@@ -26,17 +26,19 @@
   </a> 
 </div>
 
+<br>
+
+<br>
+
 <div align="center">
 
-# Bioetanol Estadísticas DynamoDB AWS
+# Bioetanol Estadísticas DynamoDB AWS ![Status](../doc/assets/icons/badges/status-completed.svg)
 
 </div>
 
 Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
 
-*   [Reportes precios bioetanol](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
-*   [Dataset biotenanol | Datos Nacionales](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
-*   [Excel Estadisticas Secretaría de Energía](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hidrocarburos%2Fbio%2Festadisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
+
 *   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/social-networks/yt.png" width="5%" height="5%" />
 
 <br>
@@ -60,7 +62,7 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
 *   [2.0) EndPoints y recursos.](#20-endpoints-y-recursos-)
 *   [2.1) Ejemplos.](#21-ejemplos-)
 
-### Sección 3) Prueba de funcionalidad y Referencias
+### Sección 3) Pruebas de Funcionalidad y Referencias
 
 *   [3.0) Prueba de funcionalidad.](#30-prueba-de-funcionalidad-)
 *   [3.1) Referencias.](#31-referencias-)
@@ -426,7 +428,7 @@ etc.....
 | ------------- | ------------- |
 | base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
 
 *   `Importante`: Los valores de las keys se incluten para pruebas locales.
 
@@ -461,32 +463,66 @@ etc.....
 
 ### 2.0.3) Bioetanol\_Tipos endpoints
 
-*   `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
+#### GET type operations:
+
+*   `base_url`/bioetanol-tipos/list?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/uuid/`uuidValue`
+*   `base_url`/bioetanol-tipos/tipo/`tipoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/periodo/`periodoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/produccion/`produccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/ventas-totales/`ventasTotalesValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/ubicacion/`ubicacionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-tipos/estado-operativo/`estadoOperativoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
+
+#### POST type operations:
+
+*   `base_url`/bioetanol-tipos/
+
+#### PUT type operations:
+
+*   `base_url`/bioetanol-tipos/`uuid`
+
+#### DELETE type operations:
+
+*   `base_url`/bioetanol-tipos/`uuid`
 
 <br>
 
-### 2.0.4) Bioetanol\_Total endpoints
+### 2.0.4) Endpoints Bioetanol_Total
 
-*   `Para resumir la documentación, revisar los endpoints desde la colección de postman incluida en el proyecto.`
+#### Operaciones tipo GET:
 
-<br>
+*   `base_url`/bioetanol-total/list?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/uuid/`uuidValue`
+*   `base_url`/bioetanol-total/periodo/`periodoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/produccion/`produccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/ventas-totales/`ventasTotalesValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/capacidad-instalada/`capacidadInstaladaValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/eficiencia-produccion/`eficienciaProduccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/ubicacion/`ubicacionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/estado-operativo/`estadoOperativoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `Todos los endpoints son opcionalmente paginados excepto /test, /db-connection y /id/{{user-id}}`
+
+#### Operaciones tipo POST:
+
+*   `base_url`/bioetanol-total/
+
+#### Operaciones tipo PUT:
+
+*   `base_url`/bioetanol-total/`uuid`
+
+#### Operaciones tipo DELETE:
+
+*   `base_url`/bioetanol-total/`uuid`
 
 </details>
+
 
 ### 2.1) Ejemplos [🔝](#índice-)
 
 <details>
   <summary>Ver</summary>
-
-### 2.1.0) Variables en Postman
-
-| **Variable** | **Value** |
-| ------------- | ------------- |
-| base\_url | http://localhost:4000/dev/v1 |
-| x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
-
-*   `Importante`: Los valores de las keys se incluten para pruebas locales.
 
 <br>
 
@@ -494,7 +530,7 @@ etc.....
 
 ### Obtener todos los items de Bioetanol-precios
 
-#### Request (GET)
+#### Solicitud (GET)
 
 ```postman
 curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&orderAt=asc' \
@@ -503,116 +539,124 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/list?limit=3&ord
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": [
         {
-            "createdAt": "2023-11-18 21:55:01",
             "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
             "periodo": "2023-11",
-            "bioetMaiz": "412,23",
             "bioetCanAzucar": "345,33",
+            "bioetMaiz": "412,23",
             "unidadMedida": "USD/m3",
             "fuenteDatos": "Secretaría de Energía",
             "region": "Norte",
             "variacionAnual": "5.2",
             "variacionMensual": "1.8",
             "observaciones": "Precios estables en el mercado",
+            "createdAt": "2023-11-18 21:55:01",
             "updatedAt": "2023-11-18 21:55:01"
         }
     ]
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "An error has occurred, failed to list database objects. Check if items exists."
+    "message": "Ha ocurrido un error, no se pudieron listar los objetos de la base de datos. Verifique si existen los items."
 }
 ```
+
+<br>
 
 ---
 
-### Obtener por UUID Bioetanol-precios
+<br>
 
-#### Request (GET)
+### Obtener item de Bioetanol-precios por UUID
+
+#### Solicitud (GET)
 
 ```postman
-curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb' \
+curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/uuid/3bfff0ca-8cba-4113-bc94-4afb6e7feb7e' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": {
-        "createdAt": "2023-11-18 21:55:01",
         "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
         "periodo": "2023-11",
-        "bioetMaiz": "412,23",
         "bioetCanAzucar": "345,33",
+        "bioetMaiz": "412,23",
         "unidadMedida": "USD/m3",
         "fuenteDatos": "Secretaría de Energía",
         "region": "Norte",
         "variacionAnual": "5.2",
         "variacionMensual": "1.8",
         "observaciones": "Precios estables en el mercado",
+        "createdAt": "2023-11-18 21:55:01",
         "updatedAt": "2023-11-18 21:55:01"
     }
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "The Bioetanol prices object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
+    "message": "El parámetro uuid es requerido"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
+
+<br>
 
 ---
 
-### Agregar item Bioetanol-precios
+<br>
 
-#### Request (POST)
+### Agregar item de Bioetanol-precios
+
+#### Solicitud (POST)
 
 ```postman
 curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
@@ -632,7 +676,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
@@ -653,35 +697,39 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-precios/' \
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "Bad request, check request body attributes. Missing or incorrect"
+    "message": "Solicitud incorrecta, verifique los atributos del cuerpo de la solicitud. Faltantes o incorrectos"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
+
+<br>
 
 ---
 
-### Actualizar item Bioetanol-precios
+<br>
 
-#### Request (PUT)
+### Actualizar item de Bioetanol-precios
+
+#### Solicitud (PUT)
 
 ```postman
 curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67ecfcf7-c338-43d8-9220-4d7b43b7e914' \
@@ -701,7 +749,7 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
@@ -722,43 +770,47 @@ curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-precios/67
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "Bad request, check request body attributes for bioetanol-precios. Missing or incorrect"
+    "message": "Solicitud incorrecta, verifique los atributos del cuerpo de la solicitud para bioetanol-precios. Faltantes o incorrectos"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
+    "message": "Error interno del servidor. No se pudo actualizar el objeto en la base de datos ya que falló al obtener un item por uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914. Verifique si el item existe en la base de datos e intente nuevamente."
 }
 ```
+
+<br>
 
 ---
 
-### Eliminar item Bioetanol-precios
+<br>
 
-#### Request (DELETE)
+### Eliminar item de Bioetanol-precios
+
+#### Solicitud (DELETE)
 
 ```postman
 curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
@@ -767,70 +819,69 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-precios
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
-    "message": "Successfully removed item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+    "message": "Item eliminado exitosamente basado en uuid b58fd5cb-ed0b-461c-bfea-50c240e51280"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+    "message": "Error interno del servidor. No se pudo eliminar el objeto en la base de datos ya que falló al obtener un item por uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4. Verifique si el item existe en la base de datos e intente nuevamente."
 }
 ```
+
+<br>
 
 ---
 
-### 2.1.2) Endpoints Bioetanol_Tipos
+<br>
 
-### Obtener todos los items de Bioetanol-tipos
+### 2.1.2) Endpoints de Bioetanol_Total
 
-#### Request (GET)
+### Obtener todos los items de Bioetanol-total
+
+#### Solicitud (GET)
 
 ```postman
-curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/list?limit=3&orderAt=asc' \
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/list?limit=3&orderAt=asc' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": [
         {
             "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
-            "tipo": "caña_azucar",
-            "periodo": "2023-11",
-            "produccion": "150000",
-            "ventasTotales": "145000",
-            "capacidadInstalada": "180000",
-            "eficienciaProduccion": "85",
-            "materiaPrima": "caña de azúcar",
-            "ubicacion": "Norte",
-            "estadoOperativo": "activo",
-            "observaciones": "Producción estable",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
             "createdAt": "2023-11-18 21:55:01",
             "updatedAt": "2023-11-18 21:55:01"
         }
@@ -838,281 +889,572 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/list?limit=3&order
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "An error has occurred, failed to list database objects. Check if items exists."
+    "message": "Ha ocurrido un error, no se pudieron listar los objetos de la base de datos. Verifique si existen los items."
 }
 ```
+
+<br>
 
 ---
 
-### Obtener por UUID Bioetanol-tipos
+<br>
 
-#### Request (GET)
+### Obtener item de Bioetanol-total por UUID
+
+#### Solicitud (GET)
 
 ```postman
-curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/uuid/3f86f08e-99a6-442f-b31c-1668cbe76edb' \
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/uuid/3bfff0ca-8cba-4113-bc94-4afb6e7feb7e' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": {
         "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
-        "tipo": "caña_azucar",
-        "periodo": "2023-11",
-        "produccion": "150000",
-        "ventasTotales": "145000",
-        "capacidadInstalada": "180000",
-        "eficienciaProduccion": "85",
-        "materiaPrima": "caña de azúcar",
-        "ubicacion": "Norte",
-        "estadoOperativo": "activo",
-        "observaciones": "Producción estable",
+        "estadoOperativo": "821",
+        "eficienciaProduccion": "95.5",
+        "capacidadInstalada": "1000",
+        "ventasTotales": "850",
+        "produccion": "900",
         "createdAt": "2023-11-18 21:55:01",
         "updatedAt": "2023-11-18 21:55:01"
     }
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "The Bioetanol types object with the requested id 3f86f08e-99a6-442f-b31c-1668cbe76edb is not found in the database."
+    "message": "El parámetro uuid es requerido"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
+
+<br>
 
 ---
 
-### Agregar item Bioetanol-tipos
+<br>
 
-#### Request (POST)
+### Agregar item de Bioetanol-total
+
+#### Solicitud (POST)
 
 ```postman
-curl --location 'http://localhost:4000/dev/v1/bioetanol-tipos/' \
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json' \
 --data '{
-    "tipo": "caña_azucar",
-    "periodo": "2023-11",
-    "produccion": "150000",
-    "ventas_totales": "145000",
-    "capacidad_instalada": "180000",
-    "eficiencia_produccion": "85",
-    "materia_prima": "caña de azúcar",
-    "ubicacion": "Norte",
-    "estado_operativo": "activo",
-    "observaciones": "Producción estable"
+    "estadoOperativo": "821",
+    "eficienciaProduccion": "95.5",
+    "capacidadInstalada": "1000",
+    "ventasTotales": "850",
+    "produccion": "900"
 }'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": {
         "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
-        "tipo": "caña_azucar",
-        "periodo": "2023-11",
-        "produccion": "150000",
-        "ventasTotales": "145000",
-        "capacidadInstalada": "180000",
-        "eficienciaProduccion": "85",
-        "materiaPrima": "caña de azúcar",
-        "ubicacion": "Norte",
-        "estadoOperativo": "activo",
-        "observaciones": "Producción estable",
+        "estadoOperativo": "821",
+        "eficienciaProduccion": "95.5",
+        "capacidadInstalada": "1000",
+        "ventasTotales": "850",
+        "produccion": "900",
         "createdAt": "2023-11-18 21:55:01",
         "updatedAt": "2023-11-18 21:55:01"
     }
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "Bad request, check request body attributes. Missing or incorrect"
+    "message": "Solicitud incorrecta, verifique los atributos del cuerpo de la solicitud. Faltantes o incorrectos"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
+
+<br>
 
 ---
 
-### Actualizar item Bioetanol-tipos
+<br>
 
-#### Request (PUT)
+### Actualizar item de Bioetanol-total
+
+#### Solicitud (PUT)
 
 ```postman
-curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-tipos/67ecfcf7-c338-43d8-9220-4d7b43b7e914' \
+curl --location --request PUT 'http://localhost:4000/dev/v1/bioetanol-total/3bfff0ca-8cba-4113-bc94-4afb6e7feb7e' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json' \
 --data '{
-    "tipo": "caña_azucar",
-    "periodo": "2023-11",
-    "produccion": "160000",
-    "ventas_totales": "155000",
-    "capacidad_instalada": "180000",
-    "eficiencia_produccion": "88",
-    "materia_prima": "caña de azúcar",
-    "ubicacion": "Norte",
-    "estado_operativo": "activo",
-    "observaciones": "Producción mejorada"
+    "estadoOperativo": "821",
+    "eficienciaProduccion": "95.5",
+    "capacidadInstalada": "1000",
+    "ventasTotales": "850",
+    "produccion": "900"
 }'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
     "message": {
-        "uuid": "67ecfcf7-c338-43d8-9220-4d7b43b7e914",
-        "tipo": "caña_azucar",
-        "periodo": "2023-11",
-        "produccion": "160000",
-        "ventasTotales": "155000",
-        "capacidadInstalada": "180000",
-        "eficienciaProduccion": "88",
-        "materiaPrima": "caña de azúcar",
-        "ubicacion": "Norte",
-        "estadoOperativo": "activo",
-        "observaciones": "Producción mejorada",
+        "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+        "estadoOperativo": "821",
+        "eficienciaProduccion": "95.5",
+        "capacidadInstalada": "1000",
+        "ventasTotales": "850",
+        "produccion": "900",
         "createdAt": "2023-11-18 21:55:01",
-        "updatedAt": "2023-11-18 22:03:34"
+        "updatedAt": "2023-11-18 21:55:01"
     }
 }
 ```
 
-#### Response (400 Bad Request)
+#### Respuesta (400 Bad Request)
 
 ```json
 {
-    "message": "Bad request, check request body attributes for bioetanol-tipos. Missing or incorrect"
+    "message": "Solicitud incorrecta, verifique los atributos del cuerpo de la solicitud para bioetanol-total. Faltantes o incorrectos"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "Internal Server Error. Unable to update object in db as failed to get a item by uuid 67ecfcf7-c338-43d8-9220-4d7b43b7e914 . Check if the item exists in the database and try again."
+    "message": "Error interno del servidor. No se pudo actualizar el objeto en la base de datos ya que falló al obtener un item por uuid 3bfff0ca-8cba-4113-bc94-4afb6e7feb7e. Verifique si el item existe en la base de datos e intente nuevamente."
 }
 ```
+
+<br>
 
 ---
 
-### Eliminar item Bioetanol-tipos
+<br>
 
-#### Request (DELETE)
+### Eliminar item de Bioetanol-total
+
+#### Solicitud (DELETE)
 
 ```postman
-curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2c6d2e51-390b-4cb4-ab69-7820c632e6a4' \
+curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-total/3bfff0ca-8cba-4113-bc94-4afb6e7feb7e' \
 --header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
 --header 'Content-Type: application/json'
 ```
 
-#### Response (200 OK)
+#### Respuesta (200 OK)
 
 ```json
 {
-    "message": "Successfully removed item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+    "message": "Item eliminado exitosamente basado en uuid 3bfff0ca-8cba-4113-bc94-4afb6e7feb7e"
 }
 ```
 
-#### Response (400 Bad Request - Headers)
+#### Respuesta (400 Bad Request - Headers)
 
 ```json
 {
-    "message": "Bad request, check missing or malformed headers"
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
 }
 ```
 
-#### Response (401 Unauthorized)
+#### Respuesta (401 Unauthorized)
 
 ```json
 {
-    "message": "Not authenticated, check x_api_key and Authorization"
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
-#### Response (500 Internal Server Error)
+#### Respuesta (500 Internal Server Error)
 
 ```json
 {
-    "message": "Unable to delete item based on uuid 2c6d2e51-390b-4cb4-ab69-7820c632e6a4"
+    "message": "Error interno del servidor. No se pudo eliminar el objeto en la base de datos ya que falló al obtener un item por uuid 3bfff0ca-8cba-4113-bc94-4afb6e7feb7e. Verifique si el item existe en la base de datos e intente nuevamente."
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Obtener item de Bioetanol-total por estado operativo
+
+#### Solicitud (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/estado-operativo/821?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Respuesta (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Respuesta (400 Bad Request)
+
+```json
+{
+    "message": "El parámetro estado operativo es requerido"
+}
+```
+
+#### Respuesta (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
+}
+```
+
+#### Respuesta (401 Unauthorized)
+
+```json
+{
+    "message": "No autenticado, verifique x_api_key y Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Obtener item de Bioetanol-total por eficiencia produccion
+
+#### Solicitud (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/eficiencia-produccion/95.5?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Respuesta (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Respuesta (400 Bad Request)
+
+```json
+{
+    "message": "El parámetro eficiencia produccion es requerido"
+}
+```
+
+#### Respuesta (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
+}
+```
+
+#### Respuesta (401 Unauthorized)
+
+```json
+{
+    "message": "No autenticado, verifique x_api_key y Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Obtener item de Bioetanol-total por capacidad instalada
+
+#### Solicitud (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/capacidad-instalada/1000?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Respuesta (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Respuesta (400 Bad Request)
+
+```json
+{
+    "message": "El parámetro capacidad instalada es requerido"
+}
+```
+
+#### Respuesta (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
+}
+```
+
+#### Respuesta (401 Unauthorized)
+
+```json
+{
+    "message": "No autenticado, verifique x_api_key y Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Obtener item de Bioetanol-total por ventas totales
+
+#### Solicitud (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/ventas-totales/850?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Respuesta (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Respuesta (400 Bad Request)
+
+```json
+{
+    "message": "El parámetro ventas totales es requerido"
+}
+```
+
+#### Respuesta (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
+}
+```
+
+#### Respuesta (401 Unauthorized)
+
+```json
+{
+    "message": "No autenticado, verifique x_api_key y Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Obtener item de Bioetanol-total por produccion
+
+#### Solicitud (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Respuesta (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Respuesta (400 Bad Request)
+
+```json
+{
+    "message": "El parámetro produccion es requerido"
+}
+```
+
+#### Respuesta (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Solicitud incorrecta, verifique los encabezados faltantes o mal formados"
+}
+```
+
+#### Respuesta (401 Unauthorized)
+
+```json
+{
+    "message": "No autenticado, verifique x_api_key y Authorization"
 }
 ```
 
@@ -1122,13 +1464,12 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2
 
 <br>
 
-## Sección 3) Prueba de funcionalidad y Referencias.
+## Sección 3) Pruebas de Funcionalidad y Referencias
 
 ### 3.0) Prueba de funcionalidad [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
-<br>
+   <summary>Ver</summary>
 
 <br>
 
@@ -1137,78 +1478,48 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2
 ### 3.1) Referencias [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+   <summary>Ver</summary>
 
- <br>
+  <br>
 
-#### Dynamodb installation
+#### Reportes
+*   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
+*   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
+*   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)    
 
-*   [DynamoDB en local ejecutable](https://cloudkatha.com/how-to-install-dynamodb-locally-on-windows-10/#:~:text=How%20to%20Install%20DynamoDB%20Locally%20on%20Windows%2010,Use%20DynamoDB%20Locally%20to%20Create%20a%20Table%20)
+#### Instalación de Dynamodb
 
-#### DynamoDB teoría
+*   [DynamoDB en ejecutable local](https://cloudkatha.com/how-to-install-dynamodb-locally-on-windows-10/#:~:text=How%20to%20Install%20DynamoDB%20Locally%20on%20Windows%2010,Use%20DynamoDB%20Locally%20to%20Create%20a%20Table%20)
 
-*   [Guía DynamoDB](https://www.dynamodbguide.com/local-secondary-indexes/)
-*   [Doc Oficial Api DynamoDB](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-table)
-*   [Definicion de atributos](https://tipsfolder.com/range-key-dynamodb-ac5558671b26d5d7f2a34cd9b138c01e/#:~:text=The%20range%20attribute%20is%20the%20type%20key%20of,%28which%20means%20it%20can%20only%20hold%20one%20value%29.)
-*   [Clave de Partición vs Ordenación](https://stackoverflow.com/questions/27329461/what-is-hash-and-range-primary-key)
-*   [Expresiones de Filtros en Dynamodb](https://www.alexdebrie.com/posts/dynamodb-filter-expressions/)
-*   [Ejemplos de Expresiones de Filtros en Dynamodb](https://dynobase.dev/dynamodb-filterexpression/)
+#### Teoría de DynamoDB
 
-#### Dynamodb operations sdk v-3
+*   [Guía de DynamoDB](https://www.dynamodbguide.com/local-secondary-indexes/)
+*   [Documentación oficial de la API DynamoDB](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html#http-api-dynamo-db-create-table)
+*   [Definición de atributos](https://tipsfolder.com/range-key-dynamodb-ac5558671b26d5d7f2a34cd9b138c01e/#:~:text=The%20range%20attribute%20is%20the%20type%20key%20of,%28which%20means%20it%20can%20only%20hold%20one%20value%29.)
+*   [Clave de partición vs Clave de ordenación](https://stackoverflow.com/questions/27329461/what-is-hash-and-range-primary-key)
+*   [Expresiones de filtro en Dynamodb](https://www.alexdebrie.com/posts/dynamodb-filter-expressions/)
+*   [Ejemplos de expresiones de filtro en Dynamodb](https://dynobase.dev/dynamodb-filterexpression/)
 
-*   [Operations](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/javascript_dynamodb_code_examples.html)
-*   [Operations API-REST](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
+#### Operaciones de Dynamodb SDK v-3
 
-#### Videotutoriales
+*   [Operaciones](https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/javascript_dynamodb_code_examples.html)
+*   [Operaciones API-REST](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
 
-*   [Dynamodb local config](https://www.youtube.com/watch?v=-KRykmVIoV0\&t=663s)
-*   [Crud Dynamodb](https://www.youtube.com/watch?v=hOcbHz4T0Eg)
+#### Tutoriales en video
 
-#### Dynamodb examples
+*   [Configuración de Dynamodb local](https://www.youtube.com/watch?v=-KRykmVIoV0\&t=663s)
+*   [CRUD Dynamodb](https://www.youtube.com/watch?v=hOcbHz4T0Eg)
+
+#### Ejemplos de Dynamodb
 
 *   [Plugin serverless](https://www.serverless.com/plugins/serverless-dynamodb-local)
-*   [Creación de varias tablas](https://stackoverflow.com/questions/47327765/creating-two-dynamodb-tables-in-serverless-yml)
-*   [Ejemplo dynamodb serverless](https://github.com/serverless/examples/tree/v3/aws-node-rest-api-with-dynamodb-and-offline)
-*   [Dynamodb SDK examples](https://github.com/aws-samples/aws-dynamodb-examples/tree/master/DynamoDB-SDK-Examples/node.js)
+*   [Creación de múltiples tablas](https://stackoverflow.com/questions/47327765/creating-two-dynamodb-tables-in-serverless-yml)
+*   [Ejemplo de dynamodb serverless](https://github.com/serverless/examples/tree/v3/aws-node-rest-api-with-dynamodb-and-offline)
+*   [Ejemplos de SDK Dynamodb](https://github.com/aws-samples/aws-dynamodb-examples/tree/master/DynamoDB-SDK-Examples/node.js)
 *   [CRUD Dynamodb](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html)
 
-#### Dynamodb code
+#### Código de Dynamodb
 
-*   [Api Rest Base](https://github.com/jacksonyuan-yt/dynamodb-crud-api-gateway)
-
-#### Herramientas
-
-*   [Herramienta de Diseño AWS app.diagrams.net](https://app.diagrams.net/?splash=0\&libs=aws4)
-
-#### Api Gateway
-
-*   [Buenas Prácticas Api-Gateway](https://docs.aws.amazon.com/whitepapers/latest/best-practices-api-gateway-private-apis-integration/rest-api.html)
-*   [Creación de Api-keys personalizadas](https://towardsaws.com/protect-your-apis-by-creating-api-keys-using-serverless-framework-fe662ad37447)
-
-#### Librerías
-
-*   [Validación de campos](https://www.npmjs.com/package/node-input-validator)
-*   [Generador de uuidv4](https://www.npmjs.com/package/uuid)
-*   [Us de nodemon](https://www.npmjs.com/package/nodemon)
-
-#### Package.json
-
-*   [Configuración de scripts en paralelo](https://stackoverflow.com/questions/30950032/how-can-i-run-multiple-npm-scripts-in-parallel)
-
-#### Formating prettier
-
-*   [Formatting Node.js codebase with Prettier](https://dev.to/zsevic/formatting-nodejs-codebase-with-prettier-3ghi)
-*   [Set up a Node.js App with ESLint and Prettier ](https://dev.to/devland/set-up-a-nodejs-app-with-eslint-and-prettier-4i7p)
-
-#### Formating remark-link
-
-*   [remark-inline-links](https://github.com/remarkjs/remark-inline-links)
-*   [remark-lint-list-item-indent](https://www.npmjs.com/package/remark-lint-list-item-indent)
-
-#### Testing
-
-*   [How to mock process env in jest](https://jestjs.io/docs/configuration#setupfiles-array)
-
-<br>
+*   [API Rest Base](https://github.com/jacksonyuan-yt/dynamodb-crud-api-gateway)
 
 </details>

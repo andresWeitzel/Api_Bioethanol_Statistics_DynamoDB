@@ -83,7 +83,15 @@ Resources:
         - AttributeName: produccion
           AttributeType: S
         - AttributeName: ventasTotales
-          AttributeType: S  
+          AttributeType: S
+        - AttributeName: capacidadInstalada
+          AttributeType: S
+        - AttributeName: eficienciaProduccion
+          AttributeType: S
+        - AttributeName: ubicacion
+          AttributeType: S
+        - AttributeName: estadoOperativo
+          AttributeType: S
       KeySchema:
         - AttributeName: uuid
           KeyType: HASH
@@ -112,6 +120,42 @@ Resources:
         - IndexName: ventasTotales
           KeySchema:
             - AttributeName: ventasTotales
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: capacidadInstalada
+          KeySchema:
+            - AttributeName: capacidadInstalada
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: eficienciaProduccion
+          KeySchema:
+            - AttributeName: eficienciaProduccion
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: ubicacion
+          KeySchema:
+            - AttributeName: ubicacion
+              KeyType: HASH    
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1 
+        - IndexName: estadoOperativo
+          KeySchema:
+            - AttributeName: estadoOperativo
               KeyType: HASH    
           Projection:
             ProjectionType: ALL

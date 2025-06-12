@@ -32,7 +32,13 @@ let uuid;
 let periodo;
 let produccion;
 let ventasTotales;
+let capacidadInstalada;
+let eficienciaProduccion;
+let ubicacion;
+let estadoOperativo;
+let observaciones;
 let createdAt;
+let updatedAt;
 let msgResponse;
 let msgLog;
 
@@ -63,12 +69,18 @@ module.exports.handler = async (event) => {
 
     eventBody = await formatToJson(event.body);
 
-    validateBodyAddItem = await validateBodyAddItemParamsBioetTotal(eventBody);
+    const validationResult = await validateBodyAddItemParamsBioetTotal(eventBody);
 
-    if (!validateBodyAddItem) {
+    if (!validationResult.isValid) {
+      let errorMessage = 'Bad request, check request body attributes:\n';
+      
+      for (const [field, error] of Object.entries(validationResult.errors)) {
+        errorMessage += `- ${field}: ${error.message}\n`;
+      }
+
       return await bodyResponse(
         BAD_REQUEST_CODE,
-        'Bad request, check request body attributes. Missing or incorrect',
+        errorMessage.trim()
       );
     }
     //-- end with body validations  ---
@@ -77,36 +89,55 @@ module.exports.handler = async (event) => {
 
     uuid = await generateUUID();
     uuid = await formatToString(uuid);
-    periodo = await eventBody.periodo;
-    produccion = await eventBody.produccion;
-    ventasTotales = await eventBody.ventas_totales;
+    periodo = eventBody.periodo;
+    produccion = eventBody.produccion;
+    ventasTotales = eventBody.ventas_totales;
+    capacidadInstalada = eventBody.capacidad_instalada;
+    eficienciaProduccion = eventBody.eficiencia_produccion;
+    ubicacion = eventBody.ubicacion;
+    estadoOperativo = eventBody.estado_operativo;
+    observaciones = eventBody.observaciones;
     createdAt = await currentDateTime();
     updatedAt = await currentDateTime();
 
-    let bioetTotalObj = new BioetanolTotal(
+    newBioetTotal = new BioetanolTotal(
       uuid,
       periodo,
       produccion,
       ventasTotales,
+      capacidadInstalada,
+      eficienciaProduccion,
+      ubicacion,
+      estadoOperativo,
+      observaciones,
       createdAt,
-      updatedAt,
+      updatedAt
     );
 
     item = {
-      uuid: await bioetTotalObj.getUuid(),
-      periodo: await bioetTotalObj.getPeriodo(),
-      produccion: await bioetTotalObj.getProduccion(),
-      ventasTotales: await bioetTotalObj.getVentasTotales(),
-      createdAt: await bioetTotalObj.getCreatedAt(),
-      updatedAt: await bioetTotalObj.getUpdatedAt(),
+      uuid: newBioetTotal.getUuid(),
+      periodo: newBioetTotal.getPeriodo(),
+      produccion: newBioetTotal.getProduccion(),
+      ventasTotales: newBioetTotal.getVentasTotales(),
+      capacidadInstalada: newBioetTotal.getCapacidadInstalada(),
+      eficienciaProduccion: newBioetTotal.getEficienciaProduccion(),
+      ubicacion: newBioetTotal.getUbicacion(),
+      estadoOperativo: newBioetTotal.getEstadoOperativo(),
+      observaciones: newBioetTotal.getObservaciones(),
+      createdAt: newBioetTotal.getCreatedAt(),
+      updatedAt: newBioetTotal.getUpdatedAt()
     };
 
-    newBioetTotal = await insertItem(BIOET_TOTAL_TABLE_NAME, item);
+    try {
+      await insertItem(BIOET_TOTAL_TABLE_NAME, item);
+    } catch (error) {
+      msgResponse = 'ERROR in insert() function.';
+      msgLog = msgResponse + `Caused by ${error}`;
+      console.log(msgLog);
 
-    if (newBioetTotal == null || !newBioetTotal.length) {
       return await bodyResponse(
         INTERNAL_SERVER_ERROR_CODE,
-        'An error has occurred, the object has not been inserted into the database',
+        'An error has occurred, failed to insert database object.'
       );
     }
 

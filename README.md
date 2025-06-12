@@ -28,17 +28,19 @@
   </a> 
 </div>
 
+<br>
+
+<br>
+
 <div align="center">
 
-# Bioethanol Statistics DynamoDB AWS
+# Bioethanol Statistics DynamoDB AWS ![Status](./doc/assets/icons/badges/status-completed.svg)
 
 </div>
 
 Api Rest for the statistical management of production and sales of bioethanol based on cane and corn implemented with Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda among others. AWS services are tested locally. The project code and its documentation (less technical doc) have been developed in English.
 
-*   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
-*   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
-*   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)
+
 *   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" />
 
 <br>
@@ -489,9 +491,34 @@ etc.....
 
 <br>
 
-### 2.0.4) Bioetanol\_Total endpoints
+### 2.0.4) Bioetanol_Total endpoints
 
-*   `To summarize the documentation, review the postman collection endpoints`
+#### GET type operations:
+
+*   `base_url`/bioetanol-total/list?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/uuid/`uuidValue`
+*   `base_url`/bioetanol-total/periodo/`periodoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/produccion/`produccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/ventas-totales/`ventasTotalesValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/capacidad-instalada/`capacidadInstaladaValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/eficiencia-produccion/`eficienciaProduccionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/ubicacion/`ubicacionValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `base_url`/bioetanol-total/estado-operativo/`estadoOperativoValue`?limit=`limitValue`\&orderAt=`orderAtValue`
+*   `All endpoints are optional paginated except /test, /db-connection and /id/{{user-id}}`
+
+#### POST type operations:
+
+*   `base_url`/bioetanol-total/
+
+#### PUT type operations:
+
+*   `base_url`/bioetanol-total/`uuid`
+
+#### DELETE type operations:
+
+*   `base_url`/bioetanol-total/`uuid`
+
+
 
 <br>
 
@@ -509,7 +536,7 @@ etc.....
 | ------------- | ------------- |
 | base\_url | http://localhost:4000/dev/v1 |
 | x-api-key | f98d8cd98h73s204e3456998ecl9427j |
-| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV\_adQssw5c |
+| bearer-token | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c |
 
 *   `Important`: Key values included are for local testing only.
 
@@ -1159,6 +1186,364 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2
 
 <br>
 
+### 2.1.3) Bioetanol_Total endpoints
+
+### Get All Bioetanol-total items
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/list?limit=3&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+#### Response (500 Internal Server Error)
+
+```json
+{
+    "message": "An error has occurred, could not list objects from database. Check if items exist."
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Get Bioetanol-total item by estado operativo
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/estado-operativo/821?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The estado operativo parameter is required"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Get Bioetanol-total item by eficiencia produccion
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/eficiencia-produccion/95.5?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The eficiencia produccion parameter is required"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Get Bioetanol-total item by capacidad instalada
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/capacidad-instalada/1000?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The capacidad instalada parameter is required"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Get Bioetanol-total item by ventas totales
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/ventas-totales/850?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The ventas totales parameter is required"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
+---
+
+<br>
+
+### Get Bioetanol-total item by produccion
+
+#### Request (GET)
+
+```postman
+curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?limit=5&orderAt=asc' \
+--header 'x-api-key: f98d8cd98h73s204e3456998ecl9427j' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+--header 'Content-Type: application/json'
+```
+
+#### Response (200 OK)
+
+```json
+{
+    "message": [
+        {
+            "uuid": "3bfff0ca-8cba-4113-bc94-4afb6e7feb7e",
+            "estadoOperativo": "821",
+            "eficienciaProduccion": "95.5",
+            "capacidadInstalada": "1000",
+            "ventasTotales": "850",
+            "produccion": "900",
+            "createdAt": "2023-11-18 21:55:01",
+            "updatedAt": "2023-11-18 21:55:01"
+        }
+    ]
+}
+```
+
+#### Response (400 Bad Request)
+
+```json
+{
+    "message": "The produccion parameter is required"
+}
+```
+
+#### Response (400 Bad Request - Headers)
+
+```json
+{
+    "message": "Bad request, check missing or malformed headers"
+}
+```
+
+#### Response (401 Unauthorized)
+
+```json
+{
+    "message": "Not authenticated, check x_api_key and Authorization"
+}
+```
+
+<br>
+
 </details>
 
 <br>
@@ -1180,6 +1565,11 @@ curl --location --request DELETE 'http://localhost:4000/dev/v1/bioetanol-tipos/2
    <summary>View</summary>
 
   <br>
+
+#### Reports
+*   [Bioethanol price reports](https://glp.se.gob.ar/biocombustible/reporte_precios_bioetanol.php)
+*   [Dataset biotenanol | National Data](https://www.datos.gob.ar/dataset/energia-estadisticas-biodiesel-bioetanol)
+*   [Excel Statistics Secretariat of Energy](https://view.officeapps.live.com/op/view.aspx?src=http%3A%2F%2Fwww.energia.gob.ar%2Fcontenidos%2Farchivos%2FReorganizacion%2Finformacion_del_mercado%2Fmercado_hydrocarburos%2Fbio%2Festatisticas_biocombustibles.xls\&wdOrigin=BROWSELINK)  
 
 #### Dynamodb installation
 
