@@ -115,10 +115,10 @@ cd 'projectName'
 ```
 
 *   We install the latest LTS version of [Nodejs(v18)](https://nodejs.org/en/download)
-*   We install the Serverless Framework globally if we have not already done so
+*   We install the Serverless Framework globally if we haven't already. I recommend version 3 so we don't need credentials. You can use the latest version 4 without any problems (it's paid).
 
 ```git
-npm install -g serverless
+npm install -g serverless@3
 ```
 
 *   We verify the version of Serverless installed
