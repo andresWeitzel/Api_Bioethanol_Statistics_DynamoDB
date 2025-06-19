@@ -8,7 +8,7 @@ provider:
   stage: dev
   region: us-east-1
   memorySize: 512
-  timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+  timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
   environment: ${file(./serverless_ssm.yml)}
   apiGateway:
     apiKeys:
@@ -35,7 +35,7 @@ functions:
   insertBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/insert.handler
     description: Function to insert an object in the bioethanol prices table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: post
@@ -44,7 +44,7 @@ functions:
   updateBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/update.handler
     description: Function to update an object in the bioethanol prices table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: put
@@ -53,7 +53,7 @@ functions:
   deleteBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/delete.handler
     description: Function to delete an object in the bioethanol prices table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: delete
@@ -62,7 +62,7 @@ functions:
   getAllBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-all.handler
     description: Function to obtain all the objects of the bioethanol prices table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -71,7 +71,7 @@ functions:
   getByUuidBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-by-uuid.handler
     description: Function to obtain all the objects of the bioethanol prices table according to uuid
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -80,7 +80,7 @@ functions:
   getLikeCreatedAtBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-created-at.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the creation date
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -89,7 +89,7 @@ functions:
   getLikeFieldTypeBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-field-type.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the field type
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -98,7 +98,7 @@ functions:
   getLikePeriodoBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the periodo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -107,7 +107,7 @@ functions:
   getLikeBioetMaizBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-bioet-maiz.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol maiz price
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -116,7 +116,7 @@ functions:
   getLikeBioetCanAzucarBioetanolPrecios:
     handler: src/controllers/bioetanol-precios/get-like-bioet-can-azucar.handler
     description: Function to obtain all the objects of the bioethanol prices table according to the bioethanol caña azucar price
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -126,7 +126,7 @@ functions:
   getBioetanolPreciosTrends:
     handler: src/controllers/bioetanol-precios/get-trends.handler
     description: Function to get bioethanol price trends and statistics
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -145,7 +145,7 @@ functions:
   insertBioetanolTotal:
     handler: src/controllers/bioetanol-total/insert.handler
     description: Function to insert an object in the bioethanol total table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: post
@@ -154,7 +154,7 @@ functions:
   updateBioetanolTotal:
     handler: src/controllers/bioetanol-total/update.handler
     description: Function to update an object in the bioethanol total table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: put
@@ -163,7 +163,7 @@ functions:
   deleteBioetanolTotal:
     handler: src/controllers/bioetanol-total/delete.handler
     description: Function to delete an object in the bioethanol total table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: delete
@@ -172,7 +172,7 @@ functions:
   getAllBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-all.handler
     description: Function to obtain all the objects of the bioethanol total table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -181,7 +181,7 @@ functions:
   getByUuidBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-by-uuid.handler
     description: Function to obtain all the objects of the bioethanol total table according to the uuid
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -190,7 +190,7 @@ functions:
   getLikeCreatedAtUpdatedAtBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-created-at-updated-at.handler
     description: Function to obtain all the objects of the bioethanol total table according to the creation date or update date
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -199,7 +199,7 @@ functions:
   getLikeFieldTypeBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-field-type.handler
     description: Function to obtain all the objects of the bioethanol total table according to the field type and value
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -208,7 +208,7 @@ functions:
   getLikePeriodoBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol total table according to the periodo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -217,7 +217,7 @@ functions:
   getLikeProduccionBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-produccion.handler
     description: Function to obtain all the objects of the bioethanol total table according to the produccion
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -226,7 +226,7 @@ functions:
   getLikeVentasTotalesBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-ventas-totales.handler
     description: Function to obtain all the objects of the bioethanol total table according to the ventasTotales
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -235,7 +235,7 @@ functions:
   getLikeCapacidadInstaladaBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-capacidad-instalada.handler
     description: Function to obtain all the objects of the bioethanol total table according to the capacidadInstalada
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -244,7 +244,7 @@ functions:
   getLikeEficienciaProduccionBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-eficiencia-produccion.handler
     description: Function to obtain all the objects of the bioethanol total table according to the eficienciaProduccion
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -253,7 +253,7 @@ functions:
   getLikeUbicacionBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-ubicacion.handler
     description: Function to obtain all the objects of the bioethanol total table according to the ubicacion
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -262,7 +262,7 @@ functions:
   getLikeEstadoOperativoBioetanolTotal:
     handler: src/controllers/bioetanol-total/get-like-estado-operativo.handler
     description: Function to obtain all the objects of the bioethanol total table according to the estadoOperativo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -273,7 +273,7 @@ functions:
   insertBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/insert.handler
     description: Function to insert an object in the bioethanol tipo table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: post
@@ -282,7 +282,7 @@ functions:
   updateBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/update.handler
     description: Function to update an object in the bioethanol tipo table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: put
@@ -291,7 +291,7 @@ functions:
   deleteBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/delete.handler
     description: Function to delete an object in the bioethanol types table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: delete
@@ -300,7 +300,7 @@ functions:
   getAllBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-all.handler
     description: Function to obtain all the objects of the bioethanol tipo table
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -309,7 +309,7 @@ functions:
   getByUuidBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-by-uuid.handler
     description: Function to obtain all the objects of the bioethanol types table according to the uuid
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -318,7 +318,7 @@ functions:
   getLikeFieldTypeBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-field-type.handler
     description: Function to obtain all the objects of the bioethanol types table according to the field type and value
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -327,7 +327,7 @@ functions:
   getLikeTipoBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-tipo.handler
     description: Function to obtain all the objects of the bioethanol types table according to the tipo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -336,7 +336,7 @@ functions:
   getLikePeriodoBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-periodo.handler
     description: Function to obtain all the objects of the bioethanol types table according to the periodo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -345,7 +345,7 @@ functions:
   getLikeProduccionBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-produccion.handler
     description: Function to obtain all the objects of the bioethanol types table according to the produccion
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -354,7 +354,7 @@ functions:
   getLikeVentasTotalesBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-ventas-totales.handler
     description: Function to obtain all the objects of the bioethanol types table according to the ventasTotales
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -363,7 +363,7 @@ functions:
   getLikeUbicacionBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-ubicacion.handler
     description: Function to obtain all the objects of the bioethanol types table according to the ubicacion
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get
@@ -372,7 +372,7 @@ functions:
   getLikeEstadoOperativoBioetanolTipos:
     handler: src/controllers/bioetanol-tipos/get-like-estado-operativo.handler
     description: Function to obtain all the objects of the bioethanol types table according to the estadoOperativo
-    timeout: ${file(./serverless_ssm.yml):LAMBDA_TEN_SECONDS_TIMEOUT_VALUE}
+    timeout: ${file(./serverless_ssm.yml):LAMBDA_THIRTY_SECONDS_TIMEOUT_VALUE}
     events:
       - http:
           method: get

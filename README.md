@@ -1552,8 +1552,17 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?lim
 
 ### 3.0) Functionality test [🔝](#index-)
 
+
 <details>
-   <summary>View</summary>
+  <summary>See</summary>
+
+<br>
+
+#### [Watch Playlist](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re)
+
+  <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re">
+    <img src="./doc/assets/Api_Bioethanol_Statistics_DynamoDB_yt.png" />
+  </a> 
 
 <br>
 
