@@ -34,7 +34,7 @@
 
 <div align="center">
 
-# Bioethanol Statistics DynamoDB AWS ![Status](./doc/assets/icons/badges/status-completed.svg)
+# Bioethanol Statistics DynamoDB AWS ![(status-completed)](./doc/assets/icons/badges/status-completed.svg)
 
 </div>
 
