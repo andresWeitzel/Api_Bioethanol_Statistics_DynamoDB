@@ -21,10 +21,10 @@
 
 <div align="right"> 
   <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md">
-    <img width="65" height="40" src="./doc/assets/translation/arg-flag.jpg" />
+    <img src="./doc/assets/translation/arg-flag.jpg" width="65" height="40" />
   </a> 
   <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md">
-    <img width="65" height="40" src="./doc/assets/translation/eeuu-flag.jpg" />
+    <img src="./doc/assets/translation/eeuu-flag.jpg" width="65" height="40" />
   </a> 
 </div>
 
