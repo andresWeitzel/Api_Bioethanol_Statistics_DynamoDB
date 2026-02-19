@@ -47,12 +47,12 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 ## Index 📜
 
 <details>
-  <summary> View </summary>
+  <summary> View details </summary>
 
 
 <div align="right">
 
-`Latest update: 18/02/26` 
+`Latest update: 19/02/26` 
 
 </div>
 
@@ -84,7 +84,7 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 ### 1.0) Description [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 
   <br>
 
@@ -98,7 +98,7 @@ Api Rest for the statistical management of the production and marketing of bioet
 ### 1.1) Project Execution [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 
 *   We create a work environment through some IDE, we may or may not create a root folder for the project, we position ourselves on it
 
@@ -174,7 +174,7 @@ npm run start:dev
 ### 1.2) Project configuration from scratch [🔝](#index-)
 
 <details>
-<summary>View</summary>
+<summary>View details</summary>
 
 <br>
 
@@ -373,7 +373,7 @@ etc.....
 ### 1.3) Technologies [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 
   <br>
 
@@ -425,7 +425,7 @@ etc.....
 ### 2.0) Endpoints and resources [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 <br>
 
 ### 2.0.1) Variables in Postman
@@ -531,7 +531,7 @@ etc.....
 ### 2.1) Examples [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 <br>
 
 ### 2.1.0) Variables in Postman
@@ -1575,7 +1575,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?lim
 ### 3.1) References [🔝](#index-)
 
 <details>
-   <summary>View</summary>
+   <summary>View details</summary>
 
   <br>
 

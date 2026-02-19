@@ -46,11 +46,11 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
 ## Índice 📜
 
 <details>
- <summary> Ver </summary>
+ <summary> Ver detalles </summary>
 
 <div align="right">
 
-`Última actualización: 18/02/26` 
+`Última actualización: 19/02/26` 
 
 </div>
 
@@ -82,7 +82,7 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
 ### 1.0) Descripción [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
@@ -96,7 +96,7 @@ Api Rest para la gestión estadística de la producción y comercialización de 
 ### 1.1) Ejecución del Proyecto [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>Ver detalles</summary>
 
 *   Creamos un ambiente de trabajo a través de algún IDE, podemos o no crear una carpeta raíz para el proyecto, nos posicionamos en ella.
 
@@ -172,7 +172,7 @@ npm run start:dev
 ### 1.2) Configuración del proyecto desde cero [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
@@ -371,7 +371,7 @@ etc.....
 ### 1.3) Tecnologías [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>Ver detalles</summary>
 
  <br>
 
@@ -423,7 +423,7 @@ etc.....
 ### 2.0) Endpoints y recursos [🔝](#índice-)
 
 <details>
-   <summary>View</summary>
+   <summary>Ver detalles</summary>
 <br>
 
 ### 2.0.1) Variables en Postman
@@ -526,7 +526,7 @@ etc.....
 ### 2.1) Ejemplos [🔝](#índice-)
 
 <details>
-  <summary>Ver</summary>
+  <summary>Ver detalles</summary>
 
 <br>
 
@@ -1473,7 +1473,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?lim
 ### 3.0) Prueba de funcionalidad [🔝](#índice-)
 
 <details>
-   <summary>Ver</summary>
+   <summary>Ver detalles</summary>
 
    #### [Ver Playlist](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re)
 
@@ -1488,7 +1488,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?lim
 ### 3.1) Referencias [🔝](#índice-)
 
 <details>
-   <summary>Ver</summary>
+   <summary>Ver detalles</summary>
 
   <br>
 
