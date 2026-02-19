@@ -50,7 +50,12 @@ Api Rest for the statistical management of production and sales of bioethanol ba
 <details>
   <summary> View </summary>
 
-  <br>
+
+<div align="right">
+
+`Latest update: 18/02/26` 
+
+</div>
 
 ### Section 1) Description, configuration and technologies
 

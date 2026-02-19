@@ -48,7 +48,11 @@ Api Rest para el manejo estadístico de producción y ventas de bioetanol a base
 <details>
  <summary> Ver </summary>
 
- <br>
+<div align="right">
+
+`Última actualización: 18/02/26` 
+
+</div>
 
 ### Sección 1)  Descripción, configuración y tecnologías
 
