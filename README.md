@@ -1558,7 +1558,7 @@ curl --location 'http://localhost:4000/dev/v1/bioetanol-total/produccion/900?lim
 
 
 <details>
-  <summary>See</summary>
+  <summary>View details</summary>
 
 <br>
 
