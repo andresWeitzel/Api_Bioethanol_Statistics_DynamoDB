@@ -32,14 +32,14 @@
 
 <div align="center">
 
-# Bioetanol Estadísticas DynamoDB AWS ![Status](../doc/assets/icons/badges/status-completed.svg)
+# Bioetanol Estadísticas DynamoDB AWS ![(status-completed)](../doc/assets/icons/badges/status-completed.svg)
 
 </div>
 
 Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto y la documentación de este (menos doc técnica), ha sido desarrollado/a en inglés.
 
-
-*   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/social-networks/yt.png" width="5%" height="5%" />
+*   [Postman Collection](../postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
+*   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/social-networks/yt.png" width="25" height="15" />
 
 <br>
 

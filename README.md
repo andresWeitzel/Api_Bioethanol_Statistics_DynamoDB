@@ -21,27 +21,26 @@
 
 <div align="right"> 
   <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/translation/README.es.md">
-    <img width="65" height="40" src="./doc/assets/translation/arg-flag.jpg" />
+    <img src="./doc/assets/translation/arg-flag.jpg" width="65" height="40" />
   </a> 
   <a href="https://github.com/andresWeitzel/Api_Bioetanol_Estadisticas_DynamoDB_AWS/blob/master/README.md">
-    <img width="65" height="40" src="./doc/assets/translation/eeuu-flag.jpg" />
+    <img src="./doc/assets/translation/eeuu-flag.jpg" width="65" height="40" />
   </a> 
 </div>
 
-<br>
 
 <br>
 
 <div align="center">
 
-# Bioethanol Statistics DynamoDB AWS ![Status](./doc/assets/icons/badges/status-completed.svg)
+# Bioethanol Statistics DynamoDB AWS ![(status-completed)](./doc/assets/icons/badges/status-completed.svg)
 
 </div>
 
 Api Rest for the statistical management of production and sales of bioethanol based on cane and corn implemented with Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda among others. AWS services are tested locally. The project code and its documentation (less technical doc) have been developed in English.
 
-
-*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="5%" height="5%" />
+*   [Postman Collection](./postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
+*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="25" height="15" />
 
 <br>
 
