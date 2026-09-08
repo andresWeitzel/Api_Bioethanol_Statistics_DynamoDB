@@ -37,8 +37,11 @@
 
 REST API to query and manage production and sales statistics for cane- and corn-based bioethanol. It brings together period prices, product types, production and sales volumes, installed capacity, and operating efficiency so the data stays centralized, filterable, and ready for reports, analysis, and management systems.
 
-*   [Postman Collection](../postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
-*   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/social-networks/yt.png" width="16" /> </a>
+<div align="left">
+<a href="../postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json" target="_blank" rel="noopener noreferrer" title="Postman Collection"><img src="../doc/assets/icons/detail-actions/postman-pill.svg" alt="Postman" width="94" height="30" border="0" /></a>
+<br>
+<a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank" rel="noopener noreferrer" title="Playlist"><img src="../doc/assets/icons/detail-actions/playlist-pill.svg" alt="Playlist" width="94" height="30" border="0" /></a>
+</div>
 
 <br>
 

@@ -37,8 +37,11 @@
 
 API REST para consultar y administrar las estadísticas de producción y comercialización de bioetanol a base de caña y maíz. Reúne precios por período, tipos de producto, volúmenes de producción y ventas, capacidad instalada y eficiencia operativa, para que esa información quede centralizada, filtrable y lista para reportes, análisis y sistemas de gestión.
 
-*   [Postman Collection](./postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
-*   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="16" /> </a>
+<div align="left">
+<a href="./postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json" target="_blank" rel="noopener noreferrer" title="Colección de Postman"><img src="./doc/assets/icons/detail-actions/postman-pill.svg" alt="Postman" width="94" height="30" border="0" /></a>
+<br>
+<a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank" rel="noopener noreferrer" title="Playlist"><img src="./doc/assets/icons/detail-actions/playlist-pill.svg" alt="Playlist" width="94" height="30" border="0" /></a>
+</div>
 
 <br>
 

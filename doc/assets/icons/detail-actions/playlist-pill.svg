@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="94" height="30" viewBox="0 0 94 30" fill="none" role="img" aria-label="Playlist">
+  <rect x="0.5" y="0.5" width="93" height="29" rx="8" fill="#1C2128" stroke="#3D4450"/>
+  <g transform="translate(10 8) scale(0.5833)" fill="none" stroke="#9AA4B2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></g>
+  <text x="28" y="19.5" fill="#9AA4B2" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" font-weight="600">Playlist</text>
+</svg>
