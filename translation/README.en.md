@@ -20,10 +20,10 @@
 
 <div align="right">
  <a href="../README.md" title="Spanish">
- <img src="../doc/assets/translation/arg-flag.jpg" width="52" height="32" alt="Spanish" title="Spanish" />
+ <img src="../doc/assets/translation/arg-flag.jpg" width="64" height="40" alt="Spanish" title="Spanish" />
  </a>
  <a href="./README.en.md" title="English">
- <img src="../doc/assets/translation/eeuu-flag.jpg" width="52" height="32" alt="English" title="English" />
+ <img src="../doc/assets/translation/eeuu-flag.jpg" width="64" height="40" alt="English" title="English" />
  </a>
 </div>
 
