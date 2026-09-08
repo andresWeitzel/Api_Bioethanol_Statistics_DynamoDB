@@ -35,7 +35,7 @@
 
 </div>
 
-Api Rest for the statistical management of production and sales of bioethanol based on cane and corn implemented with Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda among others. AWS services are tested locally. The project code is in English. Documentation is available in Spanish and English.
+REST API to query and manage production and sales statistics for cane- and corn-based bioethanol. It brings together period prices, product types, production and sales volumes, installed capacity, and operating efficiency so the data stays centralized, filterable, and ready for reports, analysis, and management systems.
 
 *   [Postman Collection](../postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
 *   [Playlist functionality test](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="../doc/assets/social-networks/yt.png" width="16" /> </a>

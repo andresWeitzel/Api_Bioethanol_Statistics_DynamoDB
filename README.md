@@ -35,7 +35,7 @@
 
 </div>
 
-Api Rest para el manejo estadístico de producción y ventas de bioetanol a base de caña y maíz implementado con Api-Gateway, Nodemon, Serverless-Framework, NodeJs, DynamoDB, Systems Manager Parameter Store, Lambda entre otros. Los servicios de aws se prueban en local. El código del proyecto está en inglés. La documentación está disponible en español e inglés.
+API REST para consultar y administrar las estadísticas de producción y comercialización de bioetanol a base de caña y maíz. Reúne precios por período, tipos de producto, volúmenes de producción y ventas, capacidad instalada y eficiencia operativa, para que esa información quede centralizada, filtrable y lista para reportes, análisis y sistemas de gestión.
 
 *   [Postman Collection](./postman/collection/Api_Bioetanol_Dynamo_AWS.postman_collection.json) 
 *   [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re) <a href="https://www.youtube.com/playlist?list=PLCl11UFjHurDt4nwIAFwH0FTX5hvPl5re" target="_blank"> <img src="./doc/assets/social-networks/yt.png" width="16" /> </a>
